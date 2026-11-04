@@ -78,3 +78,20 @@ Runtime decisions made by the system itself are logged separately in `storage/de
 - **Date:** 4 Nov 2026
 - **Decision:** The README asks for Python 3.11 (link to 3.11.9), not the guide's "3.10 or later". Only the environment step differs by operating system. Windows activation uses `Set-ExecutionPolicy -Scope Process`, which applies to that window only and needs no administrator rights.
 - **Why:** The pack pins numpy 1.24.0 and pandas 2.0.0, which support Python only up to 3.11. On a newer Python, pip would try to build them from source and fail. PowerShell's default policy blocks the activation script (hit on day one).
+
+
+## D-013 · OpenRouter fallback removed
+- **Date:** 4 Nov 2026
+- **Decision:** One provider (Groq) with two models. If Groq is unavailable, tickets are escalated to a person with the reason logged (A11). Replaces the optional fallback in D-005.
+- **Why:** The free OpenRouter models returned 429 "rate-limited upstream" in all three tests (3–4 Nov 2026). The pack uses free tiers only, so a working fallback was never available to the marker. In the clean-clone rehearsal, the empty fallback key made the README unclear.
+
+## D-014 · Every package pinned with constraints.txt
+- **Date:** 4 Nov 2026
+- **Decision:** `constraints.txt` holds `pip freeze` of the tested environment. `requirements.txt` references it with `-c constraints.txt`, so the guide's install command is unchanged.
+- **Why:** requirements.txt pins only the packages we ask for. Between the 3 Nov install and the 4 Nov rehearsal, five helper packages came out at newer versions with no change on our side (filelock, jsonpatch, platformdirs, pyzmq, mypy-extensions). Unpinned helper releases already broke setup twice (huggingface-hub, posthog). The marker installs later than we test.
+- **Note:** Regenerate constraints.txt whenever requirements.txt changes.
+
+## D-015 · README fixes from the clean-clone rehearsal
+- **Date:** 4 Nov 2026
+- **Decision:** Name the Python installer file to choose; add `-Force` to the execution policy line; say that `.env` (not `.env.example`) is the file to edit, with the command to open it; say to leave every other line as it is.
+- **Why:** A fresh clone followed literally in a new PowerShell window (Setup Guide step 09) worked end to end, but each of these points made the reader stop or guess.

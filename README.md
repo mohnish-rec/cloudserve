@@ -4,7 +4,7 @@ Triage for CloudServe support tickets: classifies each ticket, finds the relevan
 
 ## What you need first
 
-- **Python 3.11.** [Download 3.11.9](https://www.python.org/downloads/release/python-3119/). Other versions will not work: several pinned packages support Python only up to 3.11.
+- **Python 3.11.** [Download 3.11.9](https://www.python.org/downloads/release/python-3119/). On that page, under **Files**, choose **Windows installer (64-bit)** on Windows or **macOS 64-bit universal2 installer** on a Mac, and install with the default options. On Linux, install `python3.11` and `python3.11-venv` with your package manager. Other versions will not work: several pinned packages support Python only up to 3.11.
 - **A free Groq API key**, from https://console.groq.com/keys
 - About **4 GB of free disk space** and an internet connection. The first run downloads about 1 GB.
 
@@ -18,7 +18,7 @@ Open a terminal in this folder (the one containing this README) and run each ste
 
 ```powershell
 py -3.11 -m venv .venv
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
 .venv\Scripts\activate
 python --version
 ```
@@ -41,7 +41,7 @@ python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
-This takes several minutes.
+This takes several minutes. Every package is pinned to the exact version that was tested.
 
 ### 3. Add your API key
 
@@ -49,7 +49,7 @@ This takes several minutes.
 cp .env.example .env
 ```
 
-Open `.env` in any text editor, replace `your_groq_key_here` with your Groq key (no quotes, no spaces), and save.
+This creates a new file called `.env`. Open **`.env`** (not `.env.example`): on Windows with `notepad .env`, on macOS with `open -e .env`, on Linux with `nano .env`. Replace `your_groq_key_here` with your Groq key (no quotes, no spaces), leave every other line as it is, and save.
 
 ### 4. Check the model responds
 
@@ -57,7 +57,7 @@ Open `.env` in any text editor, replace `your_groq_key_here` with your Groq key 
 python scripts/check_model.py
 ```
 
-You should see `200` and `reply: ready` for `main` and `backup`, then `fallback: skipped`.
+You should see `200` and `reply: ready` for both `main` and `backup`.
 
 ### 5. Build the document store and the decision log
 
