@@ -72,3 +72,9 @@ Runtime decisions made by the system itself are logged separately in `storage/de
 - **Decision:** `actions/checkout@v4 → @v6`, `actions/setup-python@v5 → @v6`, `ubuntu-latest → ubuntu-24.04`. Everything else as in the guide.
 - **Why:** The first CI run passed (5 tests, 2m 45s) but GitHub annotated it with a warning ("Node.js 20 is deprecated" for checkout@v4 and setup-python@v5) and a notice ("ubuntu-latest will migrate to Ubuntu 26"). The v6 actions run on Node 24. Pinning the runner keeps CI reproducible instead of changing operating system without notice.
 - **Evidence:** GitHub Actions run for commit 3f0062b (4 Nov 2026): Success, 1 warning, 1 notice.
+
+
+## D-012 · README requires Python 3.11 exactly
+- **Date:** 4 Nov 2026
+- **Decision:** The README asks for Python 3.11 (link to 3.11.9), not the guide's "3.10 or later". Only the environment step differs by operating system. Windows activation uses `Set-ExecutionPolicy -Scope Process`, which applies to that window only and needs no administrator rights.
+- **Why:** The pack pins numpy 1.24.0 and pandas 2.0.0, which support Python only up to 3.11. On a newer Python, pip would try to build them from source and fail. PowerShell's default policy blocks the activation script (hit on day one).
