@@ -59,7 +59,6 @@ Runtime decisions made by the system itself are logged separately in `storage/de
 - **Decision:** VS Code's `python.terminal.useEnvFile` stays off.
 - **Why:** The marker runs the code in a plain terminal. With injection on, a script that forgot `load_dotenv()` would work here and fail for them (guide section 09: KeyError on an environment variable).
 
-
 ## D-010 · Monitoring: metrics now, Prometheus and Grafana once the pipeline runs
 - **Date:** 4 Nov 2026
 - **Decision:** The guide's three metrics are in `src/metrics.py`, plus a `classification_confidence` histogram. The guide's `prometheus.yml` is in `monitoring/`, unchanged. Prometheus and Grafana are installed once there is a running pipeline to watch.

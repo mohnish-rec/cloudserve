@@ -48,4 +48,5 @@ connection.commit()
 columns = [row[1] for row in connection.execute("PRAGMA table_info(decisions)")]
 rows = connection.execute("SELECT COUNT(*) FROM decisions").fetchone()[0]
 connection.close()
-print(f"decision log ready: {DB_PATH.relative_to(ROOT)} ({len(columns)} columns, {rows} rows)")
+shown = DB_PATH.relative_to(ROOT) if DB_PATH.is_relative_to(ROOT) else DB_PATH
+print(f"decision log ready: {shown} ({len(columns)} columns, {rows} rows)")
