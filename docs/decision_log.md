@@ -65,3 +65,10 @@ Runtime decisions made by the system itself are logged separately in `storage/de
 - **Why:** The guide's dashboard list includes "the distribution of confidence scores", which none of its three metrics can show. A dashboard with no pipeline behind it would show empty charts. The unattended run (A9) and metrics report (A10) must not depend on either program, so the marker never needs to install them.
 - **Also:** The metrics server is bound to 127.0.0.1, so Windows shows no firewall prompt, and Prometheus reads it from the same machine.
 - **Evidence:** A test ticket and a confidence score were read back from `http://localhost:8001/metrics` (4 Nov 2026).
+
+
+## D-011 · CI: the guide's workflow with current action versions and a pinned runner
+- **Date:** 4 Nov 2026
+- **Decision:** `actions/checkout@v4 → @v6`, `actions/setup-python@v5 → @v6`, `ubuntu-latest → ubuntu-24.04`. Everything else as in the guide.
+- **Why:** The first CI run passed (5 tests, 2m 45s) but GitHub annotated it with a warning ("Node.js 20 is deprecated" for checkout@v4 and setup-python@v5) and a notice ("ubuntu-latest will migrate to Ubuntu 26"). The v6 actions run on Node 24. Pinning the runner keeps CI reproducible instead of changing operating system without notice.
+- **Evidence:** GitHub Actions run for commit 3f0062b (4 Nov 2026): Success, 1 warning, 1 notice.
