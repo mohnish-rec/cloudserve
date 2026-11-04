@@ -58,3 +58,11 @@ Runtime decisions made by the system itself are logged separately in `storage/de
 - **Date:** 4 Nov 2026
 - **Decision:** VS Code's `python.terminal.useEnvFile` stays off.
 - **Why:** The marker runs the code in a plain terminal. With injection on, a script that forgot `load_dotenv()` would work here and fail for them (guide section 09: KeyError on an environment variable).
+
+
+## D-010 · Monitoring: metrics now, Prometheus and Grafana once the pipeline runs
+- **Date:** 4 Nov 2026
+- **Decision:** The guide's three metrics are in `src/metrics.py`, plus a `classification_confidence` histogram. The guide's `prometheus.yml` is in `monitoring/`, unchanged. Prometheus and Grafana are installed once there is a running pipeline to watch.
+- **Why:** The guide's dashboard list includes "the distribution of confidence scores", which none of its three metrics can show. A dashboard with no pipeline behind it would show empty charts. The unattended run (A9) and metrics report (A10) must not depend on either program, so the marker never needs to install them.
+- **Also:** The metrics server is bound to 127.0.0.1, so Windows shows no firewall prompt, and Prometheus reads it from the same machine.
+- **Evidence:** A test ticket and a confidence score were read back from `http://localhost:8001/metrics` (4 Nov 2026).
