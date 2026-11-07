@@ -95,3 +95,9 @@ Runtime decisions made by the system itself are logged separately in `storage/de
 - **Date:** 4 Nov 2026
 - **Decision:** Name the Python installer file to choose; add `-Force` to the execution policy line; say that `.env` (not `.env.example`) is the file to edit, with the command to open it; say to leave every other line as it is.
 - **Why:** A fresh clone followed literally in a new PowerShell window (Setup Guide step 09) worked end to end, but each of these points made the reader stop or guess.
+
+## D-016 · Ticket type is decided by a classifier trained on the development tickets, not by the language model
+- **Date:** 7 Nov 2026
+- **Decision:** Each ticket is turned into numbers by meaning (the same embedding model as the document store) and a small classifier, trained on the 500 labelled development tickets, predicts its type and urgency with a probability. The language model is used only to write replies. Fixed safety rules run alongside the classifier (FR-03).
+- **Why:** It gives the same answer every time (acceptance criterion A5); its probabilities can be checked against real accuracy (NFR-08: within 5 points); it costs no model calls, which protects the unattended run on the free tier (FR-12, NFR-07); and it answers in milliseconds (NFR-01). The development tickets are labelled for exactly this purpose (Project Brief: "developing your classifier").
+- **Considered:** Asking the language model to choose the type. Rejected: a model call per ticket on the free tier, answers that can vary between runs, and a stated confidence that is hard to calibrate.
