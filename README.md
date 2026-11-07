@@ -69,7 +69,7 @@ python scripts/setup_decision_log.py
 The first run downloads the embedding model, which takes a few minutes. You should see:
 
 ```
-stored 59 passages from 29 documents
+stored 141 passages from 29 documents
 test query -> top result: DOC-AUTH-001 | Resolving invalid credential errors on login
 decision log ready: storage/decisions.db (18 columns, 0 rows)
 ```

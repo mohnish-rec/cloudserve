@@ -1,9 +1,10 @@
 """Setup Guide step 04: build the vector store from the documentation.
 
-Follows the guide's code with four changes, each marked below:
+Follows the guide's code with five changes, each marked below:
 the pack's field is doc_id (not id), the file is read as UTF-8,
 the store is rebuilt from scratch so a second run gives the same result,
-and three library notices are switched off so the output stays clean.
+three library notices are switched off so the output stays clean,
+and the chunk size is the one chosen in decision D-017.
 Run: python scripts/setup_vector_store.py
 """
 import json
@@ -36,7 +37,10 @@ EMBEDDING_MODEL = os.environ["EMBEDDING_MODEL"]
 with open(ROOT / "data" / "documentation.json", encoding="utf-8") as f:
     documents = json.load(f)
 
-splitter = RecursiveCharacterTextSplitter(chunk_size=800, chunk_overlap=120)
+# Change 5: chunk size 400, overlap 80 (guide: 800 and 120), chosen in decision D-017
+# after comparing three sizes on the development tickets (scripts/compare_retrieval.py).
+splitter = RecursiveCharacterTextSplitter(chunk_size=int(os.getenv("CHUNK_SIZE", "400")),
+                                          chunk_overlap=int(os.getenv("CHUNK_OVERLAP", "80")))
 texts, metadatas = [], []
 for doc in documents:
     for chunk in splitter.split_text(doc["content"]):
