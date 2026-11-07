@@ -49,8 +49,8 @@ def test_decision_log_setup_creates_the_table_and_is_repeatable(tmp_path):
     connection = sqlite3.connect(db)
     columns = [row[1] for row in connection.execute("PRAGMA table_info(decisions)")]
     connection.close()
-    assert len(columns) == 18
-    assert {"decision_id", "run_id", "ticket_id", "action_taken", "reason", "provider"} <= set(columns)
+    assert len(columns) == 20
+    assert {"decision_id", "run_id", "ticket_id", "action_taken", "reason", "provider", "input_summary", "label"} <= set(columns)
 
 
 def test_metrics_module_defines_the_guide_metrics():

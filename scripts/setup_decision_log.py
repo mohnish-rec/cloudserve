@@ -1,6 +1,6 @@
 """Setup Guide step 05: create the decision log database.
 
-The guide's table with five added columns (marked), so a run can be
+The guide's table with seven added columns (marked), so a run can be
 reconciled and every decision traced to the model that made it.
 Run: python scripts/setup_decision_log.py
 """
@@ -28,12 +28,14 @@ CREATE TABLE IF NOT EXISTS decisions (
     created_at TEXT NOT NULL,
     ticket_id TEXT NOT NULL,
     stage TEXT NOT NULL,
+    input_summary TEXT,              -- added: what came in, with no personal details (FR-10)
     prediction TEXT,
     confidence REAL,
     alternatives TEXT,               -- added: runner-up predictions and their confidence
     threshold REAL,
     action_taken TEXT NOT NULL,
     reason TEXT NOT NULL,
+    label TEXT,                      -- added: the hand-over label for escalations (FR-07)
     sources_used TEXT,
     guardrails TEXT,
     provider TEXT,                   -- added: which provider answered, or none (A11)
@@ -43,6 +45,11 @@ CREATE TABLE IF NOT EXISTS decisions (
     requirement_ids TEXT
 )
 """)
+# Added: a database made before these two columns existed gets them now.
+existing = [row[1] for row in connection.execute("PRAGMA table_info(decisions)")]
+for name in ("input_summary", "label"):
+    if name not in existing:
+        connection.execute(f"ALTER TABLE decisions ADD COLUMN {name} TEXT")
 connection.commit()
 
 columns = [row[1] for row in connection.execute("PRAGMA table_info(decisions)")]
