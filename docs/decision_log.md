@@ -113,3 +113,16 @@ Runtime decisions made by the system itself are logged separately in `storage/de
 - **Evidence:** `evaluation/results/retrieval_comparison.md` (`python scripts/compare_retrieval.py`), 357 answerable and 143 unanswerable development tickets, 7 Nov 2026.
 - **Revisit if:** articles become longer or more numerous, or the validation run shows a lower hit rate.
 
+
+## D-018 · The classifier reads tickets as embeddings, with logistic regression at C = 10
+- **Date:** 7 Nov 2026
+- **Decision:** Ticket type and urgency come from logistic regression on all-MiniLM-L6-v2 sentence embeddings (the same model the search uses), with C (strength setting) = 10 and a learned temperature so that stated confidence matches real accuracy. Saved to `models/classifier.joblib` with a record of the data, code version, seed and date.
+- **Why (Mohnish's reasoning):** type accuracy is 99%, the calibration gap is 0.6 points, and on questions it has not seen before it is right 77% of the time, which is better than every other option we compared.
+- **The numbers:** 5-fold cross-validation, grouped so the same question never sits in both training and testing. Embeddings C = 10: accuracy 99.0%, weighted precision 99.1% [98.4%, 99.8%], macro recall 99.0%, largest calibration gap 0.6 points, stress test 77.6%. TF-IDF (term frequency–inverse document frequency) C = 10: 99.6%, gap 0.0 points, stress test 51.2%. Both C = 1 options fail the 5-point calibration limit (26.7 and 12.9 points).
+- **How strong the evidence is:** on familiar questions the options are within each other's error ranges, so accuracy does not decide it. The stress test does: 77.6% against 51.2% when whole questions are hidden from training, which is the case that matters for reworded and new tickets (14 of the 80 validation tickets are reworded). Chosen on development tickets only; the validation run confirms or overturns it.
+- **Considered:** TF-IDF with C = 1 and C = 10; embeddings with C = 1; the language model as classifier (D-016).
+- **Cost:** no new model or download; each ticket is embedded once, well under a second.
+- **Limits:** urgency is right only about half the time for every option (48.0% to 51.8%), because the labels disagree with themselves: 74 of 203 groups of identical questions carry mixed urgency, and at most 55.2% is predictable from the type. Priority (FR-13 (functional requirement 13)) therefore adds rule signals in routing, and this is reported as a data finding.
+- **Safety rules alongside it (FR-03):** of 122 person-only development tickets, the word rules catch 107 (87.7%) and the person-only type catches the other 15; none is missed by both. 12 of 378 safe tickets (3.2%) are flagged, all "charges for a service we do not believe we use", sent to a person by choice as possible billing disputes.
+- **Evidence:** `evaluation/results/classifier_comparison.md` (`python scripts/train_classifier.py`), run on Mohnish's machine, 7 Nov 2026.
+- **Revisit if:** the validation run shows type accuracy below 90% or a calibration gap above 5 points.

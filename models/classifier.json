@@ -1,0 +1,10 @@
+{
+  "features": "embeddings",
+  "C": 10.0,
+  "seed": 42,
+  "trained_on": "data/development_tickets.json",
+  "tickets": 500,
+  "data_sha256": "5a0d8912238ee9fde07b4b793bda4672261fbf3ab965bf3eb418ef6e87f95d78",
+  "git_commit": "def0f85",
+  "trained_at": "2026-11-07T16:09:51+00:00"
+}
