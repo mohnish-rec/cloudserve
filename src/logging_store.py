@@ -35,7 +35,7 @@ def db_path(url=None) -> Path:
 class DecisionRecord(BaseModel):
     run_id: str = Field(min_length=1)
     ticket_id: str = Field(min_length=1)               # the trace ID: one ticket, one trace
-    stage: Literal["classification", "routing", "generation", "validation"]
+    stage: Literal["classification", "routing", "generation", "validation", "outcome"]   # "outcome": the final action, one per ticket
     input_summary: str = Field(min_length=1)
     prediction: Optional[str] = None
     confidence: Optional[float] = Field(default=None, ge=0.0, le=1.0)

@@ -39,6 +39,7 @@ class Outcome:
     route: RouteDecision = None
     draft: Draft = None
     guardrails: Report = None
+    passage_ids: tuple = ()           # the articles search found, best first
     model_calls: int = 0
     latency_ms: int = 0
     requirement_ids: tuple = field(default_factory=tuple)
@@ -77,7 +78,8 @@ def process(ticket, classifier, retriever, now=None, kill_switch_file=None, call
                                             for x in report.checks) else 0)
         return Outcome(ticket.ticket_id, action, label, d.priority, reason, sent,
                        None if action == AUTO else _handover(ticket, c, s, passages, d, draft, reason, report),
-                       c, d, draft, report, calls, int((time.perf_counter() - start) * 1000),
+                       c, d, draft, report, tuple(p.doc_id for p in passages), calls,
+                       int((time.perf_counter() - start) * 1000),
                        tuple(dict.fromkeys(d.requirement_ids + tuple(reqs))))
 
     # A safety rule, an unusable ticket or no article: to a person with no model call (NFR-07).

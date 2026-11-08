@@ -25,6 +25,8 @@ class Classifier:
 
 
 class Search:
+    embedder = None
+
     def search(self, text):
         return ART
 
