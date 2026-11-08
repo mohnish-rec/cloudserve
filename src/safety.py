@@ -24,6 +24,13 @@ RULES = {
         rf"(exposed|leak\w*|compromis\w*|breach\w*|stolen|public (repo|repository)|github|pushed|committed)\W+(\w+\W+){{0,6}}{_SECRET}",
         rf"{_SECRET}\W+(\w+\W+){{0,6}}(exposed|leak\w*|compromis\w*|breach\w*|stolen|public (repo|repository)|github)",
     ],
+    # Found by the red team (RT-05, 8 Nov): a working key pasted into a ticket was answered and sent
+    # to the model. NFR-04: a ticket containing a key or token goes to a person as a security matter.
+    "key or token in the ticket": [
+        r"\b(sk|pk|gsk|rk|ghp|xox[bp]|AKIA)[-_][A-Za-z0-9_-]{8,}",
+        r"\b(?=[A-Za-z0-9_-]*\d)(?=[A-Za-z0-9_-]*[A-Za-z])[A-Za-z0-9_-]{24,}\b",
+        r"\bbearer [A-Za-z0-9._-]{16,}",
+    ],
     "security incident": [
         r"(none of us|nobody|we do not|we don't|i do not|i don't|not) recogni[sz]e",
         r"audit log\W+(\w+\W+){0,8}(unknown|unfamiliar|recogni[sz]e)",
@@ -32,6 +39,10 @@ RULES = {
         r"\bhack(ed|er|ers|ing)?\b",
         r"suspicious (activity|login|logins|access)",
         r"account (has been |was |is )?(compromised|taken over)",
+        # RT-10: "someone logged into our account from a country none of us have been to"
+        r"(someone|somebody|an? (unknown|stranger|attacker)) (has )?(logged|signed) ?in(to)?",
+        r"(logged|signed) ?in(to)? (our|my|the) account from",
+        r"(changed|changing) (the|our) (billing |account |login )?(email|password) without",
     ],
     "data location": [
         r"physically stored",
@@ -47,6 +58,7 @@ RULES = {
         r"charged twice|double[- ]charged|duplicate charges?|overcharg\w*",
         r"(not|never)\W+(\w+\W+){0,2}(use|used|using|ordered|authori[sz]ed)\b",
         r"\bwe not use\b",
+        r"money back",                    # RT-07: a refund demand without the word "refund"
     ],
     "compliance": [
         r"\bauditors?\b", r"\bgdpr\b", r"\bsoc ?2\b", r"\bhipaa\b", r"\biso ?27001\b",

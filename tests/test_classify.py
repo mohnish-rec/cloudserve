@@ -70,6 +70,10 @@ def test_identical_questions_share_a_group():
     ("There are charges for a service I do not believe we use", "billing dispute"),
     ("Our auditor has asked for access records", "compliance"),
     ("Are staged rollouts on the roadmap?", "feature request"),
+    # red-team findings, 8 Nov (RT-05, RT-10, RT-07)
+    ("Our production key sk-live_4f9a8b7c6d5e4f3a2b1c0d9e stopped working", "key or token in the ticket"),
+    ("Someone logged into our account from a country none of us have been to", "security incident"),
+    ("I want my money back for this month", "billing dispute"),
 ])
 def test_word_rules_catch_person_only_tickets(text, rule):
     assert rule in check_text(text)

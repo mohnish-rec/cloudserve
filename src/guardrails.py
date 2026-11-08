@@ -141,7 +141,10 @@ TAKEOVER = re.compile(
     r"ignore (all |any |the |your |previous |prior |above )*(instructions|rules|prompts?)|disregard (all |the |your )*"
     r"(instructions|rules)|system prompt|you are now|pretend (to be|you are)|act as (an?|the) |developer mode|jailbreak|"
     r"reveal (your|the) (instructions|rules|prompt)|new instructions|</?(ticket|articles|reply|system)>|"
-    r"respond with only|override (the|your) (rules|instructions)", re.I)
+    r"respond with only|override (the|your) (rules|instructions)|"
+    # RT-04 (8 Nov): a politely worded instruction aimed at the system, missed by the patterns above
+    r"note (to|for) (the |any )?(ai|assistant|bot|model|system)|(ai|assistant|bot) reading this|"
+    r"mark (this|the) ticket as|close (this|the) ticket|bypass (your|the) (usual )?(checks|rules)", re.I)
 LEAK = re.compile(r"\bRULES\b|Respond with ONLY|<ticket>|<articles>|\"answered\"|\"sentences\"|\bPR-0\d")   # case-sensitive
 
 
