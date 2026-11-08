@@ -14,6 +14,7 @@ import os
 import random
 import re
 import time
+import unicodedata
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -29,7 +30,7 @@ NO_ANSWER = ("The help articles we have do not cover this question, so I have pa
 NOTICE = ("\n\nThis reply was written automatically from our help article \"{title}\" ({doc_id}). "
           "If it does not solve your problem, just reply to this message and a member of our "
           "support team will pick it up.")          # FR-08: added by code, never by the model
-MAX_TRIES, BASE_WAIT, MAX_WAIT = 4, 1.0, 20.0
+MAX_TRIES, BASE_WAIT, MAX_WAIT = 6, 1.0, 60.0   # 8 Nov: 4 quick tries were not enough for a 429 on the free tier
 TOP_ARTICLES = 3            # PR-01 v1.1: the model reads whole articles (small-to-big, Module 5)
 _ARTICLES = {}
 
@@ -40,6 +41,10 @@ class PermanentError(Exception):
 
 class TransientError(Exception):
     """Rate limit, server error, timeout, network: worth retrying."""
+
+    def __init__(self, message="", retry_after=0.0):
+        super().__init__(message)
+        self.retry_after = retry_after    # seconds the provider asked us to wait (Retry-After header)
 
 
 @dataclass
@@ -88,7 +93,7 @@ def number_passages(articles) -> str:
     return "\n\n".join(f"[{i}] {a['doc_id']} · {a['title']}\n{a['content']}" for i, a in enumerate(articles, 1))
 
 
-def call_model(messages, model, max_tokens=1200):
+def call_model(messages, model, max_tokens=2000):
     """The Setup Guide's request, raising TransientError or PermanentError on failure."""
     body = {"model": model, "messages": messages, "max_tokens": max_tokens, "temperature": 0}
     if "gpt-oss" in model:
@@ -100,7 +105,11 @@ def call_model(messages, model, max_tokens=1200):
     except (requests.ConnectionError, requests.Timeout) as e:
         raise TransientError(type(e).__name__) from e
     if r.status_code == 429 or r.status_code >= 500:
-        raise TransientError(f"HTTP {r.status_code}")
+        try:
+            wait = float(r.headers.get("retry-after", 0) or 0)
+        except ValueError:
+            wait = 0.0
+        raise TransientError(f"HTTP {r.status_code}", retry_after=wait)
     if r.status_code != 200:
         raise PermanentError(f"HTTP {r.status_code}: {r.text[:120]}")
     return r.json()["choices"][0]["message"].get("content") or ""
@@ -122,7 +131,9 @@ def call_with_fallback(messages, models=None, call=call_model, sleep=time.sleep)
             except TransientError as e:
                 last = f"{model}: {e}"
                 if attempt < MAX_TRIES - 1:
-                    sleep(random.uniform(0, min(MAX_WAIT, BASE_WAIT * 2 ** attempt)))
+                    # Wait at least as long as the provider asks, plus backoff with jitter (Module 3).
+                    backoff = random.uniform(0, min(MAX_WAIT, BASE_WAIT * 2 ** attempt))
+                    sleep(min(MAX_WAIT, max(getattr(e, "retry_after", 0.0), backoff)))
     raise TransientError(f"all models failed after {calls} calls (last: {last})")
 
 
@@ -135,6 +146,11 @@ def assemble(sentences) -> str:
     for s in sentences:
         marks = "".join(f"[{n}]" for n in dict.fromkeys(s["sources"]))
         text = re.sub(r"\s*(\[\d+\])+", "", s["text"]).strip()
+        # Unusual spaces and hyphens from the model showed as "corruptedartefact" on Windows (8 Nov).
+        # Any Unicode space or invisible format character becomes a normal space (the first, narrower
+        # list still left "migrationback", so the model uses another invisible character as well).
+        text = "".join(" " if unicodedata.category(ch) in ("Zs", "Cf") else ch for ch in text.replace("\u2011", "-"))
+        text = re.sub(r" {2,}", " ", text)
         # An item holding two sentences gets the source on each (found on 8 Nov, DEV-0004).
         for piece in (x for x in re.split(r"(?<=[.!?])\s+(?=[A-Z])", text) if x.strip()):
             if piece[-1] in ".!?":

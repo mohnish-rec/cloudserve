@@ -102,3 +102,17 @@ def test_an_item_holding_two_sentences_gets_the_source_on_each():
     from src.generate import assemble
     out = assemble([{"text": "Select roll back on that revision. Traffic moves within thirty seconds.", "sources": (1,)}])
     assert out.endswith("Select roll back on that revision [1]. Traffic moves within thirty seconds [1].")
+
+
+def test_a_rate_limit_waits_as_long_as_the_provider_asks():
+    waits = []
+    call = fake(TransientError("429", retry_after=7.0), GOOD)
+    call_with_fallback([], models=["main"], call=call, sleep=waits.append)
+    assert waits and waits[0] >= 7.0
+
+
+def test_unusual_spaces_from_the_model_become_normal_spaces():
+    from src.generate import assemble
+    out = assemble([{"text": "rule out a corrupted\u202fartefact, roll the migration\u2060back and re\u2011invite her",
+                     "sources": (1,)}])
+    assert "corrupted artefact" in out and "migration back" in out and "re-invite" in out
