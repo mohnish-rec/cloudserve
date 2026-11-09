@@ -1,8 +1,8 @@
 """One ticket through every stage: classify, safety rules, search, route, write, guardrails, outcome.
 
 Attribution: written with Claude (Anthropic), reviewed and run by Mohnish Grover.
-Day 4 builds this as one plain function so the red-team set can run the real pipeline;
-day 5 wraps the same stages in the LangGraph workflow (Module 7) and adds the decision log.
+Day 4 built this as one plain function; on 9 Nov the same stages moved into the LangGraph
+workflow (src/workflow.py, Module 7). This module keeps the outcome, hand-over and acknowledgement.
 
 Every ticket ends in exactly one outcome (Build Specification: "Every ticket produces either
 a sent answer or a logged escalation. None are silently dropped."):
@@ -65,44 +65,24 @@ def _handover(ticket, c, s, passages, d, draft, why, report=None):
     }
 
 
+def finish(state, action, label, reason, sent=ACKNOWLEDGEMENT, reqs=()) -> Outcome:
+    """Build the one final outcome for a ticket from whatever stages ran (used by the workflow's end nodes)."""
+    ticket, c, s, d = state["ticket"], state["c"], state["s"], state["d"]
+    passages, draft, report = state.get("passages") or [], state.get("draft"), state.get("report")
+    calls = (draft.calls if draft is not None else 0) + (
+        1 if report is not None and any(x.name == "grounding_model" and not x.detail.startswith("not run")
+                                        for x in report.checks) else 0)
+    chk = next((x for x in (report.checks if report else []) if x.name == "grounding_model"), None)
+    tokens = {"writer_in": draft.tokens_in if draft else 0, "writer_out": draft.tokens_out if draft else 0,
+              "checker_in": chk.tokens_in if chk else 0, "checker_out": chk.tokens_out if chk else 0}
+    return Outcome(ticket.ticket_id, action, label, d.priority, reason, sent,
+                   None if action == AUTO else _handover(ticket, c, s, passages, d, draft, reason, report),
+                   c, d, draft, report, tuple(p.doc_id for p in passages), calls,
+                   int((time.perf_counter() - state["start"]) * 1000),
+                   tuple(dict.fromkeys(d.requirement_ids + tuple(reqs))), tokens)
+
+
 def process(ticket, classifier, retriever, now=None, kill_switch_file=None, call=None, sleep=None) -> Outcome:
-    start = time.perf_counter()
-    kw = {k: v for k, v in (("call", call), ("sleep", sleep)) if v}
-    c = classifier.classify("" if is_blocked(ticket) else ticket.text)
-    s = check(ticket.text, c.intent)
-    passages = [] if is_blocked(ticket) else retriever.search(ticket.text)
-    d = route(ticket.text, c, s, passages, received_at=ticket.received_at, now=now, kill_switch_file=kill_switch_file)
-
-    def done(action, label, reason, draft=None, report=None, sent=ACKNOWLEDGEMENT, reqs=()):
-        calls = (draft.calls if draft is not None else 0) + (
-            1 if report is not None and any(x.name == "grounding_model" and not x.detail.startswith("not run")
-                                            for x in report.checks) else 0)
-        chk = next((x for x in (report.checks if report else []) if x.name == "grounding_model"), None)
-        tokens = {"writer_in": draft.tokens_in if draft else 0, "writer_out": draft.tokens_out if draft else 0,
-                  "checker_in": chk.tokens_in if chk else 0, "checker_out": chk.tokens_out if chk else 0}
-        return Outcome(ticket.ticket_id, action, label, d.priority, reason, sent,
-                       None if action == AUTO else _handover(ticket, c, s, passages, d, draft, reason, report),
-                       c, d, draft, report, tuple(p.doc_id for p in passages), calls,
-                       int((time.perf_counter() - start) * 1000),
-                       tuple(dict.fromkeys(d.requirement_ids + tuple(reqs))), tokens)
-
-    # A safety rule, an unusable ticket or no article: to a person with no model call (NFR-07).
-    if s.must_go_to_person or c.fallback or not passages:
-        return done(ESCALATE, SPECIALIST, d.reason)
-
-    draft = generate(ticket.text, c.intent, passages, **kw)
-    if d.action == ESCALATE:                                   # e.g. confidence just under the threshold
-        label = DRAFT_READY if (d.label == DRAFT_READY and draft.ok) else SPECIALIST
-        return done(ESCALATE, label, d.reason, draft)
-    if not draft.ok:
-        return done(ESCALATE, SPECIALIST, f"Sent to a person ({SPECIALIST}) because {draft.error}.", draft,
-                    reqs=("FR-05",))
-
-    reply = with_notice(draft, passages)
-    articles = {a["doc_id"]: a for a in articles_for(passages)}
-    report = check_reply(reply, draft, articles, ticket.text, c.confidence, d.threshold, **kw)
-    if report.blocked:
-        why = "; ".join(f"{x.name}: {x.detail}" for x in report.checks if not x.passed)
-        return done("block", SPECIALIST, f"Reply blocked by a guardrail and sent to a person ({SPECIALIST}): {why}.",
-                    draft, report, reqs=("FR-09",))
-    return done(AUTO, "", d.reason, draft, report, sent=reply, reqs=("FR-05", "FR-08", "FR-09"))
+    """One ticket through the LangGraph workflow (src/workflow.py, Module 7)."""
+    from src.workflow import run_ticket
+    return run_ticket(ticket, classifier, retriever, now=now, kill_switch_file=kill_switch_file, call=call, sleep=sleep)
