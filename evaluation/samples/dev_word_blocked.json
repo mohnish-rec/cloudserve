@@ -1,0 +1,1449 @@
+[
+  {
+    "ticket_id": "DEV-0012",
+    "channel": "chat",
+    "subject": "",
+    "body": "I started an export late last night and it is still showing as queued. It covers about two million records. Should I cancel and try again?",
+    "received_at": "2026-03-31T22:43:00Z",
+    "customer_id": "CUST-1140",
+    "customer_name": "Xin Ahmed",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "data_export",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DATA-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 51,
+      "csat_rating": 3,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0018",
+    "channel": "email",
+    "subject": "Pagination returns duplicates",
+    "body": "how to get all data? page size big is reject. small is very slow.",
+    "received_at": "2026-03-11T07:02:00Z",
+    "customer_id": "CUST-1089",
+    "customer_name": "Priya Schmidt",
+    "customer_tier": "business",
+    "customer_region": "latin_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002",
+        "DOC-API-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 50,
+      "csat_rating": 4,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0024",
+    "channel": "forum",
+    "subject": "Database restore taking hours",
+    "body": "A restore we started over the weekend is still running. The database is about four hundred gigabytes. Is this a normal duration or has something stalled?",
+    "received_at": "2026-03-21T10:19:00Z",
+    "customer_id": "CUST-1167",
+    "customer_name": "Yusuf Sharma",
+    "customer_tier": "business",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "medium",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 307,
+      "csat_rating": 4,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0026",
+    "channel": "chat",
+    "subject": "",
+    "body": "When I page through results I am seeing some records twice and missing others entirely. The collection does change while I iterate. Am I doing this the wrong way?",
+    "received_at": "2026-03-19T21:03:00Z",
+    "customer_id": "CUST-1259",
+    "customer_name": "Wanjiru Rossi",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002",
+        "DOC-API-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1298,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0027",
+    "channel": "docs_comment",
+    "subject": "Pagination returns duplicates",
+    "body": "What is the right way to pull a very large extract? Requesting a big page size gets rejected and iterating page by page takes hours.",
+    "received_at": "2026-05-17T22:01:00Z",
+    "customer_id": "CUST-1243",
+    "customer_name": "Diana Silva",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 446,
+      "csat_rating": 4,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0055",
+    "channel": "chat",
+    "subject": "",
+    "body": "When I page through results I am seeing some records twice and missing others entirely. The collection does change while I iterate. Am I doing this the wrong way?",
+    "received_at": "2026-04-12T05:52:00Z",
+    "customer_id": "CUST-1104",
+    "customer_name": "Grace Rossi",
+    "customer_tier": "enterprise",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 356,
+      "csat_rating": 4,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0066",
+    "channel": "email",
+    "subject": "Pagination returns duplicates",
+    "body": "What is the right way to pull a very large extract? Requesting a big page size gets rejected and iterating page by page takes hours.",
+    "received_at": "2026-03-04T08:01:00Z",
+    "customer_id": "CUST-1236",
+    "customer_name": "Priya Aziz",
+    "customer_tier": "enterprise",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1091,
+      "csat_rating": 5,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0088",
+    "channel": "chat",
+    "subject": "",
+    "body": "A restore we started yesterday morning is still running. The database is about four hundred gigabytes. Is this a normal duration or has something stalled?",
+    "received_at": "2026-03-10T14:08:00Z",
+    "customer_id": "CUST-1238",
+    "customer_name": "Nadia Haddad",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-PERF-003",
+        "DOC-DATA-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 42,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0096",
+    "channel": "chat",
+    "subject": "",
+    "body": "we planning to migrate existing application across. It currently writes uploaded files to local disk.",
+    "received_at": "2026-04-01T23:01:00Z",
+    "customer_id": "CUST-1173",
+    "customer_name": "Yusuf Rossi",
+    "customer_tier": "enterprise",
+    "customer_region": "latin_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "onboarding",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-ONB-001",
+        "DOC-ONB-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 35,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0160",
+    "channel": "email",
+    "subject": "Remove a departing team member",
+    "body": "A team member left around 14:00 yesterday and I want to make sure their access is fully removed, including anything they may have created.",
+    "received_at": "2026-04-28T19:40:00Z",
+    "customer_id": "CUST-1239",
+    "customer_name": "Farid Rossi",
+    "customer_tier": "enterprise",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "account_access",
+      "urgency": "low",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 653,
+      "csat_rating": 2,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0162",
+    "channel": "chat",
+    "subject": "",
+    "body": "restore we start earlier today is still run. The database is about four hundred gigabytes. waiting for your reply.",
+    "received_at": "2026-03-25T11:52:00Z",
+    "customer_id": "CUST-1115",
+    "customer_name": "Rosa Liu",
+    "customer_tier": "enterprise",
+    "customer_region": "asia_pacific",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "high",
+      "expected_route": "escalate",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-PERF-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 341,
+      "csat_rating": 1,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0166",
+    "channel": "docs_comment",
+    "subject": "How do I page through large results",
+    "body": "What is the right way to pull a very large extract? Requesting a big page size gets rejected and iterating page by page takes hours.",
+    "received_at": "2026-03-31T23:58:00Z",
+    "customer_id": "CUST-1081",
+    "customer_name": "Sanjay Dubois",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002",
+        "DOC-API-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 43,
+      "csat_rating": 3,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0167",
+    "channel": "docs_comment",
+    "subject": "Pagination returns duplicates",
+    "body": "Our cursor seems to stop working partway through a long iteration. Is there an expiry we should be handling?",
+    "received_at": "2026-04-24T22:35:00Z",
+    "customer_id": "CUST-1058",
+    "customer_name": "Yusuf Iyer",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002",
+        "DOC-API-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 22,
+      "csat_rating": 4,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0169",
+    "channel": "email",
+    "subject": "Connection pool exhausted",
+    "body": "restore is running from long time. database is 400 gb. is it normal?",
+    "received_at": "2026-03-04T03:43:00Z",
+    "customer_id": "CUST-1067",
+    "customer_name": "Grace Wei",
+    "customer_tier": "standard",
+    "customer_region": "latin_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "medium",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 237,
+      "csat_rating": 4,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0177",
+    "channel": "forum",
+    "subject": "How do I page through large results",
+    "body": "What is the right way to pull a very large extract? Requesting a big page size gets rejected and iterating page by page takes hours.",
+    "received_at": "2026-05-04T23:36:00Z",
+    "customer_id": "CUST-1196",
+    "customer_name": "Ingrid Schmidt",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 26,
+      "csat_rating": 2,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0182",
+    "channel": "email",
+    "subject": "How do I page through large results",
+    "body": "Our cursor seems to stop working partway through a long iteration. Is there an expiry we should be handling?",
+    "received_at": "2026-05-05T02:55:00Z",
+    "customer_id": "CUST-1132",
+    "customer_name": "Ulrike Ahmed",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 51,
+      "csat_rating": 3,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0201",
+    "channel": "email",
+    "subject": "Pagination returns duplicates",
+    "body": "What is the right way to pull a very large extract? Requesting a big page size gets rejected and iterating page by page takes hours.",
+    "received_at": "2026-03-28T08:08:00Z",
+    "customer_id": "CUST-1190",
+    "customer_name": "Mei Costa",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002",
+        "DOC-API-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 8,
+      "csat_rating": 2,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0207",
+    "channel": "docs_comment",
+    "subject": "Question about the export endpoint",
+    "body": "Our cursor seems to stop working partway through a long iteration. Is there an expiry we should be handling?",
+    "received_at": "2026-05-12T01:31:00Z",
+    "customer_id": "CUST-1218",
+    "customer_name": "Elif Demir",
+    "customer_tier": "enterprise",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 45,
+      "csat_rating": 4,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0209",
+    "channel": "email",
+    "subject": "No connections available error",
+    "body": "restore is running from long time. database is 400 gb. is it normal?",
+    "received_at": "2026-04-02T20:53:00Z",
+    "customer_id": "CUST-1147",
+    "customer_name": "Hiroshi Nair",
+    "customer_tier": "enterprise",
+    "customer_region": "asia_pacific",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-PERF-003",
+        "DOC-DATA-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 707,
+      "csat_rating": 2,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0216",
+    "channel": "email",
+    "subject": "Question about the export endpoint",
+    "body": "Our cursor seems to stop working partway through a long iteration. Is there an expiry we should be handling?",
+    "received_at": "2026-04-17T04:27:00Z",
+    "customer_id": "CUST-1206",
+    "customer_name": "Yusuf Okafor",
+    "customer_tier": "enterprise",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 31,
+      "csat_rating": 4,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0217",
+    "channel": "email",
+    "subject": "How do I page through large results",
+    "body": "Our cursor seems to stop working partway through a long iteration. Is there an expiry we should be handling?",
+    "received_at": "2026-04-24T23:51:00Z",
+    "customer_id": "CUST-1112",
+    "customer_name": "Aditya Kulkarni",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002",
+        "DOC-API-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 13,
+      "csat_rating": 4,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0233",
+    "channel": "docs_comment",
+    "subject": "Migrating our app across",
+    "body": "We are planning to migrate an existing application across. It currently writes uploaded files to local disk. What should we change before we move?",
+    "received_at": "2026-04-26T23:08:00Z",
+    "customer_id": "CUST-1251",
+    "customer_name": "Elif Costa",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "onboarding",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-ONB-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 4,
+      "csat_rating": 4,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0256",
+    "channel": "chat",
+    "subject": "",
+    "body": "We are planning to migrate an existing application across. It currently writes uploaded files to local disk. What should we change before we move?",
+    "received_at": "2026-04-05T14:36:00Z",
+    "customer_id": "CUST-1132",
+    "customer_name": "Xin Sharma",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "onboarding",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-ONB-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 51,
+      "csat_rating": 3,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0264",
+    "channel": "email",
+    "subject": "Pagination returns duplicates",
+    "body": "Our cursor seems to stop working partway through a long iteration. Is there an expiry we should be handling?",
+    "received_at": "2026-04-06T20:40:00Z",
+    "customer_id": "CUST-1076",
+    "customer_name": "Elif Sharma",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1026,
+      "csat_rating": 1,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0279",
+    "channel": "chat",
+    "subject": "",
+    "body": "I started an export late last night and it is still showing as queued. It covers about two million records. Should I cancel and try again?",
+    "received_at": "2026-04-25T22:22:00Z",
+    "customer_id": "CUST-1256",
+    "customer_name": "Diana Kamau",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "data_export",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DATA-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 28,
+      "csat_rating": 1,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0310",
+    "channel": "docs_comment",
+    "subject": "Migrating our app across",
+    "body": "Could you point me at the right starting place? I have created an account but the console has more in it than I expected.",
+    "received_at": "2026-05-15T22:57:00Z",
+    "customer_id": "CUST-1061",
+    "customer_name": "Oscar Lindqvist",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "onboarding",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-ONB-001",
+        "DOC-ONB-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 25,
+      "csat_rating": 2,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0320",
+    "channel": "email",
+    "subject": "How do I page through large results",
+    "body": "Our cursor seems to stop working partway through a long iteration. Is there an expiry we should be handling?",
+    "received_at": "2026-04-17T14:13:00Z",
+    "customer_id": "CUST-1177",
+    "customer_name": "Kavya Patel",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 39,
+      "csat_rating": 3,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0331",
+    "channel": "chat",
+    "subject": "",
+    "body": "I started an export over the weekend and it is still showing as queued. It covers about two million records. Should I cancel and try again?",
+    "received_at": "2026-05-30T01:30:00Z",
+    "customer_id": "CUST-1061",
+    "customer_name": "Elif Wei",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "data_export",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DATA-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 209,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0338",
+    "channel": "chat",
+    "subject": "",
+    "body": "A restore we started two days ago is still running. The database is about four hundred gigabytes. Is this a normal duration or has something stalled?",
+    "received_at": "2026-03-31T18:54:00Z",
+    "customer_id": "CUST-1251",
+    "customer_name": "Priya Kulkarni",
+    "customer_tier": "enterprise",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "medium",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 462,
+      "csat_rating": 4,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0347",
+    "channel": "chat",
+    "subject": "",
+    "body": "Our staging environment is picking up production configuration values. I cannot work out where the override is coming from.",
+    "received_at": "2026-03-25T12:55:00Z",
+    "customer_id": "CUST-1052",
+    "customer_name": "Mei Sharma",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "configuration_help",
+      "urgency": "medium",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1118,
+      "csat_rating": 1,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0358",
+    "channel": "email",
+    "subject": "New to the platform, where to begin",
+    "body": "we are planning to migrate an existing application across. It currently writes uploaded files to local disk. kindly check and revert.",
+    "received_at": "2026-03-22T04:29:00Z",
+    "customer_id": "CUST-1142",
+    "customer_name": "Quentin Larsen",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "onboarding",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-ONB-001",
+        "DOC-ONB-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 26,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0364",
+    "channel": "chat",
+    "subject": "",
+    "body": "I started an export around 14:00 yesterday and it is still showing as queued. It covers about two million records. Should I cancel and try again?",
+    "received_at": "2026-05-12T11:15:00Z",
+    "customer_id": "CUST-1089",
+    "customer_name": "Xin Larsen",
+    "customer_tier": "enterprise",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "data_export",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DATA-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 843,
+      "csat_rating": 2,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0368",
+    "channel": "email",
+    "subject": "Pagination returns duplicates",
+    "body": "Our cursor seems to stop working partway through a long iteration. Is there an expiry we should be handling?",
+    "received_at": "2026-05-09T07:40:00Z",
+    "customer_id": "CUST-1253",
+    "customer_name": "Aditya Nair",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002",
+        "DOC-API-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 37,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0374",
+    "channel": "email",
+    "subject": "Database restore taking hours",
+    "body": "we get errors saying no connection is available. This start when we scaled up our service. please do the needful.",
+    "received_at": "2026-03-28T07:03:00Z",
+    "customer_id": "CUST-1245",
+    "customer_name": "Kavya Kamau",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "high",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1209,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0378",
+    "channel": "email",
+    "subject": "Database restore taking hours",
+    "body": "connection not available error coming. we scale up service then problem start. please check.",
+    "received_at": "2026-05-11T07:30:00Z",
+    "customer_id": "CUST-1185",
+    "customer_name": "Amara Costa",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-PERF-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 51,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0384",
+    "channel": "docs_comment",
+    "subject": "How do I page through large results",
+    "body": "Our cursor seems to stop working partway through a long iteration. Is there an expiry we should be handling?",
+    "received_at": "2026-04-04T21:18:00Z",
+    "customer_id": "CUST-1196",
+    "customer_name": "Priya Lindqvist",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "low",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 566,
+      "csat_rating": 5,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0401",
+    "channel": "docs_comment",
+    "subject": "Export job stuck",
+    "body": "I started an export last Friday and it is still showing as queued. It covers about two million records. Should I cancel and try again?",
+    "received_at": "2026-05-18T17:38:00Z",
+    "customer_id": "CUST-1175",
+    "customer_name": "Lucas Mendez",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "data_export",
+      "urgency": "medium",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1305,
+      "csat_rating": 5,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0408",
+    "channel": "chat",
+    "subject": "",
+    "body": "restore is running from long time. database is 400 gb. is it normal?",
+    "received_at": "2026-03-02T20:47:00Z",
+    "customer_id": "CUST-1195",
+    "customer_name": "Oscar Haddad",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-PERF-003",
+        "DOC-DATA-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 8,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0422",
+    "channel": "docs_comment",
+    "subject": "Question about the export endpoint",
+    "body": "Our cursor seems to stop working partway through a long iteration. Is there an expiry we should be handling?",
+    "received_at": "2026-05-23T01:17:00Z",
+    "customer_id": "CUST-1107",
+    "customer_name": "Sanjay Dubois",
+    "customer_tier": "business",
+    "customer_region": "latin_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 55,
+      "csat_rating": 2,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0424",
+    "channel": "chat",
+    "subject": "",
+    "body": "we planning to migrate existing application across. It currently writes uploaded files to local disk.",
+    "received_at": "2026-03-18T13:58:00Z",
+    "customer_id": "CUST-1069",
+    "customer_name": "Quentin Costa",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "onboarding",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-ONB-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 31,
+      "csat_rating": 1,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0428",
+    "channel": "email",
+    "subject": "New to the platform, where to begin",
+    "body": "we are planning to migrate existing application across. It currently writes uploaded files to local disk. please do the needful.",
+    "received_at": "2026-04-25T07:07:00Z",
+    "customer_id": "CUST-1097",
+    "customer_name": "Diana Tanaka",
+    "customer_tier": "standard",
+    "customer_region": "latin_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "onboarding",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-ONB-001",
+        "DOC-ONB-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 40,
+      "csat_rating": 3,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0430",
+    "channel": "docs_comment",
+    "subject": "Pagination returns duplicates",
+    "body": "What is the right way to pull a very large extract? Requesting a big page size gets rejected and iterating page by page takes hours.",
+    "received_at": "2026-04-21T09:57:00Z",
+    "customer_id": "CUST-1072",
+    "customer_name": "Yusuf Costa",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 51,
+      "csat_rating": 2,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0434",
+    "channel": "forum",
+    "subject": "How do I page through large results",
+    "body": "What is the right way to pull a very large extract? Requesting a big page size gets rejected and iterating page by page takes hours.",
+    "received_at": "2026-04-24T03:47:00Z",
+    "customer_id": "CUST-1176",
+    "customer_name": "Jamal Liu",
+    "customer_tier": "business",
+    "customer_region": "latin_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002",
+        "DOC-API-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 53,
+      "csat_rating": 4,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0439",
+    "channel": "email",
+    "subject": "Database restore taking hours",
+    "body": "Our connection pool appears to be exhausting under moderate load. We have already increased the pool size and it made things worse.",
+    "received_at": "2026-05-07T21:05:00Z",
+    "customer_id": "CUST-1122",
+    "customer_name": "Lucas Wei",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "low",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 782,
+      "csat_rating": 1,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0451",
+    "channel": "email",
+    "subject": "Database restore taking hours",
+    "body": "restore we start earlier today is still run. database about four hundred gigabytes. please do the needful.",
+    "received_at": "2026-03-24T12:58:00Z",
+    "customer_id": "CUST-1064",
+    "customer_name": "Caleb Liu",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-PERF-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 43,
+      "csat_rating": 2,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0458",
+    "channel": "chat",
+    "subject": "",
+    "body": "log forwarding to our external system stop late last night and not resumed by itself. destination is healthy as we know.",
+    "received_at": "2026-04-28T06:12:00Z",
+    "customer_id": "CUST-1000",
+    "customer_name": "Priya Yilmaz",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "integration_help",
+      "urgency": "low",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 958,
+      "csat_rating": 1,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0472",
+    "channel": "chat",
+    "subject": "",
+    "body": "A restore we started last Friday is still running. The database is about four hundred gigabytes. Is this a normal duration or has something stalled?",
+    "received_at": "2026-03-08T04:47:00Z",
+    "customer_id": "CUST-1179",
+    "customer_name": "Nadia Ahmed",
+    "customer_tier": "business",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "high",
+      "expected_route": "escalate",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-PERF-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 236,
+      "csat_rating": 2,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0481",
+    "channel": "docs_comment",
+    "subject": "How do I page through large results",
+    "body": "When I page through results I am seeing some records twice and missing others entirely. The collection does change while I iterate. Am I doing this the wrong way?",
+    "received_at": "2026-04-12T08:12:00Z",
+    "customer_id": "CUST-1184",
+    "customer_name": "Grace Yilmaz",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1210,
+      "csat_rating": 1,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0482",
+    "channel": "email",
+    "subject": "Pagination returns duplicates",
+    "body": "Our cursor seems to stop working partway through a long iteration. Is there an expiry we should be handling?",
+    "received_at": "2026-04-20T01:07:00Z",
+    "customer_id": "CUST-1098",
+    "customer_name": "Hiroshi Demir",
+    "customer_tier": "enterprise",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002",
+        "DOC-API-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1201,
+      "csat_rating": 5,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0496",
+    "channel": "docs_comment",
+    "subject": "Getting started with first deployment",
+    "body": "We are planning to migrate an existing application across. It currently writes uploaded files to local disk. What should we change before we move?",
+    "received_at": "2026-05-16T05:50:00Z",
+    "customer_id": "CUST-1043",
+    "customer_name": "Xin Novak",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "onboarding",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-ONB-001",
+        "DOC-ONB-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 103,
+      "csat_rating": 4,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  }
+]

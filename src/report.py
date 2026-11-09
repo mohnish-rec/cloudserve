@@ -31,6 +31,18 @@ def calibration_table(rows, bands=5):
     return out
 
 
+def _tokens(outcomes, n) -> str:
+    """Tokens as the provider reported them: the free tier's limits are counted in tokens (NFR-07)."""
+    t = Counter()
+    for o in outcomes:
+        t.update(getattr(o, "tokens", None) or {})
+    used = [o for o in outcomes if (getattr(o, "tokens", None) or {}).get("writer_in")]
+    per = (t["writer_in"] + t["writer_out"]) / len(used) if used else 0
+    return (f"- **Tokens:** writer {t['writer_in']:,} in + {t['writer_out']:,} out "
+            f"({per:,.0f} per reply written); checker {t['checker_in']:,} in + {t['checker_out']:,} out; "
+            f"total {sum(t.values()):,} ({sum(t.values()) / n if n else 0:,.0f} per ticket)")
+
+
 def build(outcomes, tickets, raw_by_id, meta, decisions_logged) -> str:
     n = len(outcomes)
     by = Counter(o.action for o in outcomes)
@@ -57,7 +69,9 @@ def build(outcomes, tickets, raw_by_id, meta, decisions_logged) -> str:
         "\"Draft ready\" hand-overs count as escalations (FR-07).",
         "", "## Technical", "",
         f"- **Latency:** median {p(50) / 1000:.1f} s, 95th percentile {p(95) / 1000:.1f} s (target: under 3 s for 95%, NFR-01)",
-        f"- **Model calls:** {sum(o.model_calls for o in outcomes)} in total, {sum(o.model_calls for o in outcomes) / n if n else 0:.2f} per ticket",
+        f"- **Model calls:** {sum(o.model_calls for o in outcomes)} in total (retries included), "
+        f"{sum(o.model_calls for o in outcomes) / n if n else 0:.2f} per ticket",
+        _tokens(outcomes, n),
         f"- **Decisions logged:** {decisions_logged['total']} rows; {decisions_logged['outcome']} final outcomes for {n} tickets "
         f"-> {'reconciles' if decisions_logged['outcome'] == n else 'DOES NOT RECONCILE'} (A8)",
         f"- **Guardrail activations:** " + (", ".join(f"{k} {v}" for k, v in fired.most_common()) or "none"),

@@ -1,0 +1,2872 @@
+[
+  {
+    "ticket_id": "DEV-0301",
+    "channel": "email",
+    "subject": "Export missing recent records",
+    "body": "The download link from our export has expired and I cannot find a way to generate a new one. Is the file still available?",
+    "received_at": "2026-05-26T00:15:00Z",
+    "customer_id": "CUST-1058",
+    "customer_name": "Rosa Ferreira",
+    "customer_tier": "business",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "data_export",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DATA-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 4,
+      "csat_rating": 4,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0302",
+    "channel": "chat",
+    "subject": "",
+    "body": "We have just signed up and I am not sure where to start. We have a containerised application and would like to get it deployed.",
+    "received_at": "2026-05-10T12:34:00Z",
+    "customer_id": "CUST-1153",
+    "customer_name": "Yusuf Haddad",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "onboarding",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-ONB-001",
+        "DOC-ONB-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 680,
+      "csat_rating": 4,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0303",
+    "channel": "chat",
+    "subject": "",
+    "body": "one of our production keys start returning 401 at around two days ago without any change on our side. Other keys against same account are still working. kindly check and revert.",
+    "received_at": "2026-04-08T05:37:00Z",
+    "customer_id": "CUST-1131",
+    "customer_name": "Nadia Ferreira",
+    "customer_tier": "enterprise",
+    "customer_region": "europe",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "api_key_issue",
+      "urgency": "low",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 363,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0304",
+    "channel": "email",
+    "subject": "Bad release in production",
+    "body": "We shipped a release two days ago that has broken checkout for a portion of our customers. We need to get back to the previous version quickly. What is the fastest safe route?",
+    "received_at": "2026-05-11T19:19:00Z",
+    "customer_id": "CUST-1237",
+    "customer_name": "Sanjay Ahmed",
+    "customer_tier": "enterprise",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "rollback_request",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DEPLOY-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 49,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0305",
+    "channel": "email",
+    "subject": "Help configuring single sign-on",
+    "body": "Single sign-on works for our engineering group but the finance group gets an error. Both are configured identically as far as we can tell. Any idea what differs?",
+    "received_at": "2026-03-28T18:28:00Z",
+    "customer_id": "CUST-1200",
+    "customer_name": "Quentin Rahman",
+    "customer_tier": "enterprise",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "sso_configuration",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-AUTH-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 372,
+      "csat_rating": 4,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0306",
+    "channel": "docs_comment",
+    "subject": "Signature verification failing",
+    "body": "Our webhook endpoint has stopped receiving events since two days ago. The endpoint is up and responding to health checks from our own monitoring.",
+    "received_at": "2026-03-27T05:44:00Z",
+    "customer_id": "CUST-1032",
+    "customer_name": "Sanjay Novak",
+    "customer_tier": "enterprise",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "webhook_issue",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 775,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0307",
+    "channel": "email",
+    "subject": "Duplicate webhook deliveries",
+    "body": "Our webhook endpoint has stopped receiving events since last Friday. The endpoint is up and responding to health checks from our own monitoring.",
+    "received_at": "2026-05-29T18:07:00Z",
+    "customer_id": "CUST-1047",
+    "customer_name": "Ulrike Silva",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "webhook_issue",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 34,
+      "csat_rating": 4,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0308",
+    "channel": "chat",
+    "subject": "",
+    "body": "What is the right way to pull a very large extract? Requesting a big page size gets rejected and iterating page by page takes hours.",
+    "received_at": "2026-05-28T21:50:00Z",
+    "customer_id": "CUST-1065",
+    "customer_name": "Grace Liu",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002",
+        "DOC-API-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 199,
+      "csat_rating": 1,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0309",
+    "channel": "docs_comment",
+    "subject": "Need data to stay in the EU",
+    "body": "one of our customers has asked for written confirmation of where their data physically stored. Can you please point me to something I can share with them?",
+    "received_at": "2026-04-15T23:55:00Z",
+    "customer_id": "CUST-1214",
+    "customer_name": "Priya Rahman",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "data_residency",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DATA-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 590,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0310",
+    "channel": "docs_comment",
+    "subject": "Migrating our app across",
+    "body": "Could you point me at the right starting place? I have created an account but the console has more in it than I expected.",
+    "received_at": "2026-05-15T22:57:00Z",
+    "customer_id": "CUST-1061",
+    "customer_name": "Oscar Lindqvist",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "onboarding",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-ONB-001",
+        "DOC-ONB-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 25,
+      "csat_rating": 2,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0311",
+    "channel": "chat",
+    "subject": "",
+    "body": "single sign-on works for our engineering group but finance group gets error. Both configured identically as we know. waiting for your reply.",
+    "received_at": "2026-03-31T05:04:00Z",
+    "customer_id": "CUST-1037",
+    "customer_name": "Wanjiru Sharma",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "sso_configuration",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-AUTH-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 35,
+      "csat_rating": 1,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0312",
+    "channel": "email",
+    "subject": "Login fails after password change",
+    "body": "My authenticator app codes are being rejected every time. I have tried generating new ones several times. I do have access to the device, it just will not accept the code.",
+    "received_at": "2026-03-07T13:06:00Z",
+    "customer_id": "CUST-1255",
+    "customer_name": "Jamal Tanaka",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "authentication_failure",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-AUTH-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 734,
+      "csat_rating": 4,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0313",
+    "channel": "chat",
+    "subject": "",
+    "body": "We shipped a release earlier today that has broken checkout for a portion of our customers. We need to get back to the previous version quickly. What is the fastest safe route?",
+    "received_at": "2026-04-13T03:54:00Z",
+    "customer_id": "CUST-1129",
+    "customer_name": "Xin Ferreira",
+    "customer_tier": "standard",
+    "customer_region": "latin_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "rollback_request",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DEPLOY-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 49,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0314",
+    "channel": "email",
+    "subject": "Key stopped working overnight",
+    "body": "One of our engineers pushed a key to a public repository by mistake. We need to replace it without taking the service down. What is the correct order of operations?",
+    "received_at": "2026-05-21T12:15:00Z",
+    "customer_id": "CUST-1226",
+    "customer_name": "Aditya Patel",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_key_issue",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-AUTH-004"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 12,
+      "csat_rating": 4,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0315",
+    "channel": "chat",
+    "subject": "",
+    "body": "How do I revert to an earlier revision? The release we put out this morning is causing errors and I would rather roll back than try to fix forward.",
+    "received_at": "2026-03-18T09:42:00Z",
+    "customer_id": "CUST-1049",
+    "customer_name": "Victor Wei",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "rollback_request",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DEPLOY-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 433,
+      "csat_rating": 2,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0316",
+    "channel": "forum",
+    "subject": "Usage allowance already consumed",
+    "body": "We were throttled around 14:00 yesterday after a traffic increase and it took down part of our product. We would rather pay overage than be stopped. How do we change that?",
+    "received_at": "2026-05-22T16:26:00Z",
+    "customer_id": "CUST-1040",
+    "customer_name": "Yusuf Silva",
+    "customer_tier": "enterprise",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "quota_or_overage",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-BILL-003",
+        "DOC-API-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 41,
+      "csat_rating": 4,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0317",
+    "channel": "chat",
+    "subject": "",
+    "body": "we need our data to remain within EU for contract we are signing. Our organisation was created some time ago and i not sure which region it is in. please do the needful.",
+    "received_at": "2026-03-05T00:19:00Z",
+    "customer_id": "CUST-1077",
+    "customer_name": "Jamal Schmidt",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "data_residency",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DATA-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 37,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0318",
+    "channel": "chat",
+    "subject": "",
+    "body": "Our staging environment is picking up production configuration values. I cannot work out where the override is coming from.",
+    "received_at": "2026-04-10T18:14:00Z",
+    "customer_id": "CUST-1007",
+    "customer_name": "Hiroshi Wei",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "configuration_help",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DEPLOY-004"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 163,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0319",
+    "channel": "email",
+    "subject": "Unexpected overage charges",
+    "body": "Overage charges appeared on our invoice that we were not expecting. We thought we were well inside our allowance.",
+    "received_at": "2026-03-03T12:25:00Z",
+    "customer_id": "CUST-1109",
+    "customer_name": "Wanjiru Kulkarni",
+    "customer_tier": "standard",
+    "customer_region": "latin_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "quota_or_overage",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-BILL-003",
+        "DOC-API-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 37,
+      "csat_rating": 2,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0320",
+    "channel": "email",
+    "subject": "How do I page through large results",
+    "body": "Our cursor seems to stop working partway through a long iteration. Is there an expiry we should be handling?",
+    "received_at": "2026-04-17T14:13:00Z",
+    "customer_id": "CUST-1177",
+    "customer_name": "Kavya Patel",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 39,
+      "csat_rating": 3,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0321",
+    "channel": "email",
+    "subject": "Help configuring single sign-on",
+    "body": "We are setting up SAML with our identity provider and users are being bounced back to an error page after authenticating successfully on our side. The assertion looks correct to us.",
+    "received_at": "2026-05-01T21:38:00Z",
+    "customer_id": "CUST-1208",
+    "customer_name": "Sanjay Larsen",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "sso_configuration",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-AUTH-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 50,
+      "csat_rating": 2,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0322",
+    "channel": "chat",
+    "subject": "",
+    "body": "We are getting errors saying no connection is available. This started when we scaled up our service. The database itself shows very few active queries.",
+    "received_at": "2026-04-22T10:04:00Z",
+    "customer_id": "CUST-1050",
+    "customer_name": "Yusuf Novak",
+    "customer_tier": "business",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "high",
+      "expected_route": "escalate",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-PERF-003",
+        "DOC-DATA-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 467,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0323",
+    "channel": "chat",
+    "subject": "",
+    "body": "New starters are not being created automatically when they log in through SSO for the first time. We expected them to be provisioned. Have we missed a setting?",
+    "received_at": "2026-05-09T18:30:00Z",
+    "customer_id": "CUST-1102",
+    "customer_name": "Rosa Yilmaz",
+    "customer_tier": "business",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "sso_configuration",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-AUTH-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 386,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0324",
+    "channel": "email",
+    "subject": "Retention period question",
+    "body": "Our policy requires two years of retention. What are our options given what the platform retains by default?",
+    "received_at": "2026-05-29T10:11:00Z",
+    "customer_id": "CUST-1205",
+    "customer_name": "Ulrike Mendez",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "compliance_request",
+      "urgency": "low",
+      "expected_route": "escalate",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-SEC-003"
+      ],
+      "must_not_auto_respond": true
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 550,
+      "csat_rating": 2,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0325",
+    "channel": "docs_comment",
+    "subject": "Connecting our CI pipeline",
+    "body": "Metrics arriving in our monitoring system lag behind what the console shows by a couple of minutes. Is that expected?",
+    "received_at": "2026-03-18T22:19:00Z",
+    "customer_id": "CUST-1002",
+    "customer_name": "Oscar Sharma",
+    "customer_tier": "enterprise",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "integration_help",
+      "urgency": "medium",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 988,
+      "csat_rating": 1,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0326",
+    "channel": "chat",
+    "subject": "",
+    "body": "Our export is missing records that were definitely created before I started the job. Is there something about how the snapshot works that I am misunderstanding?",
+    "received_at": "2026-05-05T06:53:00Z",
+    "customer_id": "CUST-1120",
+    "customer_name": "Victor Thompson",
+    "customer_tier": "business",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "data_export",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DATA-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 5,
+      "csat_rating": 1,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0327",
+    "channel": "chat",
+    "subject": "",
+    "body": "One of our engineers believes their credentials may have been exposed in a breach at another service. What should we be doing right now?",
+    "received_at": "2026-03-20T19:53:00Z",
+    "customer_id": "CUST-1066",
+    "customer_name": "Dilnoza Yilmaz",
+    "customer_tier": "enterprise",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "security_incident",
+      "urgency": "high",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": true
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 957,
+      "csat_rating": 2,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0328",
+    "channel": "chat",
+    "subject": "",
+    "body": "We are receiving the same event several times. Is this expected behaviour or is something wrong with our configuration?",
+    "received_at": "2026-03-16T23:50:00Z",
+    "customer_id": "CUST-1168",
+    "customer_name": "Lucas Silva",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "webhook_issue",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 55,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0329",
+    "channel": "docs_comment",
+    "subject": "Download link expired",
+    "body": "The download link from our export has expired and I cannot find a way to generate a new one. Is the file still available?",
+    "received_at": "2026-05-30T02:21:00Z",
+    "customer_id": "CUST-1000",
+    "customer_name": "Grace Novak",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "data_export",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DATA-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 16,
+      "csat_rating": 3,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0330",
+    "channel": "forum",
+    "subject": "No connections available error",
+    "body": "Our connection pool appears to be exhausting under moderate load. We have already increased the pool size and it made things worse.",
+    "received_at": "2026-04-03T17:27:00Z",
+    "customer_id": "CUST-1196",
+    "customer_name": "Farid Silva",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "high",
+      "expected_route": "escalate",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-PERF-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 549,
+      "csat_rating": 5,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0331",
+    "channel": "chat",
+    "subject": "",
+    "body": "I started an export over the weekend and it is still showing as queued. It covers about two million records. Should I cancel and try again?",
+    "received_at": "2026-05-30T01:30:00Z",
+    "customer_id": "CUST-1061",
+    "customer_name": "Elif Wei",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "data_export",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DATA-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 209,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0332",
+    "channel": "docs_comment",
+    "subject": "Would like custom retention",
+    "body": "Are staged rollouts on the roadmap? We would like to move traffic gradually rather than all at once.",
+    "received_at": "2026-03-08T20:39:00Z",
+    "customer_id": "CUST-1242",
+    "customer_name": "Hiroshi Rossi",
+    "customer_tier": "enterprise",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "feature_request",
+      "urgency": "low",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": true
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 139,
+      "csat_rating": 5,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0333",
+    "channel": "chat",
+    "subject": "",
+    "body": "new starters not being created automatically when they log in through SSO for the first time. We expect them to be provisioned. kindly check and revert.",
+    "received_at": "2026-03-04T11:54:00Z",
+    "customer_id": "CUST-1151",
+    "customer_name": "Wanjiru Patel",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "sso_configuration",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-AUTH-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 53,
+      "csat_rating": 4,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0334",
+    "channel": "email",
+    "subject": "Need to rotate an exposed key",
+    "body": "one of our engineers pushed a key to a public repository by mistake. We need to replace it without taking service down.",
+    "received_at": "2026-03-07T09:18:00Z",
+    "customer_id": "CUST-1045",
+    "customer_name": "Diana Wei",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "api_key_issue",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-AUTH-004",
+        "DOC-SEC-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 44,
+      "csat_rating": 4,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0335",
+    "channel": "email",
+    "subject": "Login fails after password change",
+    "body": "My authenticator app codes are being rejected every time. I have tried generating new ones several times. I do have access to the device, it just will not accept the code.",
+    "received_at": "2026-05-12T16:12:00Z",
+    "customer_id": "CUST-1137",
+    "customer_name": "Caleb Dubois",
+    "customer_tier": "enterprise",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "authentication_failure",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-AUTH-001",
+        "DOC-AUTH-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 38,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0336",
+    "channel": "email",
+    "subject": "Service slow at peak hours",
+    "body": "latency has been climbing gradually over past several hours. Nothing in our code has change. sorry for my english.",
+    "received_at": "2026-05-04T14:50:00Z",
+    "customer_id": "CUST-1074",
+    "customer_name": "Grace Ahmed",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "performance_degradation",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-PERF-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 751,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0337",
+    "channel": "email",
+    "subject": "No connections available error",
+    "body": "We are getting errors saying no connection is available. This started when we scaled up our service. The database itself shows very few active queries.",
+    "received_at": "2026-04-16T10:01:00Z",
+    "customer_id": "CUST-1179",
+    "customer_name": "Amara Kamau",
+    "customer_tier": "business",
+    "customer_region": "latin_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-PERF-003",
+        "DOC-DATA-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 233,
+      "csat_rating": 2,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0338",
+    "channel": "chat",
+    "subject": "",
+    "body": "A restore we started two days ago is still running. The database is about four hundred gigabytes. Is this a normal duration or has something stalled?",
+    "received_at": "2026-03-31T18:54:00Z",
+    "customer_id": "CUST-1251",
+    "customer_name": "Priya Kulkarni",
+    "customer_tier": "enterprise",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "medium",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 462,
+      "csat_rating": 4,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0339",
+    "channel": "email",
+    "subject": "Need to roll back the latest release",
+    "body": "How do I revert to an earlier revision? The release we put out this morning is causing errors and I would rather roll back than try to fix forward.",
+    "received_at": "2026-04-04T19:39:00Z",
+    "customer_id": "CUST-1038",
+    "customer_name": "Mei Demir",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "rollback_request",
+      "urgency": "high",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 892,
+      "csat_rating": 5,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0340",
+    "channel": "email",
+    "subject": "Export missing recent records",
+    "body": "Our export is missing records that were definitely created before I started the job. Is there something about how the snapshot works that I am misunderstanding?",
+    "received_at": "2026-03-31T18:49:00Z",
+    "customer_id": "CUST-1197",
+    "customer_name": "Sanjay Demir",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "data_export",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DATA-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 31,
+      "csat_rating": 4,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0341",
+    "channel": "forum",
+    "subject": "Connecting our CI pipeline",
+    "body": "log forwarding to our external system stop late last night and not resumed by itself. The destination is healthy as we know.",
+    "received_at": "2026-05-10T23:36:00Z",
+    "customer_id": "CUST-1233",
+    "customer_name": "Elif Silva",
+    "customer_tier": "business",
+    "customer_region": "asia_pacific",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "integration_help",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-INT-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 5,
+      "csat_rating": 1,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0342",
+    "channel": "email",
+    "subject": "Bad release in production",
+    "body": "how do I revert to earlier revision? The release we put out this morning causing errors and I better i roll back than try to fix forward. please help fast.",
+    "received_at": "2026-04-20T19:38:00Z",
+    "customer_id": "CUST-1032",
+    "customer_name": "Oscar Wei",
+    "customer_tier": "business",
+    "customer_region": "latin_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "rollback_request",
+      "urgency": "high",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1222,
+      "csat_rating": 1,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0343",
+    "channel": "email",
+    "subject": "Download link expired",
+    "body": "I started an export late last night and it is still showing as queued. It covers about two million records. Should I cancel and try again?",
+    "received_at": "2026-03-12T22:57:00Z",
+    "customer_id": "CUST-1118",
+    "customer_name": "Zara Demir",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "data_export",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DATA-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1085,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0344",
+    "channel": "email",
+    "subject": "Please add per-project spend caps",
+    "body": "we want to configure our own retention period rather than taking plan default. Is that something you are considering? please do the needful.",
+    "received_at": "2026-05-19T15:21:00Z",
+    "customer_id": "CUST-1122",
+    "customer_name": "Lucas Novak",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "feature_request",
+      "urgency": "medium",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": true
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 110,
+      "csat_rating": 2,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0345",
+    "channel": "email",
+    "subject": "Need to roll back the latest release",
+    "body": "How do I revert to an earlier revision? The release we put out this morning is causing errors and I would rather roll back than try to fix forward.",
+    "received_at": "2026-03-22T01:38:00Z",
+    "customer_id": "CUST-1009",
+    "customer_name": "Priya Demir",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "rollback_request",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DEPLOY-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 26,
+      "csat_rating": 3,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0346",
+    "channel": "chat",
+    "subject": "",
+    "body": "One of our production keys started returning 401 at around two days ago without any change on our side. Other keys against the same account are still working.",
+    "received_at": "2026-03-02T08:49:00Z",
+    "customer_id": "CUST-1064",
+    "customer_name": "Bhavesh Kamau",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_key_issue",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-AUTH-004",
+        "DOC-SEC-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 26,
+      "csat_rating": 1,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0347",
+    "channel": "chat",
+    "subject": "",
+    "body": "Our staging environment is picking up production configuration values. I cannot work out where the override is coming from.",
+    "received_at": "2026-03-25T12:55:00Z",
+    "customer_id": "CUST-1052",
+    "customer_name": "Mei Sharma",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "configuration_help",
+      "urgency": "medium",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1118,
+      "csat_rating": 1,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0348",
+    "channel": "docs_comment",
+    "subject": "Need audit logs for an auditor",
+    "body": "Our policy requires two years of retention. What are our options given what the platform retains by default?",
+    "received_at": "2026-04-05T08:54:00Z",
+    "customer_id": "CUST-1190",
+    "customer_name": "Farid Karimova",
+    "customer_tier": "business",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "compliance_request",
+      "urgency": "medium",
+      "expected_route": "escalate",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-SEC-003"
+      ],
+      "must_not_auto_respond": true
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1126,
+      "csat_rating": 2,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0349",
+    "channel": "chat",
+    "subject": "",
+    "body": "We are getting errors saying no connection is available. This started when we scaled up our service. The database itself shows very few active queries.",
+    "received_at": "2026-03-14T10:49:00Z",
+    "customer_id": "CUST-1233",
+    "customer_name": "Wanjiru Rossi",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "high",
+      "expected_route": "escalate",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-PERF-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1320,
+      "csat_rating": 1,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0350",
+    "channel": "email",
+    "subject": "Deployment rolls back every time",
+    "body": "Builds that worked last week are now failing during dependency resolution. We have not changed our code at all. This is blocking a release we had planned for yesterday morning.",
+    "received_at": "2026-04-14T20:04:00Z",
+    "customer_id": "CUST-1083",
+    "customer_name": "Oscar Costa",
+    "customer_tier": "enterprise",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "deployment_failure",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DEPLOY-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1100,
+      "csat_rating": 2,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0351",
+    "channel": "docs_comment",
+    "subject": "Need audit logs for an auditor",
+    "body": "Our auditor has asked for access records covering the last six months. Can I export these, and is that period within what you retain?",
+    "received_at": "2026-05-06T18:01:00Z",
+    "customer_id": "CUST-1203",
+    "customer_name": "Aditya Okafor",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "compliance_request",
+      "urgency": "low",
+      "expected_route": "escalate",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-SEC-003"
+      ],
+      "must_not_auto_respond": true
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 282,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0352",
+    "channel": "docs_comment",
+    "subject": "User cannot access a project",
+    "body": "One of our developers cannot see a project she should have access to. I have granted her the role twice and it does not seem to take effect.",
+    "received_at": "2026-05-03T13:43:00Z",
+    "customer_id": "CUST-1001",
+    "customer_name": "Nadia Patel",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "account_access",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-ACCT-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1167,
+      "csat_rating": 5,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0353",
+    "channel": "docs_comment",
+    "subject": "Build fails in the pipeline",
+    "body": "Our deployment reaches running and then rolls back after about a minute. The logs mention a health check timeout. It runs perfectly on my machine and in staging.",
+    "received_at": "2026-04-06T02:36:00Z",
+    "customer_id": "CUST-1228",
+    "customer_name": "Rosa Demir",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "deployment_failure",
+      "urgency": "high",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 485,
+      "csat_rating": 2,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0354",
+    "channel": "email",
+    "subject": "No connections available error",
+    "body": "We are getting errors saying no connection is available. This started when we scaled up our service. The database itself shows very few active queries.",
+    "received_at": "2026-05-01T07:52:00Z",
+    "customer_id": "CUST-1126",
+    "customer_name": "Victor Okafor",
+    "customer_tier": "enterprise",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-PERF-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 254,
+      "csat_rating": 2,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0355",
+    "channel": "email",
+    "subject": "Would like custom retention",
+    "body": "It would be very useful to set spend caps per project rather than only for the whole organisation. At the moment one team's overspend affects everyone.",
+    "received_at": "2026-03-08T16:40:00Z",
+    "customer_id": "CUST-1174",
+    "customer_name": "Ulrike Lindqvist",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "feature_request",
+      "urgency": "medium",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": true
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 935,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0356",
+    "channel": "chat",
+    "subject": "",
+    "body": "We need to demonstrate that read access to customer records is logged. I cannot find these events in the audit log.",
+    "received_at": "2026-05-27T15:20:00Z",
+    "customer_id": "CUST-1228",
+    "customer_name": "Tomas Silva",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "compliance_request",
+      "urgency": "low",
+      "expected_route": "escalate",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-SEC-003"
+      ],
+      "must_not_auto_respond": true
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 849,
+      "csat_rating": 1,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0357",
+    "channel": "chat",
+    "subject": "",
+    "body": "Our webhook endpoint has stopped receiving events since yesterday morning. The endpoint is up and responding to health checks from our own monitoring.",
+    "received_at": "2026-05-27T16:54:00Z",
+    "customer_id": "CUST-1150",
+    "customer_name": "Xin Lindqvist",
+    "customer_tier": "business",
+    "customer_region": "latin_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "webhook_issue",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 44,
+      "csat_rating": 1,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0358",
+    "channel": "email",
+    "subject": "New to the platform, where to begin",
+    "body": "we are planning to migrate an existing application across. It currently writes uploaded files to local disk. kindly check and revert.",
+    "received_at": "2026-03-22T04:29:00Z",
+    "customer_id": "CUST-1142",
+    "customer_name": "Quentin Larsen",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "onboarding",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-ONB-001",
+        "DOC-ONB-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 26,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0359",
+    "channel": "email",
+    "subject": "Need data to stay in the EU",
+    "body": "We need our data to remain within the EU for a contract we are signing. Our organisation was created some time ago and I am not sure which region it is in.",
+    "received_at": "2026-03-27T17:19:00Z",
+    "customer_id": "CUST-1232",
+    "customer_name": "Victor Aziz",
+    "customer_tier": "enterprise",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "data_residency",
+      "urgency": "medium",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 317,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0360",
+    "channel": "chat",
+    "subject": "",
+    "body": "Single sign-on works for our engineering group but the finance group gets an error. Both are configured identically as far as we can tell. Any idea what differs?",
+    "received_at": "2026-03-17T06:58:00Z",
+    "customer_id": "CUST-1095",
+    "customer_name": "Kavya Sharma",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "sso_configuration",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-AUTH-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 24,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0361",
+    "channel": "chat",
+    "subject": "",
+    "body": "Our spend cap stopped a production workload overnight. We need it raised immediately and then we need to reconsider how we have this configured.",
+    "received_at": "2026-05-14T10:52:00Z",
+    "customer_id": "CUST-1014",
+    "customer_name": "Bhavesh Iyer",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "quota_or_overage",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-BILL-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1338,
+      "csat_rating": 1,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0362",
+    "channel": "forum",
+    "subject": "Webhooks not arriving",
+    "body": "Our webhook endpoint has stopped receiving events since on Monday. The endpoint is up and responding to health checks from our own monitoring.",
+    "received_at": "2026-03-29T04:59:00Z",
+    "customer_id": "CUST-1216",
+    "customer_name": "Tomas Larsen",
+    "customer_tier": "enterprise",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "webhook_issue",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 44,
+      "csat_rating": 3,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0363",
+    "channel": "chat",
+    "subject": "",
+    "body": "The download link from our export has expired and I cannot find a way to generate a new one. Is the file still available?",
+    "received_at": "2026-05-15T16:35:00Z",
+    "customer_id": "CUST-1212",
+    "customer_name": "Zara Sharma",
+    "customer_tier": "standard",
+    "customer_region": "latin_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "data_export",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DATA-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 13,
+      "csat_rating": 4,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0364",
+    "channel": "chat",
+    "subject": "",
+    "body": "I started an export around 14:00 yesterday and it is still showing as queued. It covers about two million records. Should I cancel and try again?",
+    "received_at": "2026-05-12T11:15:00Z",
+    "customer_id": "CUST-1089",
+    "customer_name": "Xin Larsen",
+    "customer_tier": "enterprise",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "data_export",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DATA-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 843,
+      "csat_rating": 2,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0365",
+    "channel": "forum",
+    "subject": "Usage allowance already consumed",
+    "body": "Overage charges appeared on our invoice that we were not expecting. We thought we were well inside our allowance.",
+    "received_at": "2026-03-09T13:40:00Z",
+    "customer_id": "CUST-1187",
+    "customer_name": "Tomas Patel",
+    "customer_tier": "standard",
+    "customer_region": "latin_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "quota_or_overage",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-BILL-003",
+        "DOC-API-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 41,
+      "csat_rating": 1,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0366",
+    "channel": "forum",
+    "subject": "Unexpected overage charges",
+    "body": "We were throttled over the weekend after a traffic increase and it took down part of our product. We would rather pay overage than be stopped. How do we change that?",
+    "received_at": "2026-04-28T23:44:00Z",
+    "customer_id": "CUST-1081",
+    "customer_name": "Amara Demir",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "quota_or_overage",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-BILL-003",
+        "DOC-API-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 4,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0367",
+    "channel": "email",
+    "subject": "Connecting our CI pipeline",
+    "body": "We are connecting our CI pipeline and are not sure whether to use a personal key or something else. What is the recommended approach for automation?",
+    "received_at": "2026-05-08T03:14:00Z",
+    "customer_id": "CUST-1082",
+    "customer_name": "Beatriz Kulkarni",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "integration_help",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-INT-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 887,
+      "csat_rating": 5,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0368",
+    "channel": "email",
+    "subject": "Pagination returns duplicates",
+    "body": "Our cursor seems to stop working partway through a long iteration. Is there an expiry we should be handling?",
+    "received_at": "2026-05-09T07:40:00Z",
+    "customer_id": "CUST-1253",
+    "customer_name": "Aditya Nair",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002",
+        "DOC-API-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 37,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0369",
+    "channel": "email",
+    "subject": "Unexpected overage charges",
+    "body": "Overage charges appeared on our invoice that we were not expecting. We thought we were well inside our allowance.",
+    "received_at": "2026-03-28T07:40:00Z",
+    "customer_id": "CUST-1141",
+    "customer_name": "Diana Demir",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "quota_or_overage",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-BILL-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 54,
+      "csat_rating": 4,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0370",
+    "channel": "email",
+    "subject": "Possible account compromise",
+    "body": "A former employee appears to still have access three weeks after leaving. We have found API calls made under their account. This is urgent.",
+    "received_at": "2026-04-17T11:09:00Z",
+    "customer_id": "CUST-1035",
+    "customer_name": "Hiroshi Costa",
+    "customer_tier": "standard",
+    "customer_region": "latin_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "security_incident",
+      "urgency": "high",
+      "expected_route": "escalate",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-SEC-001"
+      ],
+      "must_not_auto_respond": true
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 355,
+      "csat_rating": 2,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0371",
+    "channel": "chat",
+    "subject": "",
+    "body": "We need our data to remain within the EU for a contract we are signing. Our organisation was created some time ago and I am not sure which region it is in.",
+    "received_at": "2026-04-06T16:31:00Z",
+    "customer_id": "CUST-1010",
+    "customer_name": "Aditya Rossi",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "data_residency",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DATA-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1047,
+      "csat_rating": 4,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0372",
+    "channel": "chat",
+    "subject": "",
+    "body": "latency has been climbing gradually over past a couple of days. Nothing in our code has change. please do the needful.",
+    "received_at": "2026-05-13T05:35:00Z",
+    "customer_id": "CUST-1222",
+    "customer_name": "Ulrike Thompson",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "performance_degradation",
+      "urgency": "high",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1189,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0373",
+    "channel": "chat",
+    "subject": "",
+    "body": "nothing loading properly today. Can someone look into this?",
+    "received_at": "2026-05-11T13:21:00Z",
+    "customer_id": "CUST-1214",
+    "customer_name": "Beatriz Liu",
+    "customer_tier": "business",
+    "customer_region": "asia_pacific",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "unclear_request",
+      "urgency": "high",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": true
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 765,
+      "csat_rating": 4,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0374",
+    "channel": "email",
+    "subject": "Database restore taking hours",
+    "body": "we get errors saying no connection is available. This start when we scaled up our service. please do the needful.",
+    "received_at": "2026-03-28T07:03:00Z",
+    "customer_id": "CUST-1245",
+    "customer_name": "Kavya Kamau",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "high",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1209,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0375",
+    "channel": "chat",
+    "subject": "",
+    "body": "Every deployment fails at the health check stage. I have increased the timeout twice already and it makes no difference.",
+    "received_at": "2026-05-20T20:54:00Z",
+    "customer_id": "CUST-1185",
+    "customer_name": "Rosa Zhang",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "deployment_failure",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DEPLOY-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1257,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0376",
+    "channel": "email",
+    "subject": "User cannot access a project",
+    "body": "user left company. how i remove all his access including key he made?",
+    "received_at": "2026-04-21T16:25:00Z",
+    "customer_id": "CUST-1044",
+    "customer_name": "Elif Haddad",
+    "customer_tier": "enterprise",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "account_access",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-ACCT-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 24,
+      "csat_rating": 4,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0377",
+    "channel": "email",
+    "subject": "Question about the export endpoint",
+    "body": "What is the right way to pull a very large extract? Requesting a big page size gets rejected and iterating page by page takes hours.",
+    "received_at": "2026-03-08T18:49:00Z",
+    "customer_id": "CUST-1047",
+    "customer_name": "Xin Sharma",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 623,
+      "csat_rating": 4,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0378",
+    "channel": "email",
+    "subject": "Database restore taking hours",
+    "body": "connection not available error coming. we scale up service then problem start. please check.",
+    "received_at": "2026-05-11T07:30:00Z",
+    "customer_id": "CUST-1185",
+    "customer_name": "Amara Costa",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "database_issue",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-PERF-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 51,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0379",
+    "channel": "chat",
+    "subject": "",
+    "body": "our webhook endpoint has stop receiving events since earlier today. endpoint is up and responding to health checks from our own monitoring. this is urgent for us.",
+    "received_at": "2026-04-14T00:45:00Z",
+    "customer_id": "CUST-1150",
+    "customer_name": "Priya Iyer",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "webhook_issue",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 29,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0380",
+    "channel": "chat",
+    "subject": "",
+    "body": "we shipped a release around 14:00 yesterday that has broken checkout for portion of our customers. We need to get back to the previous version quickly. this is urgent for us.",
+    "received_at": "2026-05-18T00:00:00Z",
+    "customer_id": "CUST-1018",
+    "customer_name": "Farid Dubois",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "rollback_request",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DEPLOY-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 48,
+      "csat_rating": 4,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0381",
+    "channel": "email",
+    "subject": "Please add per-project spend caps",
+    "body": "Are staged rollouts on the roadmap? We would like to move traffic gradually rather than all at once.",
+    "received_at": "2026-05-21T12:32:00Z",
+    "customer_id": "CUST-1047",
+    "customer_name": "Tomas Yilmaz",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "feature_request",
+      "urgency": "low",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": true
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 135,
+      "csat_rating": 4,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0382",
+    "channel": "email",
+    "subject": "Spend cap stopped our service",
+    "body": "Our spend cap stopped a production workload overnight. We need it raised immediately and then we need to reconsider how we have this configured.",
+    "received_at": "2026-04-28T21:15:00Z",
+    "customer_id": "CUST-1181",
+    "customer_name": "Aditya Kulkarni",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "quota_or_overage",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-BILL-003",
+        "DOC-API-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 36,
+      "csat_rating": 3,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0383",
+    "channel": "email",
+    "subject": "Response times have doubled",
+    "body": "Latency has been climbing gradually over the past a couple of days. Nothing in our code has changed. Memory usage looks high but not at the limit.",
+    "received_at": "2026-03-14T00:44:00Z",
+    "customer_id": "CUST-1135",
+    "customer_name": "Ingrid Novak",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "performance_degradation",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-PERF-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 30,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0384",
+    "channel": "docs_comment",
+    "subject": "How do I page through large results",
+    "body": "Our cursor seems to stop working partway through a long iteration. Is there an expiry we should be handling?",
+    "received_at": "2026-04-04T21:18:00Z",
+    "customer_id": "CUST-1196",
+    "customer_name": "Priya Lindqvist",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_usage_question",
+      "urgency": "low",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 566,
+      "csat_rating": 5,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0385",
+    "channel": "email",
+    "subject": "Usage allowance already consumed",
+    "body": "We were throttled on Monday after a traffic increase and it took down part of our product. We would rather pay overage than be stopped. How do we change that?",
+    "received_at": "2026-05-22T20:31:00Z",
+    "customer_id": "CUST-1085",
+    "customer_name": "Kavya Okafor",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "quota_or_overage",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-BILL-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 52,
+      "csat_rating": 2,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0386",
+    "channel": "chat",
+    "subject": "",
+    "body": "How do I revert to an earlier revision? The release we put out this morning is causing errors and I would rather roll back than try to fix forward.",
+    "received_at": "2026-04-06T15:16:00Z",
+    "customer_id": "CUST-1115",
+    "customer_name": "Beatriz Thompson",
+    "customer_tier": "business",
+    "customer_region": "latin_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "rollback_request",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DEPLOY-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 7,
+      "csat_rating": 2,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0387",
+    "channel": "chat",
+    "subject": "",
+    "body": "One of our production keys started returning 401 at around around 14:00 yesterday without any change on our side. Other keys against the same account are still working.",
+    "received_at": "2026-05-06T07:22:00Z",
+    "customer_id": "CUST-1114",
+    "customer_name": "Sanjay Costa",
+    "customer_tier": "enterprise",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "api_key_issue",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-AUTH-004",
+        "DOC-SEC-002"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 363,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0388",
+    "channel": "email",
+    "subject": "Need data to stay in the EU",
+    "body": "Are backups replicated outside our primary region? A compliance review has raised this and I need a definite answer.",
+    "received_at": "2026-04-09T20:07:00Z",
+    "customer_id": "CUST-1200",
+    "customer_name": "Kavya Nair",
+    "customer_tier": "standard",
+    "customer_region": "latin_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "data_residency",
+      "urgency": "low",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DATA-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 322,
+      "csat_rating": 4,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0389",
+    "channel": "email",
+    "subject": "Need data to stay in the EU",
+    "body": "One of our customers has asked for written confirmation of where their data is physically stored. Could you point me to something I can share with them?",
+    "received_at": "2026-05-29T09:24:00Z",
+    "customer_id": "CUST-1225",
+    "customer_name": "Caleb Zhang",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "data_residency",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-DATA-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 40,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0390",
+    "channel": "docs_comment",
+    "subject": "User cannot access a project",
+    "body": "One of our developers cannot see a project she should have access to. I have granted her the role twice and it does not seem to take effect.",
+    "received_at": "2026-04-17T05:30:00Z",
+    "customer_id": "CUST-1166",
+    "customer_name": "Yusuf Rahman",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "account_access",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-ACCT-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 6,
+      "csat_rating": 3,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0391",
+    "channel": "email",
+    "subject": "Suspicious activity in audit log",
+    "body": "One of our engineers believes their credentials may have been exposed in a breach at another service. What should we be doing right now?",
+    "received_at": "2026-03-18T14:57:00Z",
+    "customer_id": "CUST-1018",
+    "customer_name": "Grace Silva",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "security_incident",
+      "urgency": "high",
+      "expected_route": "escalate",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-SEC-001"
+      ],
+      "must_not_auto_respond": true
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 687,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0392",
+    "channel": "email",
+    "subject": "Please add per-project spend caps",
+    "body": "It would be very useful to set spend caps per project rather than only for the whole organisation. At the moment one team's overspend affects everyone.",
+    "received_at": "2026-05-04T11:16:00Z",
+    "customer_id": "CUST-1233",
+    "customer_name": "Priya Novak",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "feature_request",
+      "urgency": "medium",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": true
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 559,
+      "csat_rating": 5,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0393",
+    "channel": "docs_comment",
+    "subject": "Permission changes not taking effect",
+    "body": "A team member left on Monday and I want to make sure their access is fully removed, including anything they may have created.",
+    "received_at": "2026-05-16T11:59:00Z",
+    "customer_id": "CUST-1024",
+    "customer_name": "Aditya Ahmed",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "account_access",
+      "urgency": "low",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1095,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0394",
+    "channel": "email",
+    "subject": "Throughput drops after a few minutes",
+    "body": "We started getting 429 responses at around around 14:00 yesterday. Our traffic has not increased noticeably. We have several keys, so I had assumed our limit would be higher.",
+    "received_at": "2026-05-02T02:53:00Z",
+    "customer_id": "CUST-1159",
+    "customer_name": "Lucas Kamau",
+    "customer_tier": "enterprise",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "rate_limit",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-API-001"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 49,
+      "csat_rating": 3,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0395",
+    "channel": "email",
+    "subject": "Question",
+    "body": "We have a problem and need someone to call us urgently.",
+    "received_at": "2026-03-05T20:39:00Z",
+    "customer_id": "CUST-1073",
+    "customer_name": "Chen Thompson",
+    "customer_tier": "business",
+    "customer_region": "latin_america",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "unclear_request",
+      "urgency": "medium",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": true
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 147,
+      "csat_rating": 4,
+      "escalated": true,
+      "repeat_contact": true
+    }
+  },
+  {
+    "ticket_id": "DEV-0396",
+    "channel": "chat",
+    "subject": "",
+    "body": "we are setting up SAML with our identity provider and users are being bounced back to error page after authenticating successfully on our side. assertion looks correct to us. please do the needful.",
+    "received_at": "2026-04-07T19:56:00Z",
+    "customer_id": "CUST-1150",
+    "customer_name": "Rosa Patel",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "sso_configuration",
+      "urgency": "high",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-AUTH-003"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": true,
+      "resolution_time_minutes": 15,
+      "csat_rating": 5,
+      "escalated": false,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0397",
+    "channel": "chat",
+    "subject": "",
+    "body": "one of our production keys start returning 401 at around on Monday without any change on our side. Other keys against same account still working.",
+    "received_at": "2026-03-09T09:51:00Z",
+    "customer_id": "CUST-1205",
+    "customer_name": "Ingrid Rossi",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "api_key_issue",
+      "urgency": "medium",
+      "expected_route": "auto_respond",
+      "answerable_from_docs": true,
+      "expected_doc_ids": [
+        "DOC-AUTH-004"
+      ],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1120,
+      "csat_rating": 5,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0398",
+    "channel": "email",
+    "subject": "Urgent help needed",
+    "body": "Following up on my previous message. Any update?",
+    "received_at": "2026-04-08T10:47:00Z",
+    "customer_id": "CUST-1174",
+    "customer_name": "Oscar Ahmed",
+    "customer_tier": "enterprise",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "unclear_request",
+      "urgency": "medium",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": true
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 292,
+      "csat_rating": 3,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0399",
+    "channel": "chat",
+    "subject": "",
+    "body": "user left company. how i remove all his access including key he made?",
+    "received_at": "2026-04-18T04:20:00Z",
+    "customer_id": "CUST-1004",
+    "customer_name": "Mei Zhang",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "labels": {
+      "intent": "account_access",
+      "urgency": "high",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1320,
+      "csat_rating": 4,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  },
+  {
+    "ticket_id": "DEV-0400",
+    "channel": "chat",
+    "subject": "",
+    "body": "Our response times have roughly doubled since yesterday morning with no deployment on our side. The median looks acceptable but the 95th percentile is far worse than it was.",
+    "received_at": "2026-04-21T19:50:00Z",
+    "customer_id": "CUST-1115",
+    "customer_name": "Victor Iyer",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "labels": {
+      "intent": "performance_degradation",
+      "urgency": "high",
+      "expected_route": "escalate",
+      "answerable_from_docs": false,
+      "expected_doc_ids": [],
+      "must_not_auto_respond": false
+    },
+    "history": {
+      "first_contact_resolution": false,
+      "resolution_time_minutes": 1130,
+      "csat_rating": 1,
+      "escalated": true,
+      "repeat_contact": false
+    }
+  }
+]

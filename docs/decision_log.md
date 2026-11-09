@@ -157,3 +157,10 @@ Runtime decisions made by the system itself are logged separately in `storage/de
 - **False alarms:** none of the new patterns matches any of the 500 development tickets.
 - **Also seen:** RT-13 (Spanish) found no article and went to a person, which is safe but means non-English tickets are never answered automatically; noted for the fairness audit. The writer model sometimes joins two words ("log inagain") even after the space fix, so it appears to come from the model itself; to be counted in the evaluation.
 - **Evidence:** `evaluation/results/red_team.md` (`python scripts/red_team.py`), 8 Nov 2026.
+
+## D-022 · The word check compares numbers exactly; "one" is not treated as a number
+- **Date:** 9 Nov 2026
+- **Decision:** in grounding guardrail layer (a), a number in a reply sentence must appear in the cited article exactly as written (not in the shortened form used for other words), and "one" is no longer on the list of number words.
+- **Why:** the full run of all 500 development tickets (8–9 Nov, parts 1–5, `evaluation/results/dev_all_run.json`) had 50 replies blocked by the word check; 42 of them for "a number not in the article". 34 were the word "hundred" ("keep the page size at or below two hundred", which the article says word for word): the article's words were shortened ("hundred" → "hundr") but the reply's numbers were not, so they never matched. 8 were "one" used as an ordinary word ("one of the keys"). A bug in code, found on development tickets, not validation.
+- **Still blocked, correctly:** numbers the article does not state, such as a time the model calculated itself ("a 400-gigabyte database should take roughly 40 minutes", DEV-0024).
+- **Evidence:** the 50 word-check blocks are re-run on their own (`evaluation/samples/dev_word_blocked.json`) to measure the fix before any re-check on validation.

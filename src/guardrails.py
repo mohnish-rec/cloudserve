@@ -21,7 +21,7 @@ import os
 import re
 from dataclasses import dataclass, field
 
-from src.generate import call_with_fallback, load_prompt
+from src.generate import call_with_fallback, load_prompt, tokens_of
 from src.retrieve import STOPWORDS
 
 # Another model family from the writer (gpt-oss). llama-3.1-8b-instant was planned but Groq no longer
@@ -29,7 +29,8 @@ from src.retrieve import STOPWORDS
 GUARD_MODEL = os.getenv("GUARDRAIL_MODEL", "qwen/qwen3.8-27b")
 WORD_SUPPORT_MIN = float(os.getenv("WORD_SUPPORT_MIN", "0.6"))   # share of a sentence's words in its article
 MAX_WORDS = 230
-NUMBER_WORDS = set("one two three four five six seven eight nine ten eleven twelve fifteen twenty "
+# "one" is left out: it is usually not a number ("one of our keys"). Found 9 Nov: it blocked 8 good replies.
+NUMBER_WORDS = set("two three four five six seven eight nine ten eleven twelve fifteen twenty "
                    "thirty forty fifty sixty ninety hundred thousand million".split())
 
 
@@ -39,6 +40,8 @@ class Check:
     passed: bool
     detail: str
     error: bool = False          # the check itself failed: counts as blocked
+    tokens_in: int = 0           # the second model's tokens, for the budget
+    tokens_out: int = 0
 
 
 @dataclass
@@ -98,10 +101,13 @@ def word_support(sentences, articles: dict) -> Check:
         if not source:
             weak.append(f"{k} (cites no known article)")
             continue
-        vocab = {_stem(w) for w in re.findall(r"[a-z0-9]+", source)}
+        raw = set(re.findall(r"[a-z0-9]+", source))
+        vocab = {_stem(w) for w in raw}
         words = _words(s["text"])
         numbers = [w for w in words if w.isdigit() or w in NUMBER_WORDS]
-        if [n for n in numbers if n not in vocab]:
+        # Numbers are compared exactly as written. Found 9 Nov on the 500 development tickets: they were
+        # compared with shortened article words ("hundred" -> "hundr"), so 34 correct replies were blocked.
+        if [n for n in numbers if n not in raw]:
             weak.append(f"{k} (a number not in the article)")
             continue
         share = sum(_stem(w) in vocab for w in words) / len(words) if words else 1.0
@@ -120,6 +126,7 @@ def model_support(ticket_text, sentences, articles: dict, call=None, sleep=None)
     kw = {k: v for k, v in (("call", call), ("sleep", sleep)) if v}
     raw, _, _ = call_with_fallback([{"role": "system", "content": system}, {"role": "user", "content": msg}],
                                    models=[GUARD_MODEL], **kw)
+    t_in, t_out = tokens_of(raw)
     text = re.sub(r"<think>.*?</think>", "", raw or "", flags=re.S)     # Qwen may think aloud first
     m = re.search(r"\{[^{}]*\}\s*$", text.strip(), re.S) or re.search(r"\{.*\}", text, re.S)
     obj = json.loads(m.group(0)) if m else None
@@ -130,10 +137,10 @@ def model_support(ticket_text, sentences, articles: dict, call=None, sleep=None)
     ok = obj["fits_situation"] and not bad
     why = str(obj.get("reason", ""))[:200]
     if ok:
-        return Check("grounding_model", True, f"fits and supported ({why})")
+        return Check("grounding_model", True, f"fits and supported ({why})", tokens_in=t_in, tokens_out=t_out)
     parts = ([] if obj["fits_situation"] else ["the article does not fit the situation"]) + \
             ([f"sentences {bad} not supported"] if bad else [])
-    return Check("grounding_model", False, "; ".join(parts) + f" ({why})")
+    return Check("grounding_model", False, "; ".join(parts) + f" ({why})", tokens_in=t_in, tokens_out=t_out)
 
 
 # ---------- 3. instruction integrity ----------

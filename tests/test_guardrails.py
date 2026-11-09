@@ -63,6 +63,16 @@ def test_red_team_a_made_up_number_or_step_is_blocked_by_the_word_check():
     assert word_support(S, ARTICLES).passed
 
 
+def test_numbers_the_article_really_says_are_not_false_alarms():
+    arts = {"DOC-API-002": {"title": "Pagination", "content":
+            "Keep the page size at or below two hundred; larger requests are rejected. One of the options is a cursor."}}
+    ok = ({"text": "Keep the page size at or below two hundred.", "sources": (1,), "doc_ids": ("DOC-API-002",)},
+          {"text": "Use one of the options, a cursor.", "sources": (1,), "doc_ids": ("DOC-API-002",)})
+    assert word_support(ok, arts).passed
+    calculated = ({"text": "Keep the page size at or below four hundred.", "sources": (1,), "doc_ids": ("DOC-API-002",)},)
+    assert not word_support(calculated, arts).passed
+
+
 def test_the_checkers_thinking_is_ignored_and_its_json_is_read():
     r = run(answer="<think>The article {maybe} covers it.</think>\n" + FITS)
     assert not r.blocked

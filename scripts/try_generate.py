@@ -43,7 +43,8 @@ def main():
         passages = retriever.search(t.text)
         print("ARTICLES FOUND: " + ", ".join(f"[{i}] {p.doc_id}" for i, p in enumerate(passages, 1)))
         d = generate(t.text, c.intent, passages)
-        print(f"MODEL: {d.model or '-'}, {d.calls} call(s), {d.latency_ms} ms, prompt {d.prompt_version}")
+        print(f"MODEL: {d.model or '-'}, {d.calls} call(s), {d.latency_ms} ms, prompt {d.prompt_version}, "
+              f"tokens {d.tokens_in} in + {d.tokens_out} out")
         print(f"ANSWERED: {d.answered}   SURE: {d.sure}   CITED: {list(d.cited_doc_ids)}")
         print(f"SUMMARY FOR A COLLEAGUE: {d.summary}\nUNSURE ABOUT: {d.unsure_about or '-'}")
         if d.ok:
@@ -53,6 +54,9 @@ def main():
             g = check_reply(reply, d, arts, t.text, c.confidence, CONFIDENCE_THRESHOLD)
             for name, result in g.as_log().items():
                 print(f"   {name:<22} {result}")
+            chk = next((x for x in g.checks if x.name == "grounding_model"), None)
+            if chk and chk.tokens_in:
+                print(f"   checker tokens: {chk.tokens_in} in + {chk.tokens_out} out")
             print("-> BLOCKED, to a person: " + ", ".join(g.fired) if g.blocked else "-> SENT to the customer")
             print()
         else:

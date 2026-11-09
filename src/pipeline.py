@@ -43,6 +43,7 @@ class Outcome:
     model_calls: int = 0
     latency_ms: int = 0
     requirement_ids: tuple = field(default_factory=tuple)
+    tokens: dict = field(default_factory=dict)   # {"writer_in", "writer_out", "checker_in", "checker_out"}
 
 
 def _handover(ticket, c, s, passages, d, draft, why, report=None):
@@ -76,11 +77,14 @@ def process(ticket, classifier, retriever, now=None, kill_switch_file=None, call
         calls = (draft.calls if draft is not None else 0) + (
             1 if report is not None and any(x.name == "grounding_model" and not x.detail.startswith("not run")
                                             for x in report.checks) else 0)
+        chk = next((x for x in (report.checks if report else []) if x.name == "grounding_model"), None)
+        tokens = {"writer_in": draft.tokens_in if draft else 0, "writer_out": draft.tokens_out if draft else 0,
+                  "checker_in": chk.tokens_in if chk else 0, "checker_out": chk.tokens_out if chk else 0}
         return Outcome(ticket.ticket_id, action, label, d.priority, reason, sent,
                        None if action == AUTO else _handover(ticket, c, s, passages, d, draft, reason, report),
                        c, d, draft, report, tuple(p.doc_id for p in passages), calls,
                        int((time.perf_counter() - start) * 1000),
-                       tuple(dict.fromkeys(d.requirement_ids + tuple(reqs))))
+                       tuple(dict.fromkeys(d.requirement_ids + tuple(reqs))), tokens)
 
     # A safety rule, an unusable ticket or no article: to a person with no model call (NFR-07).
     if s.must_go_to_person or c.fallback or not passages:

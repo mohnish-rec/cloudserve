@@ -116,3 +116,11 @@ def test_unusual_spaces_from_the_model_become_normal_spaces():
     out = assemble([{"text": "rule out a corrupted\u202fartefact, roll the migration\u2060back and re\u2011invite her",
                      "sources": (1,)}])
     assert "corrupted artefact" in out and "migration back" in out and "re-invite" in out
+
+
+def test_the_providers_token_counts_are_kept_for_the_budget():
+    from src.generate import Reply
+    raw = Reply(GOOD)
+    raw.usage = {"prompt_tokens": 1234, "completion_tokens": 210}
+    d = generate("How do I roll back?", "rollback_request", P, call=fake(raw), sleep=NO_SLEEP)
+    assert d.ok and (d.tokens_in, d.tokens_out) == (1234, 210)

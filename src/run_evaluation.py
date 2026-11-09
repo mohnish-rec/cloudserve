@@ -61,8 +61,9 @@ def log_ticket(con, run_id, t, o: Outcome):
     if o.draft is not None:
         g = o.draft
         log.write(log.DecisionRecord(**base, stage="generation", action_taken="auto_respond" if g.ok else "escalate",
-                                     reason=(f"Reply drafted from {', '.join(g.cited_doc_ids)}; writer {g.sure}."
-                                             if g.ok else f"No reply: {g.error}."),
+                                     reason=(f"Reply drafted from {', '.join(g.cited_doc_ids)}; writer {g.sure}"
+                                             if g.ok else f"No reply: {g.error}")
+                                     + f"; tokens {g.tokens_in} in, {g.tokens_out} out.",
                                      sources_used=[{"doc_id": x} for x in g.cited_doc_ids], provider="groq",
                                      model=g.model or None, latency_ms=g.latency_ms, prompt_version=g.prompt_version,
                                      requirement_ids=["FR-05", "FR-11"]), con)
@@ -88,6 +89,20 @@ def failed(t, e) -> Outcome:
                    requirement_ids=("FR-11",))
 
 
+CIRCUIT_AFTER = 3   # consecutive tickets with the model unavailable before the circuit opens
+
+
+def provider_down(t) -> Outcome:
+    """Circuit open: the provider has failed for several tickets in a row (e.g. the daily limit),
+    so the rest go straight to a person instead of each waiting through every retry (FR-11)."""
+    return Outcome(t.ticket_id, "escalate", SPECIALIST, "medium",
+                   f"Sent to a person ({SPECIALIST}) because the model provider is unavailable "
+                   f"(failed for {CIRCUIT_AFTER} tickets in a row): model unavailable, circuit open.",
+                   ACKNOWLEDGEMENT, {"summary": "", "tried": ["not attempted: model provider unavailable"],
+                                     "article": "", "draft": "", "unsure": "model provider unavailable"},
+                   requirement_ids=("FR-11",))
+
+
 def run_evaluation(input_path: str, output_path: str, metrics_port: int = None) -> dict:
     started = time.perf_counter()
     if metrics_port:
@@ -100,13 +115,15 @@ def run_evaluation(input_path: str, output_path: str, metrics_port: int = None) 
     classifier = TicketClassifier.load(embedder=retriever.embedder)
     run_id = "run-" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S") + "-" + uuid.uuid4().hex[:6]
     con = log.connect()
-    outcomes = []
+    outcomes, down_in_a_row = [], 0
     print(f"{run_id}: {len(tickets)} tickets from {input_path}", flush=True)
     for k, t in enumerate(tickets, 1):
         try:
-            o = process(t, classifier, retriever)
+            o = provider_down(t) if down_in_a_row >= CIRCUIT_AFTER else process(t, classifier, retriever)
         except Exception as e:  # noqa: BLE001 - never drop or skip a ticket
             o = failed(t, e)
+        if down_in_a_row < CIRCUIT_AFTER:
+            down_in_a_row = down_in_a_row + 1 if "model unavailable" in (o.reason + str(o.handover)) else 0
         try:
             log_ticket(con, run_id, t, o)
         except Exception as e:  # noqa: BLE001 - a record that fails the schema: escalate, log the minimum
@@ -143,7 +160,7 @@ def run_evaluation(input_path: str, output_path: str, metrics_port: int = None) 
                 "articles_found": list(o.passage_ids),
                 "cited": list(o.draft.cited_doc_ids) if o.draft else [],
                 "guardrails": o.guardrails.as_log() if o.guardrails else {},
-                "model_calls": o.model_calls, "latency_ms": o.latency_ms} for o in outcomes]
+                "model_calls": o.model_calls, "tokens": o.tokens, "latency_ms": o.latency_ms} for o in outcomes]
     out.write_text(json.dumps({"meta": meta, "results": results}, indent=2, ensure_ascii=False), encoding="utf-8")
     md = out.with_name(out.stem + "_metrics.md")
     try:

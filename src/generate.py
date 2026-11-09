@@ -35,6 +35,16 @@ TOP_ARTICLES = 3            # PR-01 v1.1: the model reads whole articles (small-
 _ARTICLES = {}
 
 
+class Reply(str):
+    """The model's text, carrying the provider's token counts (8 Nov: measure the budget, don't guess)."""
+    usage: dict = {}
+
+
+def tokens_of(text) -> tuple:
+    u = getattr(text, "usage", None) or {}
+    return int(u.get("prompt_tokens", 0) or 0), int(u.get("completion_tokens", 0) or 0)
+
+
 class PermanentError(Exception):
     """Wrong key, bad request, unknown model: retrying will not help."""
 
@@ -61,6 +71,8 @@ class Draft:
     model: str = ""
     prompt_version: str = ACTIVE_PROMPT[1]
     calls: int = 0
+    tokens_in: int = 0            # as reported by the provider, for the budget (NFR-07)
+    tokens_out: int = 0
     latency_ms: int = 0
     error: str = ""
     raw: str = field(default="", repr=False)
@@ -112,7 +124,10 @@ def call_model(messages, model, max_tokens=2000):
         raise TransientError(f"HTTP {r.status_code}", retry_after=wait)
     if r.status_code != 200:
         raise PermanentError(f"HTTP {r.status_code}: {r.text[:120]}")
-    return r.json()["choices"][0]["message"].get("content") or ""
+    data = r.json()
+    out = Reply(data["choices"][0]["message"].get("content") or "")
+    out.usage = data.get("usage") or {}
+    return out
 
 
 def call_with_fallback(messages, models=None, call=call_model, sleep=time.sleep):
@@ -208,10 +223,11 @@ def generate(ticket_text, intent, passages, call=call_model, sleep=time.sleep) -
         return Draft(ok=False, error=f"model unavailable: {e}",
                      latency_ms=int((time.perf_counter() - start) * 1000))
     ms = int((time.perf_counter() - start) * 1000)
+    t_in, t_out = tokens_of(raw)
     try:
         obj = parse(raw, len(articles))
     except Exception as e:  # noqa: BLE001 - output we cannot parse is escalated, never sent (FR-05)
-        return Draft(ok=False, model=model, calls=calls, latency_ms=ms, raw=raw,
+        return Draft(ok=False, model=model, calls=calls, latency_ms=ms, raw=raw, tokens_in=t_in, tokens_out=t_out,
                      error=f"reply could not be read: {e}")
     answered = obj["answered"] and bool(obj["sentences"])
     sentences = tuple({"text": x["text"].strip(), "sources": tuple(dict.fromkeys(x["sources"])),
@@ -223,6 +239,7 @@ def generate(ticket_text, intent, passages, call=call_model, sleep=time.sleep) -
                  cited_doc_ids=tuple(dict.fromkeys(articles[c - 1]["doc_id"] for c in cites)),
                  sure=obj["sure"], summary=str(obj.get("summary", ""))[:300],
                  unsure_about=str(obj.get("unsure_about", ""))[:300], model=model, calls=calls,
+                 tokens_in=t_in, tokens_out=t_out,
                  latency_ms=ms, raw=raw, error="" if answered else "the articles do not answer it")
 
 

@@ -1,0 +1,3981 @@
+{
+  "meta": {
+    "input": "dev_part_4.json",
+    "run_id": "run-20261108T180313-64d8eb",
+    "date": "2026-11-08T23:51:09+00:00",
+    "git_commit": "6390615",
+    "prompts": "PR-01 v1.2, PR-02 v1.0",
+    "writer": "openai/gpt-oss-20b",
+    "backup": "openai/gpt-oss-120b",
+    "checker": "qwen/qwen3.8-27b",
+    "classifier": "logistic regression on all-MiniLM-L6-v2 embeddings, C=10 (D-018)",
+    "threshold": 0.85,
+    "input_sha256": "ce87ff6ed2f92272",
+    "minutes": 349.2
+  },
+  "results": [
+    {
+      "ticket_id": "DEV-0301",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is data_export (threshold 85%), no safety rule applies, and article DOC-DATA-001 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the exports page for the job status, noting that large exports may take several minutes [1]. Request a fresh download link from the exports page if the original link has expired; the file is retained for seven days [1]. Remember that the export reflects the snapshot taken when the job began, so records created during processing are not included [1]. For recurring needs, configure a scheduled export delivered to object storage instead of generating them manually [1].\n\nThis reply was written automatically from our help article \"Exporting account data and scheduled extracts\" (DOC-DATA-001). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "data_export",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-001",
+        "DOC-API-002",
+        "DOC-SEC-001",
+        "DOC-SEC-003",
+        "DOC-API-001"
+      ],
+      "cited": [
+        "DOC-DATA-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1288,
+        "writer_out": 213,
+        "checker_in": 546,
+        "checker_out": 48
+      },
+      "latency_ms": 354136
+    },
+    {
+      "ticket_id": "DEV-0302",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "low",
+      "reason": "Answered automatically: 100% sure it is onboarding (threshold 85%), no safety rule applies, and article DOC-DEPLOY-001 matches. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Create a project, then a service within it [3]. Resources belong to services and services belong to projects [3]. Connect a repository or push a container image [3]. The build service detects common project layouts automatically [3]. Set any environment variables the application needs before the first deployment rather than after it [3]. Deploy, then watch the logs for the first sixty seconds [3]. Most first-deployment problems are visible immediately in startup output [3].\n\nThis reply was written automatically from our help article \"First deployment: a walkthrough\" (DOC-ONB-001). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "onboarding",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DEPLOY-001",
+        "DOC-ONB-002",
+        "DOC-ONB-001",
+        "DOC-AUTH-003",
+        "DOC-SEC-002"
+      ],
+      "cited": [
+        "DOC-ONB-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1288,
+        "writer_out": 164,
+        "checker_in": 515,
+        "checker_out": 50
+      },
+      "latency_ms": 30449
+    },
+    {
+      "ticket_id": "DEV-0303",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is api_key_issue (threshold 85%), no safety rule applies, and article DOC-AUTH-004 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the API keys page for the key's status and expiry; revoked or expired keys will be listed with the date and the user who acted [1]. Review the scopes attached to the key; ensure it includes the endpoints you are calling [1]. If the key is still valid but needs replacement, create a new key, deploy it, confirm traffic has moved, then revoke the old key [1]. If the key was exposed, revoke it immediately rather than waiting for a rotation window [1].\n\nThis reply was written automatically from our help article \"API key rotation and scope management\" (DOC-AUTH-004). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_key_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-AUTH-004",
+        "DOC-INT-001",
+        "DOC-SEC-001",
+        "DOC-ACCT-001",
+        "DOC-API-001"
+      ],
+      "cited": [
+        "DOC-AUTH-004"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1318,
+        "writer_out": 216,
+        "checker_in": 599,
+        "checker_out": 49
+      },
+      "latency_ms": 327519
+    },
+    {
+      "ticket_id": "DEV-0304",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is rollback_request (threshold 85%), no safety rule applies, and article DOC-DEPLOY-002 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Open the revisions page for the service and identify the last revision that was healthy [1]. Select roll back on that revision [1]. Traffic moves within roughly thirty seconds and no rebuild takes place [1]. If the release included a database migration, roll the migration back before the service, or the older code will encounter a schema it does not expect [1]. Record the incident and the reason for the rollback before deploying a fix, while the detail is still fresh [1].\n\nThis reply was written automatically from our help article \"Rolling back a failed release\" (DOC-DEPLOY-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "rollback_request",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DEPLOY-002",
+        "DOC-DEPLOY-003",
+        "DOC-API-003",
+        "DOC-DATA-002",
+        "DOC-DATA-001"
+      ],
+      "cited": [
+        "DOC-DEPLOY-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 5,
+      "tokens": {
+        "writer_in": 1321,
+        "writer_out": 188,
+        "checker_in": 549,
+        "checker_out": 50
+      },
+      "latency_ms": 205194
+    },
+    {
+      "ticket_id": "DEV-0305",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is sso_configuration (threshold 85%), no safety rule applies, and article DOC-AUTH-003 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Compare the assertion consumer service URL in your identity provider against the value shown on the SSO settings page and ensure they match exactly, including the trailing path [1]. Inspect a failing assertion and confirm the NameID is the user's email address in lower case [1]. Enable just-in-time provisioning if new users should be created on first login, and set a default role for provisioned users [1]. Keep at least one administrator account with password access while testing, so a misconfiguration does not lock the whole organisation out [1].\n\nThis reply was written automatically from our help article \"Single sign-on configuration with SAML providers\" (DOC-AUTH-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "sso_configuration",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-AUTH-003",
+        "DOC-AUTH-002",
+        "DOC-AUTH-001",
+        "DOC-ACCT-001",
+        "DOC-API-003"
+      ],
+      "cited": [
+        "DOC-AUTH-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1405,
+        "writer_out": 274,
+        "checker_in": 619,
+        "checker_out": 52
+      },
+      "latency_ms": 327412
+    },
+    {
+      "ticket_id": "DEV-0306",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is webhook_issue (threshold 85%), no safety rule applies, and article DOC-API-003 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the webhook delivery log, which records every attempt with the response status and body for the last seven days [1]. Return a 2xx status as quickly as possible and process the event asynchronously, noting that deliveries time out after five seconds [1]. Compute the signature over the raw request body before any parsing, as re-serialising JSON changes the bytes and invalidates the signature [1]. Make your handler idempotent using the event identifier because at-least-once delivery means duplicates are expected [1].\n\nThis reply was written automatically from our help article \"Webhook delivery, retries and signature verification\" (DOC-API-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "webhook_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-003",
+        "DOC-AUTH-004",
+        "DOC-DEPLOY-001",
+        "DOC-INT-002",
+        "DOC-API-001"
+      ],
+      "cited": [
+        "DOC-API-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1391,
+        "writer_out": 291,
+        "checker_in": 597,
+        "checker_out": 49
+      },
+      "latency_ms": 349133
+    },
+    {
+      "ticket_id": "DEV-0307",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is webhook_issue (threshold 85%), no safety rule applies, and article DOC-API-003 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the webhook delivery log to see the status and body of each attempt for the last seven days [1]. Ensure your endpoint returns a 2xx status quickly and processes the event asynchronously, as deliveries time out after five seconds [1]. Compute the signature over the raw request body before any parsing, because re-serialising JSON changes the bytes and invalidates the signature [1]. Make your handler idempotent using the event identifier, since at-least-once delivery means duplicates are expected [1].\n\nThis reply was written automatically from our help article \"Webhook delivery, retries and signature verification\" (DOC-API-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "webhook_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-003",
+        "DOC-INT-002",
+        "DOC-API-001",
+        "DOC-AUTH-004",
+        "DOC-DEPLOY-001"
+      ],
+      "cited": [
+        "DOC-API-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 5,
+      "tokens": {
+        "writer_in": 1345,
+        "writer_out": 184,
+        "checker_in": 594,
+        "checker_out": 45
+      },
+      "latency_ms": 184364
+    },
+    {
+      "ticket_id": "DEV-0308",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use the export endpoint for very large extracts, which runs asynchronously and returns a download link [1][2]. Check the exports page for job status; jobs covering more than a million records commonly take several minutes [2]. If the original download link has expired, request a fresh link from the exports page; the underlying file is retained for seven days [2]. Remember that the export reflects the moment the job began, so records created during processing are not included [2]. For recurring needs, configure a scheduled export delivered to object storage rather than generating them manually [2].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-DATA-001",
+        "DOC-DEPLOY-002",
+        "DOC-PERF-003",
+        "DOC-INT-002"
+      ],
+      "cited": [
+        "DOC-API-002",
+        "DOC-DATA-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 5,
+      "tokens": {
+        "writer_in": 1262,
+        "writer_out": 351,
+        "checker_in": 789,
+        "checker_out": 59
+      },
+      "latency_ms": 253631
+    },
+    {
+      "ticket_id": "DEV-0309",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "low",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: data location; type: data_residency). Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "docs_comment ticket, type data_residency, priority low",
+        "tried": [
+          "classified as data_residency (100% sure)",
+          "safety rules: word rule: data location; type: data_residency",
+          "search: DOC-DATA-003, DOC-DATA-001, DOC-DATA-002, DOC-ONB-002, DOC-SEC-001"
+        ],
+        "article": "DOC-DATA-003",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: data location; type: data_residency). Priority low (the classifier's urgency)."
+      },
+      "type": "data_residency",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-003",
+        "DOC-DATA-001",
+        "DOC-DATA-002",
+        "DOC-ONB-002",
+        "DOC-SEC-001"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 119
+    },
+    {
+      "ticket_id": "DEV-0310",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "low",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (a number not in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Customer asks for initial steps to migrate their application to CloudServe.",
+        "tried": [
+          "classified as onboarding (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-AUTH-001, DOC-DATA-003, DOC-ONB-002, DOC-ACCT-001, DOC-AUTH-003",
+          "reply drafted"
+        ],
+        "article": "DOC-AUTH-001",
+        "draft": "Thanks for getting in touch. Externalise configuration before migrating, moving any file-based settings to environment variables or secrets [3]. Identify local state such as uploaded files or session data and move it to object storage or the managed database first [3]. Run the new deployment in parallel with the existing one and shift a small share of traffic before committing to the move [3]. Plan the database migration separately from the application migration to avoid diagnosing combined failures [3].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (a number not in the article)."
+      },
+      "type": "onboarding",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-AUTH-001",
+        "DOC-DATA-003",
+        "DOC-ONB-002",
+        "DOC-ACCT-001",
+        "DOC-AUTH-003"
+      ],
+      "cited": [
+        "DOC-ONB-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 3 (a number not in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 7,
+      "tokens": {
+        "writer_in": 1328,
+        "writer_out": 243,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 308115
+    },
+    {
+      "ticket_id": "DEV-0311",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: the check failed: all models failed after 6 calls (last: qwen/qwen3.8-27b: HTTP 429).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Finance group SSO errors likely due to mismatched ACS URL or email attribute; verify settings and enable JIT provisioning.",
+        "tried": [
+          "classified as sso_configuration (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-AUTH-003, DOC-ACCT-001, DOC-AUTH-002, DOC-API-003, DOC-AUTH-001",
+          "reply drafted"
+        ],
+        "article": "DOC-AUTH-003",
+        "draft": "Thanks for getting in touch. Compare the assertion consumer service URL in your identity provider against the value shown on the SSO settings page and ensure they match exactly, including the trailing path [1]. Inspect a failing SAML assertion and confirm the NameID is the user's email address in lower case [1]. Enable just-in-time provisioning if new finance users should be created on first login, and set a default role for provisioned users [1]. Keep at least one administrator account with password access while testing, so a misconfiguration does not lock the whole organisation out [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: the check failed: all models failed after 6 calls (last: qwen/qwen3.8-27b: HTTP 429)."
+      },
+      "type": "sso_configuration",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-AUTH-003",
+        "DOC-ACCT-001",
+        "DOC-AUTH-002",
+        "DOC-API-003",
+        "DOC-AUTH-001"
+      ],
+      "cited": [
+        "DOC-AUTH-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "error: the check failed: all models failed after 6 calls (last: qwen/qwen3.8-27b: HTTP 429)"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1346,
+        "writer_out": 298,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 464403
+    },
+    {
+      "ticket_id": "DEV-0312",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "high",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: sentences [2] not supported (The customer explicitly states they have access to the device, so the advice for a lost device in sentence 2 does not apply to their situation.).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "User cannot authenticate with MFA after password change; device time sync likely off.",
+        "tried": [
+          "classified as authentication_failure (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-AUTH-002, DOC-AUTH-001, DOC-AUTH-003, DOC-API-003, DOC-SEC-001",
+          "reply drafted"
+        ],
+        "article": "DOC-AUTH-002",
+        "draft": "Thanks for getting in touch. Check that automatic time synchronisation is enabled on the device generating the code [1]. If the device is lost, sign in with a recovery code and re-enrol a new device from the security page [1]. If no recovery codes are available, an account administrator can reset multi-factor authentication for that user from the team members page [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: sentences [2] not supported (The customer explicitly states they have access to the device, so the advice for a lost device in sentence 2 does not apply to their situation.)."
+      },
+      "type": "authentication_failure",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-AUTH-002",
+        "DOC-AUTH-001",
+        "DOC-AUTH-003",
+        "DOC-API-003",
+        "DOC-SEC-001"
+      ],
+      "cited": [
+        "DOC-AUTH-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "block: sentences [2] not supported (The customer explicitly states they have access to the device, so the advice for a lost device in sentence 2 does not apply to their situation.)"
+      },
+      "model_calls": 4,
+      "tokens": {
+        "writer_in": 1407,
+        "writer_out": 137,
+        "checker_in": 574,
+        "checker_out": 56
+      },
+      "latency_ms": 109256
+    },
+    {
+      "ticket_id": "DEV-0313",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is rollback_request (threshold 85%), no safety rule applies, and article DOC-DEPLOY-002 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Open the revisions page for the service and identify the last revision that was healthy [1]. Select roll back on that revision; traffic moves within roughly thirty seconds and no rebuild takes place [1]. If the release included a database migration, roll the migration back before the service, or the older code will encounter a schema it does not expect [1]. Record the incident and the reason for the rollback before deploying a fix, while the detail is still fresh [1].\n\nThis reply was written automatically from our help article \"Rolling back a failed release\" (DOC-DEPLOY-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "rollback_request",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DEPLOY-002",
+        "DOC-DATA-002",
+        "DOC-API-003",
+        "DOC-DEPLOY-003",
+        "DOC-INT-002"
+      ],
+      "cited": [
+        "DOC-DEPLOY-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1316,
+        "writer_out": 248,
+        "checker_in": 543,
+        "checker_out": 48
+      },
+      "latency_ms": 391602
+    },
+    {
+      "ticket_id": "DEV-0314",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "high",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: leaked key or credentials). Priority high (security risk).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "email ticket, type api_key_issue, priority high",
+        "tried": [
+          "classified as api_key_issue (100% sure)",
+          "safety rules: word rule: leaked key or credentials",
+          "search: DOC-AUTH-004, DOC-SEC-001, DOC-SEC-002, DOC-INT-001, DOC-API-001"
+        ],
+        "article": "DOC-AUTH-004",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: leaked key or credentials). Priority high (security risk)."
+      },
+      "type": "api_key_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-AUTH-004",
+        "DOC-SEC-001",
+        "DOC-SEC-002",
+        "DOC-INT-001",
+        "DOC-API-001"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 119
+    },
+    {
+      "ticket_id": "DEV-0315",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is rollback_request (threshold 85%), no safety rule applies, and article DOC-DEPLOY-002 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Open the revisions page for the service and identify the last revision that was healthy [1]. Select roll back on that revision [1]. Traffic moves within roughly thirty seconds and no rebuild takes place [1]. If the release included a database migration, roll the migration back before the service, or the older code will encounter a schema it does not expect [1]. Record the incident and the reason for the rollback before deploying a fix while the detail is still fresh [1].\n\nThis reply was written automatically from our help article \"Rolling back a failed release\" (DOC-DEPLOY-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "rollback_request",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DEPLOY-002",
+        "DOC-DEPLOY-001",
+        "DOC-BILL-002",
+        "DOC-DATA-002",
+        "DOC-SEC-002"
+      ],
+      "cited": [
+        "DOC-DEPLOY-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 4,
+      "tokens": {
+        "writer_in": 1358,
+        "writer_out": 204,
+        "checker_in": 538,
+        "checker_out": 49
+      },
+      "latency_ms": 170782
+    },
+    {
+      "ticket_id": "DEV-0316",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: sentences [2] not supported (The article states that production workloads 'generally need' overage, whereas the reply prescribes to 'choose overage' as a definitive instruction.).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Customer hit usage limit, was throttled, wants to switch to overage instead of a spend cap.",
+        "tried": [
+          "classified as quota_or_overage (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-BILL-003, DOC-BILL-001, DOC-BILL-002, DOC-API-001, DOC-PERF-002",
+          "reply drafted"
+        ],
+        "article": "DOC-BILL-003",
+        "draft": "Thanks for getting in touch. Check the current period usage against the plan allowance on the billing page [1]. Decide deliberately between a hard spend cap, which stops the service, and overage, which continues at the listed rate, and choose overage for production workloads [1]. Configure alerts at fifty, eighty and ninety-five per cent of allowance rather than relying on the cap as a warning [1]. Where a cap has stopped a production service, an account owner can raise it immediately from the billing page and service resumes within a minute [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: sentences [2] not supported (The article states that production workloads 'generally need' overage, whereas the reply prescribes to 'choose overage' as a definitive instruction.)."
+      },
+      "type": "quota_or_overage",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-BILL-003",
+        "DOC-BILL-001",
+        "DOC-BILL-002",
+        "DOC-API-001",
+        "DOC-PERF-002"
+      ],
+      "cited": [
+        "DOC-BILL-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "block: sentences [2] not supported (The article states that production workloads 'generally need' overage, whereas the reply prescribes to 'choose overage' as a definitive instruction.)"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1371,
+        "writer_out": 283,
+        "checker_in": 597,
+        "checker_out": 58
+      },
+      "latency_ms": 331861
+    },
+    {
+      "ticket_id": "DEV-0317",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: data location; type: data_residency). Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "chat ticket, type data_residency, priority medium",
+        "tried": [
+          "classified as data_residency (100% sure)",
+          "safety rules: word rule: data location; type: data_residency",
+          "search: DOC-DATA-003, DOC-DATA-001, DOC-ACCT-002, DOC-ONB-002, DOC-AUTH-003"
+        ],
+        "article": "DOC-DATA-003",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: data location; type: data_residency). Priority medium (the classifier's urgency)."
+      },
+      "type": "data_residency",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-003",
+        "DOC-DATA-001",
+        "DOC-ACCT-002",
+        "DOC-ONB-002",
+        "DOC-AUTH-003"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 130
+    },
+    {
+      "ticket_id": "DEV-0318",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is configuration_help (threshold 85%), no safety rule applies, and article DOC-DEPLOY-004 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the scope at which the variable was defined, noting that service scope overrides project scope and project scope overrides organisation defaults [1]. Review the environment overrides page, which lists values that differ from the defaults for each environment [1]. Redeploy after changing configuration, as running containers do not pick up new values without a restart [1].\n\nThis reply was written automatically from our help article \"Configuring environment variables and secrets\" (DOC-DEPLOY-004). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "configuration_help",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DEPLOY-004",
+        "DOC-SEC-002",
+        "DOC-DEPLOY-001",
+        "DOC-ACCT-002",
+        "DOC-DEPLOY-002"
+      ],
+      "cited": [
+        "DOC-DEPLOY-004"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1351,
+        "writer_out": 189,
+        "checker_in": 539,
+        "checker_out": 41
+      },
+      "latency_ms": 306548
+    },
+    {
+      "ticket_id": "DEV-0319",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is quota_or_overage (threshold 85%), no safety rule applies, and article DOC-BILL-003 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the current period usage against the plan allowance on the billing page [1]. Decide deliberately between a hard spend cap, which stops the service, and overage, which continues at the listed rate [1]. Configure alerts at fifty, eighty and ninety-five per cent of allowance rather than relying on the cap as a warning [1]. If a cap has stopped a production service, an account owner can raise it immediately from the billing page and the service resumes within a minute [1].\n\nThis reply was written automatically from our help article \"Usage limits, overage and spend controls\" (DOC-BILL-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "quota_or_overage",
+      "confidence": 0.9984,
+      "articles_found": [
+        "DOC-BILL-003",
+        "DOC-BILL-001",
+        "DOC-BILL-002",
+        "DOC-SEC-001",
+        "DOC-API-001"
+      ],
+      "cited": [
+        "DOC-BILL-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 4,
+      "tokens": {
+        "writer_in": 1354,
+        "writer_out": 197,
+        "checker_in": 569,
+        "checker_out": 50
+      },
+      "latency_ms": 123325
+    },
+    {
+      "ticket_id": "DEV-0320",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "low",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (a number not in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Customer needs guidance on paging large result sets and handling cursor expiry.",
+        "tried": [
+          "classified as api_usage_question (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-API-002, DOC-API-001, DOC-PERF-003, DOC-DATA-001, DOC-INT-001",
+          "reply drafted"
+        ],
+        "article": "DOC-API-002",
+        "draft": "Thanks for getting in touch. Use cursor pagination for anything that may change while you iterate [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep page size at or below two hundred [1]. Cursors expire after one hour; long-running iterations should handle expiry by restarting from a recorded checkpoint [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (a number not in the article)."
+      },
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-API-001",
+        "DOC-PERF-003",
+        "DOC-DATA-001",
+        "DOC-INT-001"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 3 (a number not in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 7,
+      "tokens": {
+        "writer_in": 1336,
+        "writer_out": 216,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 326811
+    },
+    {
+      "ticket_id": "DEV-0321",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is sso_configuration (threshold 85%), no safety rule applies, and article DOC-AUTH-003 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Compare the assertion consumer service URL in your identity provider against the value shown on the SSO settings page; they must match exactly, including the trailing path [1]. Inspect a failing assertion and confirm that the NameID is the user's email address in lower case [1]. Enable just-in-time provisioning if new users should be created on first login, and set a default role for provisioned users [1]. Keep at least one administrator account with password access while testing, so a misconfiguration does not lock the whole organisation out [1].\n\nThis reply was written automatically from our help article \"Single sign-on configuration with SAML providers\" (DOC-AUTH-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "sso_configuration",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-AUTH-003",
+        "DOC-AUTH-002",
+        "DOC-SEC-001",
+        "DOC-AUTH-001",
+        "DOC-AUTH-004"
+      ],
+      "cited": [
+        "DOC-AUTH-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 6,
+      "tokens": {
+        "writer_in": 1369,
+        "writer_out": 215,
+        "checker_in": 622,
+        "checker_out": 51
+      },
+      "latency_ms": 354453
+    },
+    {
+      "ticket_id": "DEV-0322",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is database_issue (threshold 85%), no safety rule applies, and article DOC-PERF-003 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Calculate the total possible connections as pool size multiplied by maximum instances, and compare it against your plan's connection limit [1]. Reduce the per-instance pool size rather than raising the limit [1]. Look for queries that hold a transaction open across a network call to another service, which is the most common cause of leaks of this kind [1]. Consider a connection proxy if the instance count must remain high, so that pooling happens once rather than per instance [1].\n\nThis reply was written automatically from our help article \"Database connection pool exhaustion\" (DOC-PERF-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-PERF-003",
+        "DOC-DEPLOY-001",
+        "DOC-DEPLOY-002",
+        "DOC-ONB-002",
+        "DOC-AUTH-003"
+      ],
+      "cited": [
+        "DOC-PERF-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1332,
+        "writer_out": 217,
+        "checker_in": 575,
+        "checker_out": 45
+      },
+      "latency_ms": 292923
+    },
+    {
+      "ticket_id": "DEV-0323",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "low",
+      "reason": "Answered automatically: 100% sure it is sso_configuration (threshold 85%), no safety rule applies, and article DOC-AUTH-003 matches. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Compare the assertion consumer service URL in your identity provider against the value shown on the SSO settings page and ensure they match exactly, including the trailing path [1]. Inspect a failing assertion and confirm the NameID is the user's email address in lower case [1]. Enable just-in-time provisioning if new users should be created on first login, and set a default role for provisioned users [1]. Keep at least one administrator account with password access while testing, so a misconfiguration does not lock the whole organisation out [1].\n\nThis reply was written automatically from our help article \"Single sign-on configuration with SAML providers\" (DOC-AUTH-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "sso_configuration",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-AUTH-003",
+        "DOC-ONB-001",
+        "DOC-AUTH-002",
+        "DOC-SEC-001",
+        "DOC-PERF-001"
+      ],
+      "cited": [
+        "DOC-AUTH-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1323,
+        "writer_out": 292,
+        "checker_in": 613,
+        "checker_out": 50
+      },
+      "latency_ms": 370408
+    },
+    {
+      "ticket_id": "DEV-0324",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "low",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: compliance; type: compliance_request). Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "email ticket, type compliance_request, priority low",
+        "tried": [
+          "classified as compliance_request (100% sure)",
+          "safety rules: word rule: compliance; type: compliance_request",
+          "search: DOC-SEC-003, DOC-DATA-002, DOC-ONB-001, DOC-INT-001, DOC-BILL-002"
+        ],
+        "article": "DOC-SEC-003",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: compliance; type: compliance_request). Priority low (the classifier's urgency)."
+      },
+      "type": "compliance_request",
+      "confidence": 0.9999,
+      "articles_found": [
+        "DOC-SEC-003",
+        "DOC-DATA-002",
+        "DOC-ONB-001",
+        "DOC-INT-001",
+        "DOC-BILL-002"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 103
+    },
+    {
+      "ticket_id": "DEV-0325",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is integration_help (threshold 85%), no safety rule applies, and article DOC-INT-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the forwarding status page to see the last successful delivery and any errors returned by the destination [1]. Expect a delay of up to two minutes on metrics, as they are aggregated before being sent [1].\n\nThis reply was written automatically from our help article \"Third party monitoring and log forwarding\" (DOC-INT-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "integration_help",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-INT-002",
+        "DOC-PERF-001",
+        "DOC-INT-001",
+        "DOC-SEC-002",
+        "DOC-BILL-002"
+      ],
+      "cited": [
+        "DOC-INT-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 5,
+      "tokens": {
+        "writer_in": 1321,
+        "writer_out": 186,
+        "checker_in": 504,
+        "checker_out": 51
+      },
+      "latency_ms": 247259
+    },
+    {
+      "ticket_id": "DEV-0326",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: the article does not fit the situation; sentences [3] not supported (The article states the snapshot is taken when the job starts, which does not explain why records created *before* the job started are missing, and the article does not suggest scheduling a recurring e).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Export snapshot taken at job start; records added during processing are excluded.",
+        "tried": [
+          "classified as data_export (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-DATA-001, DOC-SEC-001, DOC-API-002, DOC-SEC-003, DOC-DEPLOY-001",
+          "reply drafted"
+        ],
+        "article": "DOC-DATA-001",
+        "draft": "Thanks for getting in touch. Check the exports page for the job status to confirm it completed [1]. Remember that the export captures a snapshot taken when the job started, so any records created during processing are not included [1]. If you need all recent records, schedule a recurring export to object storage instead of generating them manually [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: the article does not fit the situation; sentences [3] not supported (The article states the snapshot is taken when the job starts, which does not explain why records created *before* the job started are missing, and the article does not suggest scheduling a recurring e)."
+      },
+      "type": "data_export",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-001",
+        "DOC-SEC-001",
+        "DOC-API-002",
+        "DOC-SEC-003",
+        "DOC-DEPLOY-001"
+      ],
+      "cited": [
+        "DOC-DATA-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "block: the article does not fit the situation; sentences [3] not supported (The article states the snapshot is taken when the job starts, which does not explain why records created *before* the job started are missing, and the article does not suggest scheduling a recurring e)"
+      },
+      "model_calls": 3,
+      "tokens": {
+        "writer_in": 1285,
+        "writer_out": 175,
+        "checker_in": 514,
+        "checker_out": 66
+      },
+      "latency_ms": 62977
+    },
+    {
+      "ticket_id": "DEV-0327",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "high",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: leaked key or credentials; type: security_incident). Priority high (security risk).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "chat ticket, type security_incident, priority high",
+        "tried": [
+          "classified as security_incident (100% sure)",
+          "safety rules: word rule: leaked key or credentials; type: security_incident",
+          "search: DOC-SEC-001, DOC-SEC-002, DOC-INT-002, DOC-AUTH-001, DOC-AUTH-004"
+        ],
+        "article": "DOC-SEC-001",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: leaked key or credentials; type: security_incident). Priority high (security risk)."
+      },
+      "type": "security_incident",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-SEC-001",
+        "DOC-SEC-002",
+        "DOC-INT-002",
+        "DOC-AUTH-001",
+        "DOC-AUTH-004"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 119
+    },
+    {
+      "ticket_id": "DEV-0328",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is webhook_issue (threshold 85%), no safety rule applies, and article DOC-API-003 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the webhook delivery log, which records every attempt with the response status and body for the last seven days [1]. Make your handler idempotent using the event identifier, as at-least-once delivery means duplicates are expected rather than exceptional [1].\n\nThis reply was written automatically from our help article \"Webhook delivery, retries and signature verification\" (DOC-API-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "webhook_issue",
+      "confidence": 0.9999,
+      "articles_found": [
+        "DOC-API-003",
+        "DOC-SEC-003",
+        "DOC-PERF-001",
+        "DOC-INT-002",
+        "DOC-BILL-001"
+      ],
+      "cited": [
+        "DOC-API-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1347,
+        "writer_out": 180,
+        "checker_in": 534,
+        "checker_out": 48
+      },
+      "latency_ms": 348737
+    },
+    {
+      "ticket_id": "DEV-0329",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: the check failed: all models failed after 6 calls (last: qwen/qwen3.8-27b: HTTP 429).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Export download link expired; guide customer to request a new link from the exports page.",
+        "tried": [
+          "classified as data_export (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-DATA-001, DOC-API-002, DOC-SEC-001, DOC-INT-002, DOC-AUTH-004",
+          "reply drafted"
+        ],
+        "article": "DOC-DATA-001",
+        "draft": "Thanks for getting in touch. Check the exports page for the job status to confirm the export is still present [1]. Request a fresh link from the exports page if the original has expired [1]. The underlying file is retained for seven days, so you can still download it within that period [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: the check failed: all models failed after 6 calls (last: qwen/qwen3.8-27b: HTTP 429)."
+      },
+      "type": "data_export",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-001",
+        "DOC-API-002",
+        "DOC-SEC-001",
+        "DOC-INT-002",
+        "DOC-AUTH-004"
+      ],
+      "cited": [
+        "DOC-DATA-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "error: the check failed: all models failed after 6 calls (last: qwen/qwen3.8-27b: HTTP 429)"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1287,
+        "writer_out": 216,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 358636
+    },
+    {
+      "ticket_id": "DEV-0330",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is database_issue (threshold 85%), no safety rule applies, and article DOC-PERF-003 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Calculate the total possible connections as pool size multiplied by maximum instances and compare it against your plan's connection limit [1]. Reduce the per-instance pool size rather than raising the limit, as many small pools are usually the wrong shape for a scaled service [1]. Look for queries that hold a transaction open across a network call to another service, which is the most common cause of leaks of this kind [1]. Consider using a connection proxy if the instance count must remain high so that pooling happens once rather than per instance [1].\n\nThis reply was written automatically from our help article \"Database connection pool exhaustion\" (DOC-PERF-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-PERF-003",
+        "DOC-AUTH-003",
+        "DOC-DEPLOY-001",
+        "DOC-PERF-001",
+        "DOC-DEPLOY-004"
+      ],
+      "cited": [
+        "DOC-PERF-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1389,
+        "writer_out": 264,
+        "checker_in": 589,
+        "checker_out": 47
+      },
+      "latency_ms": 407021
+    },
+    {
+      "ticket_id": "DEV-0331",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 2 (53% of its words in the article), 5 (57% of its words in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Large export queued for 2M records; advise wait, check status, request fresh link, note snapshot timing, suggest scheduled export.",
+        "tried": [
+          "classified as data_export (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-DATA-001, DOC-API-002, DOC-SEC-001, DOC-SEC-003, DOC-DEPLOY-002",
+          "reply drafted"
+        ],
+        "article": "DOC-DATA-001",
+        "draft": "Thanks for getting in touch. Check the exports page to see the current job status; large exports covering more than a million records often take several minutes to complete [1]. If the export remains queued for an extended period, wait until the job finishes rather than canceling it, as the system processes large jobs asynchronously [1]. Once the job completes, you can request a fresh download link from the exports page; the file will be available for seven days even if the original link expires [1]. Remember that the export reflects the data snapshot at the start of the job, so any records created during processing will not appear in the file [1]. For future needs, consider setting up a scheduled export delivered to object storage to avoid manual queuing of large datasets [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 2 (53% of its words in the article), 5 (57% of its words in the article)."
+      },
+      "type": "data_export",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-001",
+        "DOC-API-002",
+        "DOC-SEC-001",
+        "DOC-SEC-003",
+        "DOC-DEPLOY-002"
+      ],
+      "cited": [
+        "DOC-DATA-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 2 (53% of its words in the article), 5 (57% of its words in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 3,
+      "tokens": {
+        "writer_in": 1286,
+        "writer_out": 298,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 141586
+    },
+    {
+      "ticket_id": "DEV-0332",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "low",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: feature request; type: feature_request); and no help article matches it closely enough. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "docs_comment ticket, type feature_request, priority low",
+        "tried": [
+          "classified as feature_request (100% sure)",
+          "safety rules: word rule: feature request; type: feature_request",
+          "search: no relevant article"
+        ],
+        "article": "",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: feature request; type: feature_request); and no help article matches it closely enough. Priority low (the classifier's urgency)."
+      },
+      "type": "feature_request",
+      "confidence": 1.0,
+      "articles_found": [],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 117
+    },
+    {
+      "ticket_id": "DEV-0333",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "low",
+      "reason": "Answered automatically: 100% sure it is sso_configuration (threshold 85%), no safety rule applies, and article DOC-AUTH-003 matches. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Compare the assertion consumer service URL in your identity provider against the value shown on the SSO settings page; they must match exactly, including the trailing path [1]. Inspect a failing assertion and confirm that the NameID is the user's email address in lower case [1]. Enable just-in-time provisioning if new users should be created on first login, and set a default role for provisioned users [1]. Keep at least one administrator account with password access while testing, so a misconfiguration does not lock the whole organisation out [1].\n\nThis reply was written automatically from our help article \"Single sign-on configuration with SAML providers\" (DOC-AUTH-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "sso_configuration",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-AUTH-003",
+        "DOC-ONB-001",
+        "DOC-AUTH-002",
+        "DOC-SEC-001",
+        "DOC-DEPLOY-004"
+      ],
+      "cited": [
+        "DOC-AUTH-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 3,
+      "tokens": {
+        "writer_in": 1321,
+        "writer_out": 242,
+        "checker_in": 612,
+        "checker_out": 50
+      },
+      "latency_ms": 62702
+    },
+    {
+      "ticket_id": "DEV-0334",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "high",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: leaked key or credentials). Priority high (security risk).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "email ticket, type api_key_issue, priority high",
+        "tried": [
+          "classified as api_key_issue (100% sure)",
+          "safety rules: word rule: leaked key or credentials",
+          "search: DOC-AUTH-004, DOC-SEC-002, DOC-SEC-001, DOC-INT-001, DOC-DEPLOY-004"
+        ],
+        "article": "DOC-AUTH-004",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: leaked key or credentials). Priority high (security risk)."
+      },
+      "type": "api_key_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-AUTH-004",
+        "DOC-SEC-002",
+        "DOC-SEC-001",
+        "DOC-INT-001",
+        "DOC-DEPLOY-004"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 96
+    },
+    {
+      "ticket_id": "DEV-0335",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "high",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: the article does not fit the situation; sentences [2, 3] not supported (The customer explicitly states they have access to the device, making the recovery steps for lost devices or missing recovery codes irrelevant to their specific situation.).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "User's authenticator codes are being rejected after password change; device is available.",
+        "tried": [
+          "classified as authentication_failure (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-AUTH-002, DOC-AUTH-001, DOC-AUTH-003, DOC-API-003, DOC-SEC-001",
+          "reply drafted"
+        ],
+        "article": "DOC-AUTH-002",
+        "draft": "Thanks for getting in touch. Check that automatic time synchronization is enabled on the device generating the authenticator code [1]. If the device is lost, sign in with a recovery code and then re-enrol a new device from the security page [1]. If no recovery codes are available, an account administrator can reset multi-factor authentication for the user from the team members page [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: the article does not fit the situation; sentences [2, 3] not supported (The customer explicitly states they have access to the device, making the recovery steps for lost devices or missing recovery codes irrelevant to their specific situation.)."
+      },
+      "type": "authentication_failure",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-AUTH-002",
+        "DOC-AUTH-001",
+        "DOC-AUTH-003",
+        "DOC-API-003",
+        "DOC-SEC-001"
+      ],
+      "cited": [
+        "DOC-AUTH-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "block: the article does not fit the situation; sentences [2, 3] not supported (The customer explicitly states they have access to the device, making the recovery steps for lost devices or missing recovery codes irrelevant to their specific situation.)"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1407,
+        "writer_out": 277,
+        "checker_in": 577,
+        "checker_out": 58
+      },
+      "latency_ms": 349299
+    },
+    {
+      "ticket_id": "DEV-0336",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "low",
+      "reason": "Answered automatically: 100% sure it is performance_degradation (threshold 85%), no safety rule applies, and article DOC-PERF-001 matches. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Compare the median and 95th percentile latency on the metrics page to see if there is a large gap indicating contention or queueing [1]. Check memory utilisation across instances and look for sustained usage above eighty per cent, which often appears as increased latency before failures [1]. Review the dependency timing breakdown in the trace view to determine whether the delay is occurring inside your service or waiting on a downstream dependency [1]. Adjust the autoscaling policy if the load pattern is predictable, using request count scaling rather than processor utilisation for faster response [1].\n\nThis reply was written automatically from our help article \"Diagnosing elevated response latency\" (DOC-PERF-001). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "performance_degradation",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-PERF-001",
+        "DOC-PERF-002",
+        "DOC-DEPLOY-002",
+        "DOC-BILL-002",
+        "DOC-AUTH-002"
+      ],
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1306,
+        "writer_out": 261,
+        "checker_in": 616,
+        "checker_out": 45
+      },
+      "latency_ms": 327619
+    },
+    {
+      "ticket_id": "DEV-0337",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is database_issue (threshold 85%), no safety rule applies, and article DOC-PERF-003 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Calculate the total possible connections as pool size multiplied by maximum instances and compare it against your plan's connection limit [1]. Reduce the per-instance pool size rather than raising the limit, as a large number of small pools is usually the wrong shape for a scaled service [1]. Look for queries that hold a transaction open across a network call to another service, which is the most common cause of leaks of this kind [1]. Consider a connection proxy if the instance count must remain high, so that pooling happens once rather than per instance [1].\n\nThis reply was written automatically from our help article \"Database connection pool exhaustion\" (DOC-PERF-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-PERF-003",
+        "DOC-DEPLOY-001",
+        "DOC-ONB-002",
+        "DOC-AUTH-003",
+        "DOC-PERF-001"
+      ],
+      "cited": [
+        "DOC-PERF-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 5,
+      "tokens": {
+        "writer_in": 1346,
+        "writer_out": 179,
+        "checker_in": 595,
+        "checker_out": 51
+      },
+      "latency_ms": 111859
+    },
+    {
+      "ticket_id": "DEV-0338",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (a number not in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Customer asks if a 400 GB restore taking two days is normal; provide expected restore time guidance.",
+        "tried": [
+          "classified as database_issue (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-DATA-002, DOC-DATA-001, DOC-PERF-003, DOC-DEPLOY-002, DOC-ONB-002",
+          "reply drafted"
+        ],
+        "article": "DOC-DATA-002",
+        "draft": "Thanks for getting in touch. Identify the point you need to restore to, as point-in-time recovery covers any moment within the retention window [1]. Restore into a new database instance rather than over the existing one so you can preserve the current state while verifying the restore [1]. Allow roughly ten minutes per hundred gigabytes for the restore, and considerably longer if the instance is under load [1]. Verify the restored data before switching traffic and keep the original instance until verification is complete [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (a number not in the article)."
+      },
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-002",
+        "DOC-DATA-001",
+        "DOC-PERF-003",
+        "DOC-DEPLOY-002",
+        "DOC-ONB-002"
+      ],
+      "cited": [
+        "DOC-DATA-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 3 (a number not in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 7,
+      "tokens": {
+        "writer_in": 1311,
+        "writer_out": 287,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 326698
+    },
+    {
+      "ticket_id": "DEV-0339",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is rollback_request (threshold 85%), no safety rule applies, and article DOC-DEPLOY-002 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Open the revisions page for the service and identify the last revision that was healthy [1]. Select roll back on that revision; traffic moves within roughly thirty seconds and no rebuild takes place [1]. If the release included a database migration, roll the migration back before the service, or the older code will encounter a schema it does not expect [1]. Record the incident and the reason for the rollback before deploying a fix, while the detail is still fresh [1].\n\nThis reply was written automatically from our help article \"Rolling back a failed release\" (DOC-DEPLOY-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "rollback_request",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DEPLOY-002",
+        "DOC-DEPLOY-001",
+        "DOC-BILL-002",
+        "DOC-DATA-002",
+        "DOC-ACCT-001"
+      ],
+      "cited": [
+        "DOC-DEPLOY-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1366,
+        "writer_out": 246,
+        "checker_in": 547,
+        "checker_out": 48
+      },
+      "latency_ms": 348674
+    },
+    {
+      "ticket_id": "DEV-0340",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is data_export (threshold 85%), no safety rule applies, and article DOC-DATA-001 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the exports page to confirm the job status and note that large exports can take several minutes [1]. Remember that the export reflects the moment the job began, so records created during processing are not included [1]. If the download link has expired, request a fresh link from the exports page; the underlying file is retained for seven days [1].\n\nThis reply was written automatically from our help article \"Exporting account data and scheduled extracts\" (DOC-DATA-001). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "data_export",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-001",
+        "DOC-SEC-001",
+        "DOC-SEC-003",
+        "DOC-API-002",
+        "DOC-DEPLOY-001"
+      ],
+      "cited": [
+        "DOC-DATA-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1285,
+        "writer_out": 191,
+        "checker_in": 527,
+        "checker_out": 53
+      },
+      "latency_ms": 6786
+    },
+    {
+      "ticket_id": "DEV-0341",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "low",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: sentences [2] not supported (The customer reported log forwarding issues, but sentence 2 discusses metric aggregation delays which are not relevant to the reported log forwarding failure.).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "CI pipeline log forwarding stopped; need to check status, verify credentials, and manually resume forwarding.",
+        "tried": [
+          "classified as integration_help (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-INT-002, DOC-INT-001, DOC-SEC-002, DOC-DEPLOY-002, DOC-SEC-003",
+          "reply drafted"
+        ],
+        "article": "DOC-INT-002",
+        "draft": "Thanks for getting in touch. Check the forwarding status page to see the last successful delivery and any error returned by the destination [1]. Expect a delay of up to two minutes on metrics, as they are aggregated before being sent [1]. Verify the destination credential separately, since expired credentials are the most common cause of stopped delivery [1]. If forwarding has paused, resume it manually after confirming the destination is healthy [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: sentences [2] not supported (The customer reported log forwarding issues, but sentence 2 discusses metric aggregation delays which are not relevant to the reported log forwarding failure.)."
+      },
+      "type": "integration_help",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-INT-002",
+        "DOC-INT-001",
+        "DOC-SEC-002",
+        "DOC-DEPLOY-002",
+        "DOC-SEC-003"
+      ],
+      "cited": [
+        "DOC-INT-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "block: sentences [2] not supported (The customer reported log forwarding issues, but sentence 2 discusses metric aggregation delays which are not relevant to the reported log forwarding failure.)"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1292,
+        "writer_out": 248,
+        "checker_in": 545,
+        "checker_out": 53
+      },
+      "latency_ms": 349040
+    },
+    {
+      "ticket_id": "DEV-0342",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is rollback_request (threshold 85%), no safety rule applies, and article DOC-DEPLOY-002 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Open the revisions page for the service and identify the last revision that was healthy [1]. Select roll back on that revision; traffic moves within roughly thirty seconds and no rebuild takes place [1]. If the release included a database migration, roll the migration back before the service, or the older code will encounter a schema it does not expect [1]. Record the incident and the reason for the rollback before deploying a fix, while the detail is still fresh [1].\n\nThis reply was written automatically from our help article \"Rolling back a failed release\" (DOC-DEPLOY-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "rollback_request",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DEPLOY-002",
+        "DOC-DEPLOY-001",
+        "DOC-SEC-002",
+        "DOC-AUTH-001",
+        "DOC-DEPLOY-003"
+      ],
+      "cited": [
+        "DOC-DEPLOY-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1332,
+        "writer_out": 228,
+        "checker_in": 546,
+        "checker_out": 50
+      },
+      "latency_ms": 306217
+    },
+    {
+      "ticket_id": "DEV-0343",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "low",
+      "reason": "Answered automatically: 100% sure it is data_export (threshold 85%), no safety rule applies, and article DOC-DATA-001 matches. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the exports page for the job status; large exports over a million records can take several minutes [1]. If the original download link has expired, request a fresh link from the exports page; the file remains available for seven days [1]. Note that the export reflects the snapshot taken when the job started, so records created during processing are not included [1]. For recurring needs, consider configuring a scheduled export delivered to object storage instead of generating them manually [1].\n\nThis reply was written automatically from our help article \"Exporting account data and scheduled extracts\" (DOC-DATA-001). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "data_export",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-001",
+        "DOC-API-002",
+        "DOC-INT-002",
+        "DOC-SEC-003",
+        "DOC-SEC-001"
+      ],
+      "cited": [
+        "DOC-DATA-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 5,
+      "tokens": {
+        "writer_in": 1288,
+        "writer_out": 191,
+        "checker_in": 552,
+        "checker_out": 44
+      },
+      "latency_ms": 169855
+    },
+    {
+      "ticket_id": "DEV-0344",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "low",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: feature request; type: feature_request). Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "email ticket, type feature_request, priority low",
+        "tried": [
+          "classified as feature_request (100% sure)",
+          "safety rules: word rule: feature request; type: feature_request",
+          "search: DOC-BILL-003, DOC-SEC-003, DOC-ACCT-002, DOC-DATA-001, DOC-BILL-001"
+        ],
+        "article": "DOC-BILL-003",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: feature request; type: feature_request). Priority low (the classifier's urgency)."
+      },
+      "type": "feature_request",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-BILL-003",
+        "DOC-SEC-003",
+        "DOC-ACCT-002",
+        "DOC-DATA-001",
+        "DOC-BILL-001"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 180
+    },
+    {
+      "ticket_id": "DEV-0345",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is rollback_request (threshold 85%), no safety rule applies, and article DOC-DEPLOY-002 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Open the revisions page for the service and identify the last revision that was healthy [1]. Select roll back on that revision [1]. Traffic moves within roughly thirty seconds and no rebuild takes place [1]. If the release included a database migration, roll the migration back before the service, or the older code will encounter a schema it does not expect [1]. Record the incident and the reason for the rollback before deploying a fix, while the detail is still fresh [1].\n\nThis reply was written automatically from our help article \"Rolling back a failed release\" (DOC-DEPLOY-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "rollback_request",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DEPLOY-002",
+        "DOC-DEPLOY-001",
+        "DOC-BILL-002",
+        "DOC-DATA-002",
+        "DOC-ACCT-001"
+      ],
+      "cited": [
+        "DOC-DEPLOY-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 5,
+      "tokens": {
+        "writer_in": 1366,
+        "writer_out": 190,
+        "checker_in": 547,
+        "checker_out": 48
+      },
+      "latency_ms": 193208
+    },
+    {
+      "ticket_id": "DEV-0346",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is api_key_issue (threshold 85%), no safety rule applies, and article DOC-AUTH-004 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the API keys page for the key's status and expiry; revoked or expired keys will be listed with the date and the user who acted [1]. Review the scopes attached to the key to ensure it includes the endpoints you are calling [1]. If the key is revoked or expired, create a replacement key, deploy it, confirm traffic has moved, then revoke the old key to rotate without downtime [1]. If the key was exposed, revoke it immediately rather than waiting for a rotation window [1].\n\nThis reply was written automatically from our help article \"API key rotation and scope management\" (DOC-AUTH-004). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_key_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-AUTH-004",
+        "DOC-INT-001",
+        "DOC-SEC-001",
+        "DOC-ACCT-001",
+        "DOC-API-001"
+      ],
+      "cited": [
+        "DOC-AUTH-004"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1314,
+        "writer_out": 204,
+        "checker_in": 597,
+        "checker_out": 49
+      },
+      "latency_ms": 327432
+    },
+    {
+      "ticket_id": "DEV-0347",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (43% of its words in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Staging environment is inheriting production config; need to check scopes and review environment overrides.",
+        "tried": [
+          "classified as configuration_help (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-DEPLOY-004, DOC-SEC-002, DOC-DEPLOY-001, DOC-ACCT-002, DOC-DEPLOY-002",
+          "reply drafted"
+        ],
+        "article": "DOC-DEPLOY-004",
+        "draft": "Thanks for getting in touch. Check the scope at which each variable was defined, noting that service scope overrides project scope and project scope overrides organisation defaults [1]. Review the environment overrides page, which lists values that differ from the defaults for each environment [1]. Adjust any overrides so that the staging environment uses its intended values [1]. Redeploy after changing configuration, as running containers do not pick up new values without a restart [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (43% of its words in the article)."
+      },
+      "type": "configuration_help",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DEPLOY-004",
+        "DOC-SEC-002",
+        "DOC-DEPLOY-001",
+        "DOC-ACCT-002",
+        "DOC-DEPLOY-002"
+      ],
+      "cited": [
+        "DOC-DEPLOY-004"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 3 (43% of its words in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 7,
+      "tokens": {
+        "writer_in": 1351,
+        "writer_out": 219,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 347689
+    },
+    {
+      "ticket_id": "DEV-0348",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: compliance; type: compliance_request). Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "docs_comment ticket, type compliance_request, priority medium",
+        "tried": [
+          "classified as compliance_request (100% sure)",
+          "safety rules: word rule: compliance; type: compliance_request",
+          "search: DOC-SEC-003, DOC-SEC-001, DOC-DATA-002, DOC-DEPLOY-004, DOC-SEC-002"
+        ],
+        "article": "DOC-SEC-003",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: compliance; type: compliance_request). Priority medium (the classifier's urgency)."
+      },
+      "type": "compliance_request",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-SEC-003",
+        "DOC-SEC-001",
+        "DOC-DATA-002",
+        "DOC-DEPLOY-004",
+        "DOC-SEC-002"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 117
+    },
+    {
+      "ticket_id": "DEV-0349",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is database_issue (threshold 85%), no safety rule applies, and article DOC-PERF-003 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Calculate the total possible connections as pool size multiplied by maximum instances, and compare it against your plan's connection limit [1]. Reduce the per-instance pool size rather than raising the limit, as a large number of small pools is usually the wrong shape for a scaled service [1]. Look for queries that hold a transaction open across a network call to another service, which is the most common cause of leaks of this kind [1]. Consider a connection proxy if the instance count must remain high, so that pooling happens once rather than per instance [1].\n\nThis reply was written automatically from our help article \"Database connection pool exhaustion\" (DOC-PERF-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-PERF-003",
+        "DOC-DEPLOY-001",
+        "DOC-DEPLOY-002",
+        "DOC-ONB-002",
+        "DOC-AUTH-003"
+      ],
+      "cited": [
+        "DOC-PERF-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1332,
+        "writer_out": 233,
+        "checker_in": 592,
+        "checker_out": 45
+      },
+      "latency_ms": 306192
+    },
+    {
+      "ticket_id": "DEV-0350",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is deployment_failure (threshold 85%), no safety rule applies, and article DOC-DEPLOY-003 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Pin all dependencies with exact versions and commit the lock file to prevent unpinned updates from breaking the build [1]. Verify that the runtime version declared in the build configuration matches the version used locally [1]. Clear the build cache from the settings page and trigger a fresh build to eliminate any corrupted artefacts [1]. If a specific dependency fails to resolve, check that its registry is reachable from the build network [1].\n\nThis reply was written automatically from our help article \"Build failures caused by dependency resolution\" (DOC-DEPLOY-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "deployment_failure",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DEPLOY-003",
+        "DOC-DEPLOY-002",
+        "DOC-DEPLOY-001",
+        "DOC-ONB-001",
+        "DOC-PERF-001"
+      ],
+      "cited": [
+        "DOC-DEPLOY-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 4,
+      "tokens": {
+        "writer_in": 1336,
+        "writer_out": 158,
+        "checker_in": 568,
+        "checker_out": 54
+      },
+      "latency_ms": 144498
+    },
+    {
+      "ticket_id": "DEV-0351",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: compliance; type: compliance_request). Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "docs_comment ticket, type compliance_request, priority medium",
+        "tried": [
+          "classified as compliance_request (100% sure)",
+          "safety rules: word rule: compliance; type: compliance_request",
+          "search: DOC-SEC-003, DOC-SEC-001, DOC-DATA-001, DOC-DATA-002, DOC-DEPLOY-004"
+        ],
+        "article": "DOC-SEC-003",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: compliance; type: compliance_request). Priority medium (the classifier's urgency)."
+      },
+      "type": "compliance_request",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-SEC-003",
+        "DOC-SEC-001",
+        "DOC-DATA-001",
+        "DOC-DATA-002",
+        "DOC-DEPLOY-004"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 107
+    },
+    {
+      "ticket_id": "DEV-0352",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is account_access (threshold 85%), no safety rule applies, and article DOC-ACCT-001 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the effective permissions view for the user to see the combined direct roles and group memberships [1]. Confirm that the user’s invitation was accepted; pending invitations appear separately and expire after seven days [1].\n\nThis reply was written automatically from our help article \"Managing team members, roles and permissions\" (DOC-ACCT-001). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "account_access",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-ACCT-001",
+        "DOC-ACCT-002",
+        "DOC-AUTH-004",
+        "DOC-SEC-001",
+        "DOC-AUTH-003"
+      ],
+      "cited": [
+        "DOC-ACCT-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1309,
+        "writer_out": 147,
+        "checker_in": 505,
+        "checker_out": 47
+      },
+      "latency_ms": 22970
+    },
+    {
+      "ticket_id": "DEV-0353",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: sentences [5, 6, 7] not supported (The cited article DOC-DEPLOY-001 addresses health check timeouts during deployment, not build failures or dependency resolution issues covered by the other cited article.).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Deployment rolls back due to health check timeout; also build fails in pipeline.",
+        "tried": [
+          "classified as deployment_failure (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-DEPLOY-003, DOC-DEPLOY-001, DOC-ONB-001, DOC-INT-001, DOC-SEC-002",
+          "reply drafted"
+        ],
+        "article": "DOC-DEPLOY-003",
+        "draft": "Thanks for getting in touch. Confirm the container is listening on the port declared in the service definition [2]. Increase the initial delay for the health check, starting with thirty seconds, to allow the application time to warm up [2]. Compare the environment variables present in the deployment against those required by the application and add any missing ones [2]. Inspect the container logs from the failed revision rather than the running one to see the exact health-check failure details [2]. Pin all dependencies with exact versions and commit the lock file to avoid unpinned updates causing build failures [1]. Compare the runtime version declared in the build configuration with the version used locally [1]. Clear the build cache from the settings page and trigger a fresh build to rule out a corrupted artefact [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: sentences [5, 6, 7] not supported (The cited article DOC-DEPLOY-001 addresses health check timeouts during deployment, not build failures or dependency resolution issues covered by the other cited article.)."
+      },
+      "type": "deployment_failure",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DEPLOY-003",
+        "DOC-DEPLOY-001",
+        "DOC-ONB-001",
+        "DOC-INT-001",
+        "DOC-SEC-002"
+      ],
+      "cited": [
+        "DOC-DEPLOY-001",
+        "DOC-DEPLOY-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "block: sentences [5, 6, 7] not supported (The cited article DOC-DEPLOY-001 addresses health check timeouts during deployment, not build failures or dependency resolution issues covered by the other cited article.)"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1321,
+        "writer_out": 459,
+        "checker_in": 904,
+        "checker_out": 65
+      },
+      "latency_ms": 349948
+    },
+    {
+      "ticket_id": "DEV-0354",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is database_issue (threshold 85%), no safety rule applies, and article DOC-PERF-003 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Calculate the total possible connections as pool size multiplied by maximum instances, and compare it against your plan's connection limit [1]. Reduce the per-instance pool size rather than raising the limit, as a large number of small pools is usually the wrong shape for a scaled service [1]. Look for queries that hold a transaction open across a network call to another service, which is the most common cause of leaks of this kind [1]. Consider a connection proxy if the instance count must remain high, so that pooling happens once rather than per instance [1].\n\nThis reply was written automatically from our help article \"Database connection pool exhaustion\" (DOC-PERF-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-PERF-003",
+        "DOC-DEPLOY-001",
+        "DOC-ONB-002",
+        "DOC-AUTH-003",
+        "DOC-PERF-001"
+      ],
+      "cited": [
+        "DOC-PERF-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1346,
+        "writer_out": 231,
+        "checker_in": 597,
+        "checker_out": 51
+      },
+      "latency_ms": 409590
+    },
+    {
+      "ticket_id": "DEV-0355",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: feature request; type: feature_request). Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "email ticket, type feature_request, priority medium",
+        "tried": [
+          "classified as feature_request (100% sure)",
+          "safety rules: word rule: feature request; type: feature_request",
+          "search: DOC-BILL-003, DOC-ACCT-002, DOC-API-001, DOC-SEC-003, DOC-DATA-002"
+        ],
+        "article": "DOC-BILL-003",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: feature request; type: feature_request). Priority medium (the classifier's urgency)."
+      },
+      "type": "feature_request",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-BILL-003",
+        "DOC-ACCT-002",
+        "DOC-API-001",
+        "DOC-SEC-003",
+        "DOC-DATA-002"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 114
+    },
+    {
+      "ticket_id": "DEV-0356",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: compliance; type: compliance_request). Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "chat ticket, type compliance_request, priority medium",
+        "tried": [
+          "classified as compliance_request (100% sure)",
+          "safety rules: word rule: compliance; type: compliance_request",
+          "search: DOC-SEC-003, DOC-DATA-001, DOC-SEC-001, DOC-SEC-002, DOC-ACCT-001"
+        ],
+        "article": "DOC-SEC-003",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: compliance; type: compliance_request). Priority medium (the classifier's urgency)."
+      },
+      "type": "compliance_request",
+      "confidence": 0.9997,
+      "articles_found": [
+        "DOC-SEC-003",
+        "DOC-DATA-001",
+        "DOC-SEC-001",
+        "DOC-SEC-002",
+        "DOC-ACCT-001"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 195
+    },
+    {
+      "ticket_id": "DEV-0357",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is webhook_issue (threshold 85%), no safety rule applies, and article DOC-API-003 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the webhook delivery log to see the status and body of each attempt for the last seven days [1]. Ensure your endpoint returns a 2xx status quickly and processes the event asynchronously, as deliveries time out after five seconds [1]. Compute the signature over the raw request body before any parsing, because re-serialising JSON changes the bytes and invalidates the signature [1]. Make your handler idempotent using the event identifier, since at-least-once delivery means duplicates are expected [1].\n\nThis reply was written automatically from our help article \"Webhook delivery, retries and signature verification\" (DOC-API-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "webhook_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-003",
+        "DOC-DEPLOY-001",
+        "DOC-API-001",
+        "DOC-AUTH-004",
+        "DOC-INT-002"
+      ],
+      "cited": [
+        "DOC-API-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 6,
+      "tokens": {
+        "writer_in": 1385,
+        "writer_out": 181,
+        "checker_in": 590,
+        "checker_out": 47
+      },
+      "latency_ms": 265878
+    },
+    {
+      "ticket_id": "DEV-0358",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (a number not in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Customer needs steps to begin migrating an existing app that writes files locally.",
+        "tried": [
+          "classified as onboarding (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-ONB-002, DOC-DATA-002, DOC-ONB-001, DOC-DATA-003, DOC-DATA-001",
+          "reply drafted"
+        ],
+        "article": "DOC-ONB-002",
+        "draft": "Thanks for getting in touch. Externalise any configuration that is currently read from files on disk by moving it to environment variables or secrets [1]. Identify local state such as uploaded files or session data and move it to object storage or the managed database before migration [1]. Run the new deployment in parallel with the existing one and shift a small share of traffic to it before committing to the full move [1]. Plan the database migration separately from the application migration to avoid diagnosing combined failures [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (a number not in the article)."
+      },
+      "type": "onboarding",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-ONB-002",
+        "DOC-DATA-002",
+        "DOC-ONB-001",
+        "DOC-DATA-003",
+        "DOC-DATA-001"
+      ],
+      "cited": [
+        "DOC-ONB-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 3 (a number not in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 7,
+      "tokens": {
+        "writer_in": 1259,
+        "writer_out": 269,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 369782
+    },
+    {
+      "ticket_id": "DEV-0359",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: data location; type: data_residency). Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "email ticket, type data_residency, priority medium",
+        "tried": [
+          "classified as data_residency (100% sure)",
+          "safety rules: word rule: data location; type: data_residency",
+          "search: DOC-DATA-003, DOC-DATA-001, DOC-ACCT-002, DOC-ONB-002, DOC-DATA-002"
+        ],
+        "article": "DOC-DATA-003",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: data location; type: data_residency). Priority medium (the classifier's urgency)."
+      },
+      "type": "data_residency",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-003",
+        "DOC-DATA-001",
+        "DOC-ACCT-002",
+        "DOC-ONB-002",
+        "DOC-DATA-002"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 353
+    },
+    {
+      "ticket_id": "DEV-0360",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: the check failed: all models failed after 6 calls (last: qwen/qwen3.8-27b: HTTP 429).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Finance group SSO errors likely due to URL or email mismatch; check assertion consumer URL and NameID, enable JIT provisioning, keep admin account.",
+        "tried": [
+          "classified as sso_configuration (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-AUTH-003, DOC-AUTH-001, DOC-API-003, DOC-ACCT-001, DOC-AUTH-002",
+          "reply drafted"
+        ],
+        "article": "DOC-AUTH-003",
+        "draft": "Thanks for getting in touch. Compare the assertion consumer service URL in your identity provider against the value shown on the SSO settings page; they must match exactly, including the trailing path [1]. Inspect a failing assertion and confirm the NameID is the user's email address in lower case [1]. Enable just-in-time provisioning if new users should be created on first login, and set a default role for provisioned users [1]. Keep at least one administrator account with password access while testing, so a misconfiguration does not lock the whole organisation out [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: the check failed: all models failed after 6 calls (last: qwen/qwen3.8-27b: HTTP 429)."
+      },
+      "type": "sso_configuration",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-AUTH-003",
+        "DOC-AUTH-001",
+        "DOC-API-003",
+        "DOC-ACCT-001",
+        "DOC-AUTH-002"
+      ],
+      "cited": [
+        "DOC-AUTH-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "error: the check failed: all models failed after 6 calls (last: qwen/qwen3.8-27b: HTTP 429)"
+      },
+      "model_calls": 6,
+      "tokens": {
+        "writer_in": 1401,
+        "writer_out": 196,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 319524
+    },
+    {
+      "ticket_id": "DEV-0361",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "high",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: the check failed: all models failed after 6 calls (last: qwen/qwen3.8-27b: HTTP 429).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Production workload stopped by spend cap; need to raise cap and review alert settings.",
+        "tried": [
+          "classified as quota_or_overage (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-BILL-003, DOC-API-001, DOC-BILL-001, DOC-BILL-002, DOC-PERF-002",
+          "reply drafted"
+        ],
+        "article": "DOC-BILL-003",
+        "draft": "Thanks for getting in touch. Check the current period usage against the plan allowance on the billing page [1]. Decide deliberately between a hard spend cap, which stops the service, and overage, which continues at the listed rate [1]. Configure alerts at fifty, eighty and ninety-five per cent of allowance rather than relying on the cap as a warning [1]. Raise the spend cap immediately from the billing page; the service will resume within a minute [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: the check failed: all models failed after 6 calls (last: qwen/qwen3.8-27b: HTTP 429)."
+      },
+      "type": "quota_or_overage",
+      "confidence": 0.9999,
+      "articles_found": [
+        "DOC-BILL-003",
+        "DOC-API-001",
+        "DOC-BILL-001",
+        "DOC-BILL-002",
+        "DOC-PERF-002"
+      ],
+      "cited": [
+        "DOC-BILL-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "error: the check failed: all models failed after 6 calls (last: qwen/qwen3.8-27b: HTTP 429)"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1336,
+        "writer_out": 212,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 63371
+    },
+    {
+      "ticket_id": "DEV-0362",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is webhook_issue (threshold 85%), no safety rule applies, and article DOC-API-003 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the webhook delivery log, which records every attempt with the response status and body for the last seven days [1]. Return 2xx as quickly as possible and process the event asynchronously, noting that deliveries time out after five seconds [1]. Make your handler idempotent using the event identifier, as at-least-once delivery means duplicates are expected rather than exceptional [1].\n\nThis reply was written automatically from our help article \"Webhook delivery, retries and signature verification\" (DOC-API-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "webhook_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-003",
+        "DOC-DEPLOY-001",
+        "DOC-INT-002",
+        "DOC-API-001",
+        "DOC-AUTH-004"
+      ],
+      "cited": [
+        "DOC-API-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1368,
+        "writer_out": 205,
+        "checker_in": 569,
+        "checker_out": 44
+      },
+      "latency_ms": 369575
+    },
+    {
+      "ticket_id": "DEV-0363",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is data_export (threshold 85%), no safety rule applies, and article DOC-DATA-001 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Go to the exports page and request a fresh download link for the export [1]. The underlying export file is kept for seven days, so it should still be available [1].\n\nThis reply was written automatically from our help article \"Exporting account data and scheduled extracts\" (DOC-DATA-001). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "data_export",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-001",
+        "DOC-API-002",
+        "DOC-SEC-001",
+        "DOC-INT-002",
+        "DOC-AUTH-002"
+      ],
+      "cited": [
+        "DOC-DATA-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1283,
+        "writer_out": 168,
+        "checker_in": 485,
+        "checker_out": 54
+      },
+      "latency_ms": 369138
+    },
+    {
+      "ticket_id": "DEV-0364",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 2 (43% of its words in the article), 5 (58% of its words in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Customer has a large export queued; advise checking status, possible cancellation, and download steps.",
+        "tried": [
+          "classified as data_export (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-DATA-001, DOC-API-002, DOC-SEC-001, DOC-INT-002, DOC-SEC-003",
+          "reply drafted"
+        ],
+        "article": "DOC-DATA-001",
+        "draft": "Thanks for getting in touch. Check the exports page to view the current job status; large exports covering more than a million records often take several minutes to complete [1]. If the export remains queued after a reasonable time, you can cancel it and submit a new request, but first confirm that the job has not started processing [1]. Once the export completes, download the file using the link provided on the exports page; the link is valid for twenty-four hours and the file is retained for seven days [1]. Remember that the export reflects the data snapshot at the start of the job, so any records created during processing will not appear in the file [1]. For future needs, consider setting up a scheduled export delivered to object storage to avoid manual queuing [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 2 (43% of its words in the article), 5 (58% of its words in the article)."
+      },
+      "type": "data_export",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-001",
+        "DOC-API-002",
+        "DOC-SEC-001",
+        "DOC-INT-002",
+        "DOC-SEC-003"
+      ],
+      "cited": [
+        "DOC-DATA-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 2 (43% of its words in the article), 5 (58% of its words in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 5,
+      "tokens": {
+        "writer_in": 1289,
+        "writer_out": 291,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 268079
+    },
+    {
+      "ticket_id": "DEV-0365",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: sentences [3] not supported (The article advises configuring alerts to avoid relying on the cap as a warning, whereas the reply claims they warn before the cap is reached.).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Customer saw unexpected overage charges after consuming allowance; need to review usage, cap settings, and alerts.",
+        "tried": [
+          "classified as quota_or_overage (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-BILL-003, DOC-BILL-001, DOC-BILL-002, DOC-API-001, DOC-SEC-001",
+          "reply drafted"
+        ],
+        "article": "DOC-BILL-003",
+        "draft": "Thanks for getting in touch. Check the current period usage against the plan allowance on the billing page [1]. Decide deliberately between a hard spend cap, which stops the service, and overage, which continues at the listed rate [1]. Configure alerts at fifty, eighty and ninety-five per cent of allowance to be warned before the cap is reached [1]. If a cap has stopped a production service, an account owner can raise it immediately from the billing page and the service resumes within a minute [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: sentences [3] not supported (The article advises configuring alerts to avoid relying on the cap as a warning, whereas the reply claims they warn before the cap is reached.)."
+      },
+      "type": "quota_or_overage",
+      "confidence": 0.9998,
+      "articles_found": [
+        "DOC-BILL-003",
+        "DOC-BILL-001",
+        "DOC-BILL-002",
+        "DOC-API-001",
+        "DOC-SEC-001"
+      ],
+      "cited": [
+        "DOC-BILL-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "block: sentences [3] not supported (The article advises configuring alerts to avoid relying on the cap as a warning, whereas the reply claims they warn before the cap is reached.)"
+      },
+      "model_calls": 5,
+      "tokens": {
+        "writer_in": 1354,
+        "writer_out": 226,
+        "checker_in": 568,
+        "checker_out": 52
+      },
+      "latency_ms": 229647
+    },
+    {
+      "ticket_id": "DEV-0366",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is quota_or_overage (threshold 85%), no safety rule applies, and article DOC-BILL-003 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the current period usage against the plan allowance on the billing page [1]. Decide deliberately between a hard spend cap, which stops the service, and overage, which continues at the listed rate, and choose overage for production workloads [1]. Configure alerts at fifty, eighty and ninety-five per cent of allowance rather than relying on the cap as a warning [1]. If a cap has stopped a production service, an account owner can raise it immediately from the billing page and service resumes within a minute [1].\n\nThis reply was written automatically from our help article \"Usage limits, overage and spend controls\" (DOC-BILL-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "quota_or_overage",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-BILL-003",
+        "DOC-BILL-001",
+        "DOC-BILL-002",
+        "DOC-INT-002",
+        "DOC-PERF-002"
+      ],
+      "cited": [
+        "DOC-BILL-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1368,
+        "writer_out": 264,
+        "checker_in": 592,
+        "checker_out": 54
+      },
+      "latency_ms": 350657
+    },
+    {
+      "ticket_id": "DEV-0367",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is integration_help (threshold 85%), no safety rule applies, and article DOC-INT-001 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Create a service account for the pipeline instead of using a personal key [1]. Grant the service account only the projects and permissions the pipeline needs, and review that grant when the pipeline changes [1]. Store the credential as an encrypted secret in your pipeline provider, never in the repository [1]. Test the pipeline credential separately from the deployment logic, so that authentication failures are distinguishable from deployment failures [1].\n\nThis reply was written automatically from our help article \"Connecting continuous integration pipelines\" (DOC-INT-001). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "integration_help",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-INT-001",
+        "DOC-SEC-002",
+        "DOC-AUTH-004",
+        "DOC-DATA-001",
+        "DOC-ACCT-002"
+      ],
+      "cited": [
+        "DOC-INT-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 7,
+      "tokens": {
+        "writer_in": 1319,
+        "writer_out": 198,
+        "checker_in": 542,
+        "checker_out": 50
+      },
+      "latency_ms": 405834
+    },
+    {
+      "ticket_id": "DEV-0368",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "low",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (a number not in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Customer sees duplicate pagination results and cursor stops; need to use cursor pagination and handle one‑hour expiry.",
+        "tried": [
+          "classified as api_usage_question (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-API-002, DOC-PERF-003, DOC-INT-001, DOC-API-001, DOC-INT-002",
+          "reply drafted"
+        ],
+        "article": "DOC-API-002",
+        "draft": "Thanks for getting in touch. Use cursor pagination for any data that may change while iterating, as offset pagination can cause duplicates [1]. Pass the next_cursor value from each response as the cursor parameter of the following request and stop when it is null [1]. Keep the page size at or below two hundred; larger requests are rejected rather than truncated [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1]. Cursors expire after one hour, so long-running iterations should handle expiry by restarting from a recorded checkpoint [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (a number not in the article)."
+      },
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-PERF-003",
+        "DOC-INT-001",
+        "DOC-API-001",
+        "DOC-INT-002"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 3 (a number not in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 7,
+      "tokens": {
+        "writer_in": 1300,
+        "writer_out": 300,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 326610
+    },
+    {
+      "ticket_id": "DEV-0369",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is quota_or_overage (threshold 85%), no safety rule applies, and article DOC-BILL-003 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the current period usage against the plan allowance on the billing page [1]. Decide deliberately between a hard spend cap, which stops the service, and overage, which continues at the listed rate [1]. Configure alerts at fifty, eighty and ninety-five per cent of allowance rather than relying on the cap as a warning [1]. If a cap has stopped a production service, an account owner can raise it immediately from the billing page and service resumes within a minute [1].\n\nThis reply was written automatically from our help article \"Usage limits, overage and spend controls\" (DOC-BILL-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "quota_or_overage",
+      "confidence": 0.9984,
+      "articles_found": [
+        "DOC-BILL-003",
+        "DOC-BILL-001",
+        "DOC-BILL-002",
+        "DOC-SEC-001",
+        "DOC-API-001"
+      ],
+      "cited": [
+        "DOC-BILL-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1354,
+        "writer_out": 253,
+        "checker_in": 569,
+        "checker_out": 50
+      },
+      "latency_ms": 296401
+    },
+    {
+      "ticket_id": "DEV-0370",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "high",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: security incident; type: security_incident). Priority high (urgent words, security risk).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "email ticket, type security_incident, priority high",
+        "tried": [
+          "classified as security_incident (100% sure)",
+          "safety rules: word rule: security incident; type: security_incident",
+          "search: DOC-SEC-001, DOC-ACCT-001, DOC-AUTH-001, DOC-INT-001, DOC-API-003"
+        ],
+        "article": "DOC-SEC-001",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: security incident; type: security_incident). Priority high (urgent words, security risk)."
+      },
+      "type": "security_incident",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-SEC-001",
+        "DOC-ACCT-001",
+        "DOC-AUTH-001",
+        "DOC-INT-001",
+        "DOC-API-003"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 119
+    },
+    {
+      "ticket_id": "DEV-0371",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: data location; type: data_residency). Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "chat ticket, type data_residency, priority medium",
+        "tried": [
+          "classified as data_residency (100% sure)",
+          "safety rules: word rule: data location; type: data_residency",
+          "search: DOC-DATA-003, DOC-DATA-001, DOC-ACCT-002, DOC-ONB-002, DOC-AUTH-003"
+        ],
+        "article": "DOC-DATA-003",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: data location; type: data_residency). Priority medium (the classifier's urgency)."
+      },
+      "type": "data_residency",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-003",
+        "DOC-DATA-001",
+        "DOC-ACCT-002",
+        "DOC-ONB-002",
+        "DOC-AUTH-003"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 113
+    },
+    {
+      "ticket_id": "DEV-0372",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is performance_degradation (threshold 85%), no safety rule applies, and article DOC-PERF-001 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Compare the median and 95th percentile latency on the metrics page to see if a large gap indicates contention or queueing [1]. Check memory utilisation across instances; sustained utilisation above eighty percent typically shows up as latency before failure [1]. Review the dependency timing breakdown on the trace view to identify whether the delay is in your service or a downstream dependency [1]. Adjust the autoscaling policy if the load is predictable, using request count rather than processor utilisation to respond sooner [1].\n\nThis reply was written automatically from our help article \"Diagnosing elevated response latency\" (DOC-PERF-001). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "performance_degradation",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-PERF-001",
+        "DOC-PERF-002",
+        "DOC-AUTH-002",
+        "DOC-BILL-002",
+        "DOC-DEPLOY-002"
+      ],
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 3,
+      "tokens": {
+        "writer_in": 1352,
+        "writer_out": 196,
+        "checker_in": 602,
+        "checker_out": 45
+      },
+      "latency_ms": 73122
+    },
+    {
+      "ticket_id": "DEV-0373",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "high",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (type: unclear_request). Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "chat ticket, type unclear_request, priority high",
+        "tried": [
+          "classified as unclear_request (100% sure)",
+          "safety rules: type: unclear_request",
+          "search: DOC-ONB-001, DOC-BILL-001, DOC-PERF-002, DOC-PERF-003, DOC-DATA-003"
+        ],
+        "article": "DOC-ONB-001",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (type: unclear_request). Priority high (the classifier's urgency)."
+      },
+      "type": "unclear_request",
+      "confidence": 0.9991,
+      "articles_found": [
+        "DOC-ONB-001",
+        "DOC-BILL-001",
+        "DOC-PERF-002",
+        "DOC-PERF-003",
+        "DOC-DATA-003"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 79
+    },
+    {
+      "ticket_id": "DEV-0374",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (a number not in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Customer sees long restore times and connection‑limit errors after scaling; need to perform point‑in‑time restore to new instance and adjust connection pool settings.",
+        "tried": [
+          "classified as database_issue (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-DATA-002, DOC-PERF-003, DOC-DEPLOY-002, DOC-DEPLOY-001, DOC-ONB-002",
+          "reply drafted"
+        ],
+        "article": "DOC-DATA-002",
+        "draft": "Thanks for getting in touch. Identify the point in time you need to restore to, as point-in-time recovery covers any moment within the retention window [1]. Restore the data into a new database instance rather than overwriting the existing one so you can verify the restore while preserving the current state [1]. Allow roughly ten minutes per hundred gigabytes for the restore and expect longer if the instance is under load [1]. Verify the restored data before switching traffic and keep the original instance until verification is complete [1]. Calculate the total possible connections as pool size multiplied by maximum instances and compare it against your plan's connection limit [2]. Reduce the per-instance pool size rather than raising the limit, as many small pools can exceed the connection limit when scaling [2]. Look for queries that hold a transaction open across a network call, which commonly causes connections to be exhausted [2]. Consider using a connection proxy if you must keep a high instance count, so pooling occurs centrally instead of per instance [2].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (a number not in the article)."
+      },
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-002",
+        "DOC-PERF-003",
+        "DOC-DEPLOY-002",
+        "DOC-DEPLOY-001",
+        "DOC-ONB-002"
+      ],
+      "cited": [
+        "DOC-DATA-002",
+        "DOC-PERF-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 3 (a number not in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 7,
+      "tokens": {
+        "writer_in": 1299,
+        "writer_out": 501,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 350087
+    },
+    {
+      "ticket_id": "DEV-0375",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is deployment_failure (threshold 85%), no safety rule applies, and article DOC-DEPLOY-001 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Confirm the container is listening on the port declared in the service definition [1]. Increase the initial delay if the application needs time to warm up before it can answer, using a reasonable starting point such as thirty seconds [1]. Compare the environment variables present in the deployment against those the application requires and add any missing configuration [1]. Inspect the container logs from the failed revision rather than the running one to see the original failure details [1].\n\nThis reply was written automatically from our help article \"Container deployments failing during the health check phase\" (DOC-DEPLOY-001). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "deployment_failure",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DEPLOY-001",
+        "DOC-ONB-001",
+        "DOC-INT-001",
+        "DOC-ONB-002",
+        "DOC-DEPLOY-003"
+      ],
+      "cited": [
+        "DOC-DEPLOY-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1287,
+        "writer_out": 265,
+        "checker_in": 592,
+        "checker_out": 51
+      },
+      "latency_ms": 373645
+    },
+    {
+      "ticket_id": "DEV-0376",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is account_access (threshold 85%), no safety rule applies, and article DOC-ACCT-001 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Remove the departing user from the team [1]. Revoke any API keys that the user created [1]. Check for any pending invitations and cancel them if necessary [1]. If the user was the last account owner, transfer ownership before removing them [1].\n\nThis reply was written automatically from our help article \"Managing team members, roles and permissions\" (DOC-ACCT-001). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "account_access",
+      "confidence": 0.9999,
+      "articles_found": [
+        "DOC-ACCT-001",
+        "DOC-AUTH-004",
+        "DOC-SEC-001",
+        "DOC-INT-001",
+        "DOC-AUTH-002"
+      ],
+      "cited": [
+        "DOC-ACCT-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1306,
+        "writer_out": 242,
+        "checker_in": 503,
+        "checker_out": 47
+      },
+      "latency_ms": 2391
+    },
+    {
+      "ticket_id": "DEV-0377",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: the check failed: all models failed after 6 calls (last: qwen/qwen3.8-27b: HTTP 429).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Advise using the async export endpoint and monitor the export job via the exports page.",
+        "tried": [
+          "classified as api_usage_question (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-API-002, DOC-DATA-001, DOC-API-001, DOC-API-003, DOC-DEPLOY-002",
+          "reply drafted"
+        ],
+        "article": "DOC-API-002",
+        "draft": "Thanks for getting in touch. Use the export endpoint for very large extracts, as it runs asynchronously and returns a download link [1]. Check the exports page for the job status, noting that jobs over a million records may take several minutes [2]. If the download link has expired, request a fresh link from the exports page; the file is retained for seven days [2].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_model: the check failed: all models failed after 6 calls (last: qwen/qwen3.8-27b: HTTP 429)."
+      },
+      "type": "api_usage_question",
+      "confidence": 0.9999,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-DATA-001",
+        "DOC-API-001",
+        "DOC-API-003",
+        "DOC-DEPLOY-002"
+      ],
+      "cited": [
+        "DOC-API-002",
+        "DOC-DATA-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "error: the check failed: all models failed after 6 calls (last: qwen/qwen3.8-27b: HTTP 429)"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1313,
+        "writer_out": 325,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 391043
+    },
+    {
+      "ticket_id": "DEV-0378",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 2 (a number not in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Restore taking long and connection errors after scaling up service",
+        "tried": [
+          "classified as database_issue (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-DATA-002, DOC-PERF-003, DOC-DEPLOY-001, DOC-ONB-002, DOC-DEPLOY-002",
+          "reply drafted"
+        ],
+        "article": "DOC-DATA-002",
+        "draft": "Thanks for getting in touch. Identify the point you need to restore to and restore into a new database instance rather than over the existing one so the current state is preserved while you verify the restore [1]. Allow roughly ten minutes per hundred gigabytes for the restore, and considerably longer where the instance is also under load [1]. Verify the restored data before switching traffic, and keep the original instance until that verification is complete [1]. Calculate the total possible connections as pool size multiplied by maximum instances, and compare it against your plan's connection limit [2]. Reduce the per-instance pool size rather than raising the limit, as a large number of small pools is usually the wrong shape for a scaled service [2]. Look for queries that hold a transaction open across a network call to another service, which is the most common cause of leaks of this kind [2].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 2 (a number not in the article)."
+      },
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-002",
+        "DOC-PERF-003",
+        "DOC-DEPLOY-001",
+        "DOC-ONB-002",
+        "DOC-DEPLOY-002"
+      ],
+      "cited": [
+        "DOC-DATA-002",
+        "DOC-PERF-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 2 (a number not in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 5,
+      "tokens": {
+        "writer_in": 1359,
+        "writer_out": 323,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 244600
+    },
+    {
+      "ticket_id": "DEV-0379",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is webhook_issue (threshold 85%), no safety rule applies, and article DOC-API-003 matches. Priority high (urgent words).",
+      "sent_text": "Thanks for getting in touch. Check the webhook delivery log, which records every attempt with the response status and body for the last seven days [1]. Return 2xx as quickly as possible and process the event asynchronously, noting that deliveries time out after five seconds [1]. Make your handler idempotent using the event identifier, as at-least-once delivery means duplicates are expected [1].\n\nThis reply was written automatically from our help article \"Webhook delivery, retries and signature verification\" (DOC-API-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "webhook_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-003",
+        "DOC-DEPLOY-001",
+        "DOC-API-001",
+        "DOC-AUTH-004",
+        "DOC-INT-002"
+      ],
+      "cited": [
+        "DOC-API-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1390,
+        "writer_out": 208,
+        "checker_in": 566,
+        "checker_out": 48
+      },
+      "latency_ms": 327629
+    },
+    {
+      "ticket_id": "DEV-0380",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is rollback_request (threshold 85%), no safety rule applies, and article DOC-DEPLOY-002 matches. Priority high (urgent words).",
+      "sent_text": "Thanks for getting in touch. Open the revisions page for the service and identify the last revision that was healthy [1]. Select roll back on that revision; traffic moves within roughly thirty seconds and no rebuild takes place [1]. If the release included a database migration, roll the migration back before the service, or the older code will encounter a schema it does not expect [1]. Record the incident and the reason for the rollback before deploying a fix, while the detail is still fresh [1].\n\nThis reply was written automatically from our help article \"Rolling back a failed release\" (DOC-DEPLOY-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "rollback_request",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DEPLOY-002",
+        "DOC-DEPLOY-003",
+        "DOC-DATA-002",
+        "DOC-API-003",
+        "DOC-INT-002"
+      ],
+      "cited": [
+        "DOC-DEPLOY-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1300,
+        "writer_out": 251,
+        "checker_in": 547,
+        "checker_out": 47
+      },
+      "latency_ms": 327627
+    },
+    {
+      "ticket_id": "DEV-0381",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "low",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: feature request; type: feature_request). Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "email ticket, type feature_request, priority low",
+        "tried": [
+          "classified as feature_request (100% sure)",
+          "safety rules: word rule: feature request; type: feature_request",
+          "search: DOC-BILL-003, DOC-ACCT-002, DOC-ONB-002, DOC-API-001, DOC-ONB-001"
+        ],
+        "article": "DOC-BILL-003",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: feature request; type: feature_request). Priority low (the classifier's urgency)."
+      },
+      "type": "feature_request",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-BILL-003",
+        "DOC-ACCT-002",
+        "DOC-ONB-002",
+        "DOC-API-001",
+        "DOC-ONB-001"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 116
+    },
+    {
+      "ticket_id": "DEV-0382",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is quota_or_overage (threshold 85%), no safety rule applies, and article DOC-BILL-003 matches. Priority high (urgent words).",
+      "sent_text": "Thanks for getting in touch. Check the current period usage against the plan allowance on the billing page [1]. Decide deliberately between a hard spend cap, which stops the service, and overage, which continues at the listed rate [1]. Configure alerts at fifty, eighty and ninety-five per cent of allowance rather than relying on the cap as a warning [1]. Where a cap has stopped a production service, an account owner can raise it immediately from the billing page and service resumes within a minute [1].\n\nThis reply was written automatically from our help article \"Usage limits, overage and spend controls\" (DOC-BILL-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "quota_or_overage",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-BILL-003",
+        "DOC-BILL-001",
+        "DOC-BILL-002",
+        "DOC-API-001",
+        "DOC-DEPLOY-002"
+      ],
+      "cited": [
+        "DOC-BILL-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1359,
+        "writer_out": 240,
+        "checker_in": 575,
+        "checker_out": 42
+      },
+      "latency_ms": 306567
+    },
+    {
+      "ticket_id": "DEV-0383",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is performance_degradation (threshold 85%), no safety rule applies, and article DOC-PERF-001 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Compare the median and 95th percentile latency on the metrics page to see if a large gap indicates contention or queueing [1]. Check memory utilisation across instances; sustained utilisation above eighty percent typically shows up as latency before failure [1]. Review the dependency timing breakdown on the trace view to identify whether the delay is in your service or a downstream dependency [1]. Adjust the autoscaling policy if the load is predictable, scaling on request count instead of processor utilisation to respond sooner [1].\n\nThis reply was written automatically from our help article \"Diagnosing elevated response latency\" (DOC-PERF-001). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "performance_degradation",
+      "confidence": 0.9999,
+      "articles_found": [
+        "DOC-PERF-001",
+        "DOC-API-001",
+        "DOC-PERF-002",
+        "DOC-API-002",
+        "DOC-DEPLOY-001"
+      ],
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 4,
+      "tokens": {
+        "writer_in": 1359,
+        "writer_out": 173,
+        "checker_in": 613,
+        "checker_out": 53
+      },
+      "latency_ms": 123629
+    },
+    {
+      "ticket_id": "DEV-0384",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "low",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (a number not in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Customer needs to handle cursor pagination and expiry for large result sets.",
+        "tried": [
+          "classified as api_usage_question (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-API-002, DOC-API-001, DOC-PERF-003, DOC-DATA-001, DOC-INT-001",
+          "reply drafted"
+        ],
+        "article": "DOC-API-002",
+        "draft": "Thanks for getting in touch. Use cursor pagination for any query that may change while iterating [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep the page size at or below two hundred; larger requests are rejected rather than truncated [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1]. Cursors expire after one hour, so long-running iterations should handle expiry by restarting from a recorded checkpoint [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (a number not in the article)."
+      },
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-API-001",
+        "DOC-PERF-003",
+        "DOC-DATA-001",
+        "DOC-INT-001"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 3 (a number not in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 4,
+      "tokens": {
+        "writer_in": 1336,
+        "writer_out": 226,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 183918
+    },
+    {
+      "ticket_id": "DEV-0385",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is quota_or_overage (threshold 85%), no safety rule applies, and article DOC-BILL-003 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the current period usage against the plan allowance on the billing page [1]. Decide deliberately between a hard spend cap, which stops the service, and overage, which continues at the listed rate, and choose overage for production workloads [1]. Configure alerts at fifty, eighty and ninety-five per cent of allowance rather than relying on the cap as a warning [1]. Where a cap has stopped a production service, an account owner can raise it immediately from the billing page and service resumes within a minute [1].\n\nThis reply was written automatically from our help article \"Usage limits, overage and spend controls\" (DOC-BILL-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "quota_or_overage",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-BILL-003",
+        "DOC-BILL-001",
+        "DOC-BILL-002",
+        "DOC-API-001",
+        "DOC-PERF-002"
+      ],
+      "cited": [
+        "DOC-BILL-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1367,
+        "writer_out": 283,
+        "checker_in": 591,
+        "checker_out": 50
+      },
+      "latency_ms": 413831
+    },
+    {
+      "ticket_id": "DEV-0386",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is rollback_request (threshold 85%), no safety rule applies, and article DOC-DEPLOY-002 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Open the revisions page for the service and identify the last revision that was healthy [1]. Select roll back on that revision; traffic moves within roughly thirty seconds and no rebuild takes place [1]. If the release included a database migration, roll the migration back before the service, or the older code will encounter a schema it does not expect [1]. Record the incident and the reason for the rollback before deploying a fix, while the detail is still fresh [1].\n\nThis reply was written automatically from our help article \"Rolling back a failed release\" (DOC-DEPLOY-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "rollback_request",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DEPLOY-002",
+        "DOC-DEPLOY-001",
+        "DOC-BILL-002",
+        "DOC-DATA-002",
+        "DOC-SEC-002"
+      ],
+      "cited": [
+        "DOC-DEPLOY-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1358,
+        "writer_out": 278,
+        "checker_in": 539,
+        "checker_out": 50
+      },
+      "latency_ms": 328056
+    },
+    {
+      "ticket_id": "DEV-0387",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is api_key_issue (threshold 85%), no safety rule applies, and article DOC-AUTH-004 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the API keys page for the key's status and expiry; revoked or expired keys will be listed with the date and the user who acted [1]. Review the scopes attached to the key to ensure it includes the endpoint you are calling [1]. If the key is revoked or expired, create a replacement key, deploy it, confirm traffic has moved, then revoke the old key to rotate without downtime [1]. If the key was exposed, revoke it immediately rather than waiting for a rotation window [1].\n\nThis reply was written automatically from our help article \"API key rotation and scope management\" (DOC-AUTH-004). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_key_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-AUTH-004",
+        "DOC-INT-001",
+        "DOC-SEC-001",
+        "DOC-AUTH-002",
+        "DOC-AUTH-001"
+      ],
+      "cited": [
+        "DOC-AUTH-004"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1317,
+        "writer_out": 204,
+        "checker_in": 602,
+        "checker_out": 50
+      },
+      "latency_ms": 369637
+    },
+    {
+      "ticket_id": "DEV-0388",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "low",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: data location; type: data_residency). Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "email ticket, type data_residency, priority low",
+        "tried": [
+          "classified as data_residency (100% sure)",
+          "safety rules: word rule: data location; type: data_residency",
+          "search: DOC-DATA-003, DOC-DATA-002, DOC-ONB-002, DOC-DEPLOY-002, DOC-SEC-003"
+        ],
+        "article": "DOC-DATA-003",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: data location; type: data_residency). Priority low (the classifier's urgency)."
+      },
+      "type": "data_residency",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-003",
+        "DOC-DATA-002",
+        "DOC-ONB-002",
+        "DOC-DEPLOY-002",
+        "DOC-SEC-003"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 371
+    },
+    {
+      "ticket_id": "DEV-0389",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "low",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: data location; type: data_residency). Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "email ticket, type data_residency, priority low",
+        "tried": [
+          "classified as data_residency (100% sure)",
+          "safety rules: word rule: data location; type: data_residency",
+          "search: DOC-DATA-003, DOC-DATA-002, DOC-DATA-001, DOC-ONB-002, DOC-SEC-001"
+        ],
+        "article": "DOC-DATA-003",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: data location; type: data_residency). Priority low (the classifier's urgency)."
+      },
+      "type": "data_residency",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-003",
+        "DOC-DATA-002",
+        "DOC-DATA-001",
+        "DOC-ONB-002",
+        "DOC-SEC-001"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 98
+    },
+    {
+      "ticket_id": "DEV-0390",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is account_access (threshold 85%), no safety rule applies, and article DOC-ACCT-001 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the effective permissions view for the user to see the combined direct roles and group memberships [1]. Confirm that the invitation to the project was accepted; pending invitations appear separately and expire after seven days [1].\n\nThis reply was written automatically from our help article \"Managing team members, roles and permissions\" (DOC-ACCT-001). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "account_access",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-ACCT-001",
+        "DOC-ACCT-002",
+        "DOC-AUTH-004",
+        "DOC-SEC-001",
+        "DOC-AUTH-003"
+      ],
+      "cited": [
+        "DOC-ACCT-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 5,
+      "tokens": {
+        "writer_in": 1309,
+        "writer_out": 148,
+        "checker_in": 506,
+        "checker_out": 47
+      },
+      "latency_ms": 210120
+    },
+    {
+      "ticket_id": "DEV-0391",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "high",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: leaked key or credentials; word rule: security incident; type: security_incident). Priority high (security risk).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "email ticket, type security_incident, priority high",
+        "tried": [
+          "classified as security_incident (100% sure)",
+          "safety rules: word rule: leaked key or credentials; word rule: security incident; type: security_incident",
+          "search: DOC-SEC-001, DOC-SEC-002, DOC-SEC-003, DOC-DEPLOY-004, DOC-AUTH-001"
+        ],
+        "article": "DOC-SEC-001",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: leaked key or credentials; word rule: security incident; type: security_incident). Priority high (security risk)."
+      },
+      "type": "security_incident",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-SEC-001",
+        "DOC-SEC-002",
+        "DOC-SEC-003",
+        "DOC-DEPLOY-004",
+        "DOC-AUTH-001"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 131
+    },
+    {
+      "ticket_id": "DEV-0392",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: feature request; type: feature_request). Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "email ticket, type feature_request, priority medium",
+        "tried": [
+          "classified as feature_request (100% sure)",
+          "safety rules: word rule: feature request; type: feature_request",
+          "search: DOC-BILL-003, DOC-ACCT-002, DOC-API-001, DOC-ACCT-001, DOC-ONB-001"
+        ],
+        "article": "DOC-BILL-003",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: feature request; type: feature_request). Priority medium (the classifier's urgency)."
+      },
+      "type": "feature_request",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-BILL-003",
+        "DOC-ACCT-002",
+        "DOC-API-001",
+        "DOC-ACCT-001",
+        "DOC-ONB-001"
+      ],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 106
+    },
+    {
+      "ticket_id": "DEV-0393",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is account_access (threshold 85%), no safety rule applies, and article DOC-ACCT-001 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the effective permissions view for the user to see all direct roles and group memberships [1]. Confirm that any pending invitation for the user has been accepted; pending invitations expire after seven days [1]. Remove the departing user from the team rather than just changing their password, and revoke any API keys they created [1]. If the user was the last account owner, transfer ownership before removing them [1].\n\nThis reply was written automatically from our help article \"Managing team members, roles and permissions\" (DOC-ACCT-001). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "account_access",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-ACCT-001",
+        "DOC-AUTH-004",
+        "DOC-SEC-001",
+        "DOC-SEC-003",
+        "DOC-AUTH-003"
+      ],
+      "cited": [
+        "DOC-ACCT-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1316,
+        "writer_out": 203,
+        "checker_in": 542,
+        "checker_out": 56
+      },
+      "latency_ms": 26774
+    },
+    {
+      "ticket_id": "DEV-0394",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is rate_limit (threshold 85%), no safety rule applies, and article DOC-API-001 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Read the rate limit headers returned with every response to see the limit, remaining allowance, and reset time [1]. Confirm whether the endpoint you are calling has a specific lower limit, as search and export endpoints are more restricted than reads [1]. Implement exponential backoff with jitter on 429 responses instead of retrying immediately, to avoid prolonging throttling [1]. If sustained higher throughput is required, request a limit increase through an account request on Business or Enterprise plans [1].\n\nThis reply was written automatically from our help article \"Understanding API rate limits and quota tiers\" (DOC-API-001). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "rate_limit",
+      "confidence": 0.9996,
+      "articles_found": [
+        "DOC-API-001",
+        "DOC-PERF-001",
+        "DOC-INT-002",
+        "DOC-PERF-002",
+        "DOC-PERF-003"
+      ],
+      "cited": [
+        "DOC-API-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1371,
+        "writer_out": 294,
+        "checker_in": 610,
+        "checker_out": 58
+      },
+      "latency_ms": 349051
+    },
+    {
+      "ticket_id": "DEV-0395",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "high",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (type: unclear_request); and no help article matches it closely enough. Priority high (urgent words).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "email ticket, type unclear_request, priority high",
+        "tried": [
+          "classified as unclear_request (100% sure)",
+          "safety rules: type: unclear_request",
+          "search: no relevant article"
+        ],
+        "article": "",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (type: unclear_request); and no help article matches it closely enough. Priority high (urgent words)."
+      },
+      "type": "unclear_request",
+      "confidence": 0.9999,
+      "articles_found": [],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 113
+    },
+    {
+      "ticket_id": "DEV-0396",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is sso_configuration (threshold 85%), no safety rule applies, and article DOC-AUTH-003 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Compare the assertion consumer service URL in your identity provider against the value shown on the SSO settings page; they must match exactly, including the trailing path [1]. Inspect a failing assertion and confirm the NameID is the user's email address in lower case [1]. Enable just-in-time provisioning if new users should be created on first login, and set a default role for provisioned users [1]. Keep at least one administrator account with password access while testing, so a misconfiguration does not lock the whole organisation out [1].\n\nThis reply was written automatically from our help article \"Single sign-on configuration with SAML providers\" (DOC-AUTH-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "sso_configuration",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-AUTH-003",
+        "DOC-AUTH-002",
+        "DOC-SEC-001",
+        "DOC-AUTH-001",
+        "DOC-AUTH-004"
+      ],
+      "cited": [
+        "DOC-AUTH-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 5,
+      "tokens": {
+        "writer_in": 1367,
+        "writer_out": 191,
+        "checker_in": 619,
+        "checker_out": 54
+      },
+      "latency_ms": 268577
+    },
+    {
+      "ticket_id": "DEV-0397",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is api_key_issue (threshold 85%), no safety rule applies, and article DOC-AUTH-004 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the API keys page for the key's status and expiry, as revoked or expired keys will be listed with the date and the user who acted [1]. Review the scopes attached to the key to ensure it includes the endpoints you are calling, since a key with limited scope may work for some endpoints but not others [1]. If the key is revoked or expired, create a replacement key, deploy it, confirm traffic has moved, then revoke the old key to rotate without downtime [1]. If the key may have been exposed, revoke it immediately rather than waiting for a rotation window [1].\n\nThis reply was written automatically from our help article \"API key rotation and scope management\" (DOC-AUTH-004). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_key_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-AUTH-004",
+        "DOC-INT-001",
+        "DOC-SEC-001",
+        "DOC-API-001",
+        "DOC-AUTH-002"
+      ],
+      "cited": [
+        "DOC-AUTH-004"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1311,
+        "writer_out": 211,
+        "checker_in": 612,
+        "checker_out": 50
+      },
+      "latency_ms": 349545
+    },
+    {
+      "ticket_id": "DEV-0398",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "high",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (type: unclear_request); and no help article matches it closely enough. Priority high (urgent words).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "email ticket, type unclear_request, priority high",
+        "tried": [
+          "classified as unclear_request (100% sure)",
+          "safety rules: type: unclear_request",
+          "search: no relevant article"
+        ],
+        "article": "",
+        "draft": "",
+        "unsure": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (type: unclear_request); and no help article matches it closely enough. Priority high (urgent words)."
+      },
+      "type": "unclear_request",
+      "confidence": 1.0,
+      "articles_found": [],
+      "cited": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 83
+    },
+    {
+      "ticket_id": "DEV-0399",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is account_access (threshold 85%), no safety rule applies, and article DOC-AUTH-004 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the effective permissions view for the user, which resolves direct roles and group memberships together [2]. Confirm the invitation was accepted, as pending invitations appear in a separate section and expire after seven days [2]. Remove the departing user rather than only changing their password, and revoke any API keys they created [2]. Prefer group membership to direct role assignment, so that access can be reviewed in one place [2].\n\nThis reply was written automatically from our help article \"Managing team members, roles and permissions\" (DOC-ACCT-001). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "account_access",
+      "confidence": 0.999,
+      "articles_found": [
+        "DOC-AUTH-004",
+        "DOC-ACCT-001",
+        "DOC-SEC-001",
+        "DOC-AUTH-002",
+        "DOC-INT-001"
+      ],
+      "cited": [
+        "DOC-ACCT-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1300,
+        "writer_out": 315,
+        "checker_in": 528,
+        "checker_out": 46
+      },
+      "latency_ms": 400396
+    },
+    {
+      "ticket_id": "DEV-0400",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is performance_degradation (threshold 85%), no safety rule applies, and article DOC-PERF-001 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Compare the median and 95th percentile latency on the metrics page to confirm a large gap indicating contention or queueing [1]. Check memory utilisation across instances; sustained utilisation above eighty percent typically shows up as latency before failure [1]. Review the dependency timing breakdown on the trace view to see if the delay is in your service or a downstream dependency [1]. Adjust the autoscaling policy if the load is predictable, using request count scaling instead of processor utilisation [1].\n\nThis reply was written automatically from our help article \"Diagnosing elevated response latency\" (DOC-PERF-001). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "performance_degradation",
+      "confidence": 0.9999,
+      "articles_found": [
+        "DOC-PERF-001",
+        "DOC-ONB-001",
+        "DOC-INT-002",
+        "DOC-DEPLOY-002",
+        "DOC-DEPLOY-001"
+      ],
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1302,
+        "writer_out": 167,
+        "checker_in": 607,
+        "checker_out": 45
+      },
+      "latency_ms": 65519
+    }
+  ]
+}

@@ -1,0 +1,1962 @@
+{
+  "meta": {
+    "input": "dev_word_blocked.json",
+    "run_id": "run-20261109T093003-4c58a5",
+    "date": "2026-11-09T11:51:16+00:00",
+    "git_commit": "6390615",
+    "prompts": "PR-01 v1.2, PR-02 v1.0",
+    "writer": "openai/gpt-oss-20b",
+    "backup": "openai/gpt-oss-120b",
+    "checker": "qwen/qwen3.8-27b",
+    "classifier": "logistic regression on all-MiniLM-L6-v2 embeddings, C=10 (D-018)",
+    "threshold": 0.85,
+    "input_sha256": "524325a90cc73453",
+    "minutes": 142.5
+  },
+  "results": [
+    {
+      "ticket_id": "DEV-0012",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (33% of its words in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Export of 2 million records queued; large exports take minutes; check status, cancel only if needed, request fresh link.",
+        "tried": [
+          "classified as data_export (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-DATA-001, DOC-INT-002, DOC-API-002, DOC-SEC-001, DOC-DEPLOY-002",
+          "reply drafted"
+        ],
+        "article": "DOC-DATA-001",
+        "draft": "Thanks for getting in touch. Check the exports page to view the current job status [1]. Large exports covering more than a million records commonly take several minutes to complete [1]. If the export remains queued for an extended period, you can cancel it and start a new job, but it is usually not necessary to do so immediately [1]. Once the job completes, request a fresh download link from the exports page if the original link has expired [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (33% of its words in the article)."
+      },
+      "type": "data_export",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-001",
+        "DOC-INT-002",
+        "DOC-API-002",
+        "DOC-SEC-001",
+        "DOC-DEPLOY-002"
+      ],
+      "cited": [
+        "DOC-DATA-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 3 (33% of its words in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 1,
+      "tokens": {
+        "writer_in": 1284,
+        "writer_out": 238,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 28894
+    },
+    {
+      "ticket_id": "DEV-0018",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "low",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination instead of offset pagination to avoid duplicates when the collection changes while iterating [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep the page size at or below two hundred; larger requests are rejected rather than truncated [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-PERF-003",
+        "DOC-DATA-001",
+        "DOC-API-003",
+        "DOC-INT-002"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1293,
+        "writer_out": 178,
+        "checker_in": 543,
+        "checker_out": 50
+      },
+      "latency_ms": 2236
+    },
+    {
+      "ticket_id": "DEV-0024",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is database_issue (threshold 85%), no safety rule applies, and article DOC-DATA-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Identify the point you need to restore to [1]. Restore into a new database instance rather than over the existing one, so the current state is preserved while you verify the restore [1]. Allow roughly ten minutes per hundred gigabytes for the restore, and considerably longer where the instance is also under load [1]. Verify the restored data before switching traffic, and keep the original instance until that verification is complete [1].\n\nThis reply was written automatically from our help article \"Backups, retention and point-in-time restore\" (DOC-DATA-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-002",
+        "DOC-PERF-003",
+        "DOC-DATA-001",
+        "DOC-DEPLOY-002",
+        "DOC-ONB-002"
+      ],
+      "cited": [
+        "DOC-DATA-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1316,
+        "writer_out": 161,
+        "checker_in": 566,
+        "checker_out": 55
+      },
+      "latency_ms": 23795
+    },
+    {
+      "ticket_id": "DEV-0026",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "low",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for collections that may change while iterating [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep the page size at or below two hundred to avoid request rejection [1]. Remember that cursors expire after one hour, so restart from a checkpoint if needed [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-DATA-001",
+        "DOC-DATA-003",
+        "DOC-DEPLOY-002",
+        "DOC-PERF-001"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1292,
+        "writer_out": 207,
+        "checker_in": 542,
+        "checker_out": 50
+      },
+      "latency_ms": 23510
+    },
+    {
+      "ticket_id": "DEV-0027",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for large extracts to avoid duplicates and timeouts [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep the page size at or below two hundred to avoid rejection [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-DATA-001",
+        "DOC-PERF-003",
+        "DOC-DEPLOY-002",
+        "DOC-INT-002"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1305,
+        "writer_out": 166,
+        "checker_in": 544,
+        "checker_out": 59
+      },
+      "latency_ms": 2856
+    },
+    {
+      "ticket_id": "DEV-0055",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "low",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for collections that may change while iterating [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep the page size at or below two hundred to avoid request rejection [1]. Remember that cursors expire after one hour, so restart from a checkpoint if needed [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-DATA-001",
+        "DOC-DATA-003",
+        "DOC-DEPLOY-002",
+        "DOC-PERF-001"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1292,
+        "writer_out": 207,
+        "checker_in": 542,
+        "checker_out": 50
+      },
+      "latency_ms": 2973
+    },
+    {
+      "ticket_id": "DEV-0066",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for large extracts to avoid duplicates and timeouts [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep the page size at or below two hundred to avoid rejection [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-DATA-001",
+        "DOC-PERF-003",
+        "DOC-DEPLOY-002",
+        "DOC-INT-002"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1305,
+        "writer_out": 167,
+        "checker_in": 544,
+        "checker_out": 59
+      },
+      "latency_ms": 45031
+    },
+    {
+      "ticket_id": "DEV-0088",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is database_issue (threshold 85%), no safety rule applies, and article DOC-DATA-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Identify the point you need to restore to, as point-in-time recovery covers any moment within the retention window rather than only backup times [1]. Restore into a new database instance rather than over the existing one, so the current state is preserved while you verify the restore [1]. Allow roughly ten minutes per hundred gigabytes for the restore, and considerably longer where the instance is also under load [1]. Verify the restored data before switching traffic, and keep the original instance until that verification is complete [1].\n\nThis reply was written automatically from our help article \"Backups, retention and point-in-time restore\" (DOC-DATA-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-002",
+        "DOC-DATA-001",
+        "DOC-PERF-003",
+        "DOC-DEPLOY-002",
+        "DOC-ONB-002"
+      ],
+      "cited": [
+        "DOC-DATA-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1310,
+        "writer_out": 185,
+        "checker_in": 580,
+        "checker_out": 66
+      },
+      "latency_ms": 23456
+    },
+    {
+      "ticket_id": "DEV-0096",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is onboarding (threshold 85%), no safety rule applies, and article DOC-ONB-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Externalise configuration before migrating, moving any file-based settings to environment variables or secrets [1]. Identify local state such as uploaded files or session data and move it to object storage or the managed database first [1]. Run the new deployment in parallel with the existing one and shift a small share of traffic before committing to the move [1]. Plan the database migration separately from the application migration; attempting both at once makes any failure hard to diagnose [1].\n\nThis reply was written automatically from our help article \"Migrating an existing application to CloudServe\" (DOC-ONB-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "onboarding",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-ONB-002",
+        "DOC-ONB-001",
+        "DOC-DATA-002",
+        "DOC-DEPLOY-001",
+        "DOC-BILL-003"
+      ],
+      "cited": [
+        "DOC-ONB-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1243,
+        "writer_out": 225,
+        "checker_in": 531,
+        "checker_out": 49
+      },
+      "latency_ms": 23610
+    },
+    {
+      "ticket_id": "DEV-0160",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (50% of its words in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Remove departing user and revoke their API keys.",
+        "tried": [
+          "classified as account_access (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-ACCT-001, DOC-SEC-001, DOC-AUTH-004, DOC-AUTH-001, DOC-AUTH-002",
+          "reply drafted"
+        ],
+        "article": "DOC-ACCT-001",
+        "draft": "Thanks for getting in touch. Remove the departing user from the team members page [1]. Revoke any API keys that the user created [1]. Check for any pending invitations that may still exist and cancel them if necessary [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (50% of its words in the article)."
+      },
+      "type": "account_access",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-ACCT-001",
+        "DOC-SEC-001",
+        "DOC-AUTH-004",
+        "DOC-AUTH-001",
+        "DOC-AUTH-002"
+      ],
+      "cited": [
+        "DOC-ACCT-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 3 (50% of its words in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 1,
+      "tokens": {
+        "writer_in": 1320,
+        "writer_out": 198,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 1421
+    },
+    {
+      "ticket_id": "DEV-0162",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is database_issue (threshold 85%), no safety rule applies, and article DOC-DATA-002 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Identify the point you need to restore to [1]. Restore into a new database instance rather than over the existing one, so the current state is preserved while you verify the restore [1]. Allow roughly ten minutes per hundred gigabytes for the restore, and considerably longer where the instance is also under load [1]. Verify the restored data before switching traffic, and keep the original instance until that verification is complete [1].\n\nThis reply was written automatically from our help article \"Backups, retention and point-in-time restore\" (DOC-DATA-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-002",
+        "DOC-DEPLOY-002",
+        "DOC-PERF-003",
+        "DOC-ONB-002",
+        "DOC-DATA-001"
+      ],
+      "cited": [
+        "DOC-DATA-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1293,
+        "writer_out": 171,
+        "checker_in": 554,
+        "checker_out": 44
+      },
+      "latency_ms": 23033
+    },
+    {
+      "ticket_id": "DEV-0166",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for any query that may change while you iterate [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep the page size at or below two hundred; larger requests are rejected rather than truncated [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1][2].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-DATA-001",
+        "DOC-PERF-003",
+        "DOC-PERF-001",
+        "DOC-INT-002"
+      ],
+      "cited": [
+        "DOC-API-002",
+        "DOC-DATA-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1309,
+        "writer_out": 235,
+        "checker_in": 766,
+        "checker_out": 59
+      },
+      "latency_ms": 2218
+    },
+    {
+      "ticket_id": "DEV-0167",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "low",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for any query that may change while iterating [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep the page size at or below two hundred to avoid rejections [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1]. Cursors expire after one hour, so long-running iterations should handle expiry by restarting from a recorded checkpoint [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-PERF-003",
+        "DOC-INT-001",
+        "DOC-API-001",
+        "DOC-INT-002"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1300,
+        "writer_out": 243,
+        "checker_in": 562,
+        "checker_out": 43
+      },
+      "latency_ms": 2387
+    },
+    {
+      "ticket_id": "DEV-0169",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is database_issue (threshold 85%), no safety rule applies, and article DOC-PERF-003 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Calculate the total possible connections as pool size multiplied by maximum instances and compare it against your plan's connection limit [1]. Reduce the per-instance pool size rather than raising the limit, as a large number of small pools is usually the wrong shape for a scaled service [1]. Look for queries that hold a transaction open across a network call to another service, which is the most common cause of leaks of this kind [1]. Consider a connection proxy if the instance count must remain high, so that pooling happens once rather than per instance [1]. Identify the point you need to restore to, as point-in-time recovery covers any moment within the retention window [2]. Restore into a new database instance rather than over the existing one, so the current state is preserved while you verify the restore [2]. Allow roughly ten minutes per hundred gigabytes for the restore, and considerably longer where the instance is also under load [2]. Verify the restored data before switching traffic, and keep the original instance until that verification is complete [2].\n\nThis reply was written automatically from our help article \"Database connection pool exhaustion\" (DOC-PERF-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-PERF-003",
+        "DOC-DATA-002",
+        "DOC-PERF-001",
+        "DOC-ONB-002",
+        "DOC-DEPLOY-001"
+      ],
+      "cited": [
+        "DOC-PERF-003",
+        "DOC-DATA-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1351,
+        "writer_out": 332,
+        "checker_in": 922,
+        "checker_out": 54
+      },
+      "latency_ms": 2982
+    },
+    {
+      "ticket_id": "DEV-0177",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for any query that may change while iterating [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep the page size at or below two hundred to avoid rejection [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-DATA-001",
+        "DOC-PERF-003",
+        "DOC-PERF-001",
+        "DOC-INT-002"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1309,
+        "writer_out": 156,
+        "checker_in": 548,
+        "checker_out": 54
+      },
+      "latency_ms": 2189
+    },
+    {
+      "ticket_id": "DEV-0182",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "low",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for any query that may change while iterating [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep the page size at or below two hundred; larger requests are rejected rather than truncated [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1]. Cursors expire after one hour, so long-running iterations should handle expiry by restarting from a recorded checkpoint [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-API-001",
+        "DOC-PERF-003",
+        "DOC-DATA-001",
+        "DOC-INT-001"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1336,
+        "writer_out": 257,
+        "checker_in": 570,
+        "checker_out": 48
+      },
+      "latency_ms": 44999
+    },
+    {
+      "ticket_id": "DEV-0201",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination instead of offset pagination to avoid duplicates [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep the page size at or below two hundred to avoid request rejection [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-DATA-001",
+        "DOC-PERF-003",
+        "DOC-DEPLOY-002",
+        "DOC-INT-002"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1305,
+        "writer_out": 233,
+        "checker_in": 544,
+        "checker_out": 48
+      },
+      "latency_ms": 23198
+    },
+    {
+      "ticket_id": "DEV-0207",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for any query that may change while iterating [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep the page size at or below two hundred to avoid rejection [1]. Cursors expire after one hour, so long-running iterations should handle expiry by restarting from a recorded checkpoint [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 0.9996,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-API-001",
+        "DOC-DATA-001",
+        "DOC-API-003",
+        "DOC-SEC-003"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1306,
+        "writer_out": 244,
+        "checker_in": 563,
+        "checker_out": 51
+      },
+      "latency_ms": 2083
+    },
+    {
+      "ticket_id": "DEV-0209",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 5 (a number not in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Customer has no connections available during a long restore on a 400 GB database; likely connection pool exhaustion and restore time scaling.",
+        "tried": [
+          "classified as database_issue (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-PERF-003, DOC-DATA-002, DOC-ONB-002, DOC-DEPLOY-001, DOC-PERF-001",
+          "reply drafted"
+        ],
+        "article": "DOC-PERF-003",
+        "draft": "Thanks for getting in touch. Calculate the total possible connections as pool size multiplied by maximum instances and compare it against your plan's connection limit [1]. Reduce the per-instance pool size rather than raising the limit, as a large number of small pools is usually the wrong shape for a scaled service [1]. Look for queries that hold a transaction open across a network call to another service, which is the most common cause of leaks of this kind [1]. Consider a connection proxy if the instance count must remain high, so that pooling happens once rather than per instance [1]. For a 400 GB database, allow roughly ten minutes per hundred gigabytes for a restore, and considerably longer if the instance is also under load [2].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 5 (a number not in the article)."
+      },
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-PERF-003",
+        "DOC-DATA-002",
+        "DOC-ONB-002",
+        "DOC-DEPLOY-001",
+        "DOC-PERF-001"
+      ],
+      "cited": [
+        "DOC-PERF-003",
+        "DOC-DATA-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 5 (a number not in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 1,
+      "tokens": {
+        "writer_in": 1301,
+        "writer_out": 337,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 1516
+    },
+    {
+      "ticket_id": "DEV-0216",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for any query that may change while iterating [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep the page size at or below two hundred to avoid rejection [1]. Cursors expire after one hour, so long-running iterations should handle expiry by restarting from a recorded checkpoint [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 0.9996,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-API-001",
+        "DOC-DATA-001",
+        "DOC-API-003",
+        "DOC-SEC-003"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1306,
+        "writer_out": 244,
+        "checker_in": 563,
+        "checker_out": 51
+      },
+      "latency_ms": 44318
+    },
+    {
+      "ticket_id": "DEV-0217",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "low",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for any query that may change while iterating [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep the page size at or below two hundred; larger requests are rejected rather than truncated [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1]. Cursors expire after one hour, so long-running iterations should handle expiry by restarting from a recorded checkpoint [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-API-001",
+        "DOC-PERF-003",
+        "DOC-DATA-001",
+        "DOC-INT-001"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1336,
+        "writer_out": 226,
+        "checker_in": 570,
+        "checker_out": 48
+      },
+      "latency_ms": 86344
+    },
+    {
+      "ticket_id": "DEV-0233",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is onboarding (threshold 85%), no safety rule applies, and article DOC-ONB-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Externalise configuration before migrating, moving any file-based settings to environment variables or secrets [1]. Identify local state such as uploaded files or session data and move it to object storage or the managed database first [1]. Run the new deployment in parallel with the existing one and shift a small share of traffic before fully committing to the move [1]. Plan the database migration separately from the application migration to keep failures diagnosable [1].\n\nThis reply was written automatically from our help article \"Migrating an existing application to CloudServe\" (DOC-ONB-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "onboarding",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-ONB-002",
+        "DOC-DATA-003",
+        "DOC-ONB-001",
+        "DOC-ACCT-002",
+        "DOC-DEPLOY-002"
+      ],
+      "cited": [
+        "DOC-ONB-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1253,
+        "writer_out": 226,
+        "checker_in": 543,
+        "checker_out": 48
+      },
+      "latency_ms": 23474
+    },
+    {
+      "ticket_id": "DEV-0256",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is onboarding (threshold 85%), no safety rule applies, and article DOC-ONB-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Externalise configuration before migrating, moving any file-based settings to environment variables or secrets [1]. Identify local state such as uploaded files or session data and move it to object storage or the managed database first [1]. Run the new deployment in parallel with the existing one and shift a small share of traffic before committing to the move [1]. Plan the database migration separately from the application migration; attempting both at once makes any failure hard to diagnose [1].\n\nThis reply was written automatically from our help article \"Migrating an existing application to CloudServe\" (DOC-ONB-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "onboarding",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-ONB-002",
+        "DOC-ONB-001",
+        "DOC-ACCT-002",
+        "DOC-DATA-002",
+        "DOC-DEPLOY-002"
+      ],
+      "cited": [
+        "DOC-ONB-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 4,
+      "tokens": {
+        "writer_in": 1233,
+        "writer_out": 235,
+        "checker_in": 541,
+        "checker_out": 47
+      },
+      "latency_ms": 165764
+    },
+    {
+      "ticket_id": "DEV-0264",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "low",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for any data that may change while iterating, as offset pagination can cause duplicates when items are inserted mid-iteration [1]. Pass the next_cursor value from each response as the cursor parameter of the following request and stop when it is null [1]. Keep the page size at or below two hundred; larger requests are rejected rather than truncated [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1]. Cursors expire after one hour, so long-running iterations should handle expiry by restarting from a recorded checkpoint [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-PERF-003",
+        "DOC-INT-001",
+        "DOC-API-001",
+        "DOC-INT-002"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1300,
+        "writer_out": 320,
+        "checker_in": 580,
+        "checker_out": 44
+      },
+      "latency_ms": 328111
+    },
+    {
+      "ticket_id": "DEV-0279",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (33% of its words in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Export of 2 million records queued; large exports take minutes; check status, cancel only if needed, request fresh link.",
+        "tried": [
+          "classified as data_export (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-DATA-001, DOC-INT-002, DOC-API-002, DOC-SEC-001, DOC-DEPLOY-002",
+          "reply drafted"
+        ],
+        "article": "DOC-DATA-001",
+        "draft": "Thanks for getting in touch. Check the exports page to view the current job status [1]. Large exports covering more than a million records commonly take several minutes to complete [1]. If the export remains queued for an extended period, you can cancel it and start a new job, but it is usually not necessary to do so immediately [1]. Once the job completes, request a fresh download link from the exports page if the original link has expired [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (33% of its words in the article)."
+      },
+      "type": "data_export",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-001",
+        "DOC-INT-002",
+        "DOC-API-002",
+        "DOC-SEC-001",
+        "DOC-DEPLOY-002"
+      ],
+      "cited": [
+        "DOC-DATA-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 3 (33% of its words in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 6,
+      "tokens": {
+        "writer_in": 1284,
+        "writer_out": 238,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 347255
+    },
+    {
+      "ticket_id": "DEV-0310",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "low",
+      "reason": "Answered automatically: 100% sure it is onboarding (threshold 85%), no safety rule applies, and article DOC-AUTH-001 matches. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Externalise configuration before migrating; move any file-based settings to environment variables or secrets [3]. Identify local state such as uploaded files or session data and move it to object storage or the managed database first [3]. Run the new deployment in parallel with the existing one and shift a small share of traffic before committing to the move [3]. Plan the database migration separately from the application migration; attempting both at once makes any failure hard to diagnose [3].\n\nThis reply was written automatically from our help article \"Migrating an existing application to CloudServe\" (DOC-ONB-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "onboarding",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-AUTH-001",
+        "DOC-DATA-003",
+        "DOC-ONB-002",
+        "DOC-ACCT-001",
+        "DOC-AUTH-003"
+      ],
+      "cited": [
+        "DOC-ONB-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1328,
+        "writer_out": 250,
+        "checker_in": 548,
+        "checker_out": 46
+      },
+      "latency_ms": 369696
+    },
+    {
+      "ticket_id": "DEV-0320",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "low",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for any query that may change while iterating [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep the page size at or below two hundred; larger requests are rejected rather than truncated [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1]. Cursors expire after one hour, so long-running iterations should handle expiry by restarting from a recorded checkpoint [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-API-001",
+        "DOC-PERF-003",
+        "DOC-DATA-001",
+        "DOC-INT-001"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 6,
+      "tokens": {
+        "writer_in": 1336,
+        "writer_out": 257,
+        "checker_in": 570,
+        "checker_out": 48
+      },
+      "latency_ms": 244603
+    },
+    {
+      "ticket_id": "DEV-0331",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is data_export (threshold 85%), no safety rule applies, and article DOC-DATA-001 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the exports page to view the current job status; large exports covering more than a million records commonly take several minutes [1]. If the export remains queued after a reasonable wait, you can request a fresh download link from the exports page; the underlying file is retained for seven days [1]. Remember that the export reflects the moment the job began, so any records created during processing will not appear in the file [1]. For future needs, consider configuring a scheduled export delivered to object storage instead of generating them manually [1].\n\nThis reply was written automatically from our help article \"Exporting account data and scheduled extracts\" (DOC-DATA-001). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "data_export",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-001",
+        "DOC-API-002",
+        "DOC-SEC-001",
+        "DOC-SEC-003",
+        "DOC-DEPLOY-002"
+      ],
+      "cited": [
+        "DOC-DATA-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 3,
+      "tokens": {
+        "writer_in": 1286,
+        "writer_out": 247,
+        "checker_in": 560,
+        "checker_out": 51
+      },
+      "latency_ms": 105067
+    },
+    {
+      "ticket_id": "DEV-0338",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is database_issue (threshold 85%), no safety rule applies, and article DOC-DATA-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Identify the point you need to restore to, as point-in-time recovery covers any moment within the retention window rather than only backup times [1]. Restore into a new database instance rather than over the existing one so the current state is preserved while you verify the restore [1]. Allow roughly ten minutes per hundred gigabytes for the restore, and considerably longer where the instance is also under load [1]. Verify the restored data before switching traffic, and keep the original instance until that verification is complete [1].\n\nThis reply was written automatically from our help article \"Backups, retention and point-in-time restore\" (DOC-DATA-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-002",
+        "DOC-DATA-001",
+        "DOC-PERF-003",
+        "DOC-DEPLOY-002",
+        "DOC-ONB-002"
+      ],
+      "cited": [
+        "DOC-DATA-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1311,
+        "writer_out": 289,
+        "checker_in": 580,
+        "checker_out": 66
+      },
+      "latency_ms": 390965
+    },
+    {
+      "ticket_id": "DEV-0347",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is configuration_help (threshold 85%), no safety rule applies, and article DOC-DEPLOY-004 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Check the scope at which each variable was defined, noting that service scope overrides project scope and project scope overrides organisation defaults [1]. Review the environment overrides page, which lists values that differ from the defaults for each environment [1]. Redeploy after changing configuration, as running containers do not pick up new values without a restart [1].\n\nThis reply was written automatically from our help article \"Configuring environment variables and secrets\" (DOC-DEPLOY-004). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "configuration_help",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DEPLOY-004",
+        "DOC-SEC-002",
+        "DOC-DEPLOY-001",
+        "DOC-ACCT-002",
+        "DOC-DEPLOY-002"
+      ],
+      "cited": [
+        "DOC-DEPLOY-004"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1351,
+        "writer_out": 190,
+        "checker_in": 539,
+        "checker_out": 41
+      },
+      "latency_ms": 379175
+    },
+    {
+      "ticket_id": "DEV-0358",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is onboarding (threshold 85%), no safety rule applies, and article DOC-ONB-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Externalise configuration before migrating, moving any file-based settings to environment variables or secrets [1]. Identify local state such as uploaded files or session data and move it to object storage or the managed database first [1]. Run the new deployment in parallel with the existing one and shift a small share of traffic before committing to the move [1]. Plan the database migration separately from the application migration; attempting both at once makes any failure hard to diagnose [1].\n\nThis reply was written automatically from our help article \"Migrating an existing application to CloudServe\" (DOC-ONB-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "onboarding",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-ONB-002",
+        "DOC-DATA-002",
+        "DOC-ONB-001",
+        "DOC-DATA-003",
+        "DOC-DATA-001"
+      ],
+      "cited": [
+        "DOC-ONB-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 5,
+      "tokens": {
+        "writer_in": 1259,
+        "writer_out": 183,
+        "checker_in": 547,
+        "checker_out": 48
+      },
+      "latency_ms": 228101
+    },
+    {
+      "ticket_id": "DEV-0364",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 2 (43% of its words in the article), 5 (58% of its words in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Customer has a large export queued; advise checking status, possible cancellation, and download steps.",
+        "tried": [
+          "classified as data_export (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-DATA-001, DOC-API-002, DOC-SEC-001, DOC-INT-002, DOC-SEC-003",
+          "reply drafted"
+        ],
+        "article": "DOC-DATA-001",
+        "draft": "Thanks for getting in touch. Check the exports page to view the current job status; large exports covering more than a million records often take several minutes to complete [1]. If the export remains queued after a reasonable time, you can cancel it and submit a new request, but first confirm that the job has not started processing [1]. Once the export completes, download the file using the link provided on the exports page; the link is valid for twenty-four hours and the file is retained for seven days [1]. Remember that the export reflects the data snapshot at the start of the job, so any records created during processing will not appear in the file [1]. For future needs, consider setting up a scheduled export delivered to object storage to avoid manual queuing [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 2 (43% of its words in the article), 5 (58% of its words in the article)."
+      },
+      "type": "data_export",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-001",
+        "DOC-API-002",
+        "DOC-SEC-001",
+        "DOC-INT-002",
+        "DOC-SEC-003"
+      ],
+      "cited": [
+        "DOC-DATA-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 2 (43% of its words in the article), 5 (58% of its words in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1289,
+        "writer_out": 291,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 125470
+    },
+    {
+      "ticket_id": "DEV-0368",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "low",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for any data that may change while iterating, as offset pagination can cause duplicates when items are inserted mid-iteration [1]. Pass the next_cursor value from each response as the cursor parameter of the following request and stop when it is null [1]. Keep the page size at or below two hundred; larger requests are rejected rather than truncated [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1]. Cursors expire after one hour, so long-running iterations should handle expiry by restarting from a recorded checkpoint [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-PERF-003",
+        "DOC-INT-001",
+        "DOC-API-001",
+        "DOC-INT-002"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1300,
+        "writer_out": 269,
+        "checker_in": 580,
+        "checker_out": 44
+      },
+      "latency_ms": 437460
+    },
+    {
+      "ticket_id": "DEV-0374",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is database_issue (threshold 85%), no safety rule applies, and article DOC-DATA-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Identify the point you need to restore to and restore into a new database instance to preserve the current state [1]. Allow roughly ten minutes per hundred gigabytes for the restore, and considerably longer where the instance is also under load [1]. Verify the restored data before switching traffic, and keep the original instance until that verification is complete [1]. Calculate the total possible connections as pool size multiplied by maximum instances, and compare it against your plan's connection limit [2]. Reduce the per-instance pool size rather than raising the limit [2]. Look for queries that hold a transaction open across a network call to another service, which is the most common cause of leaks of this kind [2].\n\nThis reply was written automatically from our help article \"Backups, retention and point-in-time restore\" (DOC-DATA-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-002",
+        "DOC-PERF-003",
+        "DOC-DEPLOY-002",
+        "DOC-DEPLOY-001",
+        "DOC-ONB-002"
+      ],
+      "cited": [
+        "DOC-DATA-002",
+        "DOC-PERF-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 6,
+      "tokens": {
+        "writer_in": 1299,
+        "writer_out": 279,
+        "checker_in": 856,
+        "checker_out": 55
+      },
+      "latency_ms": 229128
+    },
+    {
+      "ticket_id": "DEV-0378",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is database_issue (threshold 85%), no safety rule applies, and article DOC-DATA-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Identify the point you need to restore to within the retention window [1]. Restore into a new database instance rather than over the existing one [1]. Allow roughly ten minutes per hundred gigabytes for the restore, longer if the instance is under load [1]. Verify the restored data before switching traffic and keep the original instance until verification is complete [1]. Calculate the total possible connections as pool size multiplied by maximum instances and compare it against your plan's connection limit [2]. Reduce the per-instance pool size rather than raising the limit [2]. Look for queries that hold a transaction open across a network call to another service, as this commonly leaks connections [2]. Consider using a connection proxy if you must keep a high instance count so pooling occurs once [2].\n\nThis reply was written automatically from our help article \"Backups, retention and point-in-time restore\" (DOC-DATA-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-002",
+        "DOC-PERF-003",
+        "DOC-DEPLOY-001",
+        "DOC-ONB-002",
+        "DOC-DEPLOY-002"
+      ],
+      "cited": [
+        "DOC-DATA-002",
+        "DOC-PERF-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1359,
+        "writer_out": 590,
+        "checker_in": 867,
+        "checker_out": 54
+      },
+      "latency_ms": 328427
+    },
+    {
+      "ticket_id": "DEV-0384",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "low",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for any data that may change while iterating [1]. Pass the next_cursor value from each response as the cursor parameter of the following request and stop when it is null [1]. Keep the page size at or below two hundred [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1]. Cursors expire after one hour, so long-running iterations should handle expiry by restarting from a recorded checkpoint [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-API-001",
+        "DOC-PERF-003",
+        "DOC-DATA-001",
+        "DOC-INT-001"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1336,
+        "writer_out": 220,
+        "checker_in": 562,
+        "checker_out": 48
+      },
+      "latency_ms": 370271
+    },
+    {
+      "ticket_id": "DEV-0401",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (33% of its words in the article), 5 (50% of its words in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Export of 2M records stuck in queue; advise check status, wait, cancel if still pending, then retry.",
+        "tried": [
+          "classified as data_export (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-DATA-001, DOC-API-002, DOC-SEC-001, DOC-SEC-003, DOC-API-001",
+          "reply drafted"
+        ],
+        "article": "DOC-DATA-001",
+        "draft": "Thanks for getting in touch. Check the exports page to see the current status of the job [1]. Large exports, such as those with more than a million records, can take several minutes to process [1]. If the job remains queued for an extended period, you can cancel it and start a new export, but first confirm that the current job is still pending [1]. Once the export completes, download the file using the link provided on the exports page; the link is valid for twenty-four hours [1]. For future needs, consider setting up a scheduled export delivered to object storage to avoid manual retries [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (33% of its words in the article), 5 (50% of its words in the article)."
+      },
+      "type": "data_export",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-001",
+        "DOC-API-002",
+        "DOC-SEC-001",
+        "DOC-SEC-003",
+        "DOC-API-001"
+      ],
+      "cited": [
+        "DOC-DATA-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 3 (33% of its words in the article), 5 (50% of its words in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 2,
+      "tokens": {
+        "writer_in": 1289,
+        "writer_out": 297,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 69951
+    },
+    {
+      "ticket_id": "DEV-0408",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (a number not in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Customer wonders if a long restore time for a 400 GB database is normal; provide expected duration and steps.",
+        "tried": [
+          "classified as database_issue (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-DATA-002, DOC-PERF-003, DOC-DEPLOY-002, DOC-PERF-001, DOC-ONB-002",
+          "reply drafted"
+        ],
+        "article": "DOC-DATA-002",
+        "draft": "Thanks for getting in touch. Identify the point in time you need to restore to, as point-in-time recovery covers any moment within the retention window [1]. Restore the backup into a new database instance rather than over the existing one so you can preserve the current state while verifying the restore [1]. Allow roughly ten minutes per hundred gigabytes for the restore, which means a 400 GB database can take around forty minutes, and considerably longer if the instance is under load [1]. After the restore completes, verify the restored data before switching traffic and keep the original instance until verification is complete [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (a number not in the article)."
+      },
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-002",
+        "DOC-PERF-003",
+        "DOC-DEPLOY-002",
+        "DOC-PERF-001",
+        "DOC-ONB-002"
+      ],
+      "cited": [
+        "DOC-DATA-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 3 (a number not in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 7,
+      "tokens": {
+        "writer_in": 1287,
+        "writer_out": 311,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 369654
+    },
+    {
+      "ticket_id": "DEV-0422",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for any query that may change while iterating [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep the page size at or below two hundred to avoid rejection [1]. Cursors expire after one hour, so long-running iterations should handle expiry by restarting from a recorded checkpoint [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 0.9996,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-API-001",
+        "DOC-DATA-001",
+        "DOC-API-003",
+        "DOC-SEC-003"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 6,
+      "tokens": {
+        "writer_in": 1306,
+        "writer_out": 244,
+        "checker_in": 563,
+        "checker_out": 51
+      },
+      "latency_ms": 309000
+    },
+    {
+      "ticket_id": "DEV-0424",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is onboarding (threshold 85%), no safety rule applies, and article DOC-ONB-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Externalise configuration before migrating, moving anything read from a file on disk to environment variables or secrets [1]. Identify local state such as uploaded files or session data and move it to object storage or the managed database first [1]. Run the new deployment in parallel with the existing one and shift a small share of traffic before committing to the move [1]. Plan the database migration separately from the application migration to avoid diagnosing combined failures [1].\n\nThis reply was written automatically from our help article \"Migrating an existing application to CloudServe\" (DOC-ONB-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "onboarding",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-ONB-002",
+        "DOC-ONB-001",
+        "DOC-DATA-002",
+        "DOC-DEPLOY-001",
+        "DOC-BILL-003"
+      ],
+      "cited": [
+        "DOC-ONB-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1243,
+        "writer_out": 241,
+        "checker_in": 529,
+        "checker_out": 48
+      },
+      "latency_ms": 327635
+    },
+    {
+      "ticket_id": "DEV-0428",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is onboarding (threshold 85%), no safety rule applies, and article DOC-ONB-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Externalise configuration before migrating [1]. Move uploaded files to object storage or the managed database first [1]. Run the new deployment in parallel with the existing one and shift a small share of traffic before committing to the move [1]. Plan the database migration separately from the application migration; attempting both at once makes any failure hard to diagnose [1].\n\nThis reply was written automatically from our help article \"Migrating an existing application to CloudServe\" (DOC-ONB-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "onboarding",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-ONB-002",
+        "DOC-DATA-002",
+        "DOC-ONB-001",
+        "DOC-DEPLOY-001",
+        "DOC-PERF-001"
+      ],
+      "cited": [
+        "DOC-ONB-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 5,
+      "tokens": {
+        "writer_in": 1259,
+        "writer_out": 156,
+        "checker_in": 526,
+        "checker_out": 48
+      },
+      "latency_ms": 200622
+    },
+    {
+      "ticket_id": "DEV-0430",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination instead of offset pagination to avoid duplicates [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep the page size at or below two hundred to avoid request rejection [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-DATA-001",
+        "DOC-PERF-003",
+        "DOC-DEPLOY-002",
+        "DOC-INT-002"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 7,
+      "tokens": {
+        "writer_in": 1305,
+        "writer_out": 233,
+        "checker_in": 544,
+        "checker_out": 48
+      },
+      "latency_ms": 327970
+    },
+    {
+      "ticket_id": "DEV-0434",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for anything that may change while you iterate [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep page size at or below two hundred; larger requests are rejected rather than truncated [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1]. Check the exports page for job status; jobs covering more than a million records commonly take several minutes [2]. Request a fresh link from the exports page if the original has expired; the underlying file is retained for seven days [2]. Note that the export reflects the moment the job began, so records created during processing are not included [2]. For recurring needs, configure a scheduled export delivered to object storage rather than generating them manually [2].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-DATA-001",
+        "DOC-PERF-003",
+        "DOC-PERF-001",
+        "DOC-INT-002"
+      ],
+      "cited": [
+        "DOC-API-002",
+        "DOC-DATA-001"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1309,
+        "writer_out": 419,
+        "checker_in": 857,
+        "checker_out": 54
+      },
+      "latency_ms": 370324
+    },
+    {
+      "ticket_id": "DEV-0439",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "high",
+      "reason": "Answered automatically: 100% sure it is database_issue (threshold 85%), no safety rule applies, and article DOC-PERF-003 matches. Priority high (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Calculate the total possible connections as pool size multiplied by maximum instances and compare it against your plan's connection limit [1]. Reduce the per-instance pool size rather than raising the limit, as a large number of small pools is usually the wrong shape for a scaled service [1]. Look for queries that hold a transaction open across a network call to another service, which is the most common cause of leaks of this kind [1]. Consider using a connection proxy if the instance count must remain high, so that pooling happens once rather than per instance [1].\n\nThis reply was written automatically from our help article \"Database connection pool exhaustion\" (DOC-PERF-003). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-PERF-003",
+        "DOC-DATA-002",
+        "DOC-ONB-002",
+        "DOC-DEPLOY-002",
+        "DOC-PERF-001"
+      ],
+      "cited": [
+        "DOC-PERF-003"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1308,
+        "writer_out": 330,
+        "checker_in": 593,
+        "checker_out": 52
+      },
+      "latency_ms": 433905
+    },
+    {
+      "ticket_id": "DEV-0451",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is database_issue (threshold 85%), no safety rule applies, and article DOC-DATA-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Identify the point you need to restore to [1]. Restore into a new database instance rather than over the existing one, so the current state is preserved while you verify the restore [1]. Allow roughly ten minutes per hundred gigabytes for the restore, and considerably longer where the instance is also under load [1]. Verify the restored data before switching traffic, and keep the original instance until that verification is complete [1].\n\nThis reply was written automatically from our help article \"Backups, retention and point-in-time restore\" (DOC-DATA-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-002",
+        "DOC-ONB-002",
+        "DOC-PERF-003",
+        "DOC-DEPLOY-002",
+        "DOC-DATA-001"
+      ],
+      "cited": [
+        "DOC-DATA-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 3,
+      "tokens": {
+        "writer_in": 1306,
+        "writer_out": 171,
+        "checker_in": 558,
+        "checker_out": 46
+      },
+      "latency_ms": 36503
+    },
+    {
+      "ticket_id": "DEV-0458",
+      "action": "block",
+      "label": "Needs a specialist",
+      "priority": "low",
+      "reason": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (57% of its words in the article).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "Log forwarding stopped; need to check status page, verify credentials, and manually resume.",
+        "tried": [
+          "classified as integration_help (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-INT-002, DOC-DEPLOY-002, DOC-SEC-003, DOC-SEC-001, DOC-PERF-001",
+          "reply drafted"
+        ],
+        "article": "DOC-INT-002",
+        "draft": "Thanks for getting in touch. Check the forwarding status page to see the last successful delivery and any error returned by the destination [1]. Verify the destination credential separately since expired credentials are the most common cause of stopped delivery [1]. If needed, resume forwarding manually after confirming the destination is healthy [1].",
+        "unsure": "Reply blocked by a guardrail and sent to a person (Needs a specialist): grounding_words: sentences 3 (57% of its words in the article)."
+      },
+      "type": "integration_help",
+      "confidence": 0.9999,
+      "articles_found": [
+        "DOC-INT-002",
+        "DOC-DEPLOY-002",
+        "DOC-SEC-003",
+        "DOC-SEC-001",
+        "DOC-PERF-001"
+      ],
+      "cited": [
+        "DOC-INT-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "block: sentences 3 (57% of its words in the article)",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "not run"
+      },
+      "model_calls": 7,
+      "tokens": {
+        "writer_in": 1262,
+        "writer_out": 181,
+        "checker_in": 0,
+        "checker_out": 0
+      },
+      "latency_ms": 369712
+    },
+    {
+      "ticket_id": "DEV-0472",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is database_issue (threshold 85%), no safety rule applies, and article DOC-DATA-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Identify the point you need to restore to [1]. Restore into a new database instance rather than over the existing one, so the current state is preserved while you verify the restore [1]. Allow roughly ten minutes per hundred gigabytes for the restore, and considerably longer where the instance is also under load [1]. Verify the restored data before switching traffic, and keep the original instance until that verification is complete [1].\n\nThis reply was written automatically from our help article \"Backups, retention and point-in-time restore\" (DOC-DATA-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-002",
+        "DOC-DEPLOY-002",
+        "DOC-DATA-001",
+        "DOC-PERF-003",
+        "DOC-ONB-002"
+      ],
+      "cited": [
+        "DOC-DATA-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 5,
+      "tokens": {
+        "writer_in": 1271,
+        "writer_out": 169,
+        "checker_in": 560,
+        "checker_out": 66
+      },
+      "latency_ms": 247157
+    },
+    {
+      "ticket_id": "DEV-0481",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "low",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for anything that may change while you iterate [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep page size at or below two hundred [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-DATA-001",
+        "DOC-API-001",
+        "DOC-PERF-003",
+        "DOC-PERF-001"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1318,
+        "writer_out": 206,
+        "checker_in": 548,
+        "checker_out": 50
+      },
+      "latency_ms": 349315
+    },
+    {
+      "ticket_id": "DEV-0482",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "low",
+      "reason": "Answered automatically: 100% sure it is api_usage_question (threshold 85%), no safety rule applies, and article DOC-API-002 matches. Priority low (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Use cursor pagination for any query that may change while iterating [1]. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null [1]. Keep the page size at or below two hundred to avoid rejections [1]. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link [1]. Cursors expire after one hour, so long-running iterations should handle expiry by restarting from a recorded checkpoint [1].\n\nThis reply was written automatically from our help article \"Pagination and handling large result sets\" (DOC-API-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "api_usage_question",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-PERF-003",
+        "DOC-INT-001",
+        "DOC-API-001",
+        "DOC-INT-002"
+      ],
+      "cited": [
+        "DOC-API-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 5,
+      "tokens": {
+        "writer_in": 1300,
+        "writer_out": 243,
+        "checker_in": 562,
+        "checker_out": 43
+      },
+      "latency_ms": 149474
+    },
+    {
+      "ticket_id": "DEV-0496",
+      "action": "auto_respond",
+      "label": "",
+      "priority": "medium",
+      "reason": "Answered automatically: 100% sure it is onboarding (threshold 85%), no safety rule applies, and article DOC-ONB-002 matches. Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. Externalise any configuration that is currently read from files on disk and move it to environment variables or secrets [1]. Identify local state such as uploaded files and relocate it to object storage or a managed database before migration [1]. Run the new deployment in parallel with the existing one and shift a small share of traffic to it before fully committing [1]. Plan the database migration separately from the application migration to simplify troubleshooting [1].\n\nThis reply was written automatically from our help article \"Migrating an existing application to CloudServe\" (DOC-ONB-002). If it does not solve your problem, just reply to this message and a member of our support team will pick it up.",
+      "handover": null,
+      "type": "onboarding",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-ONB-002",
+        "DOC-ONB-001",
+        "DOC-DEPLOY-001",
+        "DOC-ACCT-002",
+        "DOC-DATA-001"
+      ],
+      "cited": [
+        "DOC-ONB-002"
+      ],
+      "guardrails": {
+        "private_data": "pass",
+        "grounding_words": "pass",
+        "instruction_integrity": "pass",
+        "tone_and_scope": "pass",
+        "confidence_floor": "pass",
+        "grounding_model": "pass"
+      },
+      "model_calls": 8,
+      "tokens": {
+        "writer_in": 1293,
+        "writer_out": 267,
+        "checker_in": 541,
+        "checker_out": 43
+      },
+      "latency_ms": 350415
+    }
+  ]
+}

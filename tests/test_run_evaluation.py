@@ -79,3 +79,23 @@ def test_running_the_same_file_twice_gives_the_same_decisions_and_duplicates_not
     first = [(r["ticket_id"], r["action_taken"]) for r in log.read(con, a["run_id"], "outcome")]
     second = [(r["ticket_id"], r["action_taken"]) for r in log.read(con, b["run_id"], "outcome")]
     assert a["run_id"] != b["run_id"] and first == second and len(first) == 4
+
+
+def test_when_the_provider_keeps_failing_the_rest_go_to_a_person_without_waiting(tmp_path, fake, monkeypatch):
+    from src.pipeline import Outcome
+    calls = []
+
+    def down(t, classifier, retriever):
+        calls.append(t.ticket_id)
+        return Outcome(t.ticket_id, "escalate", "Needs a specialist", "medium",
+                       "Sent to a person because model unavailable: HTTP 429.", "ack")
+    monkeypatch.setattr(R, "process", down)
+    rows = [{"ticket_id": f"P-{i}", "channel": "email", "subject": "", "body": "roll back please",
+             "received_at": "2026-11-08T09:00:00Z", "customer_id": "C", "customer_tier": "business",
+             "customer_region": "europe", "language_fluency": "fluent"} for i in range(6)]
+    f = tmp_path / "six.json"
+    f.write_text(json.dumps(rows), encoding="utf-8")
+    R.run_evaluation(str(f), str(tmp_path / "six_out.json"))
+    data = json.loads((tmp_path / "six_out.json").read_text(encoding="utf-8"))["results"]
+    assert len(calls) == 3 and len(data) == 6                     # three tried, the rest not attempted
+    assert all("circuit open" in r["reason"] for r in data[3:])
