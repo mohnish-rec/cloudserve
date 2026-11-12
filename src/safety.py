@@ -12,6 +12,7 @@ document): security, compliance, feature requests and unclear requests (the
 must-not labels), plus Daniel's cases: data location, leaked keys and billing
 disputes (Stage 1 workbook, Section 1, Daniel row; PRD FR-03).
 """
+import os
 import re
 from dataclasses import dataclass
 
@@ -73,6 +74,79 @@ RULES = {
 }
 _COMPILED = {name: [re.compile(p, re.I) for p in pats] for name, pats in RULES.items()}
 
+# ---- 10 Nov: narrowed rules (on by default from 12 Nov; NARROW_RULES=off turns them off) ----
+# Questions about where data lives, and questions about an unrecognised charge, are answered from the
+# help articles (the answer key labels 21 of 29 and 9 of 11 of these automatic). REQUESTS stay with a person:
+# moving or deleting data, changing region, refunds, disputes, chargebacks, double charges, money back.
+# Untouched, zero tolerance: security incidents, leaked keys, keys pasted in a ticket, compliance,
+# feature and unclear requests (every must-not type), and every guardrail on every reply.
+NARROW_DATA_LOCATION = [
+    r"\b(move|moving|migrate|migrating|transfer|transferring|relocate|relocating)\b\W+(\w+\W+){0,4}(data|organi[sz]ation|account|project)\W+(\w+\W+){0,4}(to|into)\b",
+    r"\b(change|changing|switch|switching)\b\W+(\w+\W+){0,3}region\b",
+    r"\b(delete|deleting|erase|erasing|purge|purging)\b\W+(\w+\W+){0,4}(all )?(our |my )?data\b",
+    r"\bdata (sovereignty)\b",
+]
+NARROW_BILLING = [p for p in RULES["billing dispute"] if "use" not in p]   # drops only "a service we do not use"
+_NARROW = {"data location": [re.compile(p, re.I) for p in NARROW_DATA_LOCATION],
+           "billing dispute": [re.compile(p, re.I) for p in NARROW_BILLING]}
+
+
+def _narrow() -> bool:
+    return os.getenv("NARROW_RULES", "on") == "on"   # on by default from 12 Nov
+
+
+# ---- 11 Nov 2026: final question rules decided by Mohnish Grover (off unless QUESTION_RULES=on) ----
+# All 500 development tickets were grouped into 53 questions and each was decided by him
+# (evaluation/human_review/question_groups_decisions.json). With this switch on:
+# 1. Daniel's data-location rule is restored in full: every data-location ticket goes to a person, by its words or
+#    by its type, even when NARROW_RULES is on (Daniel: "anything involving data location, because we get those
+#    wrong occasionally even as humans and the consequence is a compliance problem"). This covers Q22 and Q23;
+#    Q24 (backup replication only) is the one exception, below.
+#    The billing narrowing (an unrecognised charge is answered) is unchanged.
+# 2. Q20 and Q11 go to a person (Q11 below). Q20: no article explains an export missing records created BEFORE the job (Ines's article
+#    covers records created during it), so an automatic reply would give the wrong reason.
+# Checked on the development tickets: exactly the 29 data-location tickets, the 9 Q20 tickets and the 4 Q11 tickets.
+QUESTION_RULES = {
+    "no article covers it: export missing records created before the job (Q20)": [
+        r"\bexport\w*\W+(\w+\W+){0,6}missing\W+(\w+\W+){0,8}before\b"],
+    # Q11: no article says to update the password stored in automated jobs; decided "person" (11 Nov). The checker
+    # blocked all 4 in v1.6 but let 1 through in v1.7, so the decision is enforced here instead.
+    "no article covers it: automated jobs failing after a password change (Q11)": [
+        r"\bpassword\b\W+(\w+\W+){0,12}(automated|scheduled|scripts?|jobs?|pipelines?|integrations?)\W+(\w+\W+){0,6}(fail\w*|authenticat\w*|broken|stopped)"],
+}
+_QUESTIONS = {name: [re.compile(p, re.I) for p in pats] for name, pats in QUESTION_RULES.items()}
+
+# 12 Nov 2026 (Mohnish Grover): one exception to Daniel's rule. A question only about whether BACKUPS are replicated
+# outside the region (Q24) is answered automatically: Ines's article answers it directly ("Backups are replicated to
+# a second region by default"). Every other data-location ticket still goes to a person (Q22 written confirmation,
+# Q23 keeping data in a region for a contract), because those usually need a person's confirmation or a migration.
+# Fails safe: the exception applies only when the backup question is recognised AND no request or security word is
+# present (confirm, contract, move, delete, stop, without permission, accessed, breach, ...); any
+# wording it does not recognise goes to a person.
+BACKUP_QUESTION = [re.compile(p, re.I) for p in [
+    r"\bbackups?\b\W+(\w+\W+){0,8}(replicat\w*|cop(y|ied|ies)|stored|kept|held|sent|go(es|ing)?|saved)\W+(\w+\W+){0,6}"
+    r"(outside|another|second|other|different|abroad|elsewhere|cross)",
+    r"\b(replicat\w*|cop(y|ies|ied)|send|sent|store[sd]?|keep|kept)\W+(\w+\W+){0,3}backups?\W+(\w+\W+){0,4}"
+    r"(outside|another|second|other|different|abroad|elsewhere)",
+    r"\b(cross[- ]?region|second region|other regions?)\W+(\w+\W+){0,4}backups?\b",
+    r"\bwhere (are|do|does|is) (our |my |the )?backups?\b",
+]]
+DATA_REQUEST = re.compile(
+    r"written|in writing|confirm\w*|certif\w*|attest\w*|letter|document\w*|\bcontract\w*|\bsign(ing|ed)?\b|"
+    r"\b(move|moving|migrat\w*|transfer\w*|relocat\w*)\b|\b(change|changing|switch\w*)\W+(\w+\W+){0,3}region|"
+    r"\b(delete|deleting|erase|erasing|purge)\b|physically|\bgdpr\b|\bdpa\b|data processing|remain|stay|keep (our|all|the) data|"
+    r"\bstop\b|without (permission|consent|authori\w*)|accessed|\bsomeone\b|\bsomebody\b|unauthori\w*|breach\w*|"
+    r"leak\w*|compromis\w*|stolen|hack\w*",
+    re.I)
+
+
+def _backup_question_only(text: str) -> bool:
+    return any(p.search(text or "") for p in BACKUP_QUESTION) and not DATA_REQUEST.search(text or "")
+
+
+def _question_rules() -> bool:
+    return os.getenv("QUESTION_RULES", "on") == "on"   # on by default from 12 Nov
+
 
 @dataclass(frozen=True)
 class SafetyResult:
@@ -82,11 +156,18 @@ class SafetyResult:
 
 def check_text(text: str) -> list:
     """The fixed word rules alone: names of the rules that matched."""
-    return [name for name, pats in _COMPILED.items() if any(p.search(text or "") for p in pats)]
+    rules = {**_COMPILED, **_NARROW} if _narrow() else dict(_COMPILED)
+    if _question_rules():
+        rules["data location"] = _COMPILED["data location"]     # Daniel's rule in full (11 Nov)
+        rules.update(_QUESTIONS)
+    return [name for name, pats in rules.items() if any(p.search(text or "") for p in pats)]
 
 
 def check(text: str, predicted_type: str = None) -> SafetyResult:
     reasons = [f"word rule: {name}" for name in check_text(text)]
-    if predicted_type in PERSON_ONLY_TYPES:
+    types = PERSON_ONLY_TYPES - {"data_residency"} if (_narrow() and not _question_rules()) else PERSON_ONLY_TYPES
+    if predicted_type in types:
         reasons.append(f"type: {predicted_type}")
+    if _question_rules() and _backup_question_only(text):      # the Q24 exception (12 Nov); every other rule stays
+        reasons = [r for r in reasons if r not in ("word rule: data location", "type: data_residency")]
     return SafetyResult(bool(reasons), tuple(reasons))

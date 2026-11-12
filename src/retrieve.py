@@ -200,6 +200,62 @@ class Retriever:
                 for r, i in enumerate(best_per_article[: self.top_k], start=1)]
 
 
+# ---- 11 Nov: type-aware search for non-fluent tickets (off unless TYPE_AWARE_SEARCH=on) ----
+# Found in the 500 development tickets (PR-01 v1.4 run): 4 of the 6 should-be-automatic non-fluent tickets that were lost
+# are one question ("point me at right starting place... console has more in it than I expect"). Its fluent version
+# finds "First deployment: a walkthrough"; the non-fluent version found login articles or nothing. The classifier still
+# gets its type right (onboarding), so its type is used to make sure one article of that kind is among those read.
+# Governance Framework: "Systems built on retrieval tend to perform noticeably worse on tickets written in non-fluent
+# English, because the retrieval step depends on the phrasing matching the documentation."
+# Article categories for each ticket type, from the development labels (which articles each type's tickets expect).
+TYPE_CATEGORIES = {
+    "account_access": ("account",), "api_key_issue": ("authentication", "security"), "api_usage_question": ("api",),
+    "authentication_failure": ("authentication",), "billing_query": ("billing",), "configuration_help": ("deployment", "account"),
+    "data_export": ("data",), "data_residency": ("data",), "database_issue": ("performance", "data"),
+    "deployment_failure": ("deployment",), "integration_help": ("integration",), "onboarding": ("onboarding",),
+    "performance_degradation": ("performance",), "quota_or_overage": ("billing", "api"), "rate_limit": ("api",),
+    "rollback_request": ("deployment",), "sso_configuration": ("authentication",), "webhook_issue": ("api",),
+}
+TYPE_FLOOR = float(os.getenv("TYPE_AWARE_MIN_SIMILARITY", "0.25"))   # the added article must still be somewhat related
+FILLER = re.compile(r"(please do the needful|kindly check and revert|please tell what to do|please help fast|"
+                    r"waiting for (your|ur) (reply|response)|sorry for my english|this is urgent|thank(s| you)|"
+                    r"\bpls\b|\bplease\b|\bkindly\b)", re.I)
+
+
+def type_aware() -> bool:
+    return os.getenv("TYPE_AWARE_SEARCH", "on") == "on"   # on by default from 12 Nov
+
+
+def strip_filler(text: str) -> str:
+    """The question without politeness and waiting phrases, which pull the search towards the wrong articles."""
+    return re.sub(r"\s{2,}", " ", FILLER.sub(" ", text or "")).strip()
+
+
+def search_typed(retriever, text, intent) -> list:
+    """Search on the question without filler; then, if none of the articles the writer reads (the top 3) is of the
+    kind the ticket's type calls for, put the best article of that kind third (or first, if search found nothing).
+    Every guardrail still runs: an added article that does not fit the situation is blocked like any other."""
+    query = strip_filler(text) or text
+    found = retriever.search(query)
+    cats = TYPE_CATEGORIES.get(intent)
+    if not cats:
+        return found
+    top3 = list(dict.fromkeys(p.doc_id for p in found))[:3]
+    if any(p.category in cats for p in found if p.doc_id in top3):
+        return found
+    sims = retriever.vectors @ retriever._embed(query)
+    pick = [i for i in np.argsort(-sims) if retriever.chunks[i]["category"] in cats]
+    if not pick or sims[pick[0]] < TYPE_FLOOR:
+        return found
+    i = int(pick[0])
+    c = retriever.chunks[i]
+    added = Passage(doc_id=c["doc_id"], title=c["title"], category=c["category"], text=c["text"],
+                    similarity=round(float(sims[i]), 4), keyword=0.0, rank=0)
+    rest = [p for p in found if p.doc_id != c["doc_id"]]
+    out = rest[:2] + [added] + rest[2:]
+    return [Passage(**{**p.__dict__, "rank": r}) for r, p in enumerate(out[: retriever.top_k], start=1)]
+
+
 if __name__ == "__main__":
     question = " ".join(sys.argv[1:]) or "How do I revert to an earlier revision?"
     retriever = Retriever.from_store()

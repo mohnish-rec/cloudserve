@@ -30,7 +30,7 @@ from src.classify import TicketClassifier  # noqa: E402
 from src.generate import ACTIVE_PROMPT  # noqa: E402
 from src.guardrails import GUARD_MODEL  # noqa: E402
 from src.ingest import load_tickets  # noqa: E402
-from src.pipeline import ACKNOWLEDGEMENT, Outcome, process  # noqa: E402
+from src.pipeline import ACKNOWLEDGEMENT, Outcome, citation_trail, process  # noqa: E402
 from src.retrieve import Retriever  # noqa: E402
 from src.route import CONFIDENCE_THRESHOLD, SPECIALIST  # noqa: E402
 
@@ -56,7 +56,7 @@ def log_ticket(con, run_id, t, o: Outcome):
         log.write(log.DecisionRecord(**base, stage="routing", prediction=c.intent if c else None,
                                      confidence=d.confidence, threshold=d.threshold, action_taken=d.action,
                                      label=d.label, reason=d.reason, model="rules (src/route.py)",
-                                     sources_used=[{"doc_id": x} for x in o.passage_ids],
+                                     sources_used=list(o.sources) or [{"doc_id": x} for x in o.passage_ids],
                                      requirement_ids=list(d.requirement_ids)), con)
     if o.draft is not None:
         g = o.draft
@@ -64,19 +64,21 @@ def log_ticket(con, run_id, t, o: Outcome):
                                      reason=(f"Reply drafted from {', '.join(g.cited_doc_ids)}; writer {g.sure}"
                                              if g.ok else f"No reply: {g.error}")
                                      + f"; tokens {g.tokens_in} in, {g.tokens_out} out.",
-                                     sources_used=[{"doc_id": x} for x in g.cited_doc_ids], provider="groq",
+                                     sources_used=citation_trail(g, o.sources) or [{"doc_id": x} for x in g.cited_doc_ids],
+                                     provider="groq",
                                      model=g.model or None, latency_ms=g.latency_ms, prompt_version=g.prompt_version,
                                      requirement_ids=["FR-05", "FR-11"]), con)
     if o.guardrails is not None:
         log.write(log.DecisionRecord(**base, stage="validation", guardrails=o.guardrails.as_log(),
                                      action_taken="block" if o.guardrails.blocked else "auto_respond",
                                      reason=("Blocked: " + ", ".join(o.guardrails.fired) + "." if o.guardrails.blocked
-                                             else "All five guardrails passed."),
+                                             else f"All {len(o.guardrails.checks)} guardrails passed."),
                                      model=GUARD_MODEL, prompt_version="PR-02 v1.0", requirement_ids=["FR-09"]), con)
     log.write(log.DecisionRecord(**base, stage="outcome", prediction=c.intent if c else None,
                                  confidence=c.confidence if c else None, threshold=CONFIDENCE_THRESHOLD,
                                  action_taken=o.action, label=o.label, reason=o.reason,
-                                 sources_used=[{"doc_id": x} for x in (o.draft.cited_doc_ids if o.draft else ())],
+                                 sources_used=citation_trail(o.draft, o.sources)
+                                 or [{"doc_id": x} for x in (o.draft.cited_doc_ids if o.draft else ())],
                                  latency_ms=o.latency_ms, requirement_ids=list(o.requirement_ids) or ["FR-12"]), con)
 
 
@@ -153,6 +155,11 @@ def run_evaluation(input_path: str, output_path: str, metrics_port: int = None, 
             "backup": os.getenv("BACKUP_MODEL_NAME", "openai/gpt-oss-120b"), "checker": GUARD_MODEL,
             "classifier": CLASSIFIER, "threshold": CONFIDENCE_THRESHOLD,
             "reply_cache": "on (development run)" if use_cache else "off (fresh run)",
+            "writer_provider": "Groq direct (free tier)",
+            "experiment": (f"trim {os.getenv('TRIM_UNSUPPORTED', 'on')}, writer reads {os.getenv('WRITER_ARTICLES', '3')} "
+                           f"articles, narrowed safety rules {os.getenv('NARROW_RULES', 'on')}, "
+                           f"type-aware search {os.getenv('TYPE_AWARE_SEARCH', 'on')}, "
+                           f"question rules {os.getenv('QUESTION_RULES', 'on')}"),   # the switches as run (12 Nov)
             "input_sha256": hashlib.sha256(Path(input_path).read_bytes()).hexdigest()[:16],
             "minutes": round((time.perf_counter() - started) / 60, 1)}
     out = Path(output_path)
@@ -163,6 +170,7 @@ def run_evaluation(input_path: str, output_path: str, metrics_port: int = None, 
                 "confidence": o.classification.confidence if o.classification else None,
                 "articles_found": list(o.passage_ids),
                 "cited": list(o.draft.cited_doc_ids) if o.draft else [],
+                "citations": citation_trail(o.draft, o.sources),     # 11 Nov: each cited article -> passages, sentences
                 "guardrails": o.guardrails.as_log() if o.guardrails else {},
                 "model_calls": o.model_calls, "tokens": o.tokens, "latency_ms": o.latency_ms} for o in outcomes]
     out.write_text(json.dumps({"meta": meta, "results": results}, indent=2, ensure_ascii=False), encoding="utf-8")

@@ -11,14 +11,16 @@ Bounded: no loops, at most eight steps per ticket, so a ticket can never cycle (
 autonomy). The model never chooses the path: every branch is decided by code from the stage results.
 One state per ticket, keyed by the ticket ID, which is also the trace ID in the decision log (FR-10).
 """
+import os
 import time
 from typing import Any, TypedDict
 
 from langgraph.graph import END, StateGraph
 
 from src.generate import articles_for, generate, with_notice
-from src.guardrails import check_reply
+from src.guardrails import check_reply, trim
 from src.ingest import is_blocked
+from src.retrieve import search_typed, type_aware
 from src.pipeline import AUTO, DRAFT_READY, ESCALATE, SPECIALIST, finish
 from src.route import route
 from src.safety import check
@@ -33,11 +35,13 @@ class TicketState(TypedDict, total=False):
     d: Any            # route decision
     draft: Any
     report: Any       # guardrail report
+    trimmed: str      # 10 Nov: which sentences were removed before the reply was sent
     outcome: Any      # the final Outcome
 
 
 def build(classifier, retriever, now=None, kill_switch_file=None, call=None, sleep=None):
     kw = {k: v for k, v in (("call", call), ("sleep", sleep)) if v}
+    has_vectors = hasattr(retriever, "vectors")       # a test retriever may not have them
 
     def classify(st):
         t = st["ticket"]
@@ -48,7 +52,11 @@ def build(classifier, retriever, now=None, kill_switch_file=None, call=None, sle
 
     def search(st):
         t = st["ticket"]
-        return {"passages": [] if is_blocked(t) else retriever.search(t.text)}
+        if is_blocked(t):
+            return {"passages": []}
+        if type_aware() and has_vectors:                      # 11 Nov, non-fluent tickets (see src/retrieve.py)
+            return {"passages": search_typed(retriever, t.text, st["c"].intent)}
+        return {"passages": retriever.search(t.text)}
 
     def route_node(st):
         t = st["ticket"]
@@ -70,8 +78,21 @@ def build(classifier, retriever, now=None, kill_switch_file=None, call=None, sle
     def validate(st):
         reply = with_notice(st["draft"], st["passages"])
         arts = {a["doc_id"]: a for a in articles_for(st["passages"])}
-        return {"report": check_reply(reply, st["draft"], arts, st["ticket"].text, st["c"].confidence,
-                                      st["d"].threshold, **kw)}
+        report = check_reply(reply, st["draft"], arts, st["ticket"].text, st["c"].confidence,
+                             st["d"].threshold, **kw)
+        # 10 Nov, experiment 1B (on by default from 12 Nov): remove only the failed sentences, then check the
+        # WHOLE reply again. TRIM_UNSUPPORTED=off turns it off.
+        if report.blocked and os.getenv("TRIM_UNSUPPORTED", "on") == "on":
+            short = trim(st["draft"], report)
+            if short is not None:
+                again = check_reply(with_notice(short, st["passages"]), short, arts, st["ticket"].text,
+                                    st["c"].confidence, st["d"].threshold, **kw)
+                if not again.blocked:
+                    gone = len(st["draft"].sentences) - len(short.sentences)
+                    return {"report": again, "draft": short,
+                            "trimmed": f"{gone} of {len(st['draft'].sentences)} sentences removed "
+                                       f"({'; '.join(c.name for c in report.checks if not c.passed)}), then re-checked"}
+        return {"report": report}
 
     def after_validate(st):
         return "blocked" if st["report"].blocked else "send"
@@ -93,7 +114,8 @@ def build(classifier, retriever, now=None, kill_switch_file=None, call=None, sle
                                   reqs=("FR-09",))}
 
     def send(st):
-        return {"outcome": finish(st, AUTO, "", st["d"].reason, sent=with_notice(st["draft"], st["passages"]),
+        why = st["d"].reason + (f" Trimmed: {st['trimmed']}." if st.get("trimmed") else "")
+        return {"outcome": finish(st, AUTO, "", why, sent=with_notice(st["draft"], st["passages"]),
                                   reqs=("FR-05", "FR-08", "FR-09"))}
 
     g = StateGraph(TicketState)

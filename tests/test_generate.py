@@ -1,6 +1,7 @@
 """Generation (FR-05, FR-08, FR-11) with a fake model, so no key or network is needed."""
 import json
 
+from src.generate import ACTIVE_PROMPT
 from src.generate import (NO_ANSWER, PermanentError, TransientError, call_with_fallback, generate,
                           load_prompt, with_notice)
 from src.retrieve import Passage
@@ -27,7 +28,8 @@ def fake(*replies):
 def test_a_good_reply_is_parsed_and_its_citations_resolve_to_real_articles():
     d = generate("How do I roll back?", "rollback_request", P, call=fake(GOOD), sleep=NO_SLEEP)
     assert d.ok and d.answered and d.citations == (1,) and d.cited_doc_ids == ("DOC-DEPLOY-002",)
-    assert d.prompt_version == "PR-01 v1.2"
+    # The prompt file is chosen when the program starts (PR01_FILE), so the test checks the version that is active.
+    assert d.prompt_version == ACTIVE_PROMPT[1] and ACTIVE_PROMPT[1].startswith("PR-01 v")
     assert d.reply == "Thanks for getting in touch. Open Deployments and choose Revert [1]."
     assert d.sentences[0]["doc_ids"] == ("DOC-DEPLOY-002",)
 
@@ -35,7 +37,9 @@ def test_a_good_reply_is_parsed_and_its_citations_resolve_to_real_articles():
 def test_the_notice_is_added_by_code_and_names_the_article():
     d = generate("How do I roll back?", "rollback_request", P, call=fake(GOOD), sleep=NO_SLEEP)
     text = with_notice(d, P)
-    assert "written automatically" in text and "DOC-DEPLOY-002" in text and "reply to this message" in text
+    # 11 Nov: the article is named by its title above its steps, and the customer sees no [n] numbers.
+    assert 'From our help article "Rolling back a failed release":' in text and "[1]" not in text
+    assert "written automatically" in text and "reply to this message" in text
 
 
 def test_not_answered_or_unreadable_or_uncited_output_is_never_sent():
@@ -160,6 +164,8 @@ def test_a_different_ticket_or_a_cache_turned_off_makes_a_fresh_call(monkeypatch
     generate("How do I roll back?", "rollback_request", P, sleep=NO_SLEEP)
     generate("How do I roll back a release?", "rollback_request", P, sleep=NO_SLEEP)
     monkeypatch.setenv("REPLY_CACHE", "off")
+    import src.generate as G
+    G._RUN_MEMO.clear()      # 12 Nov (A5): a new run; within one run the same input reuses its answer
     generate("How do I roll back?", "rollback_request", P, sleep=NO_SLEEP)
     assert len(posts) == 3
 

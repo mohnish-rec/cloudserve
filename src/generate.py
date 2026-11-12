@@ -26,14 +26,30 @@ from src import cache
 load_dotenv()
 ROOT = Path(__file__).resolve().parent.parent
 PROMPT_DIR = ROOT / "prompts" / "build"
-ACTIVE_PROMPT = ("PR-01_draft_reply.md", "PR-01 v1.2")    # one pointer: rollback = change this line
+# The prompt file can be chosen per run (PR01_FILE) and its version is read from the file itself.
+# 12 Nov 2026: the default is the final prompt, v1.7; rollback = PR01_FILE=PR-01_draft_reply.md (v1.2).
+_PR01_FILE = os.getenv("PR01_FILE", "PR-01_draft_reply_v1.7.md")
+_v = re.search(r"\*\*Version:\*\*\s*([0-9.]+)", (Path(__file__).resolve().parent.parent / "prompts" / "build" / _PR01_FILE)
+               .read_text(encoding="utf-8"))
+ACTIVE_PROMPT = (_PR01_FILE, f"PR-01 v{_v.group(1) if _v else '?'}")
+# PR-01 v1.4 (11 Nov): extractive. The model chooses labelled article pieces; the code copies them word for word.
+EXTRACTIVE = "**Mode:** extractive" in (PROMPT_DIR / _PR01_FILE).read_text(encoding="utf-8")
+# PR-01 v1.6 (11 Nov): the code adds every Resolution step of each article the model answers from (Mohnish Grover).
+ALL_STEPS = "**Steps:** all" in (PROMPT_DIR / _PR01_FILE).read_text(encoding="utf-8")
+# PR-01 v1.7 (11 Nov): for the main article, every Note and Common cause as well (the whole article minus Symptoms).
+WHOLE_ARTICLE = "**Pieces:** whole article" in (PROMPT_DIR / _PR01_FILE).read_text(encoding="utf-8")
 NO_ANSWER = ("The help articles we have do not cover this question, so I have passed your ticket "
              "to a specialist, who will reply to you directly.")
-NOTICE = ("\n\nThis reply was written automatically from our help article \"{title}\" ({doc_id}). "
+NOTICE = ("\n\nThis reply was written automatically from the help {articles} named above. "
           "If it does not solve your problem, just reply to this message and a member of our "
           "support team will pick it up.")          # FR-08: added by code, never by the model
+# 11 Nov: the customer sees each step under the article it came from, with no [n] numbers (Ravi: "here is the
+# page it came from"; Build Spec: citations attached to claims). These lines are written by code, not the model.
+HEADING = 'From our help article "{title}":'
+ALSO = ' (also in: {titles})'
+CAUSES = "Common causes listed in the article:"   # 11 Nov (v1.6): written by code; the causes below it are Ines's words
 MAX_TRIES, BASE_WAIT, MAX_WAIT = 6, 1.0, 60.0   # 8 Nov: 4 quick tries were not enough for a 429 on the free tier
-TOP_ARTICLES = 3            # PR-01 v1.1: the model reads whole articles (small-to-big, Module 5)
+TOP_ARTICLES = int(os.getenv("WRITER_ARTICLES", "3"))   # PR-01 v1.1: whole articles (Module 5)
 _ARTICLES = {}
 
 
@@ -106,19 +122,99 @@ def articles_for(passages, top=TOP_ARTICLES) -> list:
     return out
 
 
+def article_pieces(content) -> tuple:
+    """11 Nov (PR-01 v1.4): an article as (symptoms, pieces). Pieces are ("R1", text) for each Resolution step
+    (kept whole, so a step stays with its own explanation), ("C1", text) for each Common cause and ("N1", text)
+    for each sentence of the Notes, all exactly as written."""
+    sections = dict(re.findall(r"^## (.+?)\n(.*?)(?=^## |\Z)", content, re.M | re.S))
+    bullets = lambda s: [b.strip() for b in re.findall(r"^\s*-\s+(.+)$", s or "", re.M)]
+    steps = [x.strip() for x in re.findall(r"^\s*\d+\.\s+(.+)$", sections.get("Resolution", ""), re.M)]
+    notes = [x.strip() for x in re.split(r"(?<=[.!?])\s+", " ".join((sections.get("Notes") or "").split())) if x.strip()]
+    pieces = ([(f"R{i}", t) for i, t in enumerate(steps, 1)] + [(f"C{i}", t) for i, t in enumerate(bullets(sections.get("Common causes")), 1)]
+              + [(f"N{i}", t) for i, t in enumerate(notes, 1)])
+    return bullets(sections.get("Symptoms")), pieces
+
+
+def number_pieces(articles) -> str:
+    """The articles as the extractive writer sees them: symptoms for matching, then every piece with its label."""
+    out = []
+    for k, a in enumerate(articles, 1):
+        symptoms, pieces = article_pieces(a["content"])
+        out.append(f"[{k}] {a['doc_id']} · {a['title']}\nSymptoms (for matching only, never chosen): {'; '.join(symptoms)}\n"
+                   "Pieces you may choose:\n" + "\n".join(f"{k}.{code}  {text}" for code, text in pieces))
+    return "\n\n".join(out)
+
+
+def parse_pieces(raw: str, labels: dict):
+    """Module 2's defensive parse for v1.4: every chosen label must exist; nothing else is accepted."""
+    s = re.sub(r"^`{3}(?:json)?|`{3}$", "", (raw or "").strip(), flags=re.M).strip()
+    m = re.search(r"\{.*\}", s, re.S)
+    if not m:
+        raise ValueError("no JSON object")
+    obj = json.loads(m.group(0))
+    problems = []
+    if not isinstance(obj.get("answered"), bool):
+        problems.append("answered must be true or false")
+    chosen = obj.get("pieces")
+    if not isinstance(chosen, list):
+        problems.append("pieces is not a list")
+        chosen = []
+    unknown = [c for c in chosen if c not in labels]
+    if unknown:
+        problems.append(f"labels that do not exist: {unknown[:5]}")
+    if obj.get("answered") is True and not chosen:
+        problems.append("an answer with no pieces")
+    if len(chosen) > 8:
+        problems.append("more than eight pieces")
+    if obj.get("sure") not in ("sure", "not sure"):
+        problems.append("sure must be 'sure' or 'not sure'")
+    if problems:
+        raise ValueError("; ".join(problems))
+    obj["pieces"] = list(dict.fromkeys(chosen))
+    return obj
+
+
+def complete_steps(chosen, labels) -> list:
+    """PR-01 v1.6 (11 Nov): for every article the model took a Resolution step from, all of that article's steps, in
+    the article's order; then the Notes and then the Common causes the model chose, each in the article's order.
+    Articles keep the order in which the model first used them. Found 11 Nov: told to keep conditional steps, the
+    model still left out the database-migration step in all 28 rollback replies. PR-01 v1.7: the main article (the
+    first one the model took a step from) also brings every Note and Common cause; a second article only its steps."""
+    order = lambda p: (p.split(".")[1][0] != "R", p.split(".")[1][0] == "C", int(p.split(".")[1][1:]))
+    arts = list(dict.fromkeys(p.split(".")[0] for p in chosen))
+    with_steps = {p.split(".")[0] for p in chosen if p.split(".")[1].startswith("R")}
+    out = []
+    main = next((a for a in arts if a in with_steps), None)
+    for a in arts:
+        mine = [p for p in chosen if p.split(".")[0] == a]
+        if a in with_steps:
+            mine += [p for p in labels if p.split(".")[0] == a and p.split(".")[1].startswith("R")]
+        if WHOLE_ARTICLE and a == main:     # v1.7: the main article in full (its Notes and Common causes too)
+            mine += [p for p in labels if p.split(".")[0] == a]
+        out += sorted(dict.fromkeys(mine), key=order)
+    return out
+
+
 def number_passages(articles) -> str:
     return "\n\n".join(f"[{i}] {a['doc_id']} · {a['title']}\n{a['content']}" for i, a in enumerate(articles, 1))
 
 
-def call_model(messages, model, max_tokens=2000):
+def provider(role="writer") -> dict:
+    """Both the writer and the checker use Groq's free tier directly (LLM_BASE_URL, LLM_API_KEY; D-024).
+    The role is kept so the run memory's key names where an answer came from."""
+    return {"base_url": os.environ["LLM_BASE_URL"], "api_key": os.environ["LLM_API_KEY"], "pin": ""}
+
+
+def call_model(messages, model, max_tokens=2000, role="writer"):
     """The Setup Guide's request, raising TransientError or PermanentError on failure."""
+    p = provider(role)
     body = {"model": model, "messages": messages, "max_tokens": max_tokens, "temperature": 0}
     if "gpt-oss" in model:
         body["reasoning_effort"] = "low"
     try:
-        r = requests.post(f"{os.environ['LLM_BASE_URL']}/chat/completions",
-                          headers={"Authorization": f"Bearer {os.environ['LLM_API_KEY']}"},
-                          json=body, timeout=30)
+        r = requests.post(f"{p['base_url']}/chat/completions",
+                          headers={"Authorization": f"Bearer {p['api_key']}"},
+                          json=body, timeout=60)
     except (requests.ConnectionError, requests.Timeout) as e:
         raise TransientError(type(e).__name__) from e
     if r.status_code == 429 or r.status_code >= 500:
@@ -135,18 +231,49 @@ def call_model(messages, model, max_tokens=2000):
     return out
 
 
-def call_with_fallback(messages, models=None, call=call_model, sleep=time.sleep):
+# 12 Nov 2026, acceptance criterion A5 ("the same input produces the same routing decision"): within one run the
+# same model input gets the same answer. Found in the final development run: two identical tickets (DEV-0156 and
+# DEV-0399, "user left company...") got different decisions, because the hosted models are not perfectly repeatable
+# even at temperature 0. This memory lasts only for the life of the process and is never saved, so every evaluation
+# run is still a fresh test (D-025, 9 Nov). Order: saved cache (if on), then this memory, then the model. Like the
+# cache, it keeps only answers that were read successfully (remember()), so a garbled answer is retried, not repeated.
+# Only real calls use it; tests with fake models never do.
+_RUN_MEMO = {}
+_RUN_MEMO_MAX = 20000
+
+
+def remember(raw, model):
+    """Keep a successfully read answer for the rest of this run (A5). Called where the cache stores answers."""
+    k = getattr(raw, "memo_key", "")
+    if k and len(_RUN_MEMO) < _RUN_MEMO_MAX:
+        _RUN_MEMO[k] = (str(raw), model)
+
+
+def call_with_fallback(messages, models=None, call=call_model, sleep=time.sleep, role="writer"):
     """Main model with retries, then the backup model; returns (text, model, calls)."""
     models = models or [os.getenv("MODEL_NAME", "openai/gpt-oss-20b"),
                         os.getenv("BACKUP_MODEL_NAME", "openai/gpt-oss-120b")]
     k = ""
-    if call is call_model and cache.enabled():            # only the real call; fake models never touch it
-        k = cache.key(messages, models)
+    real = call is call_model
+    if real:
+        call = (lambda m, mod, _r=role: call_model(m, mod, role=_r))
+    if real and cache.enabled():            # only the real call; fake models never touch it
+        route = provider(role)                   # 9 Nov: a different provider is a different answer
+        k = cache.key(messages, models + [route["base_url"], route["pin"]])
         hit = cache.get(k)
         if hit:
             out = Reply(hit[0])
             out.cached, out.cache_key = True, k
             return out, hit[1], 0
+    mkey = ""
+    if real:                                     # A5: the same input earlier in this run, the same answer
+        route = provider(role)
+        mkey = cache.key(messages, models + [route["base_url"], route["pin"]])
+        if mkey in _RUN_MEMO:
+            text, model = _RUN_MEMO[mkey]
+            out = Reply(text)
+            out.memo = True
+            return out, model, 0
     calls, last = 0, ""
     for model in models:
         for attempt in range(MAX_TRIES):
@@ -155,6 +282,8 @@ def call_with_fallback(messages, models=None, call=call_model, sleep=time.sleep)
                 out = call(messages, model)
                 if k and isinstance(out, Reply):
                     out.cache_key = k
+                if mkey and isinstance(out, Reply):
+                    out.memo_key = mkey
                 return out, model, calls
             except PermanentError as e:
                 last = f"{model}: {e}"
@@ -171,24 +300,52 @@ def call_with_fallback(messages, models=None, call=call_model, sleep=time.sleep)
 GREETING = "Thanks for getting in touch."
 
 
+def _pieces(text):
+    """One model sentence as clean sentences: no [n], normal spaces, a full stop at the end."""
+    text = re.sub(r"\s*(\[\d+\])+", "", text).strip()
+    # Unusual spaces and hyphens from the model showed as "corruptedartefact" on Windows (8 Nov).
+    # Any Unicode space or invisible format character becomes a normal space (the first, narrower
+    # list still left "migrationback", so the model uses another invisible character as well).
+    text = "".join(" " if unicodedata.category(ch) in ("Zs", "Cf") else ch for ch in text.replace("\u2011", "-"))
+    text = re.sub(r" {2,}", " ", text)
+    # An item holding two sentences is split, each keeping the source (found on 8 Nov, DEV-0004).
+    return [p if p[-1] in ".!?" else p + "." for p in (x.strip() for x in re.split(r"(?<=[.!?])\s+(?=[A-Z])", text)) if p]
+
+
 def assemble(sentences) -> str:
-    """The code, not the model, writes the greeting and the [n] numbers (PR-01 v1.2)."""
+    """The internal draft: greeting and [n] numbers written by the code (PR-01 v1.2). The guardrails' sentence
+    numbers, the trim step and the answer library use it; the customer sees render() instead (11 Nov)."""
     parts = [GREETING]
     for s in sentences:
         marks = "".join(f"[{n}]" for n in dict.fromkeys(s["sources"]))
-        text = re.sub(r"\s*(\[\d+\])+", "", s["text"]).strip()
-        # Unusual spaces and hyphens from the model showed as "corruptedartefact" on Windows (8 Nov).
-        # Any Unicode space or invisible format character becomes a normal space (the first, narrower
-        # list still left "migrationback", so the model uses another invisible character as well).
-        text = "".join(" " if unicodedata.category(ch) in ("Zs", "Cf") else ch for ch in text.replace("\u2011", "-"))
-        text = re.sub(r" {2,}", " ", text)
-        # An item holding two sentences gets the source on each (found on 8 Nov, DEV-0004).
-        for piece in (x for x in re.split(r"(?<=[.!?])\s+(?=[A-Z])", text) if x.strip()):
-            if piece[-1] in ".!?":
-                parts.append(f"{piece[:-1]} {marks}{piece[-1]}")
-            else:
-                parts.append(f"{piece} {marks}.")
+        parts += [f"{p[:-1]} {marks}{p[-1]}" for p in _pieces(s["text"])]
     return " ".join(parts)
+
+
+def _title(doc_id, passages=None):
+    articles_for(passages or [])                      # make sure the article titles are loaded
+    return _ARTICLES.get(doc_id, {}).get("title") or next(
+        (p.title for p in passages or [] if p.doc_id == doc_id), doc_id)
+
+
+def render(draft: Draft, passages=None) -> str:
+    """11 Nov: what a reader sees. Each step sits under the article it came from, in reading order, with no
+    numbers; a step backed by two articles goes under the first and names the other as "(also in: ...)"."""
+    groups = {}
+    for s in draft.sentences:
+        docs = list(dict.fromkeys(s["doc_ids"]))
+        also = ALSO.format(titles=", ".join(f'"{_title(d, passages)}"' for d in docs[1:])) if docs[1:] else ""
+        # 11 Nov: a piece copied from an article is shown exactly as Ines wrote it, with nothing added (a Common
+        # cause has no full stop in the article, so none is added here either).
+        texts = [s["text"].strip()] if s.get("verbatim") else _pieces(s["text"])
+        kind = "cause" if ALL_STEPS and ".C" in s.get("piece", "") else "step"
+        groups.setdefault(docs[0], []).extend((kind, f"- {p}{also}") for p in texts)
+    lines = [f"{GREETING} Here is what to do:"]
+    for doc_id, items in groups.items():
+        lines += ["", HEADING.format(title=_title(doc_id, passages))] + [t for k, t in items if k == "step"]
+        causes = [t for k, t in items if k == "cause"]
+        lines += [CAUSES] + causes if causes else []
+    return "\n".join(lines)
 
 
 def parse(raw: str, n_articles: int):
@@ -229,9 +386,12 @@ def generate(ticket_text, intent, passages, call=call_model, sleep=time.sleep) -
     start = time.perf_counter()
     articles = articles_for(passages)
     system, user = load_prompt()
+    labels = {f"{k}.{code}": (text, a["doc_id"], k) for k, a in enumerate(articles, 1)
+              for code, text in article_pieces(a["content"])[1]} if EXTRACTIVE else {}
     messages = [{"role": "system", "content": system},
                 {"role": "user", "content": user.format(no_answer=NO_ANSWER, intent=intent,
-                                                        passages=number_passages(articles),
+                                                        passages=number_pieces(articles) if EXTRACTIVE
+                                                        else number_passages(articles),
                                                         ticket=ticket_text.replace("</ticket>", "< /ticket>"))}]
     try:
         raw, model, calls = call_with_fallback(messages, call=call, sleep=sleep)
@@ -241,16 +401,23 @@ def generate(ticket_text, intent, passages, call=call_model, sleep=time.sleep) -
     ms = int((time.perf_counter() - start) * 1000)
     t_in, t_out = tokens_of(raw)
     try:
-        obj = parse(raw, len(articles))
+        obj = parse_pieces(raw, labels) if EXTRACTIVE else parse(raw, len(articles))
     except Exception as e:  # noqa: BLE001 - output we cannot parse is escalated, never sent (FR-05)
         return Draft(ok=False, model=model, calls=calls, latency_ms=ms, raw=raw, tokens_in=t_in, tokens_out=t_out,
                      error=f"reply could not be read: {e}")
     if getattr(raw, "cache_key", "") and not getattr(raw, "cached", False):
         cache.put(raw.cache_key, raw, model)               # only answers that were read successfully
-    answered = obj["answered"] and bool(obj["sentences"])
-    sentences = tuple({"text": x["text"].strip(), "sources": tuple(dict.fromkeys(x["sources"])),
-                       "doc_ids": tuple(dict.fromkeys(articles[n - 1]["doc_id"] for n in x["sources"]))}
-                      for x in obj["sentences"]) if answered else ()
+    remember(raw, model)                                   # A5 (12 Nov): this run reuses it for the same input
+    if EXTRACTIVE:                 # the article's own words, exactly as written; the label is kept for the log
+        answered = obj["answered"] and bool(obj["pieces"])
+        chosen = complete_steps(obj["pieces"], labels) if (answered and ALL_STEPS) else obj["pieces"]
+        sentences = tuple({"text": labels[p][0], "sources": (labels[p][2],), "doc_ids": (labels[p][1],),
+                           "piece": p, "verbatim": True} for p in chosen) if answered else ()
+    else:
+        answered = obj["answered"] and bool(obj["sentences"])
+        sentences = tuple({"text": x["text"].strip(), "sources": tuple(dict.fromkeys(x["sources"])),
+                           "doc_ids": tuple(dict.fromkeys(articles[n - 1]["doc_id"] for n in x["sources"]))}
+                          for x in obj["sentences"]) if answered else ()
     cites = tuple(dict.fromkeys(n for x in sentences for n in x["sources"]))
     return Draft(ok=answered, answered=answered, reply=assemble(sentences) if answered else NO_ANSWER,
                  sentences=sentences, citations=cites,
@@ -262,9 +429,6 @@ def generate(ticket_text, intent, passages, call=call_model, sleep=time.sleep) -
 
 
 def with_notice(draft: Draft, passages=None) -> str:
-    """The customer-facing text: the model's reply plus the fixed notice (FR-08)."""
-    articles_for(passages or [])                      # make sure the article titles are loaded
-    doc_id = draft.cited_doc_ids[0]
-    title = _ARTICLES.get(doc_id, {}).get("title") or next(
-        (p.title for p in passages or [] if p.doc_id == doc_id), doc_id)
-    return draft.reply + NOTICE.format(title=title, doc_id=doc_id)
+    """The customer-facing text (what the guardrails check and what is sent): render() plus the fixed notice (FR-08)."""
+    n = len(dict.fromkeys(d for s in draft.sentences for d in s["doc_ids"]))
+    return render(draft, passages) + NOTICE.format(articles="articles" if n > 1 else "article")

@@ -1,0 +1,2962 @@
+[
+ {
+  "ticket_id": "CONS-0156-00",
+  "channel": "chat",
+  "subject": "",
+  "body": "user left company. how i remove all his access including key he made?",
+  "received_at": "2026-03-31T13:24:00Z",
+  "customer_id": "CUST-1002",
+  "customer_name": "Lucas Patel",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "account_access",
+   "urgency": "low",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-ACCT-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 7,
+   "csat_rating": 4,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0156"
+ },
+ {
+  "ticket_id": "CONS-0004-00",
+  "channel": "chat",
+  "subject": "",
+  "body": "how do I revert to earlier revision? release we put out this morning is causing errors and I better i roll back than try to fix forward. please tell what to do.",
+  "received_at": "2026-05-30T04:58:00Z",
+  "customer_id": "CUST-1059",
+  "customer_name": "Yusuf Demir",
+  "customer_tier": "business",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "rollback_request",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-DEPLOY-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 42,
+   "csat_rating": 1,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0004"
+ },
+ {
+  "ticket_id": "CONS-0035-00",
+  "channel": "chat",
+  "subject": "",
+  "body": "One of our engineers believes their credentials may have been exposed in a breach at another service. What should we be doing right now?",
+  "received_at": "2026-05-09T03:40:00Z",
+  "customer_id": "CUST-1086",
+  "customer_name": "Oscar Silva",
+  "customer_tier": "standard",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "security_incident",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-SEC-001"
+   ],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 266,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0035"
+ },
+ {
+  "ticket_id": "CONS-0061-00",
+  "channel": "email",
+  "subject": "Need data to stay in the EU",
+  "body": "One of our customers has asked for written confirmation of where their data is physically stored. Could you point me to something I can share with them?",
+  "received_at": "2026-05-28T08:08:00Z",
+  "customer_id": "CUST-1204",
+  "customer_name": "Rosa Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "data_residency",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 1064,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0061"
+ },
+ {
+  "ticket_id": "CONS-0089-00",
+  "channel": "forum",
+  "subject": "Service slow at peak hours",
+  "body": "The service is noticeably slow during our afternoon peak and fine the rest of the day. We have autoscaling enabled so I expected it to cope.",
+  "received_at": "2026-04-12T04:12:00Z",
+  "customer_id": "CUST-1096",
+  "customer_name": "Hiroshi Demir",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "performance_degradation",
+   "urgency": "low",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 900,
+   "csat_rating": 4,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0089"
+ },
+ {
+  "ticket_id": "CONS-0102-00",
+  "channel": "docs_comment",
+  "subject": "Retention period question",
+  "body": "Our auditor has asked for access records covering the last six months. Can I export these, and is that period within what you retain?",
+  "received_at": "2026-05-24T15:00:00Z",
+  "customer_id": "CUST-1075",
+  "customer_name": "Nadia Costa",
+  "customer_tier": "business",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "compliance_request",
+   "urgency": "medium",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 187,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0102"
+ },
+ {
+  "ticket_id": "CONS-0209-00",
+  "channel": "email",
+  "subject": "No connections available error",
+  "body": "restore is running from long time. database is 400 gb. is it normal?",
+  "received_at": "2026-04-02T20:53:00Z",
+  "customer_id": "CUST-1147",
+  "customer_name": "Hiroshi Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "database_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-PERF-003",
+    "DOC-DATA-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 707,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": true
+  },
+  "source_ticket": "DEV-0209"
+ },
+ {
+  "ticket_id": "CONS-0281-00",
+  "channel": "chat",
+  "subject": "",
+  "body": "My authenticator app codes are being rejected every time. I have tried generating new ones several times. I do have access to the device, it just will not accept the code.",
+  "received_at": "2026-05-01T06:40:00Z",
+  "customer_id": "CUST-1108",
+  "customer_name": "Grace Novak",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "authentication_failure",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 55,
+   "csat_rating": 3,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0281"
+ },
+ {
+  "ticket_id": "CONS-0450-00",
+  "channel": "email",
+  "subject": "Help configuring single sign-on",
+  "body": "Single sign-on works for our engineering group but the finance group gets an error. Both are configured identically as far as we can tell. Any idea what differs?",
+  "received_at": "2026-03-06T19:41:00Z",
+  "customer_id": "CUST-1106",
+  "customer_name": "Kavya Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "sso_configuration",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-003"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 35,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0450"
+ },
+ {
+  "ticket_id": "CONS-0016-00",
+  "channel": "email",
+  "subject": "Need to rotate an exposed key",
+  "body": "one of our engineers pushed key to a public repository by mistake. We need to replace it without taking service down.",
+  "received_at": "2026-04-18T10:14:00Z",
+  "customer_id": "CUST-1252",
+  "customer_name": "Ulrike Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "api_key_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-004",
+    "DOC-SEC-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 9,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0016"
+ },
+ {
+  "ticket_id": "CONS-0156-01",
+  "channel": "chat",
+  "subject": "",
+  "body": "user left company. how i remove all his access including key he made?",
+  "received_at": "2026-03-31T13:24:00Z",
+  "customer_id": "CUST-1002",
+  "customer_name": "Lucas Patel",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "account_access",
+   "urgency": "low",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-ACCT-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 7,
+   "csat_rating": 4,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0156"
+ },
+ {
+  "ticket_id": "CONS-0004-01",
+  "channel": "chat",
+  "subject": "",
+  "body": "how do I revert to earlier revision? release we put out this morning is causing errors and I better i roll back than try to fix forward. please tell what to do.",
+  "received_at": "2026-05-30T04:58:00Z",
+  "customer_id": "CUST-1059",
+  "customer_name": "Yusuf Demir",
+  "customer_tier": "business",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "rollback_request",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-DEPLOY-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 42,
+   "csat_rating": 1,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0004"
+ },
+ {
+  "ticket_id": "CONS-0035-01",
+  "channel": "chat",
+  "subject": "",
+  "body": "One of our engineers believes their credentials may have been exposed in a breach at another service. What should we be doing right now?",
+  "received_at": "2026-05-09T03:40:00Z",
+  "customer_id": "CUST-1086",
+  "customer_name": "Oscar Silva",
+  "customer_tier": "standard",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "security_incident",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-SEC-001"
+   ],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 266,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0035"
+ },
+ {
+  "ticket_id": "CONS-0061-01",
+  "channel": "email",
+  "subject": "Need data to stay in the EU",
+  "body": "One of our customers has asked for written confirmation of where their data is physically stored. Could you point me to something I can share with them?",
+  "received_at": "2026-05-28T08:08:00Z",
+  "customer_id": "CUST-1204",
+  "customer_name": "Rosa Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "data_residency",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 1064,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0061"
+ },
+ {
+  "ticket_id": "CONS-0089-01",
+  "channel": "forum",
+  "subject": "Service slow at peak hours",
+  "body": "The service is noticeably slow during our afternoon peak and fine the rest of the day. We have autoscaling enabled so I expected it to cope.",
+  "received_at": "2026-04-12T04:12:00Z",
+  "customer_id": "CUST-1096",
+  "customer_name": "Hiroshi Demir",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "performance_degradation",
+   "urgency": "low",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 900,
+   "csat_rating": 4,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0089"
+ },
+ {
+  "ticket_id": "CONS-0102-01",
+  "channel": "docs_comment",
+  "subject": "Retention period question",
+  "body": "Our auditor has asked for access records covering the last six months. Can I export these, and is that period within what you retain?",
+  "received_at": "2026-05-24T15:00:00Z",
+  "customer_id": "CUST-1075",
+  "customer_name": "Nadia Costa",
+  "customer_tier": "business",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "compliance_request",
+   "urgency": "medium",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 187,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0102"
+ },
+ {
+  "ticket_id": "CONS-0209-01",
+  "channel": "email",
+  "subject": "No connections available error",
+  "body": "restore is running from long time. database is 400 gb. is it normal?",
+  "received_at": "2026-04-02T20:53:00Z",
+  "customer_id": "CUST-1147",
+  "customer_name": "Hiroshi Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "database_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-PERF-003",
+    "DOC-DATA-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 707,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": true
+  },
+  "source_ticket": "DEV-0209"
+ },
+ {
+  "ticket_id": "CONS-0281-01",
+  "channel": "chat",
+  "subject": "",
+  "body": "My authenticator app codes are being rejected every time. I have tried generating new ones several times. I do have access to the device, it just will not accept the code.",
+  "received_at": "2026-05-01T06:40:00Z",
+  "customer_id": "CUST-1108",
+  "customer_name": "Grace Novak",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "authentication_failure",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 55,
+   "csat_rating": 3,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0281"
+ },
+ {
+  "ticket_id": "CONS-0450-01",
+  "channel": "email",
+  "subject": "Help configuring single sign-on",
+  "body": "Single sign-on works for our engineering group but the finance group gets an error. Both are configured identically as far as we can tell. Any idea what differs?",
+  "received_at": "2026-03-06T19:41:00Z",
+  "customer_id": "CUST-1106",
+  "customer_name": "Kavya Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "sso_configuration",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-003"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 35,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0450"
+ },
+ {
+  "ticket_id": "CONS-0016-01",
+  "channel": "email",
+  "subject": "Need to rotate an exposed key",
+  "body": "one of our engineers pushed key to a public repository by mistake. We need to replace it without taking service down.",
+  "received_at": "2026-04-18T10:14:00Z",
+  "customer_id": "CUST-1252",
+  "customer_name": "Ulrike Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "api_key_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-004",
+    "DOC-SEC-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 9,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0016"
+ },
+ {
+  "ticket_id": "CONS-0156-02",
+  "channel": "chat",
+  "subject": "",
+  "body": "user left company. how i remove all his access including key he made?",
+  "received_at": "2026-03-31T13:24:00Z",
+  "customer_id": "CUST-1002",
+  "customer_name": "Lucas Patel",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "account_access",
+   "urgency": "low",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-ACCT-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 7,
+   "csat_rating": 4,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0156"
+ },
+ {
+  "ticket_id": "CONS-0004-02",
+  "channel": "chat",
+  "subject": "",
+  "body": "how do I revert to earlier revision? release we put out this morning is causing errors and I better i roll back than try to fix forward. please tell what to do.",
+  "received_at": "2026-05-30T04:58:00Z",
+  "customer_id": "CUST-1059",
+  "customer_name": "Yusuf Demir",
+  "customer_tier": "business",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "rollback_request",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-DEPLOY-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 42,
+   "csat_rating": 1,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0004"
+ },
+ {
+  "ticket_id": "CONS-0035-02",
+  "channel": "chat",
+  "subject": "",
+  "body": "One of our engineers believes their credentials may have been exposed in a breach at another service. What should we be doing right now?",
+  "received_at": "2026-05-09T03:40:00Z",
+  "customer_id": "CUST-1086",
+  "customer_name": "Oscar Silva",
+  "customer_tier": "standard",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "security_incident",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-SEC-001"
+   ],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 266,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0035"
+ },
+ {
+  "ticket_id": "CONS-0061-02",
+  "channel": "email",
+  "subject": "Need data to stay in the EU",
+  "body": "One of our customers has asked for written confirmation of where their data is physically stored. Could you point me to something I can share with them?",
+  "received_at": "2026-05-28T08:08:00Z",
+  "customer_id": "CUST-1204",
+  "customer_name": "Rosa Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "data_residency",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 1064,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0061"
+ },
+ {
+  "ticket_id": "CONS-0089-02",
+  "channel": "forum",
+  "subject": "Service slow at peak hours",
+  "body": "The service is noticeably slow during our afternoon peak and fine the rest of the day. We have autoscaling enabled so I expected it to cope.",
+  "received_at": "2026-04-12T04:12:00Z",
+  "customer_id": "CUST-1096",
+  "customer_name": "Hiroshi Demir",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "performance_degradation",
+   "urgency": "low",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 900,
+   "csat_rating": 4,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0089"
+ },
+ {
+  "ticket_id": "CONS-0102-02",
+  "channel": "docs_comment",
+  "subject": "Retention period question",
+  "body": "Our auditor has asked for access records covering the last six months. Can I export these, and is that period within what you retain?",
+  "received_at": "2026-05-24T15:00:00Z",
+  "customer_id": "CUST-1075",
+  "customer_name": "Nadia Costa",
+  "customer_tier": "business",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "compliance_request",
+   "urgency": "medium",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 187,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0102"
+ },
+ {
+  "ticket_id": "CONS-0209-02",
+  "channel": "email",
+  "subject": "No connections available error",
+  "body": "restore is running from long time. database is 400 gb. is it normal?",
+  "received_at": "2026-04-02T20:53:00Z",
+  "customer_id": "CUST-1147",
+  "customer_name": "Hiroshi Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "database_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-PERF-003",
+    "DOC-DATA-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 707,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": true
+  },
+  "source_ticket": "DEV-0209"
+ },
+ {
+  "ticket_id": "CONS-0281-02",
+  "channel": "chat",
+  "subject": "",
+  "body": "My authenticator app codes are being rejected every time. I have tried generating new ones several times. I do have access to the device, it just will not accept the code.",
+  "received_at": "2026-05-01T06:40:00Z",
+  "customer_id": "CUST-1108",
+  "customer_name": "Grace Novak",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "authentication_failure",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 55,
+   "csat_rating": 3,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0281"
+ },
+ {
+  "ticket_id": "CONS-0450-02",
+  "channel": "email",
+  "subject": "Help configuring single sign-on",
+  "body": "Single sign-on works for our engineering group but the finance group gets an error. Both are configured identically as far as we can tell. Any idea what differs?",
+  "received_at": "2026-03-06T19:41:00Z",
+  "customer_id": "CUST-1106",
+  "customer_name": "Kavya Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "sso_configuration",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-003"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 35,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0450"
+ },
+ {
+  "ticket_id": "CONS-0016-02",
+  "channel": "email",
+  "subject": "Need to rotate an exposed key",
+  "body": "one of our engineers pushed key to a public repository by mistake. We need to replace it without taking service down.",
+  "received_at": "2026-04-18T10:14:00Z",
+  "customer_id": "CUST-1252",
+  "customer_name": "Ulrike Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "api_key_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-004",
+    "DOC-SEC-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 9,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0016"
+ },
+ {
+  "ticket_id": "CONS-0156-03",
+  "channel": "chat",
+  "subject": "",
+  "body": "user left company. how i remove all his access including key he made?",
+  "received_at": "2026-03-31T13:24:00Z",
+  "customer_id": "CUST-1002",
+  "customer_name": "Lucas Patel",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "account_access",
+   "urgency": "low",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-ACCT-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 7,
+   "csat_rating": 4,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0156"
+ },
+ {
+  "ticket_id": "CONS-0004-03",
+  "channel": "chat",
+  "subject": "",
+  "body": "how do I revert to earlier revision? release we put out this morning is causing errors and I better i roll back than try to fix forward. please tell what to do.",
+  "received_at": "2026-05-30T04:58:00Z",
+  "customer_id": "CUST-1059",
+  "customer_name": "Yusuf Demir",
+  "customer_tier": "business",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "rollback_request",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-DEPLOY-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 42,
+   "csat_rating": 1,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0004"
+ },
+ {
+  "ticket_id": "CONS-0035-03",
+  "channel": "chat",
+  "subject": "",
+  "body": "One of our engineers believes their credentials may have been exposed in a breach at another service. What should we be doing right now?",
+  "received_at": "2026-05-09T03:40:00Z",
+  "customer_id": "CUST-1086",
+  "customer_name": "Oscar Silva",
+  "customer_tier": "standard",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "security_incident",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-SEC-001"
+   ],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 266,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0035"
+ },
+ {
+  "ticket_id": "CONS-0061-03",
+  "channel": "email",
+  "subject": "Need data to stay in the EU",
+  "body": "One of our customers has asked for written confirmation of where their data is physically stored. Could you point me to something I can share with them?",
+  "received_at": "2026-05-28T08:08:00Z",
+  "customer_id": "CUST-1204",
+  "customer_name": "Rosa Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "data_residency",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 1064,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0061"
+ },
+ {
+  "ticket_id": "CONS-0089-03",
+  "channel": "forum",
+  "subject": "Service slow at peak hours",
+  "body": "The service is noticeably slow during our afternoon peak and fine the rest of the day. We have autoscaling enabled so I expected it to cope.",
+  "received_at": "2026-04-12T04:12:00Z",
+  "customer_id": "CUST-1096",
+  "customer_name": "Hiroshi Demir",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "performance_degradation",
+   "urgency": "low",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 900,
+   "csat_rating": 4,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0089"
+ },
+ {
+  "ticket_id": "CONS-0102-03",
+  "channel": "docs_comment",
+  "subject": "Retention period question",
+  "body": "Our auditor has asked for access records covering the last six months. Can I export these, and is that period within what you retain?",
+  "received_at": "2026-05-24T15:00:00Z",
+  "customer_id": "CUST-1075",
+  "customer_name": "Nadia Costa",
+  "customer_tier": "business",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "compliance_request",
+   "urgency": "medium",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 187,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0102"
+ },
+ {
+  "ticket_id": "CONS-0209-03",
+  "channel": "email",
+  "subject": "No connections available error",
+  "body": "restore is running from long time. database is 400 gb. is it normal?",
+  "received_at": "2026-04-02T20:53:00Z",
+  "customer_id": "CUST-1147",
+  "customer_name": "Hiroshi Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "database_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-PERF-003",
+    "DOC-DATA-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 707,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": true
+  },
+  "source_ticket": "DEV-0209"
+ },
+ {
+  "ticket_id": "CONS-0281-03",
+  "channel": "chat",
+  "subject": "",
+  "body": "My authenticator app codes are being rejected every time. I have tried generating new ones several times. I do have access to the device, it just will not accept the code.",
+  "received_at": "2026-05-01T06:40:00Z",
+  "customer_id": "CUST-1108",
+  "customer_name": "Grace Novak",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "authentication_failure",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 55,
+   "csat_rating": 3,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0281"
+ },
+ {
+  "ticket_id": "CONS-0450-03",
+  "channel": "email",
+  "subject": "Help configuring single sign-on",
+  "body": "Single sign-on works for our engineering group but the finance group gets an error. Both are configured identically as far as we can tell. Any idea what differs?",
+  "received_at": "2026-03-06T19:41:00Z",
+  "customer_id": "CUST-1106",
+  "customer_name": "Kavya Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "sso_configuration",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-003"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 35,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0450"
+ },
+ {
+  "ticket_id": "CONS-0016-03",
+  "channel": "email",
+  "subject": "Need to rotate an exposed key",
+  "body": "one of our engineers pushed key to a public repository by mistake. We need to replace it without taking service down.",
+  "received_at": "2026-04-18T10:14:00Z",
+  "customer_id": "CUST-1252",
+  "customer_name": "Ulrike Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "api_key_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-004",
+    "DOC-SEC-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 9,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0016"
+ },
+ {
+  "ticket_id": "CONS-0156-04",
+  "channel": "chat",
+  "subject": "",
+  "body": "user left company. how i remove all his access including key he made?",
+  "received_at": "2026-03-31T13:24:00Z",
+  "customer_id": "CUST-1002",
+  "customer_name": "Lucas Patel",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "account_access",
+   "urgency": "low",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-ACCT-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 7,
+   "csat_rating": 4,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0156"
+ },
+ {
+  "ticket_id": "CONS-0004-04",
+  "channel": "chat",
+  "subject": "",
+  "body": "how do I revert to earlier revision? release we put out this morning is causing errors and I better i roll back than try to fix forward. please tell what to do.",
+  "received_at": "2026-05-30T04:58:00Z",
+  "customer_id": "CUST-1059",
+  "customer_name": "Yusuf Demir",
+  "customer_tier": "business",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "rollback_request",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-DEPLOY-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 42,
+   "csat_rating": 1,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0004"
+ },
+ {
+  "ticket_id": "CONS-0035-04",
+  "channel": "chat",
+  "subject": "",
+  "body": "One of our engineers believes their credentials may have been exposed in a breach at another service. What should we be doing right now?",
+  "received_at": "2026-05-09T03:40:00Z",
+  "customer_id": "CUST-1086",
+  "customer_name": "Oscar Silva",
+  "customer_tier": "standard",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "security_incident",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-SEC-001"
+   ],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 266,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0035"
+ },
+ {
+  "ticket_id": "CONS-0061-04",
+  "channel": "email",
+  "subject": "Need data to stay in the EU",
+  "body": "One of our customers has asked for written confirmation of where their data is physically stored. Could you point me to something I can share with them?",
+  "received_at": "2026-05-28T08:08:00Z",
+  "customer_id": "CUST-1204",
+  "customer_name": "Rosa Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "data_residency",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 1064,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0061"
+ },
+ {
+  "ticket_id": "CONS-0089-04",
+  "channel": "forum",
+  "subject": "Service slow at peak hours",
+  "body": "The service is noticeably slow during our afternoon peak and fine the rest of the day. We have autoscaling enabled so I expected it to cope.",
+  "received_at": "2026-04-12T04:12:00Z",
+  "customer_id": "CUST-1096",
+  "customer_name": "Hiroshi Demir",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "performance_degradation",
+   "urgency": "low",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 900,
+   "csat_rating": 4,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0089"
+ },
+ {
+  "ticket_id": "CONS-0102-04",
+  "channel": "docs_comment",
+  "subject": "Retention period question",
+  "body": "Our auditor has asked for access records covering the last six months. Can I export these, and is that period within what you retain?",
+  "received_at": "2026-05-24T15:00:00Z",
+  "customer_id": "CUST-1075",
+  "customer_name": "Nadia Costa",
+  "customer_tier": "business",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "compliance_request",
+   "urgency": "medium",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 187,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0102"
+ },
+ {
+  "ticket_id": "CONS-0209-04",
+  "channel": "email",
+  "subject": "No connections available error",
+  "body": "restore is running from long time. database is 400 gb. is it normal?",
+  "received_at": "2026-04-02T20:53:00Z",
+  "customer_id": "CUST-1147",
+  "customer_name": "Hiroshi Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "database_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-PERF-003",
+    "DOC-DATA-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 707,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": true
+  },
+  "source_ticket": "DEV-0209"
+ },
+ {
+  "ticket_id": "CONS-0281-04",
+  "channel": "chat",
+  "subject": "",
+  "body": "My authenticator app codes are being rejected every time. I have tried generating new ones several times. I do have access to the device, it just will not accept the code.",
+  "received_at": "2026-05-01T06:40:00Z",
+  "customer_id": "CUST-1108",
+  "customer_name": "Grace Novak",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "authentication_failure",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 55,
+   "csat_rating": 3,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0281"
+ },
+ {
+  "ticket_id": "CONS-0450-04",
+  "channel": "email",
+  "subject": "Help configuring single sign-on",
+  "body": "Single sign-on works for our engineering group but the finance group gets an error. Both are configured identically as far as we can tell. Any idea what differs?",
+  "received_at": "2026-03-06T19:41:00Z",
+  "customer_id": "CUST-1106",
+  "customer_name": "Kavya Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "sso_configuration",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-003"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 35,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0450"
+ },
+ {
+  "ticket_id": "CONS-0016-04",
+  "channel": "email",
+  "subject": "Need to rotate an exposed key",
+  "body": "one of our engineers pushed key to a public repository by mistake. We need to replace it without taking service down.",
+  "received_at": "2026-04-18T10:14:00Z",
+  "customer_id": "CUST-1252",
+  "customer_name": "Ulrike Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "api_key_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-004",
+    "DOC-SEC-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 9,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0016"
+ },
+ {
+  "ticket_id": "CONS-0156-05",
+  "channel": "chat",
+  "subject": "",
+  "body": "user left company. how i remove all his access including key he made?",
+  "received_at": "2026-03-31T13:24:00Z",
+  "customer_id": "CUST-1002",
+  "customer_name": "Lucas Patel",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "account_access",
+   "urgency": "low",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-ACCT-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 7,
+   "csat_rating": 4,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0156"
+ },
+ {
+  "ticket_id": "CONS-0004-05",
+  "channel": "chat",
+  "subject": "",
+  "body": "how do I revert to earlier revision? release we put out this morning is causing errors and I better i roll back than try to fix forward. please tell what to do.",
+  "received_at": "2026-05-30T04:58:00Z",
+  "customer_id": "CUST-1059",
+  "customer_name": "Yusuf Demir",
+  "customer_tier": "business",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "rollback_request",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-DEPLOY-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 42,
+   "csat_rating": 1,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0004"
+ },
+ {
+  "ticket_id": "CONS-0035-05",
+  "channel": "chat",
+  "subject": "",
+  "body": "One of our engineers believes their credentials may have been exposed in a breach at another service. What should we be doing right now?",
+  "received_at": "2026-05-09T03:40:00Z",
+  "customer_id": "CUST-1086",
+  "customer_name": "Oscar Silva",
+  "customer_tier": "standard",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "security_incident",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-SEC-001"
+   ],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 266,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0035"
+ },
+ {
+  "ticket_id": "CONS-0061-05",
+  "channel": "email",
+  "subject": "Need data to stay in the EU",
+  "body": "One of our customers has asked for written confirmation of where their data is physically stored. Could you point me to something I can share with them?",
+  "received_at": "2026-05-28T08:08:00Z",
+  "customer_id": "CUST-1204",
+  "customer_name": "Rosa Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "data_residency",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 1064,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0061"
+ },
+ {
+  "ticket_id": "CONS-0089-05",
+  "channel": "forum",
+  "subject": "Service slow at peak hours",
+  "body": "The service is noticeably slow during our afternoon peak and fine the rest of the day. We have autoscaling enabled so I expected it to cope.",
+  "received_at": "2026-04-12T04:12:00Z",
+  "customer_id": "CUST-1096",
+  "customer_name": "Hiroshi Demir",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "performance_degradation",
+   "urgency": "low",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 900,
+   "csat_rating": 4,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0089"
+ },
+ {
+  "ticket_id": "CONS-0102-05",
+  "channel": "docs_comment",
+  "subject": "Retention period question",
+  "body": "Our auditor has asked for access records covering the last six months. Can I export these, and is that period within what you retain?",
+  "received_at": "2026-05-24T15:00:00Z",
+  "customer_id": "CUST-1075",
+  "customer_name": "Nadia Costa",
+  "customer_tier": "business",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "compliance_request",
+   "urgency": "medium",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 187,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0102"
+ },
+ {
+  "ticket_id": "CONS-0209-05",
+  "channel": "email",
+  "subject": "No connections available error",
+  "body": "restore is running from long time. database is 400 gb. is it normal?",
+  "received_at": "2026-04-02T20:53:00Z",
+  "customer_id": "CUST-1147",
+  "customer_name": "Hiroshi Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "database_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-PERF-003",
+    "DOC-DATA-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 707,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": true
+  },
+  "source_ticket": "DEV-0209"
+ },
+ {
+  "ticket_id": "CONS-0281-05",
+  "channel": "chat",
+  "subject": "",
+  "body": "My authenticator app codes are being rejected every time. I have tried generating new ones several times. I do have access to the device, it just will not accept the code.",
+  "received_at": "2026-05-01T06:40:00Z",
+  "customer_id": "CUST-1108",
+  "customer_name": "Grace Novak",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "authentication_failure",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 55,
+   "csat_rating": 3,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0281"
+ },
+ {
+  "ticket_id": "CONS-0450-05",
+  "channel": "email",
+  "subject": "Help configuring single sign-on",
+  "body": "Single sign-on works for our engineering group but the finance group gets an error. Both are configured identically as far as we can tell. Any idea what differs?",
+  "received_at": "2026-03-06T19:41:00Z",
+  "customer_id": "CUST-1106",
+  "customer_name": "Kavya Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "sso_configuration",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-003"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 35,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0450"
+ },
+ {
+  "ticket_id": "CONS-0016-05",
+  "channel": "email",
+  "subject": "Need to rotate an exposed key",
+  "body": "one of our engineers pushed key to a public repository by mistake. We need to replace it without taking service down.",
+  "received_at": "2026-04-18T10:14:00Z",
+  "customer_id": "CUST-1252",
+  "customer_name": "Ulrike Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "api_key_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-004",
+    "DOC-SEC-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 9,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0016"
+ },
+ {
+  "ticket_id": "CONS-0156-06",
+  "channel": "chat",
+  "subject": "",
+  "body": "user left company. how i remove all his access including key he made?",
+  "received_at": "2026-03-31T13:24:00Z",
+  "customer_id": "CUST-1002",
+  "customer_name": "Lucas Patel",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "account_access",
+   "urgency": "low",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-ACCT-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 7,
+   "csat_rating": 4,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0156"
+ },
+ {
+  "ticket_id": "CONS-0004-06",
+  "channel": "chat",
+  "subject": "",
+  "body": "how do I revert to earlier revision? release we put out this morning is causing errors and I better i roll back than try to fix forward. please tell what to do.",
+  "received_at": "2026-05-30T04:58:00Z",
+  "customer_id": "CUST-1059",
+  "customer_name": "Yusuf Demir",
+  "customer_tier": "business",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "rollback_request",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-DEPLOY-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 42,
+   "csat_rating": 1,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0004"
+ },
+ {
+  "ticket_id": "CONS-0035-06",
+  "channel": "chat",
+  "subject": "",
+  "body": "One of our engineers believes their credentials may have been exposed in a breach at another service. What should we be doing right now?",
+  "received_at": "2026-05-09T03:40:00Z",
+  "customer_id": "CUST-1086",
+  "customer_name": "Oscar Silva",
+  "customer_tier": "standard",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "security_incident",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-SEC-001"
+   ],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 266,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0035"
+ },
+ {
+  "ticket_id": "CONS-0061-06",
+  "channel": "email",
+  "subject": "Need data to stay in the EU",
+  "body": "One of our customers has asked for written confirmation of where their data is physically stored. Could you point me to something I can share with them?",
+  "received_at": "2026-05-28T08:08:00Z",
+  "customer_id": "CUST-1204",
+  "customer_name": "Rosa Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "data_residency",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 1064,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0061"
+ },
+ {
+  "ticket_id": "CONS-0089-06",
+  "channel": "forum",
+  "subject": "Service slow at peak hours",
+  "body": "The service is noticeably slow during our afternoon peak and fine the rest of the day. We have autoscaling enabled so I expected it to cope.",
+  "received_at": "2026-04-12T04:12:00Z",
+  "customer_id": "CUST-1096",
+  "customer_name": "Hiroshi Demir",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "performance_degradation",
+   "urgency": "low",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 900,
+   "csat_rating": 4,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0089"
+ },
+ {
+  "ticket_id": "CONS-0102-06",
+  "channel": "docs_comment",
+  "subject": "Retention period question",
+  "body": "Our auditor has asked for access records covering the last six months. Can I export these, and is that period within what you retain?",
+  "received_at": "2026-05-24T15:00:00Z",
+  "customer_id": "CUST-1075",
+  "customer_name": "Nadia Costa",
+  "customer_tier": "business",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "compliance_request",
+   "urgency": "medium",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 187,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0102"
+ },
+ {
+  "ticket_id": "CONS-0209-06",
+  "channel": "email",
+  "subject": "No connections available error",
+  "body": "restore is running from long time. database is 400 gb. is it normal?",
+  "received_at": "2026-04-02T20:53:00Z",
+  "customer_id": "CUST-1147",
+  "customer_name": "Hiroshi Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "database_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-PERF-003",
+    "DOC-DATA-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 707,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": true
+  },
+  "source_ticket": "DEV-0209"
+ },
+ {
+  "ticket_id": "CONS-0281-06",
+  "channel": "chat",
+  "subject": "",
+  "body": "My authenticator app codes are being rejected every time. I have tried generating new ones several times. I do have access to the device, it just will not accept the code.",
+  "received_at": "2026-05-01T06:40:00Z",
+  "customer_id": "CUST-1108",
+  "customer_name": "Grace Novak",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "authentication_failure",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 55,
+   "csat_rating": 3,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0281"
+ },
+ {
+  "ticket_id": "CONS-0450-06",
+  "channel": "email",
+  "subject": "Help configuring single sign-on",
+  "body": "Single sign-on works for our engineering group but the finance group gets an error. Both are configured identically as far as we can tell. Any idea what differs?",
+  "received_at": "2026-03-06T19:41:00Z",
+  "customer_id": "CUST-1106",
+  "customer_name": "Kavya Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "sso_configuration",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-003"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 35,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0450"
+ },
+ {
+  "ticket_id": "CONS-0016-06",
+  "channel": "email",
+  "subject": "Need to rotate an exposed key",
+  "body": "one of our engineers pushed key to a public repository by mistake. We need to replace it without taking service down.",
+  "received_at": "2026-04-18T10:14:00Z",
+  "customer_id": "CUST-1252",
+  "customer_name": "Ulrike Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "api_key_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-004",
+    "DOC-SEC-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 9,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0016"
+ },
+ {
+  "ticket_id": "CONS-0156-07",
+  "channel": "chat",
+  "subject": "",
+  "body": "user left company. how i remove all his access including key he made?",
+  "received_at": "2026-03-31T13:24:00Z",
+  "customer_id": "CUST-1002",
+  "customer_name": "Lucas Patel",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "account_access",
+   "urgency": "low",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-ACCT-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 7,
+   "csat_rating": 4,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0156"
+ },
+ {
+  "ticket_id": "CONS-0004-07",
+  "channel": "chat",
+  "subject": "",
+  "body": "how do I revert to earlier revision? release we put out this morning is causing errors and I better i roll back than try to fix forward. please tell what to do.",
+  "received_at": "2026-05-30T04:58:00Z",
+  "customer_id": "CUST-1059",
+  "customer_name": "Yusuf Demir",
+  "customer_tier": "business",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "rollback_request",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-DEPLOY-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 42,
+   "csat_rating": 1,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0004"
+ },
+ {
+  "ticket_id": "CONS-0035-07",
+  "channel": "chat",
+  "subject": "",
+  "body": "One of our engineers believes their credentials may have been exposed in a breach at another service. What should we be doing right now?",
+  "received_at": "2026-05-09T03:40:00Z",
+  "customer_id": "CUST-1086",
+  "customer_name": "Oscar Silva",
+  "customer_tier": "standard",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "security_incident",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-SEC-001"
+   ],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 266,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0035"
+ },
+ {
+  "ticket_id": "CONS-0061-07",
+  "channel": "email",
+  "subject": "Need data to stay in the EU",
+  "body": "One of our customers has asked for written confirmation of where their data is physically stored. Could you point me to something I can share with them?",
+  "received_at": "2026-05-28T08:08:00Z",
+  "customer_id": "CUST-1204",
+  "customer_name": "Rosa Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "data_residency",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 1064,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0061"
+ },
+ {
+  "ticket_id": "CONS-0089-07",
+  "channel": "forum",
+  "subject": "Service slow at peak hours",
+  "body": "The service is noticeably slow during our afternoon peak and fine the rest of the day. We have autoscaling enabled so I expected it to cope.",
+  "received_at": "2026-04-12T04:12:00Z",
+  "customer_id": "CUST-1096",
+  "customer_name": "Hiroshi Demir",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "performance_degradation",
+   "urgency": "low",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 900,
+   "csat_rating": 4,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0089"
+ },
+ {
+  "ticket_id": "CONS-0102-07",
+  "channel": "docs_comment",
+  "subject": "Retention period question",
+  "body": "Our auditor has asked for access records covering the last six months. Can I export these, and is that period within what you retain?",
+  "received_at": "2026-05-24T15:00:00Z",
+  "customer_id": "CUST-1075",
+  "customer_name": "Nadia Costa",
+  "customer_tier": "business",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "compliance_request",
+   "urgency": "medium",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 187,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0102"
+ },
+ {
+  "ticket_id": "CONS-0209-07",
+  "channel": "email",
+  "subject": "No connections available error",
+  "body": "restore is running from long time. database is 400 gb. is it normal?",
+  "received_at": "2026-04-02T20:53:00Z",
+  "customer_id": "CUST-1147",
+  "customer_name": "Hiroshi Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "database_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-PERF-003",
+    "DOC-DATA-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 707,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": true
+  },
+  "source_ticket": "DEV-0209"
+ },
+ {
+  "ticket_id": "CONS-0281-07",
+  "channel": "chat",
+  "subject": "",
+  "body": "My authenticator app codes are being rejected every time. I have tried generating new ones several times. I do have access to the device, it just will not accept the code.",
+  "received_at": "2026-05-01T06:40:00Z",
+  "customer_id": "CUST-1108",
+  "customer_name": "Grace Novak",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "authentication_failure",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 55,
+   "csat_rating": 3,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0281"
+ },
+ {
+  "ticket_id": "CONS-0450-07",
+  "channel": "email",
+  "subject": "Help configuring single sign-on",
+  "body": "Single sign-on works for our engineering group but the finance group gets an error. Both are configured identically as far as we can tell. Any idea what differs?",
+  "received_at": "2026-03-06T19:41:00Z",
+  "customer_id": "CUST-1106",
+  "customer_name": "Kavya Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "sso_configuration",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-003"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 35,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0450"
+ },
+ {
+  "ticket_id": "CONS-0016-07",
+  "channel": "email",
+  "subject": "Need to rotate an exposed key",
+  "body": "one of our engineers pushed key to a public repository by mistake. We need to replace it without taking service down.",
+  "received_at": "2026-04-18T10:14:00Z",
+  "customer_id": "CUST-1252",
+  "customer_name": "Ulrike Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "api_key_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-004",
+    "DOC-SEC-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 9,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0016"
+ },
+ {
+  "ticket_id": "CONS-0156-08",
+  "channel": "chat",
+  "subject": "",
+  "body": "user left company. how i remove all his access including key he made?",
+  "received_at": "2026-03-31T13:24:00Z",
+  "customer_id": "CUST-1002",
+  "customer_name": "Lucas Patel",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "account_access",
+   "urgency": "low",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-ACCT-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 7,
+   "csat_rating": 4,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0156"
+ },
+ {
+  "ticket_id": "CONS-0004-08",
+  "channel": "chat",
+  "subject": "",
+  "body": "how do I revert to earlier revision? release we put out this morning is causing errors and I better i roll back than try to fix forward. please tell what to do.",
+  "received_at": "2026-05-30T04:58:00Z",
+  "customer_id": "CUST-1059",
+  "customer_name": "Yusuf Demir",
+  "customer_tier": "business",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "rollback_request",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-DEPLOY-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 42,
+   "csat_rating": 1,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0004"
+ },
+ {
+  "ticket_id": "CONS-0035-08",
+  "channel": "chat",
+  "subject": "",
+  "body": "One of our engineers believes their credentials may have been exposed in a breach at another service. What should we be doing right now?",
+  "received_at": "2026-05-09T03:40:00Z",
+  "customer_id": "CUST-1086",
+  "customer_name": "Oscar Silva",
+  "customer_tier": "standard",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "security_incident",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-SEC-001"
+   ],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 266,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0035"
+ },
+ {
+  "ticket_id": "CONS-0061-08",
+  "channel": "email",
+  "subject": "Need data to stay in the EU",
+  "body": "One of our customers has asked for written confirmation of where their data is physically stored. Could you point me to something I can share with them?",
+  "received_at": "2026-05-28T08:08:00Z",
+  "customer_id": "CUST-1204",
+  "customer_name": "Rosa Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "data_residency",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 1064,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0061"
+ },
+ {
+  "ticket_id": "CONS-0089-08",
+  "channel": "forum",
+  "subject": "Service slow at peak hours",
+  "body": "The service is noticeably slow during our afternoon peak and fine the rest of the day. We have autoscaling enabled so I expected it to cope.",
+  "received_at": "2026-04-12T04:12:00Z",
+  "customer_id": "CUST-1096",
+  "customer_name": "Hiroshi Demir",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "performance_degradation",
+   "urgency": "low",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 900,
+   "csat_rating": 4,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0089"
+ },
+ {
+  "ticket_id": "CONS-0102-08",
+  "channel": "docs_comment",
+  "subject": "Retention period question",
+  "body": "Our auditor has asked for access records covering the last six months. Can I export these, and is that period within what you retain?",
+  "received_at": "2026-05-24T15:00:00Z",
+  "customer_id": "CUST-1075",
+  "customer_name": "Nadia Costa",
+  "customer_tier": "business",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "compliance_request",
+   "urgency": "medium",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 187,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0102"
+ },
+ {
+  "ticket_id": "CONS-0209-08",
+  "channel": "email",
+  "subject": "No connections available error",
+  "body": "restore is running from long time. database is 400 gb. is it normal?",
+  "received_at": "2026-04-02T20:53:00Z",
+  "customer_id": "CUST-1147",
+  "customer_name": "Hiroshi Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "database_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-PERF-003",
+    "DOC-DATA-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 707,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": true
+  },
+  "source_ticket": "DEV-0209"
+ },
+ {
+  "ticket_id": "CONS-0281-08",
+  "channel": "chat",
+  "subject": "",
+  "body": "My authenticator app codes are being rejected every time. I have tried generating new ones several times. I do have access to the device, it just will not accept the code.",
+  "received_at": "2026-05-01T06:40:00Z",
+  "customer_id": "CUST-1108",
+  "customer_name": "Grace Novak",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "authentication_failure",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 55,
+   "csat_rating": 3,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0281"
+ },
+ {
+  "ticket_id": "CONS-0450-08",
+  "channel": "email",
+  "subject": "Help configuring single sign-on",
+  "body": "Single sign-on works for our engineering group but the finance group gets an error. Both are configured identically as far as we can tell. Any idea what differs?",
+  "received_at": "2026-03-06T19:41:00Z",
+  "customer_id": "CUST-1106",
+  "customer_name": "Kavya Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "sso_configuration",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-003"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 35,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0450"
+ },
+ {
+  "ticket_id": "CONS-0016-08",
+  "channel": "email",
+  "subject": "Need to rotate an exposed key",
+  "body": "one of our engineers pushed key to a public repository by mistake. We need to replace it without taking service down.",
+  "received_at": "2026-04-18T10:14:00Z",
+  "customer_id": "CUST-1252",
+  "customer_name": "Ulrike Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "api_key_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-004",
+    "DOC-SEC-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 9,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0016"
+ },
+ {
+  "ticket_id": "CONS-0156-09",
+  "channel": "chat",
+  "subject": "",
+  "body": "user left company. how i remove all his access including key he made?",
+  "received_at": "2026-03-31T13:24:00Z",
+  "customer_id": "CUST-1002",
+  "customer_name": "Lucas Patel",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "account_access",
+   "urgency": "low",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-ACCT-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 7,
+   "csat_rating": 4,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0156"
+ },
+ {
+  "ticket_id": "CONS-0004-09",
+  "channel": "chat",
+  "subject": "",
+  "body": "how do I revert to earlier revision? release we put out this morning is causing errors and I better i roll back than try to fix forward. please tell what to do.",
+  "received_at": "2026-05-30T04:58:00Z",
+  "customer_id": "CUST-1059",
+  "customer_name": "Yusuf Demir",
+  "customer_tier": "business",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "rollback_request",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-DEPLOY-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 42,
+   "csat_rating": 1,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0004"
+ },
+ {
+  "ticket_id": "CONS-0035-09",
+  "channel": "chat",
+  "subject": "",
+  "body": "One of our engineers believes their credentials may have been exposed in a breach at another service. What should we be doing right now?",
+  "received_at": "2026-05-09T03:40:00Z",
+  "customer_id": "CUST-1086",
+  "customer_name": "Oscar Silva",
+  "customer_tier": "standard",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "security_incident",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-SEC-001"
+   ],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 266,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0035"
+ },
+ {
+  "ticket_id": "CONS-0061-09",
+  "channel": "email",
+  "subject": "Need data to stay in the EU",
+  "body": "One of our customers has asked for written confirmation of where their data is physically stored. Could you point me to something I can share with them?",
+  "received_at": "2026-05-28T08:08:00Z",
+  "customer_id": "CUST-1204",
+  "customer_name": "Rosa Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "data_residency",
+   "urgency": "high",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 1064,
+   "csat_rating": 1,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0061"
+ },
+ {
+  "ticket_id": "CONS-0089-09",
+  "channel": "forum",
+  "subject": "Service slow at peak hours",
+  "body": "The service is noticeably slow during our afternoon peak and fine the rest of the day. We have autoscaling enabled so I expected it to cope.",
+  "received_at": "2026-04-12T04:12:00Z",
+  "customer_id": "CUST-1096",
+  "customer_name": "Hiroshi Demir",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "performance_degradation",
+   "urgency": "low",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 900,
+   "csat_rating": 4,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0089"
+ },
+ {
+  "ticket_id": "CONS-0102-09",
+  "channel": "docs_comment",
+  "subject": "Retention period question",
+  "body": "Our auditor has asked for access records covering the last six months. Can I export these, and is that period within what you retain?",
+  "received_at": "2026-05-24T15:00:00Z",
+  "customer_id": "CUST-1075",
+  "customer_name": "Nadia Costa",
+  "customer_tier": "business",
+  "customer_region": "europe",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "compliance_request",
+   "urgency": "medium",
+   "expected_route": "escalate",
+   "answerable_from_docs": false,
+   "expected_doc_ids": [],
+   "must_not_auto_respond": true
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 187,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0102"
+ },
+ {
+  "ticket_id": "CONS-0209-09",
+  "channel": "email",
+  "subject": "No connections available error",
+  "body": "restore is running from long time. database is 400 gb. is it normal?",
+  "received_at": "2026-04-02T20:53:00Z",
+  "customer_id": "CUST-1147",
+  "customer_name": "Hiroshi Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "database_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-PERF-003",
+    "DOC-DATA-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": false,
+   "resolution_time_minutes": 707,
+   "csat_rating": 2,
+   "escalated": true,
+   "repeat_contact": true
+  },
+  "source_ticket": "DEV-0209"
+ },
+ {
+  "ticket_id": "CONS-0281-09",
+  "channel": "chat",
+  "subject": "",
+  "body": "My authenticator app codes are being rejected every time. I have tried generating new ones several times. I do have access to the device, it just will not accept the code.",
+  "received_at": "2026-05-01T06:40:00Z",
+  "customer_id": "CUST-1108",
+  "customer_name": "Grace Novak",
+  "customer_tier": "enterprise",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "authentication_failure",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-001"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 55,
+   "csat_rating": 3,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0281"
+ },
+ {
+  "ticket_id": "CONS-0450-09",
+  "channel": "email",
+  "subject": "Help configuring single sign-on",
+  "body": "Single sign-on works for our engineering group but the finance group gets an error. Both are configured identically as far as we can tell. Any idea what differs?",
+  "received_at": "2026-03-06T19:41:00Z",
+  "customer_id": "CUST-1106",
+  "customer_name": "Kavya Rahman",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "fluent",
+  "labels": {
+   "intent": "sso_configuration",
+   "urgency": "high",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-003"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 35,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0450"
+ },
+ {
+  "ticket_id": "CONS-0016-09",
+  "channel": "email",
+  "subject": "Need to rotate an exposed key",
+  "body": "one of our engineers pushed key to a public repository by mistake. We need to replace it without taking service down.",
+  "received_at": "2026-04-18T10:14:00Z",
+  "customer_id": "CUST-1252",
+  "customer_name": "Ulrike Nair",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "non_fluent",
+  "labels": {
+   "intent": "api_key_issue",
+   "urgency": "medium",
+   "expected_route": "auto_respond",
+   "answerable_from_docs": true,
+   "expected_doc_ids": [
+    "DOC-AUTH-004",
+    "DOC-SEC-002"
+   ],
+   "must_not_auto_respond": false
+  },
+  "history": {
+   "first_contact_resolution": true,
+   "resolution_time_minutes": 9,
+   "csat_rating": 5,
+   "escalated": false,
+   "repeat_contact": false
+  },
+  "source_ticket": "DEV-0016"
+ }
+]

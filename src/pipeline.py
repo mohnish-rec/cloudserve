@@ -16,7 +16,7 @@ import time
 from dataclasses import dataclass, field
 
 from src.classify import Classification
-from src.generate import Draft, articles_for, generate, with_notice
+from src.generate import Draft, articles_for, generate, render, with_notice
 from src.guardrails import Report, check_reply
 from src.ingest import is_blocked
 from src.route import AUTO, DRAFT_READY, ESCALATE, SPECIALIST, RouteDecision, route
@@ -44,6 +44,23 @@ class Outcome:
     latency_ms: int = 0
     requirement_ids: tuple = field(default_factory=tuple)
     tokens: dict = field(default_factory=dict)   # {"writer_in", "writer_out", "checker_in", "checker_out"}
+    sources: tuple = ()               # 11 Nov: every passage search found: doc_id, rank, scores, the passage itself
+
+
+def citation_trail(draft, sources) -> list:
+    """11 Nov (A6, Ines): for each cited article, its title, best search score, the passages search found in it, and
+    the sentences it supports, so a reader can follow every citation to the passage and see what it backs."""
+    if draft is None or not draft.ok:
+        return []
+    from src.generate import _pieces, _title
+    trail = {}
+    for k, s in enumerate(draft.sentences, 1):
+        for d in dict.fromkeys(s["doc_ids"]):
+            found = [x for x in sources if x["doc_id"] == d]
+            t = trail.setdefault(d, {"doc_id": d, "title": _title(d), "score": max((x["score"] for x in found), default=None),
+                                     "passages": [x["passage"] for x in found], "sentences": []})
+            t["sentences"] += [f"{k}. {p}" for p in _pieces(s["text"])]
+    return list(trail.values())
 
 
 def _handover(ticket, c, s, passages, d, draft, why, report=None):
@@ -59,7 +76,7 @@ def _handover(ticket, c, s, passages, d, draft, why, report=None):
         "tried": tried,
         "article": passages[0].doc_id if passages else "",
         # No draft for the agent when it held private data or came from an attack on the system.
-        "draft": draft.reply if draft is not None and draft.ok and not (report and {"private_data", "instruction_integrity"}
+        "draft": render(draft, passages) if draft is not None and draft.ok and not (report and {"private_data", "instruction_integrity"}
                                                                         & set(report.fired)) else "",
         "unsure": "; ".join(x for x in [why, draft.unsure_about if draft is not None else ""] if x),
     }
@@ -71,7 +88,7 @@ def finish(state, action, label, reason, sent=ACKNOWLEDGEMENT, reqs=()) -> Outco
     passages, draft, report = state.get("passages") or [], state.get("draft"), state.get("report")
     calls = (draft.calls if draft is not None else 0) + (
         1 if report is not None and any(x.name == "grounding_model" and not x.detail.startswith("not run")
-                                        and not x.cached for x in report.checks) else 0)
+                                        and not x.cached and not x.memo for x in report.checks) else 0)
     chk = next((x for x in (report.checks if report else []) if x.name == "grounding_model"), None)
     tokens = {"writer_in": draft.tokens_in if draft else 0, "writer_out": draft.tokens_out if draft else 0,
               "checker_in": chk.tokens_in if chk else 0, "checker_out": chk.tokens_out if chk else 0,
@@ -80,7 +97,9 @@ def finish(state, action, label, reason, sent=ACKNOWLEDGEMENT, reqs=()) -> Outco
                    None if action == AUTO else _handover(ticket, c, s, passages, d, draft, reason, report),
                    c, d, draft, report, tuple(p.doc_id for p in passages), calls,
                    int((time.perf_counter() - state["start"]) * 1000),
-                   tuple(dict.fromkeys(d.requirement_ids + tuple(reqs))), tokens)
+                   tuple(dict.fromkeys(d.requirement_ids + tuple(reqs))), tokens,
+                   tuple({"doc_id": p.doc_id, "rank": p.rank, "score": round(float(p.similarity), 3),
+                          "keyword": round(float(p.keyword), 3), "passage": p.text[:400]} for p in passages))
 
 
 def process(ticket, classifier, retriever, now=None, kill_switch_file=None, call=None, sleep=None) -> Outcome:

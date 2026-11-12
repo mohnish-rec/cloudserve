@@ -60,8 +60,10 @@ def build(outcomes, tickets, raw_by_id, meta, decisions_logged) -> str:
         f"# Metrics report: {meta['input']}", "",
         f"- **Run:** {meta['run_id']} · {meta['date']} · {n} tickets",
         f"- **System version:** commit {meta['git_commit']} · prompts {meta['prompts']} · writer {meta['writer']} "
-        f"(backup {meta['backup']}) · checker {meta['checker']} · classifier {meta['classifier']} · "
-        f"threshold {meta['threshold']} · reply cache {meta.get('reply_cache', 'off')}",
+        f"(backup {meta['backup']}) via {meta.get('writer_provider', 'Groq direct')} · checker {meta['checker']} · "
+        f"classifier {meta['classifier']} · "
+        f"threshold {meta['threshold']} · reply cache {meta.get('reply_cache', 'off')}"
+        + (f" · experiment: {meta['experiment']}" if meta.get("experiment") else ""),
         f"- **Answer key in the file:** {'yes, used only to mark this report' if labels else 'no: accuracy figures not available'}",
         "", "## Volume", "",
         "| Processed | Answered automatically | Escalated | Blocked by guardrails |", "|---|---|---|---|",
