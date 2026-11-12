@@ -21,6 +21,8 @@ from pathlib import Path
 import requests
 from dotenv import load_dotenv
 
+from src import cache
+
 load_dotenv()
 ROOT = Path(__file__).resolve().parent.parent
 PROMPT_DIR = ROOT / "prompts" / "build"
@@ -38,6 +40,8 @@ _ARTICLES = {}
 class Reply(str):
     """The model's text, carrying the provider's token counts (8 Nov: measure the budget, don't guess)."""
     usage: dict = {}
+    cached: bool = False          # True: reused from the reply cache, no call made (D-025)
+    cache_key: str = ""
 
 
 def tokens_of(text) -> tuple:
@@ -71,6 +75,7 @@ class Draft:
     model: str = ""
     prompt_version: str = ACTIVE_PROMPT[1]
     calls: int = 0
+    cached: bool = False          # reused from the reply cache (D-025)
     tokens_in: int = 0            # as reported by the provider, for the budget (NFR-07)
     tokens_out: int = 0
     latency_ms: int = 0
@@ -134,12 +139,23 @@ def call_with_fallback(messages, models=None, call=call_model, sleep=time.sleep)
     """Main model with retries, then the backup model; returns (text, model, calls)."""
     models = models or [os.getenv("MODEL_NAME", "openai/gpt-oss-20b"),
                         os.getenv("BACKUP_MODEL_NAME", "openai/gpt-oss-120b")]
+    k = ""
+    if call is call_model and cache.enabled():            # only the real call; fake models never touch it
+        k = cache.key(messages, models)
+        hit = cache.get(k)
+        if hit:
+            out = Reply(hit[0])
+            out.cached, out.cache_key = True, k
+            return out, hit[1], 0
     calls, last = 0, ""
     for model in models:
         for attempt in range(MAX_TRIES):
             calls += 1
             try:
-                return call(messages, model), model, calls
+                out = call(messages, model)
+                if k and isinstance(out, Reply):
+                    out.cache_key = k
+                return out, model, calls
             except PermanentError as e:
                 last = f"{model}: {e}"
                 break                                    # no retry: move to the backup model
@@ -229,6 +245,8 @@ def generate(ticket_text, intent, passages, call=call_model, sleep=time.sleep) -
     except Exception as e:  # noqa: BLE001 - output we cannot parse is escalated, never sent (FR-05)
         return Draft(ok=False, model=model, calls=calls, latency_ms=ms, raw=raw, tokens_in=t_in, tokens_out=t_out,
                      error=f"reply could not be read: {e}")
+    if getattr(raw, "cache_key", "") and not getattr(raw, "cached", False):
+        cache.put(raw.cache_key, raw, model)               # only answers that were read successfully
     answered = obj["answered"] and bool(obj["sentences"])
     sentences = tuple({"text": x["text"].strip(), "sources": tuple(dict.fromkeys(x["sources"])),
                        "doc_ids": tuple(dict.fromkeys(articles[n - 1]["doc_id"] for n in x["sources"]))}
@@ -239,7 +257,7 @@ def generate(ticket_text, intent, passages, call=call_model, sleep=time.sleep) -
                  cited_doc_ids=tuple(dict.fromkeys(articles[c - 1]["doc_id"] for c in cites)),
                  sure=obj["sure"], summary=str(obj.get("summary", ""))[:300],
                  unsure_about=str(obj.get("unsure_about", ""))[:300], model=model, calls=calls,
-                 tokens_in=t_in, tokens_out=t_out,
+                 cached=bool(getattr(raw, "cached", False)), tokens_in=t_in, tokens_out=t_out,
                  latency_ms=ms, raw=raw, error="" if answered else "the articles do not answer it")
 
 

@@ -24,7 +24,7 @@ Two privacy and fairness choices (PRD NFR-04, NFR-06):
 - the labels and history in the data files are the answer key: they are left
   out here and only the evaluation harness reads them.
 
-Check (Build Specification, day one):  python -m src.ingest data/validation_tickets.json
+Check (Build Specification, day one):  python -m src.ingest data/development_tickets.json
 """
 import json
 import re
@@ -155,7 +155,7 @@ def is_blocked(ticket: Ticket) -> bool:
 
 
 if __name__ == "__main__":
-    path = sys.argv[1] if len(sys.argv) > 1 else "data/validation_tickets.json"
+    path = sys.argv[1] if len(sys.argv) > 1 else "data/development_tickets.json"
     tickets = load_tickets(path)
     print(f"{len(tickets)} tickets read from {Path(path).name}\n")
     for channel in CHANNELS:

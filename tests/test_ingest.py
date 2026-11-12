@@ -9,8 +9,8 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 def test_all_four_channels_come_through_in_the_same_shape():
-    tickets = load_tickets(ROOT / "data" / "validation_tickets.json")
-    assert len(tickets) == 80
+    tickets = load_tickets(ROOT / "data" / "development_tickets.json")   # never the validation file (D-026)
+    assert len(tickets) == 500
     assert {t.channel for t in tickets} == set(CHANNELS)
     for t in tickets:
         assert isinstance(t, Ticket) and t.text and not t.issues

@@ -99,3 +99,11 @@ def test_when_the_provider_keeps_failing_the_rest_go_to_a_person_without_waiting
     data = json.loads((tmp_path / "six_out.json").read_text(encoding="utf-8"))["results"]
     assert len(calls) == 3 and len(data) == 6                     # three tried, the rest not attempted
     assert all("circuit open" in r["reason"] for r in data[3:])
+
+
+def test_the_cache_is_off_unless_a_development_run_asks_for_it(tmp_path, fake):
+    meta = R.run_evaluation(str(tickets_file(tmp_path)), str(tmp_path / "plain.json"))
+    assert meta["reply_cache"].startswith("off") and os.environ["REPLY_CACHE"] == "off"
+    meta = R.run_evaluation(str(tickets_file(tmp_path)), str(tmp_path / "dev.json"), use_cache=True)
+    assert meta["reply_cache"].startswith("on")
+    os.environ["REPLY_CACHE"] = "off"

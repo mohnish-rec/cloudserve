@@ -71,10 +71,11 @@ def finish(state, action, label, reason, sent=ACKNOWLEDGEMENT, reqs=()) -> Outco
     passages, draft, report = state.get("passages") or [], state.get("draft"), state.get("report")
     calls = (draft.calls if draft is not None else 0) + (
         1 if report is not None and any(x.name == "grounding_model" and not x.detail.startswith("not run")
-                                        for x in report.checks) else 0)
+                                        and not x.cached for x in report.checks) else 0)
     chk = next((x for x in (report.checks if report else []) if x.name == "grounding_model"), None)
     tokens = {"writer_in": draft.tokens_in if draft else 0, "writer_out": draft.tokens_out if draft else 0,
-              "checker_in": chk.tokens_in if chk else 0, "checker_out": chk.tokens_out if chk else 0}
+              "checker_in": chk.tokens_in if chk else 0, "checker_out": chk.tokens_out if chk else 0,
+              "writer_cached": int(bool(draft and draft.cached)), "checker_cached": int(bool(chk and chk.cached))}
     return Outcome(ticket.ticket_id, action, label, d.priority, reason, sent,
                    None if action == AUTO else _handover(ticket, c, s, passages, d, draft, reason, report),
                    c, d, draft, report, tuple(p.doc_id for p in passages), calls,

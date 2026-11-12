@@ -124,3 +124,47 @@ def test_the_providers_token_counts_are_kept_for_the_budget():
     raw.usage = {"prompt_tokens": 1234, "completion_tokens": 210}
     d = generate("How do I roll back?", "rollback_request", P, call=fake(raw), sleep=NO_SLEEP)
     assert d.ok and (d.tokens_in, d.tokens_out) == (1234, 210)
+
+
+def _fake_provider(monkeypatch, tmp_path, answers):
+    """The real call path (call_model) against a fake HTTP (hypertext transfer protocol) endpoint."""
+    import src.generate as G
+    posts = []
+
+    class R:
+        def __init__(self, text):
+            self.status_code, self.headers, self.text = 200, {}, text
+
+        def json(self):
+            return {"choices": [{"message": {"content": self.text}}], "usage": {"prompt_tokens": 100, "completion_tokens": 20}}
+
+    seq = list(answers)
+    monkeypatch.setattr(G.requests, "post", lambda url, headers, json, timeout: posts.append(1) or R(seq.pop(0)))
+    monkeypatch.setenv("LLM_BASE_URL", "https://example.invalid/v1")
+    monkeypatch.setenv("LLM_API_KEY", "test")
+    monkeypatch.setenv("CACHE_PATH", str(tmp_path / "cache.db"))
+    monkeypatch.setenv("REPLY_CACHE", "on")
+    return posts
+
+
+def test_the_same_ticket_is_answered_once_then_reused_from_the_cache(monkeypatch, tmp_path):
+    posts = _fake_provider(monkeypatch, tmp_path, [GOOD])
+    first = generate("How do I roll back?", "rollback_request", P, sleep=NO_SLEEP)
+    again = generate("How do I roll back?", "rollback_request", P, sleep=NO_SLEEP)
+    assert len(posts) == 1 and first.ok and again.ok and again.cached and not first.cached
+    assert again.reply == first.reply and (again.tokens_in, again.calls) == (0, 0)
+
+
+def test_a_different_ticket_or_a_cache_turned_off_makes_a_fresh_call(monkeypatch, tmp_path):
+    posts = _fake_provider(monkeypatch, tmp_path, [GOOD, GOOD, GOOD])
+    generate("How do I roll back?", "rollback_request", P, sleep=NO_SLEEP)
+    generate("How do I roll back a release?", "rollback_request", P, sleep=NO_SLEEP)
+    monkeypatch.setenv("REPLY_CACHE", "off")
+    generate("How do I roll back?", "rollback_request", P, sleep=NO_SLEEP)
+    assert len(posts) == 3
+
+
+def test_an_answer_that_could_not_be_read_is_never_cached(monkeypatch, tmp_path):
+    posts = _fake_provider(monkeypatch, tmp_path, ["not json at all", GOOD])
+    assert not generate("How do I roll back?", "rollback_request", P, sleep=NO_SLEEP).ok
+    assert generate("How do I roll back?", "rollback_request", P, sleep=NO_SLEEP).ok and len(posts) == 2

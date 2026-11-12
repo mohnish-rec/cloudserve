@@ -38,9 +38,15 @@ def _tokens(outcomes, n) -> str:
         t.update(getattr(o, "tokens", None) or {})
     used = [o for o in outcomes if (getattr(o, "tokens", None) or {}).get("writer_in")]
     per = (t["writer_in"] + t["writer_out"]) / len(used) if used else 0
-    return (f"- **Tokens:** writer {t['writer_in']:,} in + {t['writer_out']:,} out "
+    writes = sum(1 for o in outcomes if getattr(o, "draft", None) is not None)
+    checks = sum(1 for o in outcomes if getattr(o, "guardrails", None) is not None
+                 and any(x.name == "grounding_model" and not x.detail.startswith("not run") for x in o.guardrails.checks))
+    t_tokens = sum(v for k, v in t.items() if not k.endswith("_cached"))
+    return (f"- **Reply cache (D-025):** {t['writer_cached']} of {writes} replies and {t['checker_cached']} of {checks} "
+            f"checks reused, with no model call\n"
+            f"- **Tokens:** writer {t['writer_in']:,} in + {t['writer_out']:,} out "
             f"({per:,.0f} per reply written); checker {t['checker_in']:,} in + {t['checker_out']:,} out; "
-            f"total {sum(t.values()):,} ({sum(t.values()) / n if n else 0:,.0f} per ticket)")
+            f"total {t_tokens:,} ({t_tokens / n if n else 0:,.0f} per ticket)")
 
 
 def build(outcomes, tickets, raw_by_id, meta, decisions_logged) -> str:
@@ -55,7 +61,7 @@ def build(outcomes, tickets, raw_by_id, meta, decisions_logged) -> str:
         f"- **Run:** {meta['run_id']} · {meta['date']} · {n} tickets",
         f"- **System version:** commit {meta['git_commit']} · prompts {meta['prompts']} · writer {meta['writer']} "
         f"(backup {meta['backup']}) · checker {meta['checker']} · classifier {meta['classifier']} · "
-        f"threshold {meta['threshold']}",
+        f"threshold {meta['threshold']} · reply cache {meta.get('reply_cache', 'off')}",
         f"- **Answer key in the file:** {'yes, used only to mark this report' if labels else 'no: accuracy figures not available'}",
         "", "## Volume", "",
         "| Processed | Answered automatically | Escalated | Blocked by guardrails |", "|---|---|---|---|",

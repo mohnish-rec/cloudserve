@@ -21,6 +21,7 @@ import os
 import re
 from dataclasses import dataclass, field
 
+from src import cache
 from src.generate import call_with_fallback, load_prompt, tokens_of
 from src.retrieve import STOPWORDS
 
@@ -40,6 +41,7 @@ class Check:
     passed: bool
     detail: str
     error: bool = False          # the check itself failed: counts as blocked
+    cached: bool = False         # the second model's answer reused from the reply cache (D-025)
     tokens_in: int = 0           # the second model's tokens, for the budget
     tokens_out: int = 0
 
@@ -133,14 +135,19 @@ def model_support(ticket_text, sentences, articles: dict, call=None, sleep=None)
     if not isinstance(obj, dict) or not isinstance(obj.get("fits_situation"), bool) \
             or not isinstance(obj.get("unsupported_sentences", []), list):
         raise ValueError("the checker's answer could not be read")
+    if getattr(raw, "cache_key", "") and not getattr(raw, "cached", False):
+        cache.put(raw.cache_key, raw, GUARD_MODEL)          # only answers that were read successfully
+    hit = bool(getattr(raw, "cached", False))
     bad = [n for n in obj.get("unsupported_sentences", []) if isinstance(n, int)]
     ok = obj["fits_situation"] and not bad
     why = str(obj.get("reason", ""))[:200]
     if ok:
-        return Check("grounding_model", True, f"fits and supported ({why})", tokens_in=t_in, tokens_out=t_out)
+        return Check("grounding_model", True, f"fits and supported ({why})", tokens_in=t_in, tokens_out=t_out,
+                     cached=hit)
     parts = ([] if obj["fits_situation"] else ["the article does not fit the situation"]) + \
             ([f"sentences {bad} not supported"] if bad else [])
-    return Check("grounding_model", False, "; ".join(parts) + f" ({why})", tokens_in=t_in, tokens_out=t_out)
+    return Check("grounding_model", False, "; ".join(parts) + f" ({why})", tokens_in=t_in, tokens_out=t_out,
+                 cached=hit)
 
 
 # ---------- 3. instruction integrity ----------
