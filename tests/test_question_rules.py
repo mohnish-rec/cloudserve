@@ -1,6 +1,6 @@
 """11 Nov 2026: the final question rules decided by Mohnish Grover (QUESTION_RULES=on).
-1. Daniel's data-location rule restored (Q22, Q23), even with the narrowed rules on; one exception (12 Nov): a plain
-   question about backup replication (Q24) is answered automatically. Any request or security word keeps a person.
+1. Daniel's data-location rule restored (Q22, Q23, Q24), even with the narrowed rules on. Backup-replication
+   questions (Q24) go to a person like every other data-location question (13 Nov).
 2. Q20 (export missing records created before the job) and Q11 (automated jobs failing after a password change) go
    to a person: no article answers them.
 Q21 and Q27 stay automatic, and the billing narrowing is unchanged. Texts are the customers' own words."""
@@ -19,8 +19,8 @@ DATA_LOCATION = [
     "Stop copying our backups to another region please.",
     "Our backups were copied to another region without permission, someone accessed them.",
 ]
-# 12 Nov: the one exception (Q24), answered automatically; Ines's article says "Backups are replicated to a second
-# region by default". Includes rewordings the development tickets do not contain.
+# Q24, backup replication: to a person like every other data-location question (13 Nov). Includes rewordings the
+# development tickets do not contain.
 BACKUP_QUESTIONS = [
     "Are backups replicated outside our primary region? A compliance review has raised this and I need a definite answer.",
     "are backups replicated outside our primary region? please help fast.",
@@ -51,14 +51,8 @@ def test_every_data_location_question_goes_to_a_person(final_rules, text):
 
 
 @pytest.mark.parametrize("text", BACKUP_QUESTIONS)
-def test_a_plain_backup_replication_question_is_answered_automatically(final_rules, text):
-    assert not safety.check(text, "data_residency").must_go_to_person
-
-
-def test_the_backup_exception_never_overrides_another_rule(final_rules):
-    result = safety.check("Are backups replicated outside our region? Our audit log shows logins none of us recognise.",
-                          "data_residency")
-    assert result.must_go_to_person and "word rule: security incident" in result.reasons
+def test_a_backup_replication_question_goes_to_a_person(final_rules, text):
+    assert safety.check(text, "data_residency").must_go_to_person
 
 
 def test_the_data_residency_type_alone_sends_a_ticket_to_a_person(final_rules):

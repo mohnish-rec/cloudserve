@@ -100,8 +100,9 @@ def _narrow() -> bool:
 # (evaluation/human_review/question_groups_decisions.json). With this switch on:
 # 1. Daniel's data-location rule is restored in full: every data-location ticket goes to a person, by its words or
 #    by its type, even when NARROW_RULES is on (Daniel: "anything involving data location, because we get those
-#    wrong occasionally even as humans and the consequence is a compliance problem"). This covers Q22 and Q23;
-#    Q24 (backup replication only) is the one exception, below.
+#    wrong occasionally even as humans and the consequence is a compliance problem"). This covers Q22, Q23 and Q24.
+#    13 Nov 2026 (Mohnish Grover): backup-replication questions (Q24) follow Daniel's rule like every other
+#    data-location question; the earlier exception for them is removed.
 #    The billing narrowing (an unrecognised charge is answered) is unchanged.
 # 2. Q20 and Q11 go to a person (Q11 below). Q20: no article explains an export missing records created BEFORE the job (Ines's article
 #    covers records created during it), so an automatic reply would give the wrong reason.
@@ -115,34 +116,6 @@ QUESTION_RULES = {
         r"\bpassword\b\W+(\w+\W+){0,12}(automated|scheduled|scripts?|jobs?|pipelines?|integrations?)\W+(\w+\W+){0,6}(fail\w*|authenticat\w*|broken|stopped)"],
 }
 _QUESTIONS = {name: [re.compile(p, re.I) for p in pats] for name, pats in QUESTION_RULES.items()}
-
-# 12 Nov 2026 (Mohnish Grover): one exception to Daniel's rule. A question only about whether BACKUPS are replicated
-# outside the region (Q24) is answered automatically: Ines's article answers it directly ("Backups are replicated to
-# a second region by default"). Every other data-location ticket still goes to a person (Q22 written confirmation,
-# Q23 keeping data in a region for a contract), because those usually need a person's confirmation or a migration.
-# Fails safe: the exception applies only when the backup question is recognised AND no request or security word is
-# present (confirm, contract, move, delete, stop, without permission, accessed, breach, ...); any
-# wording it does not recognise goes to a person.
-BACKUP_QUESTION = [re.compile(p, re.I) for p in [
-    r"\bbackups?\b\W+(\w+\W+){0,8}(replicat\w*|cop(y|ied|ies)|stored|kept|held|sent|go(es|ing)?|saved)\W+(\w+\W+){0,6}"
-    r"(outside|another|second|other|different|abroad|elsewhere|cross)",
-    r"\b(replicat\w*|cop(y|ies|ied)|send|sent|store[sd]?|keep|kept)\W+(\w+\W+){0,3}backups?\W+(\w+\W+){0,4}"
-    r"(outside|another|second|other|different|abroad|elsewhere)",
-    r"\b(cross[- ]?region|second region|other regions?)\W+(\w+\W+){0,4}backups?\b",
-    r"\bwhere (are|do|does|is) (our |my |the )?backups?\b",
-]]
-DATA_REQUEST = re.compile(
-    r"written|in writing|confirm\w*|certif\w*|attest\w*|letter|document\w*|\bcontract\w*|\bsign(ing|ed)?\b|"
-    r"\b(move|moving|migrat\w*|transfer\w*|relocat\w*)\b|\b(change|changing|switch\w*)\W+(\w+\W+){0,3}region|"
-    r"\b(delete|deleting|erase|erasing|purge)\b|physically|\bgdpr\b|\bdpa\b|data processing|remain|stay|keep (our|all|the) data|"
-    r"\bstop\b|without (permission|consent|authori\w*)|accessed|\bsomeone\b|\bsomebody\b|unauthori\w*|breach\w*|"
-    r"leak\w*|compromis\w*|stolen|hack\w*",
-    re.I)
-
-
-def _backup_question_only(text: str) -> bool:
-    return any(p.search(text or "") for p in BACKUP_QUESTION) and not DATA_REQUEST.search(text or "")
-
 
 def _question_rules() -> bool:
     return os.getenv("QUESTION_RULES", "on") == "on"   # on by default from 12 Nov
@@ -168,6 +141,4 @@ def check(text: str, predicted_type: str = None) -> SafetyResult:
     types = PERSON_ONLY_TYPES - {"data_residency"} if (_narrow() and not _question_rules()) else PERSON_ONLY_TYPES
     if predicted_type in types:
         reasons.append(f"type: {predicted_type}")
-    if _question_rules() and _backup_question_only(text):      # the Q24 exception (12 Nov); every other rule stays
-        reasons = [r for r in reasons if r not in ("word rule: data location", "type: data_residency")]
     return SafetyResult(bool(reasons), tuple(reasons))

@@ -80,8 +80,57 @@ decision log ready: storage/decisions.db (18 columns, 0 rows)
 python -m pytest tests/ -v
 ```
 
-Every test should show `PASSED`.
+Every test should show `PASSED` (274 tests).
 
 ## Running the system
 
-To be added as each stage is built.
+### Process a file of tickets, unattended
+
+Put the ticket file (in the same format as `data/development_tickets.json`) anywhere you like, then run:
+
+```
+python -m src.run_evaluation <tickets file> <results file>
+```
+
+For example, for the hidden test set:
+
+```
+python -m src.run_evaluation data/test_tickets.json evaluation/results/test_run.json
+```
+
+It needs no further input. Each ticket is classified, checked against the safety rules, matched to the help
+articles, answered or passed to a person, and logged. It writes:
+
+- `<results file>`: one entry per ticket, with the decision, the reply sent and the articles cited;
+- `<results file>_metrics.md` beside it: the measures for the run, with the settings it used;
+- `storage/decisions.db`: a log row for every decision.
+
+**How long it takes:** on Groq's free tier, 80 tickets took about 8 minutes and 500 tickets about 10 hours
+(12 Nov 2026). When the free tier's limit is reached, the system waits and tries again on its own; a ticket whose
+reply cannot be checked is never sent and goes to a person instead. Leave the terminal open until it finishes.
+
+### Settings
+
+The tested settings are the defaults, so nothing needs to be set. Each can be switched off for a comparison,
+for example `$env:QUESTION_RULES="off"` in PowerShell or `export QUESTION_RULES=off` on macOS/Linux:
+
+| Setting | Default | What it does |
+|---|---|---|
+| `PR01_FILE` | `PR-01_draft_reply_v1.7.md` | The reply prompt. `PR-01_draft_reply.md` is the earlier v1.2 (rollback) |
+| `QUESTION_RULES` | on | Questions decided by Mohnish Grover go to a person (data location, missing export records, jobs failing after a password change) |
+| `NARROW_RULES` | on | Safety rules hold back requests and disputes, not plain questions |
+| `TYPE_AWARE_SEARCH` | on | Article search also uses the ticket's type |
+| `TRIM_UNSUPPORTED` | on | A sentence the checker cannot support is removed and the whole reply checked again |
+| `REPLY_CACHE` | off in runs | Stored answers are never used for validation or test runs (D-025) |
+
+To stop all automatic replies at once (kill switch), create an empty file called `storage/kill_switch`:
+every ticket then goes to a person. Delete the file to turn replies back on.
+
+### Red-team check
+
+```
+python scripts/red_team.py
+```
+
+Runs the attack tickets in `data/red_team/` through the real system and writes `evaluation/results/red_team.md`.
+Every one must be stopped.

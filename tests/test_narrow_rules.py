@@ -36,10 +36,10 @@ def test_security_word_rules_are_untouched(text):
 
 def test_the_final_settings_apply_with_nothing_set(monkeypatch):
     """12 Nov: narrowed rules and question rules are on by default, so a fresh machine (the hidden-set run)
-    gets Mohnish's decisions with no settings line: data location to a person (Daniel's rule), backup
-    replication answered from the article (Q24), refunds to a person."""
+    gets Mohnish's decisions with no settings line: data location to a person (Daniel's rule), including
+    backup replication (Q24, 13 Nov), and refunds to a person."""
     monkeypatch.delenv("NARROW_RULES")
     monkeypatch.delenv("QUESTION_RULES")
     assert check("Where is our data physically stored?", "data_residency").must_go_to_person
-    assert not check("Are backups replicated outside our primary region?", "data_residency").must_go_to_person
+    assert check("Are backups replicated outside our primary region?", "data_residency").must_go_to_person
     assert check("I want a refund", "billing_query").must_go_to_person
