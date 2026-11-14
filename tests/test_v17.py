@@ -77,3 +77,13 @@ def test_the_checker_sees_causes_under_the_same_line_as_the_customer(v17):
     cause = next(s for s in d.sentences if ".C" in s["piece"])
     step = next(s for s in d.sentences if ".R" in s["piece"])
     assert _shown(cause).startswith(f'(listed under "{G.CAUSES}")') and _shown(step) == step["text"]
+
+
+def test_two_article_replies_may_be_longer():
+    """14 Nov 2026, reply setting R1: 230 words for one article, 320 when the reply draws on two (Q39 was blocked at 263)."""
+    from src.guardrails import tone_and_scope
+    one = "Thanks for getting in touch. Here is what to do:\n\nFrom our help article \"A\":\n- " + "word " * 260
+    two = one + "\nFrom our help article \"B\":\n- " + "more " * 20
+    assert not tone_and_scope(one).passed
+    assert tone_and_scope(two).passed
+    assert not tone_and_scope(two + "\n- " + "extra " * 60).passed

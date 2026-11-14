@@ -33,7 +33,6 @@ Q20 = ["Our export is missing records that were definitely created before I star
        "our export missing records definitely created before I start job. sorry for my english."]
 STAY_AUTOMATIC = [
     "I started an export late last night and it is still showing as queued. Should I cancel and try again?",  # Q21
-    "A restore we started last Friday is still running. The database is about four hundred gigabytes.",       # Q27
     "There are charges on our invoice for a service I do not believe we use. Could you explain?",              # Q14
     "The download link from our export has expired. Is the file still available?",                             # Q19
 ]
@@ -61,9 +60,9 @@ def test_the_data_residency_type_alone_sends_a_ticket_to_a_person(final_rules):
 
 
 @pytest.mark.parametrize("text", Q20)
-def test_export_missing_older_records_goes_to_a_person(final_rules, text):
-    result = safety.check(text, "data_export")
-    assert result.must_go_to_person and any("(Q20)" in r for r in result.reasons)
+def test_export_missing_older_records_is_answered(final_rules, text):
+    """14 Nov 2026: the Q20 rule is removed; the customer asks how the snapshot works and the article answers it."""
+    assert not safety.check(text, "data_export").must_go_to_person
 
 
 @pytest.mark.parametrize("text", [
@@ -75,7 +74,6 @@ def test_automated_jobs_failing_after_a_password_change_go_to_a_person(final_rul
 
 
 @pytest.mark.parametrize("text", STAY_AUTOMATIC + [
-    "I keep getting an invalid credentials message. My password is correct, I am sure.",                       # Q12
     "We are connecting our CI pipeline and are not sure whether to use a personal key or something else."])    # Q32
 def test_questions_decided_automatic_are_not_caught(final_rules, text):
     assert not safety.check(text, "data_export").must_go_to_person

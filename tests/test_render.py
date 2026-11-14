@@ -1,5 +1,7 @@
 """11 Nov: the reply a customer sees. Steps grouped under the article they came from; no [n] numbers;
 the rare step backed by two articles names the second as "(also in: ...)"; the log can follow every citation."""
+import re
+
 from src.generate import Draft, assemble, render, with_notice
 from src.guardrails import MAX_WORDS, tone_and_scope
 from src.pipeline import citation_trail
@@ -37,7 +39,12 @@ def test_the_new_layout_adds_nothing_to_the_length_count():
     long = " ".join(["word"] * MAX_WORDS) + "."
     one = tone_and_scope(with_notice(_draft((long, [TEAM]), ("Short step.", [TEAM]))))
     two = tone_and_scope(with_notice(_draft((long, [TEAM, KEYS]), ("Short step.", [KEYS]))))   # headings, also-in
-    assert not one.passed and one.detail == two.detail                                         # same word count
+    # 14 Nov (reply setting R1): two articles may be longer, so compare the counted words, not the verdict
+    n = lambda c: re.search(r"\((\d+) words", c.detail)
+    long2 = tone_and_scope(with_notice(_draft((" ".join(["word"] * 330) + ".", [TEAM, KEYS]), ("Short step.", [KEYS]))))
+    long1 = tone_and_scope(with_notice(_draft((" ".join(["word"] * 330) + ".", [TEAM]), ("Short step.", [TEAM]))))
+    assert not one.passed and two.passed
+    assert n(long1).group(1) == n(long2).group(1)                                               # same word count
     assert tone_and_scope(with_notice(_draft(("Select roll back on that revision.", [TEAM])))).passed
 
 

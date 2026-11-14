@@ -30,6 +30,7 @@ from src.retrieve import STOPWORDS
 GUARD_MODEL = os.getenv("GUARDRAIL_MODEL", "qwen/qwen3.8-27b")
 WORD_SUPPORT_MIN = float(os.getenv("WORD_SUPPORT_MIN", "0.6"))   # share of a sentence's words in its article
 MAX_WORDS = 230
+MAX_WORDS_TWO_ARTICLES = 320   # 14 Nov 2026, reply setting R1 (Mohnish Grover): a reply drawing on two articles may be longer
 # "one" is left out: it is usually not a number ("one of our keys"). Found 9 Nov: it blocked 8 good replies.
 NUMBER_WORDS = set("two three four five six seven eight nine ten eleven twelve fifteen twenty "
                    "thirty forty fifty sixty ninety hundred thousand million".split())
@@ -213,8 +214,9 @@ def tone_and_scope(reply) -> Check:
     own = re.sub(r"\s*\(also in: [^)]*\)", "", reply.replace(" Here is what to do:", ""))
     own = " ".join(l[2:] if l.startswith("- ") else l for l in own.splitlines()
                    if not l.startswith("From our help article") and l != "Common causes listed in the article:")
-    if len(own.split()) > MAX_WORDS:
-        found.append(f"too long ({len(own.split())} words)")
+    limit = MAX_WORDS_TWO_ARTICLES if reply.count("From our help article") >= 2 else MAX_WORDS
+    if len(own.split()) > limit:
+        found.append(f"too long ({len(own.split())} words, limit {limit})")
     return Check("tone_and_scope", not found, "found " + ", ".join(found) if found else "no promises, polite, in length")
 
 

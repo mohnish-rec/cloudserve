@@ -108,13 +108,41 @@ def _narrow() -> bool:
 #    covers records created during it), so an automatic reply would give the wrong reason.
 # Checked on the development tickets: exactly the 29 data-location tickets, the 9 Q20 tickets and the 4 Q11 tickets.
 QUESTION_RULES = {
-    "no article covers it: export missing records created before the job (Q20)": [
-        r"\bexport\w*\W+(\w+\W+){0,6}missing\W+(\w+\W+){0,8}before\b"],
+    # Q20 (export missing records created before the job) was removed on 14 Nov 2026 (Mohnish Grover): the customer
+    # asks how the snapshot works, and Ines's article answers that.
     # Q11: no article says to update the password stored in automated jobs; decided "person" (11 Nov). The checker
     # blocked all 4 in v1.6 but let 1 through in v1.7, so the decision is enforced here instead.
     "no article covers it: automated jobs failing after a password change (Q11)": [
         r"\bpassword\b\W+(\w+\W+){0,12}(automated|scheduled|scripts?|jobs?|pipelines?|integrations?)\W+(\w+\W+){0,6}(fail\w*|authenticat\w*|broken|stopped)"],
+    # 14 Nov 2026, walkthrough of the 500 development tickets (Mohnish Grover):
+    # Q12: "invalid credentials" though sure the password is correct, often for days. The article's causes (a lock that
+    # clears in 30 minutes, a stale cookie, a password changed elsewhere) mostly do not fit, so a person looks.
+    "the article's causes do not fit: invalid credentials with a correct password (Q12)": [
+        r"(invalid credentials|cannot log ?in|can.?t log ?in|cannot sign ?in|not able to log ?in)\W+(\w+\W+){0,25}password\W+(\w+\W+){0,2}(is )?(correct|right)",
+        r"password\W+(\w+\W+){0,2}(is )?(correct|right)\W+(\w+\W+){0,25}(invalid credentials|cannot log ?in|can.?t log ?in)"],
+    # Q27: a database restore still running long after it started. The article gives about ten minutes per 100 GB;
+    # a stalled restore is on CloudServe's side and the customer cannot fix it.
+    "needs a person: a database restore still running (Q27)": [
+        r"\brestor\w*\W+(\w+\W+){0,6}(still|from long time|for hours|for days)\W+(\w+\W+){0,2}(running|run|going|in progress)",
+        r"\brestor\w*\W+(is |are )?(running|run) from long time"],
+    # Q41: throttled after a traffic increase and would rather pay overage. If the throttling was the rate limit, only
+    # an account request (a person) can raise it.
+    "needs a person: throttled, would rather pay overage (Q41)": [
+        r"\bthrottl\w*\W+(\w+\W+){0,25}(rather|prefer)\W+(\w+\W+){0,3}(pay )?overage"],
 }
+# Q05 (14 Nov 2026, Mohnish Grover): a key the customer exposed by mistake (pushed or committed to a repository, or
+# "an exposed key" to rotate) is answered from Ines's two articles (revoke first, replace, search the audit log).
+# Any sign that it was USED or stolen, or a breach elsewhere, still goes to a person (Q53g, Q53h, Q53i), and so do
+# the security-incident rules and type, which this never touches.
+SELF_EXPOSED = re.compile(r"(pushed|committed|commit|exposed)\W+(\w+\W+){0,6}(key|secret|token|credential)|"
+                          r"(key|secret|token|credential)\w*\W+(\w+\W+){0,6}(public (repo|repository)|github|repository)|"
+                          r"rotate\W+(\w+\W+){0,3}exposed\W+key", re.I)
+SIGN_OF_USE = re.compile(r"breach\w*|compromis\w*|stolen|someone|somebody|unknown|unfamiliar|recogni[sz]e|accessed|"
+                         r"\bused\b|\busing\b|activity|unauthori[sz]ed|calls? made|hack\w*|attack\w*|suspicious", re.I)
+
+
+def _self_exposed_only(text: str) -> bool:
+    return bool(SELF_EXPOSED.search(text or "")) and not SIGN_OF_USE.search(text or "")
 _QUESTIONS = {name: [re.compile(p, re.I) for p in pats] for name, pats in QUESTION_RULES.items()}
 
 def _question_rules() -> bool:
@@ -137,7 +165,10 @@ def check_text(text: str) -> list:
 
 
 def check(text: str, predicted_type: str = None) -> SafetyResult:
-    reasons = [f"word rule: {name}" for name in check_text(text)]
+    names = check_text(text)
+    if _question_rules() and "leaked key or credentials" in names and _self_exposed_only(text):
+        names = [n for n in names if n != "leaked key or credentials"]      # Q05 (14 Nov); every other rule stays
+    reasons = [f"word rule: {name}" for name in names]
     types = PERSON_ONLY_TYPES - {"data_residency"} if (_narrow() and not _question_rules()) else PERSON_ONLY_TYPES
     if predicted_type in types:
         reasons.append(f"type: {predicted_type}")

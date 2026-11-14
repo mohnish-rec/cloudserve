@@ -1,0 +1,1220 @@
+{
+ "about": "13 Nov 2026: Mohnish Grover's walkthrough of the 500 development tickets, one question at a time. Development tickets only.",
+ "questions": [
+  {
+   "question": "Q01",
+   "title": "Developer cannot see a project despite permission",
+   "tickets": [
+    "DEV-0017",
+    "DEV-0063",
+    "DEV-0093",
+    "DEV-0266",
+    "DEV-0352",
+    "DEV-0390",
+    "DEV-0459",
+    "DEV-0485",
+    "DEV-0487",
+    "DEV-0140",
+    "DEV-0161"
+   ],
+   "n": 11,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": ""
+  },
+  {
+   "question": "Q02",
+   "title": "Team member left: remove all their access and keys",
+   "tickets": [
+    "DEV-0019",
+    "DEV-0160",
+    "DEV-0212",
+    "DEV-0393",
+    "DEV-0460",
+    "DEV-0094",
+    "DEV-0156",
+    "DEV-0376",
+    "DEV-0399"
+   ],
+   "n": 9,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Change the reply (C): decide the reply setting after more questions are checked",
+   "why": "",
+   "note": "reply partly off-topic (whole article)"
+  },
+  {
+   "question": "Q03",
+   "title": "How group membership and permissions work",
+   "tickets": [
+    "DEV-0023",
+    "DEV-0435"
+   ],
+   "n": 2,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Change the reply (C): decide the reply setting later",
+   "why": "",
+   "note": "reply partly off-topic (whole article)"
+  },
+  {
+   "question": "Q04",
+   "title": "Production API key suddenly returns 401",
+   "tickets": [
+    "DEV-0002",
+    "DEV-0111",
+    "DEV-0303",
+    "DEV-0346",
+    "DEV-0387",
+    "DEV-0397",
+    "DEV-0476"
+   ],
+   "n": 7,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": ""
+  },
+  {
+   "question": "Q05",
+   "title": "API key pushed to a public repository",
+   "tickets": [
+    "DEV-0016",
+    "DEV-0181",
+    "DEV-0222",
+    "DEV-0269",
+    "DEV-0314",
+    "DEV-0334"
+   ],
+   "n": 6,
+   "earlier_decision": "Person",
+   "decision_13nov": "Answer automatically",
+   "why": "",
+   "note": "CHANGE NEEDED: narrow the leaked-key rule - key exposed + how to replace it -> answer; any sign it was used (unknown activity, accessed, unfamiliar address) -> person"
+  },
+  {
+   "question": "Q06",
+   "title": "Key reads fine but writes get a permission error",
+   "tickets": [
+    "DEV-0051",
+    "DEV-0119",
+    "DEV-0145",
+    "DEV-0250",
+    "DEV-0491"
+   ],
+   "n": 5,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": "",
+   "note": "DEV-0491: subject 'exposed key' triggered the leaked-key rule; fixed by the Q05 change"
+  },
+  {
+   "question": "Q07a",
+   "title": "Cursor stops partway through a long iteration (expiry?)",
+   "tickets": [
+    "DEV-0167",
+    "DEV-0182",
+    "DEV-0207",
+    "DEV-0216",
+    "DEV-0217",
+    "DEV-0264",
+    "DEV-0320",
+    "DEV-0368",
+    "DEV-0384",
+    "DEV-0422",
+    "DEV-0482"
+   ],
+   "n": 11,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": ""
+  },
+  {
+   "question": "Q07b",
+   "title": "Records seen twice / missing while paging a changing collection",
+   "tickets": [
+    "DEV-0026",
+    "DEV-0055",
+    "DEV-0481"
+   ],
+   "n": 3,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": ""
+  },
+  {
+   "question": "Q08",
+   "title": "How to pull a very large extract",
+   "tickets": [
+    "DEV-0027",
+    "DEV-0066",
+    "DEV-0166",
+    "DEV-0177",
+    "DEV-0201",
+    "DEV-0308",
+    "DEV-0377",
+    "DEV-0430",
+    "DEV-0434",
+    "DEV-0018"
+   ],
+   "n": 10,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": ""
+  },
+  {
+   "question": "Q09",
+   "title": "Cannot get into the console, colleague can",
+   "tickets": [
+    "DEV-0008",
+    "DEV-0047",
+    "DEV-0218",
+    "DEV-0230",
+    "DEV-0285",
+    "DEV-0479"
+   ],
+   "n": 6,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically and fix (C)",
+   "why": "",
+   "note": "CHANGES NEEDED: (1) search should rely on the message more than the subject (DEV-0008 sent the MFA article because of its subject); (2) the checker should not block sentences that are exact copies of the article (DEV-0218, DEV-0285); (3) agent-facing wording noted only: Ines's words are never changed"
+  },
+  {
+   "question": "Q10",
+   "title": "Authenticator app codes rejected",
+   "tickets": [
+    "DEV-0176",
+    "DEV-0281",
+    "DEV-0312",
+    "DEV-0335",
+    "DEV-0409"
+   ],
+   "n": 5,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically and fix (C)",
+   "why": "",
+   "note": "NOTED, NOT CHANGED (Ines's words are never changed): agent-facing wording ('Ask the user to...', 'the user should...') in DOC-AUTH-002 goes to customers. Labels expect only DOC-AUTH-001 for 3 tickets; the system's DOC-AUTH-002 is the better article"
+  },
+  {
+   "question": "Q11",
+   "title": "Shared-account password changed, automated jobs fail to authenticate",
+   "tickets": [
+    "DEV-0011",
+    "DEV-0054",
+    "DEV-0126",
+    "DEV-0206"
+   ],
+   "n": 4,
+   "earlier_decision": "Person",
+   "decision_13nov": "Person (keep the Q11 rule)",
+   "why": ""
+  },
+  {
+   "question": "Q12",
+   "title": "Invalid credentials though password is correct",
+   "tickets": [
+    "DEV-0133",
+    "DEV-0180",
+    "DEV-0497",
+    "DEV-0045",
+    "DEV-0149"
+   ],
+   "n": 5,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Person",
+   "why": "",
+   "note": "CHANGE NEEDED: new question rule - 'invalid credentials' / 'cannot login' while sure the password is correct -> person. Must not catch Q09 (only me, colleague fine) or Q10 (authenticator codes)"
+  },
+  {
+   "question": "Q13",
+   "title": "Invoice much higher than usual",
+   "tickets": [
+    "DEV-0034",
+    "DEV-0199",
+    "DEV-0242",
+    "DEV-0407",
+    "DEV-0452",
+    "DEV-0455",
+    "DEV-0457",
+    "DEV-0463"
+   ],
+   "n": 8,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": ""
+  },
+  {
+   "question": "Q14",
+   "title": "Invoice charges for a service we do not use",
+   "tickets": [
+    "DEV-0073",
+    "DEV-0078",
+    "DEV-0151",
+    "DEV-0189",
+    "DEV-0284",
+    "DEV-0411",
+    "DEV-0415",
+    "DEV-0478",
+    "DEV-0050",
+    "DEV-0079",
+    "DEV-0228"
+   ],
+   "n": 11,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": ""
+  },
+  {
+   "question": "Q15",
+   "title": "Billing period does not match calendar month",
+   "tickets": [
+    "DEV-0046",
+    "DEV-0173",
+    "DEV-0200",
+    "DEV-0247",
+    "DEV-0486"
+   ],
+   "n": 5,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Change the reply (C): decide the reply setting later",
+   "why": "",
+   "note": "reply partly off-topic (whole article); the answer lines sit 3rd and last"
+  },
+  {
+   "question": "Q16",
+   "title": "Where to store secrets so they are not in logs",
+   "tickets": [
+    "DEV-0006",
+    "DEV-0039",
+    "DEV-0147",
+    "DEV-0227",
+    "DEV-0297",
+    "DEV-0404",
+    "DEV-0412"
+   ],
+   "n": 7,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Change the reply (C): decide the reply setting later",
+   "why": "",
+   "note": "reply partly off-topic (variable scopes and overrides)"
+  },
+  {
+   "question": "Q17",
+   "title": "Staging picks up production configuration",
+   "tickets": [
+    "DEV-0010",
+    "DEV-0082",
+    "DEV-0283",
+    "DEV-0318",
+    "DEV-0347",
+    "DEV-0410"
+   ],
+   "n": 6,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically and fix (C)",
+   "why": "",
+   "note": "CHANGE NEEDED: DOC-ACCT-002 'Organisation setup and project structure' (symptom: 'Environments are sharing configuration unintentionally') was found by search but ranked 3rd or 4th, behind DOC-SEC-002 (exposed secrets, irrelevant); the writer reads the top 3 and did not use it"
+  },
+  {
+   "question": "Q18",
+   "title": "Environment variable set but app cannot see it",
+   "tickets": [
+    "DEV-0101",
+    "DEV-0116",
+    "DEV-0136",
+    "DEV-0425"
+   ],
+   "n": 4,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Change the reply (C): decide the reply setting later",
+   "why": "",
+   "note": "reply partly off-topic (secrets lines)"
+  },
+  {
+   "question": "Q19",
+   "title": "Export download link expired",
+   "tickets": [
+    "DEV-0022",
+    "DEV-0065",
+    "DEV-0087",
+    "DEV-0113",
+    "DEV-0244",
+    "DEV-0301",
+    "DEV-0329",
+    "DEV-0363",
+    "DEV-0440",
+    "DEV-0441",
+    "DEV-0447",
+    "DEV-0453"
+   ],
+   "n": 12,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Change the reply (C): decide the reply setting later",
+   "why": "",
+   "note": "reply partly off-topic (job status, snapshot, audit trail)"
+  },
+  {
+   "question": "Q20",
+   "title": "Export missing records created before the job",
+   "tickets": [
+    "DEV-0104",
+    "DEV-0129",
+    "DEV-0185",
+    "DEV-0278",
+    "DEV-0326",
+    "DEV-0340",
+    "DEV-0420",
+    "DEV-0429",
+    "DEV-0490"
+   ],
+   "n": 9,
+   "earlier_decision": "Person",
+   "decision_13nov": "Answer automatically",
+   "why": "",
+   "note": "CHANGE NEEDED: remove the Q20 question rule. Mohnish's reading: the customer asks how the snapshot works, and the article answers that"
+  },
+  {
+   "question": "Q21",
+   "title": "Export still queued for hours",
+   "tickets": [
+    "DEV-0012",
+    "DEV-0060",
+    "DEV-0279",
+    "DEV-0331",
+    "DEV-0343",
+    "DEV-0364",
+    "DEV-0401",
+    "DEV-0446"
+   ],
+   "n": 8,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": "Probably Answer as it's not saying anything wrong either (Mohnish Grover)"
+  },
+  {
+   "question": "Q22",
+   "title": "Written confirmation of where data is stored",
+   "tickets": [
+    "DEV-0058",
+    "DEV-0059",
+    "DEV-0061",
+    "DEV-0118",
+    "DEV-0123",
+    "DEV-0135",
+    "DEV-0208",
+    "DEV-0275",
+    "DEV-0292",
+    "DEV-0309",
+    "DEV-0389",
+    "DEV-0432",
+    "DEV-0433",
+    "DEV-0492"
+   ],
+   "n": 14,
+   "earlier_decision": "Person",
+   "decision_13nov": "Person (Daniel's data-location rule)",
+   "why": ""
+  },
+  {
+   "question": "Q23",
+   "title": "Data must stay in the EU for a contract",
+   "tickets": [
+    "DEV-0110",
+    "DEV-0154",
+    "DEV-0289",
+    "DEV-0317",
+    "DEV-0359",
+    "DEV-0371",
+    "DEV-0445",
+    "DEV-0466",
+    "DEV-0483"
+   ],
+   "n": 9,
+   "earlier_decision": "Person",
+   "decision_13nov": "Person (Daniel's data-location rule)",
+   "why": ""
+  },
+  {
+   "question": "Q24",
+   "title": "Are backups replicated outside our region?",
+   "tickets": [
+    "DEV-0106",
+    "DEV-0188",
+    "DEV-0205",
+    "DEV-0388",
+    "DEV-0464",
+    "DEV-0489"
+   ],
+   "n": 6,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Person (Daniel's data-location rule) - confirmed 14 Nov",
+   "why": "",
+   "note": "the only statement about backup regions is in DOC-DATA-003, which applies to Business and Enterprise plans; 4 of 6 are Standard. Plan-limit rule for all articles (C2) to be decided at Q31/Q33/Q47-Q49"
+  },
+  {
+   "question": "Q25",
+   "title": "'No connection available' errors after scaling up",
+   "tickets": [
+    "DEV-0032",
+    "DEV-0068",
+    "DEV-0070",
+    "DEV-0115",
+    "DEV-0137",
+    "DEV-0322",
+    "DEV-0337",
+    "DEV-0349",
+    "DEV-0354",
+    "DEV-0215",
+    "DEV-0378",
+    "DEV-0374"
+   ],
+   "n": 12,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": "",
+   "note": "DEV-0374, DEV-0378: subject 'Database restore taking hours' added the backups article -> blocked for length (subject-line fix from Q09)"
+  },
+  {
+   "question": "Q26",
+   "title": "Connection pool exhausting under moderate load",
+   "tickets": [
+    "DEV-0128",
+    "DEV-0143",
+    "DEV-0277",
+    "DEV-0330",
+    "DEV-0439"
+   ],
+   "n": 5,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": "I think it can be answered (Mohnish Grover)"
+  },
+  {
+   "question": "Q27",
+   "title": "400 GB database restore still running",
+   "tickets": [
+    "DEV-0024",
+    "DEV-0088",
+    "DEV-0338",
+    "DEV-0472",
+    "DEV-0169",
+    "DEV-0209",
+    "DEV-0408",
+    "DEV-0162",
+    "DEV-0451"
+   ],
+   "n": 9,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Person",
+   "why": "",
+   "note": "CHANGE NEEDED: new question rule - a database restore still running long after it started -> person (article gives ~10 min per 100 GB; a stalled restore is on CloudServe's side). Must not catch questions about how to start a restore"
+  },
+  {
+   "question": "Q28",
+   "title": "Every deployment fails at the health check",
+   "tickets": [
+    "DEV-0036",
+    "DEV-0052",
+    "DEV-0072",
+    "DEV-0086",
+    "DEV-0108",
+    "DEV-0130",
+    "DEV-0171",
+    "DEV-0195",
+    "DEV-0224",
+    "DEV-0272",
+    "DEV-0375"
+   ],
+   "n": 11,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": ""
+  },
+  {
+   "question": "Q29",
+   "title": "Deployment reaches running then rolls back",
+   "tickets": [
+    "DEV-0025",
+    "DEV-0041",
+    "DEV-0081",
+    "DEV-0112",
+    "DEV-0280",
+    "DEV-0353",
+    "DEV-0442",
+    "DEV-0449",
+    "DEV-0454"
+   ],
+   "n": 9,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": ""
+  },
+  {
+   "question": "Q30",
+   "title": "Builds fail during dependency resolution",
+   "tickets": [
+    "DEV-0090",
+    "DEV-0236",
+    "DEV-0350",
+    "DEV-0416",
+    "DEV-0480",
+    "DEV-0001",
+    "DEV-0075"
+   ],
+   "n": 7,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": "",
+   "note": "labels expect DOC-DEPLOY-001 (health check), which does not fit; the system's DOC-DEPLOY-003 (dependency resolution) is the right article"
+  },
+  {
+   "question": "Q31",
+   "title": "Log forwarding stopped",
+   "tickets": [
+    "DEV-0037",
+    "DEV-0038",
+    "DEV-0062",
+    "DEV-0194",
+    "DEV-0219",
+    "DEV-0299",
+    "DEV-0341",
+    "DEV-0458",
+    "DEV-0469"
+   ],
+   "n": 9,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically (all plans)",
+   "why": "",
+   "note": "DOC-INT-002 applies to Business and Enterprise; 4 of 9 are Standard - answered anyway (no plan rule here)"
+  },
+  {
+   "question": "Q32",
+   "title": "Which key to use for a CI pipeline",
+   "tickets": [
+    "DEV-0049",
+    "DEV-0057",
+    "DEV-0084",
+    "DEV-0238",
+    "DEV-0259",
+    "DEV-0287",
+    "DEV-0367"
+   ],
+   "n": 7,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": ""
+  },
+  {
+   "question": "Q33",
+   "title": "Monitoring metrics lag behind the console",
+   "tickets": [
+    "DEV-0124",
+    "DEV-0198",
+    "DEV-0223",
+    "DEV-0262",
+    "DEV-0325"
+   ],
+   "n": 5,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Change the reply (C): decide the reply setting later",
+   "why": "",
+   "note": "reply partly off-topic; labels expect DOC-INT-001 (CI pipelines), which has nothing on metrics delay - the system's DOC-INT-002 is right"
+  },
+  {
+   "question": "Q34",
+   "title": "New account, where do I start?",
+   "tickets": [
+    "DEV-0170",
+    "DEV-0226",
+    "DEV-0251",
+    "DEV-0273",
+    "DEV-0295",
+    "DEV-0296",
+    "DEV-0310",
+    "DEV-0462",
+    "DEV-0474"
+   ],
+   "n": 9,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically and fix (C)",
+   "why": "",
+   "note": "subject 'Migrating our app across' sent DEV-0310/0295/0474 the migration article (subject-line fix); DEV-0170 escalated because the writer said the articles do not answer it (run-to-run inconsistency)"
+  },
+  {
+   "question": "Q35",
+   "title": "Migrating an app that writes files to local disk",
+   "tickets": [
+    "DEV-0096",
+    "DEV-0233",
+    "DEV-0256",
+    "DEV-0358",
+    "DEV-0424",
+    "DEV-0428",
+    "DEV-0496"
+   ],
+   "n": 7,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": "",
+   "note": "3 labels expect only DOC-ONB-001; the system's DOC-ONB-002 (migration) is the right article"
+  },
+  {
+   "question": "Q36",
+   "title": "Just signed up with a containerised app",
+   "tickets": [
+    "DEV-0174",
+    "DEV-0270",
+    "DEV-0294",
+    "DEV-0302",
+    "DEV-0405",
+    "DEV-0443"
+   ],
+   "n": 6,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": ""
+  },
+  {
+   "question": "Q37",
+   "title": "Latency climbing gradually, nothing changed",
+   "tickets": [
+    "DEV-0043",
+    "DEV-0056",
+    "DEV-0178",
+    "DEV-0186",
+    "DEV-0204",
+    "DEV-0241",
+    "DEV-0267",
+    "DEV-0274",
+    "DEV-0286",
+    "DEV-0336",
+    "DEV-0372",
+    "DEV-0383",
+    "DEV-0468",
+    "DEV-0495"
+   ],
+   "n": 14,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": ""
+  },
+  {
+   "question": "Q38",
+   "title": "Response times doubled, no deployment",
+   "tickets": [
+    "DEV-0225",
+    "DEV-0243",
+    "DEV-0288",
+    "DEV-0290",
+    "DEV-0400"
+   ],
+   "n": 5,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically (changed from Person, 14 Nov)",
+   "why": ""
+  },
+  {
+   "question": "Q39",
+   "title": "Slow at afternoon peak despite autoscaling",
+   "tickets": [
+    "DEV-0089",
+    "DEV-0095",
+    "DEV-0213",
+    "DEV-0437"
+   ],
+   "n": 4,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically (fix length in the reply-setting decision)",
+   "why": "",
+   "note": "all 4 blocked for length (263 words): whole DOC-PERF-001 + DOC-PERF-002 steps exceed 230 words"
+  },
+  {
+   "question": "Q40",
+   "title": "Spend cap stopped production, raise it now",
+   "tickets": [
+    "DEV-0044",
+    "DEV-0064",
+    "DEV-0092",
+    "DEV-0099",
+    "DEV-0138",
+    "DEV-0172",
+    "DEV-0203",
+    "DEV-0361",
+    "DEV-0382",
+    "DEV-0414",
+    "DEV-0500"
+   ],
+   "n": 11,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": ""
+  },
+  {
+   "question": "Q41",
+   "title": "Throttled after a traffic increase",
+   "tickets": [
+    "DEV-0048",
+    "DEV-0074",
+    "DEV-0239",
+    "DEV-0255",
+    "DEV-0316",
+    "DEV-0366",
+    "DEV-0385"
+   ],
+   "n": 7,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Person",
+   "why": "a rate-limit increase needs a person anyway (Mohnish Grover)",
+   "note": "CHANGE NEEDED: new question rule - throttled after a traffic increase, wanting overage instead of being stopped -> person. Must not catch Q40 (spend cap stopped production) or Q43 (429 errors questions)"
+  },
+  {
+   "question": "Q42",
+   "title": "Unexpected overage charges",
+   "tickets": [
+    "DEV-0192",
+    "DEV-0319",
+    "DEV-0365",
+    "DEV-0369",
+    "DEV-0436"
+   ],
+   "n": 5,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": "",
+   "note": "second article (DOC-API-001) adds 'Limits are enforced per organisation. Issuing more keys does not increase the available quota' - include under the two-article rule"
+  },
+  {
+   "question": "Q43a",
+   "title": "429 / too many requests despite several keys",
+   "tickets": [
+    "DEV-0029",
+    "DEV-0221",
+    "DEV-0252",
+    "DEV-0258",
+    "DEV-0431",
+    "DEV-0467",
+    "DEV-0031",
+    "DEV-0179",
+    "DEV-0271",
+    "DEV-0394"
+   ],
+   "n": 10,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": ""
+  },
+  {
+   "question": "Q43b",
+   "title": "Throughput drops sharply after a few minutes, under the limit",
+   "tickets": [
+    "DEV-0100"
+   ],
+   "n": 1,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": ""
+  },
+  {
+   "question": "Q44",
+   "title": "Are search endpoints rate-limited differently?",
+   "tickets": [
+    "DEV-0183",
+    "DEV-0276"
+   ],
+   "n": 2,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": ""
+  },
+  {
+   "question": "Q45",
+   "title": "How do I revert to an earlier revision?",
+   "tickets": [
+    "DEV-0004",
+    "DEV-0009",
+    "DEV-0040",
+    "DEV-0042",
+    "DEV-0122",
+    "DEV-0127",
+    "DEV-0157",
+    "DEV-0163",
+    "DEV-0263",
+    "DEV-0315",
+    "DEV-0339",
+    "DEV-0342",
+    "DEV-0345",
+    "DEV-0386",
+    "DEV-0423",
+    "DEV-0473"
+   ],
+   "n": 16,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": ""
+  },
+  {
+   "question": "Q46",
+   "title": "Release broke checkout, need to go back",
+   "tickets": [
+    "DEV-0030",
+    "DEV-0053",
+    "DEV-0083",
+    "DEV-0098",
+    "DEV-0131",
+    "DEV-0153",
+    "DEV-0304",
+    "DEV-0313",
+    "DEV-0380",
+    "DEV-0444",
+    "DEV-0461",
+    "DEV-0488"
+   ],
+   "n": 12,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": "",
+   "note": "include the backups article only when the customer mentions damaged or lost data, never by default"
+  },
+  {
+   "question": "Q47",
+   "title": "SSO works for one group but not another",
+   "tickets": [
+    "DEV-0076",
+    "DEV-0103",
+    "DEV-0155",
+    "DEV-0190",
+    "DEV-0305",
+    "DEV-0311",
+    "DEV-0360",
+    "DEV-0403",
+    "DEV-0417",
+    "DEV-0419",
+    "DEV-0450"
+   ],
+   "n": 11,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically (all plans)",
+   "why": "Answer automatically and later if it is not solved it should be sent to a person with a draft (Mohnish Grover)"
+  },
+  {
+   "question": "Q48",
+   "title": "SAML login bounces users back",
+   "tickets": [
+    "DEV-0014",
+    "DEV-0033",
+    "DEV-0069",
+    "DEV-0144",
+    "DEV-0220",
+    "DEV-0298",
+    "DEV-0321",
+    "DEV-0396",
+    "DEV-0484"
+   ],
+   "n": 9,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically (all plans)",
+   "why": ""
+  },
+  {
+   "question": "Q49",
+   "title": "SSO not creating new starters",
+   "tickets": [
+    "DEV-0020",
+    "DEV-0196",
+    "DEV-0323",
+    "DEV-0333",
+    "DEV-0438",
+    "DEV-0471"
+   ],
+   "n": 6,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Change the reply (C): decide the reply setting later",
+   "why": "",
+   "note": "reply partly off-topic; the answer (just-in-time provisioning) sits 3rd"
+  },
+  {
+   "question": "Q50",
+   "title": "Webhook endpoint stopped receiving events",
+   "tickets": [
+    "DEV-0071",
+    "DEV-0105",
+    "DEV-0306",
+    "DEV-0307",
+    "DEV-0357",
+    "DEV-0362",
+    "DEV-0379",
+    "DEV-0427",
+    "DEV-0465"
+   ],
+   "n": 9,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Answer automatically",
+   "why": "",
+   "note": "article says the endpoint is disabled after 24h of failures but not how to re-enable it; the follow-up rule covers this"
+  },
+  {
+   "question": "Q51",
+   "title": "Same webhook event received several times",
+   "tickets": [
+    "DEV-0229",
+    "DEV-0232",
+    "DEV-0261",
+    "DEV-0291",
+    "DEV-0328",
+    "DEV-0406",
+    "DEV-0159"
+   ],
+   "n": 7,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Change the reply (C): decide the reply setting later",
+   "why": "",
+   "note": "reply partly off-topic (signature line)"
+  },
+  {
+   "question": "Q52",
+   "title": "Webhook signature verification fails",
+   "tickets": [
+    "DEV-0067",
+    "DEV-0080",
+    "DEV-0117",
+    "DEV-0125",
+    "DEV-0197"
+   ],
+   "n": 5,
+   "earlier_decision": "Answer automatically",
+   "decision_13nov": "Change the reply (C): decide the reply setting later",
+   "why": "",
+   "note": "reply partly off-topic; the answer (raw body) sits 3rd"
+  },
+  {
+   "question": "Q53a",
+   "title": "Auditor wants six months of access records",
+   "tickets": [
+    "DEV-0003",
+    "DEV-0028",
+    "DEV-0102",
+    "DEV-0109",
+    "DEV-0146",
+    "DEV-0187",
+    "DEV-0191",
+    "DEV-0231",
+    "DEV-0248",
+    "DEV-0265",
+    "DEV-0351",
+    "DEV-0498"
+   ],
+   "n": 12,
+   "earlier_decision": "Person",
+   "decision_13nov": "Person (zero tolerance: must-not)",
+   "why": ""
+  },
+  {
+   "question": "Q53b",
+   "title": "Policy requires two years of retention",
+   "tickets": [
+    "DEV-0021",
+    "DEV-0114",
+    "DEV-0141",
+    "DEV-0235",
+    "DEV-0260",
+    "DEV-0268",
+    "DEV-0324",
+    "DEV-0348",
+    "DEV-0448"
+   ],
+   "n": 9,
+   "earlier_decision": "Person",
+   "decision_13nov": "Person (zero tolerance: must-not)",
+   "why": ""
+  },
+  {
+   "question": "Q53c",
+   "title": "Read access to customer records not in the audit log",
+   "tickets": [
+    "DEV-0013",
+    "DEV-0165",
+    "DEV-0245",
+    "DEV-0253",
+    "DEV-0356"
+   ],
+   "n": 5,
+   "earlier_decision": "Person",
+   "decision_13nov": "Person (zero tolerance: must-not)",
+   "why": ""
+  },
+  {
+   "question": "Q53d",
+   "title": "Spend caps per project (feature request)",
+   "tickets": [
+    "DEV-0005",
+    "DEV-0007",
+    "DEV-0077",
+    "DEV-0152",
+    "DEV-0246",
+    "DEV-0257",
+    "DEV-0355",
+    "DEV-0392"
+   ],
+   "n": 8,
+   "earlier_decision": "Person",
+   "decision_13nov": "Person (zero tolerance: feature request)",
+   "why": ""
+  },
+  {
+   "question": "Q53e",
+   "title": "Configure our own retention period (feature request)",
+   "tickets": [
+    "DEV-0150",
+    "DEV-0202",
+    "DEV-0237",
+    "DEV-0344",
+    "DEV-0402",
+    "DEV-0456"
+   ],
+   "n": 6,
+   "earlier_decision": "Person",
+   "decision_13nov": "Person (zero tolerance: feature request)",
+   "why": ""
+  },
+  {
+   "question": "Q53f",
+   "title": "Staged rollouts on the roadmap? (feature request)",
+   "tickets": [
+    "DEV-0168",
+    "DEV-0175",
+    "DEV-0193",
+    "DEV-0293",
+    "DEV-0332",
+    "DEV-0381"
+   ],
+   "n": 6,
+   "earlier_decision": "Person",
+   "decision_13nov": "Person (zero tolerance: feature request)",
+   "why": ""
+  },
+  {
+   "question": "Q53g",
+   "title": "Engineer's credentials exposed in another service's breach",
+   "tickets": [
+    "DEV-0035",
+    "DEV-0097",
+    "DEV-0158",
+    "DEV-0240",
+    "DEV-0282",
+    "DEV-0300",
+    "DEV-0327",
+    "DEV-0391",
+    "DEV-0470",
+    "DEV-0475"
+   ],
+   "n": 10,
+   "earlier_decision": "Person",
+   "decision_13nov": "Person (zero tolerance: security incident)",
+   "why": "",
+   "note": "the Q05 leaked-key narrowing must keep breach/compromise/unknown activity with a person; use these tickets as tests"
+  },
+  {
+   "question": "Q53h",
+   "title": "Unknown address in our audit log created resources",
+   "tickets": [
+    "DEV-0085",
+    "DEV-0107",
+    "DEV-0121",
+    "DEV-0148",
+    "DEV-0164",
+    "DEV-0184",
+    "DEV-0211",
+    "DEV-0477",
+    "DEV-0499"
+   ],
+   "n": 9,
+   "earlier_decision": "Person",
+   "decision_13nov": "Person (zero tolerance: security incident)",
+   "why": "",
+   "note": "test for the Q05 boundary: unknown activity -> person"
+  },
+  {
+   "question": "Q53i",
+   "title": "Former employee still has access",
+   "tickets": [
+    "DEV-0015",
+    "DEV-0132",
+    "DEV-0139",
+    "DEV-0210",
+    "DEV-0234",
+    "DEV-0254",
+    "DEV-0370"
+   ],
+   "n": 7,
+   "earlier_decision": "Person",
+   "decision_13nov": "Person (zero tolerance: security incident)",
+   "why": ""
+  },
+  {
+   "question": "Q53j",
+   "title": "Need someone to call us urgently",
+   "tickets": [
+    "DEV-0120",
+    "DEV-0395",
+    "DEV-0418",
+    "DEV-0426"
+   ],
+   "n": 4,
+   "earlier_decision": "Person",
+   "decision_13nov": "Person (zero tolerance: unclear request)",
+   "why": ""
+  },
+  {
+   "question": "Q53k",
+   "title": "It is not working, please help",
+   "tickets": [
+    "DEV-0134",
+    "DEV-0413",
+    "DEV-0421",
+    "DEV-0494"
+   ],
+   "n": 4,
+   "earlier_decision": "Person",
+   "decision_13nov": "Person (zero tolerance: unclear request)",
+   "why": ""
+  },
+  {
+   "question": "Q53l",
+   "title": "Following up, any update?",
+   "tickets": [
+    "DEV-0214",
+    "DEV-0249",
+    "DEV-0398",
+    "DEV-0493"
+   ],
+   "n": 4,
+   "earlier_decision": "Person",
+   "decision_13nov": "Person (zero tolerance: unclear request)",
+   "why": "",
+   "note": "follow-ups: covered by the follow-up change (link to the earlier ticket, hand over with a draft)"
+  },
+  {
+   "question": "Q53m",
+   "title": "Nothing is loading properly today",
+   "tickets": [
+    "DEV-0091",
+    "DEV-0142",
+    "DEV-0373"
+   ],
+   "n": 3,
+   "earlier_decision": "Person",
+   "decision_13nov": "Person (zero tolerance: unclear request)",
+   "why": ""
+  }
+ ],
+ "standing_rules": [
+  "Never change Ines's words (Mohnish Grover, 14 Nov 2026).",
+  "If the answer is split across two articles, the reply should draw on both (Mohnish Grover, 14 Nov 2026).",
+  "If an automatic answer did not solve the problem, the follow-up goes to a person with a draft (Mohnish Grover, 14 Nov 2026)."
+ ],
+ "general_changes": [
+  "Follow-ups: link a new ticket to the same customer's recent automatic reply on the same type (customer_id, date, 7-day window) and send it to a person with a draft (the earlier reply, article and what was not certain), instead of answering again."
+ ],
+ "reply_setting": {
+  "decision": "R1: keep PR-01 v1.7 (the whole main article, plus the steps of any second article); allow longer replies when two articles are used (230 words for one article, 320 for two); keep Ines's order",
+  "by": "Mohnish Grover",
+  "date": "2026-11-14"
+ }
+}
