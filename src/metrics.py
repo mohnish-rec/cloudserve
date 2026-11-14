@@ -7,7 +7,10 @@ where drift shows up first".
 from prometheus_client import Counter, Histogram, start_http_server
 
 TICKETS = Counter("tickets_processed_total", "Tickets processed", ["channel", "outcome"])
-LATENCY = Histogram("response_seconds", "End to end response time")
+LATENCY = Histogram(  # buckets up to 5 minutes: on the free tier a reply can wait through rate limits (14 Nov)
+    "response_seconds", "End to end response time",
+    buckets=[0.25, 0.5, 1, 2, 3, 5, 10, 20, 30, 60, 120, 300],
+)
 GUARDRAIL = Counter("guardrail_blocks_total", "Responses blocked", ["guardrail"])
 CONFIDENCE = Histogram(  # added: not in the guide's code, but needed for its fifth dashboard panel
     "classification_confidence", "Classifier confidence per ticket",

@@ -92,6 +92,29 @@ def failed(t, e) -> Outcome:
                    requirement_ids=("FR-11",))
 
 
+def record_metrics(t, o: Outcome):
+    """Setup Guide 06: what the Prometheus metrics count, for the run and for the API alike."""
+    metrics.TICKETS.labels(t.channel, o.action).inc()
+    metrics.LATENCY.observe(o.latency_ms / 1000)
+    if o.classification is not None:
+        metrics.CONFIDENCE.observe(o.classification.confidence)
+    for name in (o.guardrails.fired if o.guardrails else []):
+        metrics.GUARDRAIL.labels(name).inc()
+
+
+def as_result(o: Outcome) -> dict:
+    """One ticket's result, as written to the results file and returned by the API."""
+    return {"ticket_id": o.ticket_id, "action": o.action, "label": o.label, "priority": o.priority,
+            "reason": o.reason, "sent_text": o.sent_text, "handover": o.handover,
+            "type": o.classification.intent if o.classification else None,
+            "confidence": o.classification.confidence if o.classification else None,
+            "articles_found": list(o.passage_ids),
+            "cited": list(o.draft.cited_doc_ids) if o.draft else [],
+            "citations": citation_trail(o.draft, o.sources),     # 11 Nov: each cited article -> passages, sentences
+            "guardrails": o.guardrails.as_log() if o.guardrails else {},
+            "model_calls": o.model_calls, "tokens": o.tokens, "latency_ms": o.latency_ms}
+
+
 CIRCUIT_AFTER = 3   # consecutive tickets with the model unavailable before the circuit opens
 
 
@@ -141,12 +164,7 @@ def run_evaluation(input_path: str, output_path: str, metrics_port: int = None, 
             log.write(log.DecisionRecord(run_id=run_id, ticket_id=t.ticket_id, stage="outcome", input_summary=summary(t),
                                          action_taken="escalate", label=SPECIALIST, reason=o.reason,
                                          requirement_ids=["FR-10"]), con)
-        metrics.TICKETS.labels(t.channel, o.action).inc()
-        metrics.LATENCY.observe(o.latency_ms / 1000)
-        if o.classification is not None:
-            metrics.CONFIDENCE.observe(o.classification.confidence)
-        for name in (o.guardrails.fired if o.guardrails else []):
-            metrics.GUARDRAIL.labels(name).inc()
+        record_metrics(t, o)
         outcomes[i] = o
         print(f"  [{k}/{len(tickets)}] {t.ticket_id} {o.action:<12} {o.label or '-':<28} {o.latency_ms / 1000:5.1f} s", flush=True)
 
@@ -170,15 +188,7 @@ def run_evaluation(input_path: str, output_path: str, metrics_port: int = None, 
             "minutes": round((time.perf_counter() - started) / 60, 1)}
     out = Path(output_path)
     out.parent.mkdir(parents=True, exist_ok=True)
-    results = [{"ticket_id": o.ticket_id, "action": o.action, "label": o.label, "priority": o.priority,
-                "reason": o.reason, "sent_text": o.sent_text, "handover": o.handover,
-                "type": o.classification.intent if o.classification else None,
-                "confidence": o.classification.confidence if o.classification else None,
-                "articles_found": list(o.passage_ids),
-                "cited": list(o.draft.cited_doc_ids) if o.draft else [],
-                "citations": citation_trail(o.draft, o.sources),     # 11 Nov: each cited article -> passages, sentences
-                "guardrails": o.guardrails.as_log() if o.guardrails else {},
-                "model_calls": o.model_calls, "tokens": o.tokens, "latency_ms": o.latency_ms} for o in outcomes]
+    results = [as_result(o) for o in outcomes]
     out.write_text(json.dumps({"meta": meta, "results": results}, indent=2, ensure_ascii=False), encoding="utf-8")
     md = out.with_name(out.stem + "_metrics.md")
     try:

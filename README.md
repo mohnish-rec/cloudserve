@@ -117,7 +117,8 @@ for example `$env:QUESTION_RULES="off"` in PowerShell or `export QUESTION_RULES=
 | Setting | Default | What it does |
 |---|---|---|
 | `PR01_FILE` | `PR-01_draft_reply_v1.7.md` | The reply prompt. `PR-01_draft_reply.md` is the earlier v1.2 (rollback) |
-| `QUESTION_RULES` | on | Questions decided by Mohnish Grover go to a person (data location, missing export records, jobs failing after a password change) |
+| `QUESTION_RULES` | on | Word rules for questions Mohnish Grover sent to a person: jobs failing after a password change (Q11), invalid credentials with a correct password (Q12), a restore still running (Q27), throttled and would rather pay overage (Q41) |
+| `LEARNED_DECISIONS` | on | A model learned from his decisions on the development tickets; it reads the message only and can only send a ticket to a person (`src/decisions.py`) |
 | `NARROW_RULES` | on | Safety rules hold back requests and disputes, not plain questions |
 | `TYPE_AWARE_SEARCH` | on | Article search also uses the ticket's type |
 | `TRIM_UNSUPPORTED` | on | A sentence the checker cannot support is removed and the whole reply checked again |
@@ -125,6 +126,31 @@ for example `$env:QUESTION_RULES="off"` in PowerShell or `export QUESTION_RULES=
 
 To stop all automatic replies at once (kill switch), create an empty file called `storage/kill_switch`:
 every ticket then goes to a person. Delete the file to turn replies back on.
+
+### Try one ticket at a time (the API)
+
+```
+python -m src.api
+```
+
+Then open http://127.0.0.1:8000/docs in a browser, choose **POST /tickets**, press **Try it out**, paste a ticket
+(the same fields as in `data/development_tickets.json`) and press **Execute**. The answer shows the decision, the
+reply or the handover for a person, and the reasons. It is the same pipeline as the unattended run: every guardrail
+runs and every decision is written to `storage/decisions.db`. `GET /health` shows whether the kill switch is on.
+Labels sent with a ticket are ignored. Stop it with Ctrl+C.
+
+### Monitoring (Prometheus and Grafana)
+
+The system exposes its metrics at http://localhost:8001/metrics while it runs: start the API as above, or add
+`--metrics-port 8001` to the unattended run. Then:
+
+1. Start Prometheus with `monitoring/prometheus.yml` (it reads localhost:8001 every 15 seconds).
+2. In Grafana, add Prometheus as a data source, then **Dashboards > New > Import** and upload
+   `monitoring/grafana_dashboard.json`.
+
+The dashboard shows the five panels the Setup Guide asks for: tickets per hour by channel and outcome; the share
+answered automatically against escalated; response time at the median and 95th percentile (with the 3-second
+target line); guardrail activations by guardrail over time; and the distribution of confidence scores.
 
 ### Red-team check
 
