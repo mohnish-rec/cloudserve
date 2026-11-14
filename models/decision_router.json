@@ -1,0 +1,12 @@
+{
+  "trained": "2026-11-14T16:20:29+00:00",
+  "git_commit": "95ab781",
+  "learned_from": "Mohnish Grover's decisions, evaluation/human_review/dev_walkthrough.json (development tickets only)",
+  "decisions_sha256": "b22d28343f594c1b",
+  "tickets": 384,
+  "to_a_person": 25,
+  "model": "logistic regression, C=10, balanced classes, on all-MiniLM-L6-v2",
+  "threshold": 0.5,
+  "on_its_own_training_tickets": "381 of 384 match",
+  "tested_on_unseen_wordings": "97.7% (scripts/learn_decisions.py)"
+}

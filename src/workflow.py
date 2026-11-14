@@ -23,7 +23,8 @@ from src.ingest import is_blocked
 from src.retrieve import search_typed, type_aware
 from src.pipeline import AUTO, DRAFT_READY, ESCALATE, SPECIALIST, finish
 from src.route import route
-from src.safety import check
+from src import decisions
+from src.safety import SafetyResult, check
 
 
 class TicketState(TypedDict, total=False):
@@ -42,13 +43,23 @@ class TicketState(TypedDict, total=False):
 def build(classifier, retriever, now=None, kill_switch_file=None, call=None, sleep=None):
     kw = {k: v for k, v in (("call", call), ("sleep", sleep)) if v}
     has_vectors = hasattr(retriever, "vectors")       # a test retriever may not have them
+    # Looked up once here: LangGraph inspects each step's code, and a test classifier has no embed (10 Nov, 14 Nov).
+    embed = getattr(classifier, "embed", None)
 
     def classify(st):
         t = st["ticket"]
         return {"c": classifier.classify("" if is_blocked(t) else t.text)}
 
     def check_rules(st):
-        return {"s": check(st["ticket"].text, st["c"].intent)}
+        t = st["ticket"]
+        s = check(t.text, st["c"].intent)
+        # 14 Nov 2026: Mohnish Grover's decisions, learned from the 500 development tickets (src/decisions.py). It can
+        # only add a handover; a test classifier without embeddings skips it.
+        if decisions.enabled() and not s.must_go_to_person and not is_blocked(t) and embed is not None:
+            p = decisions.person_probability(embed([t.text])[0])
+            if p >= decisions.THRESHOLD:
+                s = SafetyResult(True, s.reasons + (decisions.reason(p),))
+        return {"s": s}
 
     def search(st):
         t = st["ticket"]

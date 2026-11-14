@@ -136,6 +136,20 @@ def _shown(s) -> str:
     return s["text"]
 
 
+def exact_copy(sentence, articles: dict) -> bool:
+    """14 Nov 2026 (walkthrough, Q09): True when the sentence is word for word in an article it cites (list numbers and
+    dashes aside). Such a sentence is supported by construction, so the checker's 'not supported' verdict on it is a
+    false alarm (DEV-0218, DEV-0285). Checked here, not taken from the writer's own flag."""
+    words = " ".join((sentence.get("text") or "").split()).rstrip(".")
+    if not sentence.get("verbatim") or not words:
+        return False
+    for d in sentence.get("doc_ids", ()):
+        body = " ".join(re.sub(r"^\s*(\d+\.|-)\s+", "", ln) for ln in articles.get(d, {}).get("content", "").splitlines())
+        if words in " ".join(body.split()):
+            return True
+    return False
+
+
 def model_support(ticket_text, sentences, articles: dict, call=None, sleep=None) -> Check:
     """Layer (b): a model from another family checks situation fit and support (PR-02)."""
     system, user = load_prompt("PR-02_grounding_check.md")
@@ -160,8 +174,11 @@ def model_support(ticket_text, sentences, articles: dict, call=None, sleep=None)
     hit = bool(getattr(raw, "cached", False))
     memo = bool(getattr(raw, "memo", False))
     bad = [n for n in obj.get("unsupported_sentences", []) if isinstance(n, int)]
+    # 14 Nov 2026: a sentence copied word for word from its article cannot be unsupported; only the situation fit decides
+    cleared = [n for n in bad if 1 <= n <= len(sentences) and exact_copy(sentences[n - 1], articles)]
+    bad = [n for n in bad if n not in cleared]
     ok = obj["fits_situation"] and not bad
-    why = str(obj.get("reason", ""))[:200]
+    why = str(obj.get("reason", ""))[:200] + (f"; sentences {cleared} are exact copies of the article" if cleared else "")
     if ok:
         return Check("grounding_model", True, f"fits and supported ({why})", tokens_in=t_in, tokens_out=t_out,
                      cached=hit, memo=memo)
