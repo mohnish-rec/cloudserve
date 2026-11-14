@@ -23,7 +23,7 @@ from src.ingest import is_blocked
 from src.retrieve import search_typed, type_aware
 from src.pipeline import AUTO, DRAFT_READY, ESCALATE, SPECIALIST, finish
 from src.route import route
-from src import decisions
+from src import decisions, followups
 from src.safety import SafetyResult, check
 
 
@@ -55,8 +55,11 @@ def build(classifier, retriever, now=None, kill_switch_file=None, call=None, sle
         s = check(t.text, st["c"].intent)
         # 14 Nov 2026: Mohnish Grover's decisions, learned from the 500 development tickets (src/decisions.py). It can
         # only add a handover; a test classifier without embeddings skips it.
+        prior = None if is_blocked(t) else followups.earlier(t, st["c"].intent)
+        if prior is not None and not s.must_go_to_person:            # 14 Nov: Mohnish Grover's follow-up rule
+            s = SafetyResult(True, s.reasons + (followups.reason(prior),))
         if decisions.enabled() and not s.must_go_to_person and not is_blocked(t) and embed is not None:
-            p = decisions.person_probability(embed([t.text])[0])
+            p = decisions.person_probability(embed([decisions.text_of(t)])[0])   # message only (14 Nov)
             if p >= decisions.THRESHOLD:
                 s = SafetyResult(True, s.reasons + (decisions.reason(p),))
         return {"s": s}
@@ -126,6 +129,7 @@ def build(classifier, retriever, now=None, kill_switch_file=None, call=None, sle
 
     def send(st):
         why = st["d"].reason + (f" Trimmed: {st['trimmed']}." if st.get("trimmed") else "")
+        followups.remember(st["ticket"], st["c"].intent, with_notice(st["draft"], st["passages"]))
         return {"outcome": finish(st, AUTO, "", why, sent=with_notice(st["draft"], st["passages"]),
                                   reqs=("FR-05", "FR-08", "FR-09"))}
 

@@ -57,3 +57,22 @@ def test_new_wordings_of_his_person_decisions_go_to_a_person(embed, text):
     "We're new here with a container we want to deploy. Where do we begin?"])                                          # Q36
 def test_new_wordings_of_his_answer_decisions_are_not_handed_over(embed, text):
     assert decisions.person_probability(embed(text)) < decisions.THRESHOLD
+
+
+def test_it_reads_the_message_not_the_subject():
+    """14 Nov 2026 (Mohnish Grover): a misleading subject must not decide. A ticket with no message uses its subject."""
+    from types import SimpleNamespace as T
+    assert decisions.text_of(T(body="No connection is available.", text="Database restore taking hours. No connection "
+                               "is available.")) == "No connection is available."
+    assert decisions.text_of(T(body="", text="Invoice higher than expected")) == "Invoice higher than expected"
+
+
+@pytest.mark.skipif(not REAL, reason="run python scripts/train_decision_router.py first")
+@pytest.mark.parametrize("ticket", ["DEV-0374", "DEV-0378", "DEV-0439"])
+def test_misleading_subject_no_longer_sends_his_answered_tickets_to_a_person(embed, ticket):
+    """These three went to a person in the sandbox run because of the subject 'Database restore taking hours'."""
+    from pathlib import Path
+    from src.ingest import load_tickets
+    t = next(x for x in load_tickets(Path(__file__).resolve().parent.parent / "data" / "development_tickets.json")
+             if x.ticket_id == ticket)
+    assert decisions.person_probability(embed(decisions.text_of(t))) < decisions.THRESHOLD

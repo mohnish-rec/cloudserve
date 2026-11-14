@@ -30,6 +30,7 @@ from src.classify import TicketClassifier  # noqa: E402
 from src.generate import ACTIVE_PROMPT  # noqa: E402
 from src.guardrails import GUARD_MODEL  # noqa: E402
 from src.ingest import load_tickets  # noqa: E402
+from src import followups  # noqa: E402
 from src.pipeline import ACKNOWLEDGEMENT, Outcome, citation_trail, process  # noqa: E402
 from src.retrieve import Retriever  # noqa: E402
 from src.route import CONFIDENCE_THRESHOLD, SPECIALIST  # noqa: E402
@@ -120,9 +121,13 @@ def run_evaluation(input_path: str, output_path: str, metrics_port: int = None, 
     classifier = TicketClassifier.load(embedder=retriever.embedder)
     run_id = "run-" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S") + "-" + uuid.uuid4().hex[:6]
     con = log.connect()
-    outcomes, down_in_a_row = [], 0
+    outcomes, down_in_a_row = [None] * len(tickets), 0
+    followups.reset()                     # 14 Nov: follow-ups are recognised within this run only
+    # In time order, so a customer's earlier ticket is handled before its follow-up; results keep the file's order.
+    order = sorted(range(len(tickets)), key=lambda i: tickets[i].received_at or "~")
     print(f"{run_id}: {len(tickets)} tickets from {input_path}", flush=True)
-    for k, t in enumerate(tickets, 1):
+    for k, i in enumerate(order, 1):
+        t = tickets[i]
         try:
             o = provider_down(t) if down_in_a_row >= CIRCUIT_AFTER else process(t, classifier, retriever)
         except Exception as e:  # noqa: BLE001 - never drop or skip a ticket
@@ -142,7 +147,7 @@ def run_evaluation(input_path: str, output_path: str, metrics_port: int = None, 
             metrics.CONFIDENCE.observe(o.classification.confidence)
         for name in (o.guardrails.fired if o.guardrails else []):
             metrics.GUARDRAIL.labels(name).inc()
-        outcomes.append(o)
+        outcomes[i] = o
         print(f"  [{k}/{len(tickets)}] {t.ticket_id} {o.action:<12} {o.label or '-':<28} {o.latency_ms / 1000:5.1f} s", flush=True)
 
     rows = log.read(con, run_id)

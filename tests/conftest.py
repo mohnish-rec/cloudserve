@@ -34,3 +34,12 @@ def _sentence_mode(monkeypatch):
 def _fresh_run_memory(monkeypatch):
     """A5 run memory (12 Nov): each test starts as a new run, so tests cannot affect each other."""
     monkeypatch.setattr(G, "_RUN_MEMO", {})
+
+
+@pytest.fixture(autouse=True)
+def _fresh_followups():
+    """Follow-ups (14 Nov): each test starts as a new run."""
+    from src import followups
+    followups.reset()
+    yield
+    followups.reset()

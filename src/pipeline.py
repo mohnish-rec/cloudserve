@@ -70,14 +70,19 @@ def _handover(ticket, c, s, passages, d, draft, why, report=None):
     tried.append("search: " + (", ".join(p.doc_id for p in passages) if passages else "no relevant article"))
     if draft is not None:
         tried.append("reply drafted" if draft.ok else f"reply not drafted ({draft.error})")
+    from src import followups
+    prior = followups.earlier(ticket, c.intent) if any(r.startswith("follow-up") for r in s.reasons) else None
+    if prior is not None:                       # 14 Nov: the earlier automatic reply is the person's draft
+        tried.append(f"earlier automatic reply sent for {prior[2]}")
     return {
         "summary": (draft.summary if draft is not None and draft.summary else
                     f"{ticket.channel} ticket, type {c.intent}, priority {d.priority}"),
         "tried": tried,
         "article": passages[0].doc_id if passages else "",
         # No draft for the agent when it held private data or came from an attack on the system.
-        "draft": render(draft, passages) if draft is not None and draft.ok and not (report and {"private_data", "instruction_integrity"}
-                                                                        & set(report.fired)) else "",
+        "draft": prior[3] if prior is not None else (
+            render(draft, passages) if draft is not None and draft.ok and not (report and {"private_data", "instruction_integrity"}
+                                                                        & set(report.fired)) else ""),
         "unsure": "; ".join(x for x in [why, draft.unsure_about if draft is not None else ""] if x),
     }
 

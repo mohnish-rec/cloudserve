@@ -4,7 +4,7 @@ Attribution: written with Claude (Anthropic), reviewed and run by Mohnish Grover
 He decided every one of the 500 development tickets, question by question (evaluation/human_review/dev_walkthrough.json).
 A logistic regression on the same meaning fingerprints the classifier uses (all-MiniLM-L6-v2) learns those decisions,
 so a new ticket that MEANS the same as one he sent to a person goes to a person, however it is worded
-(scripts/learn_decisions.py: 97.7% match on unseen wordings). Trained only on development tickets, never the labels.
+(scripts/learn_decisions.py; it reads the message only, see text_of). Trained only on development tickets, never the labels.
 It can only ADD a handover: Daniel's safety rules and the zero-tolerance types stay fixed rules underneath (FR-03),
 and the question rules in src/safety.py stay as a backstop. LEARNED_DECISIONS=off turns it off.
 """
@@ -36,6 +36,14 @@ def load(path=MODEL_PATH):
 def person_probability(vector, path=MODEL_PATH) -> float:
     """How likely Mohnish would send this ticket to a person, from its meaning fingerprint."""
     return float(load(path).predict_proba(np.asarray(vector, dtype=float).reshape(1, -1))[0, 1])
+
+
+def text_of(ticket) -> str:
+    """What the learned layer reads: the message only (14 Nov 2026, Mohnish Grover). A misleading subject such as
+    "Database restore taking hours" on a message about connections sent DEV-0374, DEV-0378 and DEV-0439 to a person;
+    reading the message only matched all 384 of his decisions, also on unseen wordings
+    (scripts/compare_decision_text.py). A ticket with no message falls back to its subject."""
+    return ticket.body or ticket.text
 
 
 def reason(p: float) -> str:

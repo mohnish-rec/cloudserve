@@ -25,6 +25,7 @@ import numpy as np  # noqa: E402
 from sklearn.linear_model import LogisticRegression  # noqa: E402
 from sklearn.model_selection import GroupKFold  # noqa: E402
 from src.classify import SEED, TicketClassifier  # noqa: E402
+from src.decisions import text_of  # noqa: E402
 from src.ingest import load_tickets  # noqa: E402
 from src.retrieve import default_embedder  # noqa: E402
 
@@ -36,7 +37,7 @@ qof = {k: q["question"] for q in W for k in q["tickets"]}
 keep = {q["question"] for q in W if not q["question"].startswith("Q53") and q["question"] not in FIXED}
 tickets = [t for t in load_tickets(ROOT / "data" / "development_tickets.json") if qof[t.ticket_id] in keep]
 y = np.array([qof[t.ticket_id] in person_q for t in tickets], dtype=int)
-X = np.asarray(TicketClassifier(features="embeddings", embedder=default_embedder()).embed([t.text for t in tickets]))
+X = np.asarray(TicketClassifier(features="embeddings", embedder=default_embedder()).embed([text_of(t) for t in tickets]))  # message only (14 Nov)
 norm = lambda s: re.sub(r"[^a-z0-9 ]", "", s.lower())
 groups = {"A. new wording (same message never in training)": [norm(t.body) for t in tickets],
           "B. a new question (whole question never in training)": [qof[t.ticket_id] for t in tickets]}
