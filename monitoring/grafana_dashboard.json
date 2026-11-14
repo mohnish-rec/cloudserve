@@ -27,7 +27,7 @@
       "id": 1,
       "type": "timeseries",
       "title": "Tickets processed per hour, by channel and outcome",
-      "description": "Setup Guide 06, panel 1.",
+      "description": "Setup Guide 06, panel 1. Only channel/outcome pairs with tickets are shown.",
       "datasource": {
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
@@ -45,12 +45,15 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "refId": "A",
-          "expr": "sum by (channel, outcome) (increase(tickets_processed_total[1h]))",
+          "expr": "sum by (channel, outcome) (increase(tickets_processed_total[1h])) > 0",
           "legendFormat": "{{channel}} \u00b7 {{outcome}}"
         }
       ],
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "min": 0,
+          "decimals": 0
+        },
         "overrides": []
       },
       "options": {}
@@ -92,7 +95,9 @@
       ],
       "fieldConfig": {
         "defaults": {
-          "unit": "percentunit"
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1
         },
         "overrides": []
       },
@@ -195,7 +200,7 @@
       "id": 5,
       "type": "bargauge",
       "title": "Distribution of confidence scores",
-      "description": "Setup Guide 06, panel 5: where drift shows up first. Tickets per confidence band over the dashboard's time range.",
+      "description": "Setup Guide 06, panel 5: where drift shows up first. Tickets per confidence band since the system started.",
       "datasource": {
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
@@ -213,7 +218,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "refId": "A",
-          "expr": "sum by (le) (increase(classification_confidence_bucket[$__range]))",
+          "expr": "sum by (le) (classification_confidence_bucket)",
           "legendFormat": "up to {{le}}",
           "format": "heatmap",
           "instant": true

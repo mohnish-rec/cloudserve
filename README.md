@@ -144,7 +144,9 @@ Labels sent with a ticket are ignored. Stop it with Ctrl+C.
 The system exposes its metrics at http://localhost:8001/metrics while it runs: start the API as above, or add
 `--metrics-port 8001` to the unattended run. Then:
 
-1. Start Prometheus with `monitoring/prometheus.yml` (it reads localhost:8001 every 15 seconds).
+1. Start Prometheus with `monitoring/prometheus.yml` (it reads localhost:8001 every 15 seconds), from the folder
+   Prometheus was unzipped to: `.\prometheus.exe --config.file=<this project>\monitoring\prometheus.yml --web.listen-address=127.0.0.1:9090`
+   (the listen address keeps it on this computer, so Windows does not ask about the firewall).
 2. In Grafana, add Prometheus as a data source, then **Dashboards > New > Import** and upload
    `monitoring/grafana_dashboard.json`.
 

@@ -57,3 +57,12 @@ def test_metrics_module_defines_the_guide_metrics():
     from src import metrics
     for name in ["TICKETS", "LATENCY", "GUARDRAIL", "CONFIDENCE"]:
         assert hasattr(metrics, name)
+
+def test_dashboard_counts_start_at_zero():
+    """14 Nov 2026: a count that first appears at 1 shows as no increase in Prometheus; every series starts at 0."""
+    from src import metrics
+    samples = {(s.labels.get("channel"), s.labels.get("outcome")) for m in metrics.TICKETS.collect() for s in m.samples
+               if s.name == "tickets_processed_total"}
+    assert ("email", "auto_respond") in samples and ("chat", "escalate") in samples and ("forum", "block") in samples
+    guards = {s.labels.get("guardrail") for m in metrics.GUARDRAIL.collect() for s in m.samples}
+    assert {"private_data", "grounding_model", "tone_and_scope"} <= guards

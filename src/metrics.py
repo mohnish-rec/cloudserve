@@ -18,6 +18,16 @@ CONFIDENCE = Histogram(  # added: not in the guide's code, but needed for its fi
 )
 
 
+# 14 Nov 2026: every channel/outcome and guardrail count starts at 0. A count that first appears already at 1 has no
+# earlier value, so Prometheus reads its increase as 0 and the per-hour panels stay flat (seen on the dashboard).
+for _channel in ("email", "chat", "docs_comment", "forum", "unknown"):
+    for _outcome in ("auto_respond", "escalate", "block"):
+        TICKETS.labels(_channel, _outcome)
+for _name in ("private_data", "grounding_words", "grounding_model", "instruction_integrity", "tone_and_scope",
+              "confidence_floor"):
+    GUARDRAIL.labels(_name)
+
+
 def start_metrics_server(port: int = 8001) -> None:
     """Serve metrics at http://localhost:<port>/metrics (the guide's port).
 
