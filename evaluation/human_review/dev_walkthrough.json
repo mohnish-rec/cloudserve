@@ -469,7 +469,14 @@
    "earlier_decision": "Answer automatically",
    "decision_13nov": "Answer automatically",
    "why": "",
-   "note": "DEV-0374, DEV-0378: subject 'Database restore taking hours' added the backups article -> blocked for length (subject-line fix from Q09)"
+   "note": "DEV-0374, DEV-0378: subject 'Database restore taking hours' added the backups article -> blocked for length (subject-line fix from Q09)",
+   "reply_14nov": {
+    "decision": "Keep the reply as it is (option A)",
+    "words": "lets keep how it was (Mohnish Grover, 14 Nov 2026)",
+    "evidence": "scripts/compare_message_check.py -> evaluation/results/compare_message_check.md: the message check fixed DEV-0374, DEV-0378, DEV-0439 but removed a needed article from 10 tickets, so it was not built",
+    "known_limitation": "a subject that contradicts the message can pull in an extra article; the right steps are still in the reply, second. With the subject 'Database restore taking hours', every fluent message got the connection pool article only (DEV-0068, DEV-0137, DEV-0439) and every non-fluent message also got the restore article first (DEV-0374, DEV-0378; VAL-0078 seen when looking at validation). Same answer rate, lower reply clarity for non-fluent customers.",
+    "report": "keep that in the report (Mohnish Grover, 14 Nov 2026)"
+   }
   },
   {
    "question": "Q26",
