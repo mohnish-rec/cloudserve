@@ -122,6 +122,7 @@ for example `$env:QUESTION_RULES="off"` in PowerShell or `export QUESTION_RULES=
 | `NARROW_RULES` | on | Safety rules hold back requests and disputes, not plain questions |
 | `TYPE_AWARE_SEARCH` | on | Article search also uses the ticket's type |
 | `TRIM_UNSUPPORTED` | on | A sentence the checker cannot support is removed and the whole reply checked again |
+| `PLAN_RULE` | on | A reply using an article that applies only to other plans (its "Applies to" line) goes to a person with the draft (`src/plans.py`) |
 | `REPLY_CACHE` | off in runs | Stored answers are never used for validation or test runs (D-025) |
 
 To stop all automatic replies at once (kill switch), create an empty file called `storage/kill_switch`:

@@ -11,7 +11,7 @@ import pytest
 import src.generate as G
 
 SWITCHES = ("NARROW_RULES", "TRIM_UNSUPPORTED", "REPLY_CACHE", "TYPE_AWARE_SEARCH", "QUESTION_RULES",
-            "LEARNED_DECISIONS")
+            "LEARNED_DECISIONS", "PLAN_RULE")
 SENTENCE_PROMPT = "PR-01_draft_reply_v1.3.md"
 
 

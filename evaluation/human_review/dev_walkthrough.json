@@ -70,7 +70,13 @@
    "n": 7,
    "earlier_decision": "Answer automatically",
    "decision_13nov": "Answer automatically",
-   "why": ""
+   "why": "",
+   "recheck_15nov": {
+    "decision": "Answer automatically (unchanged)",
+    "words": [
+     "Option A"
+    ]
+   }
   },
   {
    "question": "Q05",
@@ -219,8 +225,16 @@
    "n": 5,
    "earlier_decision": "Answer automatically",
    "decision_13nov": "Person",
-   "why": "",
-   "note": "CHANGE NEEDED: new question rule - 'invalid credentials' / 'cannot login' while sure the password is correct -> person. Must not catch Q09 (only me, colleague fine) or Q10 (authenticator codes)"
+   "why": "The issue is complex and needs human assistance for a quick resolution (Mohnish Grover, 15 Nov 2026)",
+   "note": "CHANGE NEEDED: new question rule - 'invalid credentials' / 'cannot login' while sure the password is correct -> person. Must not catch Q09 (only me, colleague fine) or Q10 (authenticator codes)",
+   "recheck_15nov": {
+    "decision": "Person (unchanged)",
+    "words": [
+     "send to a person",
+     "The issue is complex and needs human assistance for a quick resolution"
+    ],
+    "note": "re-checked on 15 Nov from the tickets and the article; the 13 Nov record held no reason in his words (the CHANGE NEEDED note is Claude's build note)"
+   }
   },
   {
    "question": "Q13",
@@ -510,8 +524,19 @@
    "n": 9,
    "earlier_decision": "Answer automatically",
    "decision_13nov": "Person",
-   "why": "",
-   "note": "CHANGE NEEDED: new question rule - a database restore still running long after it started -> person (article gives ~10 min per 100 GB; a stalled restore is on CloudServe's side). Must not catch questions about how to start a restore"
+   "why": "to a person (Mohnish Grover, 15 Nov 2026); reasoning drafted by Gemini and approved by Mohnish Grover, see recheck_15nov",
+   "note": "CHANGE NEEDED: new question rule - a database restore still running long after it started -> person (article gives ~10 min per 100 GB; a stalled restore is on CloudServe's side). Must not catch questions about how to start a restore",
+   "recheck_15nov": {
+    "decision": "Person (unchanged)",
+    "words": [
+     "to a person",
+     "Gemini but approved by me"
+    ],
+    "reasoning_drafted_by_gemini_approved_by_mohnish": [
+     "No way to check live status. The article says to allow \"roughly ten minutes per hundred gigabytes\" (around 40 minutes for 400 GB, or much longer under load). However, if the restore has been running for hours, the customer cannot tell from this article whether it is just slow or genuinely hung—only support can check the backend job.",
+     "Risk of data loss or downtime. Customers dealing with active database restores often need reassurance before they cancel or retry a job."
+    ]
+   }
   },
   {
    "question": "Q28",
@@ -768,8 +793,17 @@
    "n": 7,
    "earlier_decision": "Answer automatically",
    "decision_13nov": "Person",
-   "why": "a rate-limit increase needs a person anyway (Mohnish Grover)",
-   "note": "CHANGE NEEDED: new question rule - throttled after a traffic increase, wanting overage instead of being stopped -> person. Must not catch Q40 (spend cap stopped production) or Q43 (429 errors questions)"
+   "why": "send it to a person because of the noise (Mohnish Grover, 15 Nov 2026)",
+   "note": "CHANGE NEEDED: new question rule - throttled after a traffic increase, wanting overage instead of being stopped -> person. Must not catch Q40 (spend cap stopped production) or Q43 (429 errors questions)",
+   "recheck_15nov": {
+    "decision": "Person (unchanged)",
+    "words": [
+     "it answers it: Decide deliberately between a hard spend cap, which stops the service, and overage, which continues at the listed rate. Production workloads generally need the second.",
+     "For some reason I feel like it is getting answered from the knowledge base but there is extra noise which shouldn't confuse the customer like \"Overage protection is disabled, so usage continued beyond the allowance\"",
+     "send it to a person because of the noise"
+    ],
+    "replaced_reason": "a rate-limit increase needs a person anyway: this repeated a claim made by Claude on 13 Nov, which the ticket does not support (the customer never mentions the API rate limit), so Q41 was decided again on 15 Nov from the ticket and the article alone"
+   }
   },
   {
    "question": "Q42",
@@ -877,7 +911,13 @@
    "earlier_decision": "Answer automatically",
    "decision_13nov": "Answer automatically",
    "why": "",
-   "note": "include the backups article only when the customer mentions damaged or lost data, never by default"
+   "note": "include the backups article only when the customer mentions damaged or lost data, never by default",
+   "recheck_15nov": {
+    "decision": "Answer automatically (unchanged)",
+    "words": [
+     "Option A"
+    ]
+   }
   },
   {
    "question": "Q47",
@@ -917,7 +957,15 @@
    "n": 9,
    "earlier_decision": "Answer automatically",
    "decision_13nov": "Answer automatically (all plans)",
-   "why": ""
+   "why": "",
+   "recheck_15nov": {
+    "decision": "C: answer Business and Enterprise; Standard to a person (general rule: the article's 'Applies to' line decides)",
+    "words": [
+     "C",
+     "It should be a general rule because if the standard plan customers cannot get their answers with it then it will be useless"
+    ],
+    "also_changes": "Q31, Q47, Q49 for Standard customers (their articles apply to Business and Enterprise plans only)"
+   }
   },
   {
    "question": "Q49",
@@ -954,7 +1002,14 @@
    "earlier_decision": "Answer automatically",
    "decision_13nov": "Answer automatically",
    "why": "",
-   "note": "article says the endpoint is disabled after 24h of failures but not how to re-enable it; the follow-up rule covers this"
+   "note": "article says the endpoint is disabled after 24h of failures but not how to re-enable it; the follow-up rule covers this",
+   "recheck_15nov": {
+    "decision": "Answer automatically (unchanged)",
+    "words": [
+     "A, Answer it automatically"
+    ],
+    "note": "the 'note' field (endpoint disabled after 24h; follow-up rule covers it) is Claude's build note, not his reason"
+   }
   },
   {
    "question": "Q51",
@@ -1217,11 +1272,43 @@
   "If an automatic answer did not solve the problem, the follow-up goes to a person with a draft (Mohnish Grover, 14 Nov 2026)."
  ],
  "general_changes": [
-  "Follow-ups: link a new ticket to the same customer's recent automatic reply on the same type (customer_id, date, 7-day window) and send it to a person with a draft (the earlier reply, article and what was not certain), instead of answering again."
+  "Follow-ups: link a new ticket to the same customer's recent automatic reply on the same type (customer_id, date, 7-day window) and send it to a person with a draft (the earlier reply, article and what was not certain), instead of answering again.",
+  {
+   "date": "15 Nov 2026",
+   "rule": "plan rule: when an article the reply uses applies only to other plans ('Applies to' line), the ticket goes to a person with the draft",
+   "words": "It should be a general rule because if the standard plan customers cannot get their answers with it then it will be useless (Mohnish Grover)"
+  }
  ],
  "reply_setting": {
   "decision": "R1: keep PR-01 v1.7 (the whole main article, plus the steps of any second article); allow longer replies when two articles are used (230 words for one article, 320 for two); keep Ines's order",
   "by": "Mohnish Grover",
   "date": "2026-11-14"
- }
+ },
+ "ai_assistance": [
+  {
+   "question": "Q26",
+   "date": "13 Nov 2026",
+   "what": "Mohnish Grover consulted Gemini and pasted its analysis; decision and words his own: \"for now I think it can be answered so A\""
+  },
+  {
+   "question": "Q41",
+   "date": "13-15 Nov 2026",
+   "what": "13 Nov reason repeated a claim by Claude (rate limit) that the ticket does not support; on 15 Nov he consulted Gemini, Claude checked Gemini's points against the system, and he re-decided in his own words: \"send it to a person because of the noise\""
+  },
+  {
+   "question": "Q27",
+   "date": "15 Nov 2026",
+   "what": "reasoning drafted by Gemini, approved by Mohnish Grover (\"Gemini but approved by me\")"
+  },
+  {
+   "question": "Q04, Q12, Q27, Q41, Q46, Q48, Q50",
+   "date": "13 Nov 2026",
+   "what": "he asked Claude for its view before deciding; all seven re-checked on 15 Nov from the tickets and articles alone (Q41, Q12, Q27 stay Person; Q04, Q46, Q50 stay Answer; Q48 changed to C with the general plan rule)"
+  },
+  {
+   "question": "all",
+   "date": "13-15 Nov 2026",
+   "what": "the 'note' fields marked CHANGE NEEDED are Claude's build notes, not his reasons"
+  }
+ ]
 }

@@ -115,18 +115,20 @@ QUESTION_RULES = {
     "no article covers it: automated jobs failing after a password change (Q11)": [
         r"\bpassword\b\W+(\w+\W+){0,12}(automated|scheduled|scripts?|jobs?|pipelines?|integrations?)\W+(\w+\W+){0,6}(fail\w*|authenticat\w*|broken|stopped)"],
     # 14 Nov 2026, walkthrough of the 500 development tickets (Mohnish Grover):
-    # Q12: "invalid credentials" though sure the password is correct, often for days. The article's causes (a lock that
-    # clears in 30 minutes, a stale cookie, a password changed elsewhere) mostly do not fit, so a person looks.
-    "the article's causes do not fit: invalid credentials with a correct password (Q12)": [
+    # Q12: "invalid credentials" though sure the password is correct. Mohnish Grover, 15 Nov 2026: "The issue is
+    # complex and needs human assistance for a quick resolution".
+    "needs a person: invalid credentials with a correct password (Q12)": [
         r"(invalid credentials|cannot log ?in|can.?t log ?in|cannot sign ?in|not able to log ?in)\W+(\w+\W+){0,25}password\W+(\w+\W+){0,2}(is )?(correct|right)",
         r"password\W+(\w+\W+){0,2}(is )?(correct|right)\W+(\w+\W+){0,25}(invalid credentials|cannot log ?in|can.?t log ?in)"],
-    # Q27: a database restore still running long after it started. The article gives about ten minutes per 100 GB;
-    # a stalled restore is on CloudServe's side and the customer cannot fix it.
+    # Q27: a database restore still running long after it started. Mohnish Grover, 15 Nov 2026: "to a person"; the
+    # reasoning (the customer cannot tell slow from stalled, only support can check the job) was drafted by Gemini and
+    # approved by him (evaluation/human_review/dev_walkthrough.json).
     "needs a person: a database restore still running (Q27)": [
         r"\brestor\w*\W+(\w+\W+){0,6}(still|from long time|for hours|for days)\W+(\w+\W+){0,2}(running|run|going|in progress)",
         r"\brestor\w*\W+(is |are )?(running|run) from long time"],
-    # Q41: throttled after a traffic increase and would rather pay overage. If the throttling was the rate limit, only
-    # an account request (a person) can raise it.
+    # Q41: throttled after a traffic increase and would rather pay overage. Mohnish Grover, 15 Nov 2026: "send it to a
+    # person because of the noise" (the reply would include a Common cause, "Overage protection is disabled...", that
+    # describes a different situation from the customer's).
     "needs a person: throttled, would rather pay overage (Q41)": [
         r"\bthrottl\w*\W+(\w+\W+){0,25}(rather|prefer)\W+(\w+\W+){0,3}(pay )?overage"],
 }

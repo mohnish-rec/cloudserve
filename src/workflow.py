@@ -23,7 +23,7 @@ from src.ingest import is_blocked
 from src.retrieve import search_typed, type_aware
 from src.pipeline import AUTO, DRAFT_READY, ESCALATE, SPECIALIST, finish
 from src.route import route
-from src import decisions, followups
+from src import decisions, followups, plans
 from src.safety import SafetyResult, check
 
 
@@ -109,7 +109,22 @@ def build(classifier, retriever, now=None, kill_switch_file=None, call=None, sle
         return {"report": report}
 
     def after_validate(st):
-        return "blocked" if st["report"].blocked else "send"
+        if st["report"].blocked:
+            return "blocked"
+        return "plan" if plan_excluded(st) else "send"
+
+    def plan_excluded(st):
+        """15 Nov 2026, Mohnish Grover's plan rule (src/plans.py)."""
+        if not plans.enabled():
+            return None
+        arts = {a["doc_id"]: a for a in articles_for(st["passages"])}
+        return plans.excluded(st["ticket"].customer_tier, st["draft"].cited_doc_ids, arts)
+
+    def plan(st):
+        doc_id, applies = plan_excluded(st)
+        return {"outcome": finish(st, ESCALATE, DRAFT_READY,
+                                  plans.reason(doc_id, applies, st["ticket"].customer_tier, DRAFT_READY),
+                                  reqs=("FR-07",))}
 
     def handover(st):
         d, draft = st["d"], st.get("draft")
@@ -136,7 +151,7 @@ def build(classifier, retriever, now=None, kill_switch_file=None, call=None, sle
     g = StateGraph(TicketState)
     for name, fn in [("classify", classify), ("check_rules", check_rules), ("search", search), ("route", route_node),
                      ("write", write), ("validate", validate), ("handover", handover), ("blocked", blocked),
-                     ("send", send)]:
+                     ("send", send), ("plan", plan)]:
         g.add_node(name, fn)
     g.set_entry_point("classify")
     g.add_edge("classify", "check_rules")
@@ -144,8 +159,8 @@ def build(classifier, retriever, now=None, kill_switch_file=None, call=None, sle
     g.add_edge("search", "route")
     g.add_conditional_edges("route", after_route, {"handover": "handover", "write": "write"})
     g.add_conditional_edges("write", after_write, {"handover": "handover", "validate": "validate"})
-    g.add_conditional_edges("validate", after_validate, {"blocked": "blocked", "send": "send"})
-    for end in ("handover", "blocked", "send"):
+    g.add_conditional_edges("validate", after_validate, {"blocked": "blocked", "send": "send", "plan": "plan"})
+    for end in ("handover", "blocked", "send", "plan"):
         g.add_edge(end, END)
     return g.compile()
 

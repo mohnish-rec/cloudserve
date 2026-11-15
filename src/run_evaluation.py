@@ -183,7 +183,8 @@ def run_evaluation(input_path: str, output_path: str, metrics_port: int = None, 
                            f"articles, narrowed safety rules {os.getenv('NARROW_RULES', 'on')}, "
                            f"type-aware search {os.getenv('TYPE_AWARE_SEARCH', 'on')}, "
                            f"question rules {os.getenv('QUESTION_RULES', 'on')}, "
-                           f"learned decisions {os.getenv('LEARNED_DECISIONS', 'on')}"),   # the switches as run (12 Nov)
+                           f"learned decisions {os.getenv('LEARNED_DECISIONS', 'on')}, "
+                           f"plan rule {os.getenv('PLAN_RULE', 'on')}"),   # the switches as run (12 Nov)
             "input_sha256": hashlib.sha256(Path(input_path).read_bytes()).hexdigest()[:16],
             "minutes": round((time.perf_counter() - started) / 60, 1)}
     out = Path(output_path)
