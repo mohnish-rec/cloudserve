@@ -87,6 +87,22 @@ was about 5 s. Median is under 1 second because tickets for a person need no mod
 "Never change Ines's words", they read oddly to a customer. Found in 6 replies of the latest 500-ticket run
 (DEV-0008, DEV-0176, DEV-0281, DEV-0312, DEV-0335, DEV-0409; scripts/check_replies.py).
 
+## 8. Citation accuracy against the answer key: 93.2% (17 Nov 2026)
+
+**What happens.** In the final 500-ticket development run (evaluation/results/dev500_final_17nov_SANDBOX_PAID.json),
+259 of the 278 automatic replies that the answer key gives an article for cite one of its articles (target 95%).
+All 19 others were answered automatically, the answer key also says "answer automatically", and every guardrail
+passed. Every ticket, its full reply and the full articles are in Citation_Accuracy_Check_17Nov.xlsx (Capstone folder).
+
+| Group | Tickets | What happened |
+|---|---|---|
+| Q30, Q31, Q33, Q35, Q10 | 16 | The reply comes from the article whose title matches the customer's question (for example "Build failures caused by dependency resolution" for builds failing during dependency resolution); the answer key lists a different article |
+| Q09 (DEV-0008), Q34 (DEV-0295, DEV-0474) | 3 | The subject line points to a different problem from the message, and the reply comes from the subject's article (limitation 1) |
+
+Mohnish Grover, 17 Nov 2026: "I think the 3 real misses are true rest were fine". Without the 16, citation accuracy
+would be 259 of 262 (98.9%). Nothing is changed: citing the answer key's articles would mean using the labels to
+decide.
+
 ## Fixed
 
 - **Plan-limited articles answered for Standard customers (fixed 15 Nov 2026).** Articles that apply to Business and
