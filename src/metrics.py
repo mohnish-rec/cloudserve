@@ -1,5 +1,8 @@
 """Setup Guide step 06: the metrics the system exposes for Prometheus.
 
+Attribution: based on the Setup Guide's code (step 06), adapted with Claude (Anthropic); reviewed and run by
+Mohnish Grover.
+
 The guide's three metrics, plus a confidence histogram for the dashboard
 panel the guide lists as "the distribution of confidence scores, which is
 where drift shows up first".

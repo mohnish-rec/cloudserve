@@ -12,6 +12,7 @@ a sent answer or a logged escalation. None are silently dropped."):
 Anything that goes to a person carries the hand-over (FR-07) and the customer gets the
 acknowledgement straight away.
 """
+import re
 import time
 from dataclasses import dataclass, field
 
@@ -64,7 +65,9 @@ def citation_trail(draft, sources) -> list:
 
 
 def _handover(ticket, c, s, passages, d, draft, why, report=None):
-    """FR-07's five parts. The draft is for the agent to check, never sent as it is."""
+    """FR-07. The draft is for the agent to check, never sent as it is. 16 Nov 2026: "draft" only ever holds a reply
+    the agent could check and send; the reply sent earlier to the same customer and a reply a check stopped are kept
+    in their own fields, so neither is mistaken for something to send."""
     tried = [f"classified as {c.intent} ({c.confidence:.0%} sure)"]
     tried.append("safety rules: " + ("; ".join(s.reasons) if s.reasons else "none fired"))
     tried.append("search: " + (", ".join(p.doc_id for p in passages) if passages else "no relevant article"))
@@ -74,16 +77,37 @@ def _handover(ticket, c, s, passages, d, draft, why, report=None):
     prior = followups.earlier(ticket, c.intent) if any(r.startswith("follow-up") for r in s.reasons) else None
     if prior is not None:                       # 14 Nov: the earlier automatic reply is the person's draft
         tried.append(f"earlier automatic reply sent for {prior[2]}")
+    # No reply text for the agent when it held private data or came from an attack on the system.
+    unsafe = bool(report and {"private_data", "instruction_integrity"} & set(report.fired))
+    text = render(draft, passages) if draft is not None and draft.ok and not unsafe else ""
+    stopped = bool(report and report.blocked)
+    from src import handover_text as H
+    from src.route import kill_switch_on
+    reasons = H.not_sure(ticket, c, s, d, passages, draft, report, prior, kill_switch_on())
+    if "(plan rule)" in why:                                 # 15 Nov: the article is for other plans
+        reasons.insert(0, re.sub(r"^Sent to a person \([^)]*\) because article \S+ applies to (.*) and this customer "
+                                 r"is on (.*) plan \(plan rule\)\.$",
+                                 lambda m: f"The help article is for {m.group(1)}, and this customer is on the "
+                                           f"{m.group(2).capitalize()} plan.", why))
+    if prior is not None:
+        attached = "Attached: the earlier automatic reply this customer already received (do not send it again)."
+    elif stopped and text:
+        attached = "Attached: the reply that was stopped (for information, not for sending)."
+    elif text:
+        attached = "Attached: a draft reply, not sent. Please check it before sending."
+    else:
+        attached = "Attached: no draft reply."
     return {
-        "summary": (draft.summary if draft is not None and draft.summary else
-                    f"{ticket.channel} ticket, type {c.intent}, priority {d.priority}"),
+        "summary": H.summary(ticket, c, d, passages, reasons, attached,
+                             used=draft.cited_doc_ids if (draft is not None and draft.ok and prior is None) else (),
+                             used_titles=H.titles_in(prior[3]) if prior is not None else ()),
         "tried": tried,
         "article": passages[0].doc_id if passages else "",
-        # No draft for the agent when it held private data or came from an attack on the system.
-        "draft": prior[3] if prior is not None else (
-            render(draft, passages) if draft is not None and draft.ok and not (report and {"private_data", "instruction_integrity"}
-                                                                        & set(report.fired)) else ""),
-        "unsure": "; ".join(x for x in [why, draft.unsure_about if draft is not None else ""] if x),
+        "documents": [{"doc_id": i, "title": t} for i, t in list(dict.fromkeys((p.doc_id, p.title) for p in passages))[:3]],
+        "draft": "" if (prior is not None or stopped) else text,
+        "earlier_reply": prior[3] if prior is not None else "",
+        "stopped_reply": text if stopped and prior is None else "",
+        "unsure": " ".join(reasons),
     }
 
 

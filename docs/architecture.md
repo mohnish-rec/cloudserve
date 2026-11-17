@@ -1,6 +1,6 @@
 # Architecture
 
-How the CloudServe support system is designed, and why. Each choice traces to a requirement in the PRD (product requirements document) version 2 and to the course module it comes from. Written 7 November 2026, before the build; updated as the build changes it.
+How the CloudServe support system is designed, and why. Each choice traces to a requirement in the PRD (product requirements document) version 2 and to the course module it comes from. Written 7 November 2026, before the build; rewritten 17 November 2026 to match the system as built (the earlier text is in Git history). Every file is explained in `docs/code_guide.md`.
 
 ## 1. Why the system exists: the translation ladder (Module 1)
 
@@ -20,96 +20,101 @@ Downward check: an answer that is classified, grounded in an article and checked
 - **We assume:** the articles are correct and current; agents read hand-overs; the hidden tickets resemble the development tickets (PRD section 7).
 - **Not ours:** sending email, account changes, refunds, live channel connections, writing articles (PRD section 6).
 
-## 3. The pipeline
+## 3. The pipeline (as built)
 
 ```
-tickets file / API (application programming interface)
-  -> 1 Ingest      raw kept + cleaned copy + 7 data-quality checks        (FR-01)
-  -> kill switch   on: escalate every ticket                              (FR-16)
-  -> 2 Classify    type, urgency, calibrated confidence, 3 alternatives   (FR-02)
-  -> safety rules  fixed word rules + risky types: either one -> person   (FR-03)
-  -> 3 Retrieve    meaning + keyword search, top 5, abstain below floor   (FR-04)
-  -> 4 Route       answer or escalate, threshold from data, reason        (FR-06)
-  -> 5 Generate    cited reply (or fixed "not covered" sentence)          (FR-05)
-  -> 6 Validate    5 guardrails, fail closed                              (FR-09)
-  -> answer: reply + automatic-reply notice                               (FR-08)
-     escalate: hand-over (5 parts + label) + customer acknowledgement     (FR-07)
-  -> decision log (every stage), results, metrics report, gaps list       (FR-10, FR-12, FR-15)
+tickets file (python -m src.run_evaluation, or python -m evaluation.harness) / one ticket (API, python -m src.api)
+  -> 1 Ingest        raw kept + cleaned copy + data-quality checks; never crashes            (FR-01, A2)
+  -> 2 Classify      type (22) and urgency, confidence 0-1, alternatives                     (FR-02, A3)
+  -> 3 Rules         a person must handle it? fixed safety rules and person-only types;
+                     Mohnish Grover's four "person" decisions; follow-up within 7 days;
+                     the learned decisions model (can only send to a person)                 (FR-03)
+  -> 4 Search        400-character passages, meaning + keyword search merged (RRF),
+                     relevance floor 0.35, top 5; also uses the ticket's type                 (FR-04, A4)
+  -> 5 Route         answer only at 85% confidence or more, no rule fired, an article found;
+                     reason in plain words; priority; kill switch                             (FR-06, FR-13, FR-16, A5)
+  -> 6 Write         the main article copied word for word (prompt PR-01 v1.7), named         (FR-05, A6)
+  -> 7 Check         six guardrails; an unsupported sentence is removed and the reply
+                     checked again; any failure blocks (fail closed)                          (FR-09, A7)
+  -> 8 Plan rule     an article for other plans is held for a person
+  -> answered:  the reply + the automatic-reply notice                                        (FR-08)
+     to a person: an acknowledgement to the customer; for the agent a summary (the ticket,
+                  what it is about, the relevant articles, what the system was not sure
+                  about) and, where useful, a draft reply                                     (FR-07)
+  -> decision log (every step), results file, metrics report, live metrics                     (FR-10, FR-12, A8-A10)
 ```
 
-Every exit is either **answered** or **escalated with a reason**. Nothing is dropped and nothing crashes the run (FR-11).
+The steps are joined as one LangGraph workflow (`src/workflow.py`, D-023). Every exit is either **answered** or **with
+a person, with a reason**. Nothing is dropped and one bad ticket never stops the run (FR-11, A9, A11).
+
+**What the system does not do** (CloudServe's own support tool would): send the email or chat message, put the
+ticket in the agents' queue, change accounts, issue refunds. The system returns the reply or the handover, and the
+support tool delivers it (through the API, `POST /tickets`).
 
 ## 4. The Generative Four and the Sustaining Three (Module 1)
 
-| Lever | Decision | How |
+| Lever | Decision | How (as built) |
 |---|---|---|
-| Retrieval | Current, not stale | Search the supplied articles every time; check each article's last-reviewed date (NFR-04 risk) |
-| Context | Specific to this ticket | The ticket text, its type, urgency and channel; never the customer's name |
-| Memory | Accumulates, within limits | Stored history of processed tickets for repeat contacts (FR-14) |
-| Feedback | Reviewed by people, not self-learning | Gaps and blocked replies listed for the writer and tier two (FR-15). The system never changes itself, because learning from current practice would "scale up a mistake" (Daniel) |
-| Guardrails | Prevent | Fixed safety rules before the model; five guardrails after it (FR-03, FR-09) |
-| Orchestration | Coordinate and record | One orchestrated workflow; every stage logged with the ticket ID as trace ID (FR-10) |
-| Recovery | Fail to a person, never to silence | Retries, backup model, then escalation; the kill switch (FR-11, FR-16) |
-
-Trust (Module 1): Trust = Accuracy x Consistency, and customers need to know what produced the answer. Accuracy is measured (NFR-03), consistency is tested (NFR-11), and every automatic reply says it is automatic (FR-08).
+| Retrieval | Current, not stale | The 29 supplied articles are searched for every ticket. (Every article was reviewed 0 days ago in the data, so no age check is needed.) |
+| Context | Specific to this ticket | The ticket's text, type, urgency and channel; the customer's name is never used |
+| Memory | Within limits | Within one run: the same input gets the same answer (A5), and the same customer asking again within 7 days goes to a person (follow-up rule) |
+| Feedback | Reviewed by people, not self-learning | The system never changes itself while running. Its only learned decisions were trained once, offline, on Mohnish Grover's own decisions for the 500 development tickets, never on the answer key or on past handling (Daniel: learning from current practice would "scale up a mistake") |
+| Guardrails | Prevent | Fixed safety rules before any AI call; six guardrails after it |
+| Orchestration | Coordinate and record | One LangGraph workflow; every step logged with the ticket ID |
+| Recovery | Fail to a person, never to silence | Retries with backoff, a backup model, then a person; after 3 tickets in a row with the AI service down, the rest go straight to a person; the kill switch |
 
 ## 5. Data pipeline card (Module 3)
 
 | Question | Answer |
 |---|---|
-| Source to destination | Tickets file -> decisions, results and metrics report |
-| ETL (extract, transform, load) or ELT (extract, load, transform) | **ELT**: each ticket is kept raw as received and a cleaned copy is made, because "every cleaning step loses information" and future analysis may need the original |
+| Source to destination | Tickets file -> decision log, results file, metrics report |
+| ETL or ELT | **ELT** (extract, load, transform): each ticket is kept raw as received and a cleaned copy is made |
 | Pipeline or orchestration | Per ticket: orchestration (each step depends on the one before). Across tickets: a pipeline (one bad ticket never stops the others) |
-| Load | Full load of the input file each run; every run has its own run ID |
-| Idempotency | Re-running the same file gives the same decisions under a new run ID; nothing is overwritten or duplicated |
-| Failure handling | Temporary errors (429, 5xx, timeouts): retry with backoff and jitter, limited. Permanent errors (401, 400, bad input): no retry. Both end in escalation with the reason |
-| Quarantine | A ticket that fails the data-quality checks is escalated with its reasons: our dead-letter queue. Owner: tier two |
-| Data-quality checks at ingest | Completeness (ID, body), validity (channel, plan, region, fluency), timeliness (readable time), uniqueness (ticket ID), consistency (clean text), integrity (customer ID carries several names: plan and region read from each ticket, never looked up by ID) |
-| Monitoring | Tickets in and out, escalation rate, guardrail blocks, latency, confidence distribution, each with a threshold, an action and an owner (week three) |
+| Load | The whole input file each run; tickets processed in the order received; every run has its own run ID |
+| Idempotency | Re-running the same file gives the same decisions under a new run ID; nothing is overwritten |
+| Failure handling | Temporary errors (rate limits, server errors, timeouts): retry with backoff and jitter. Permanent errors: no retry. Both end with a person and the reason |
+| Quarantine | A ticket that fails the data-quality checks goes to a person with its reasons |
+| Monitoring | Prometheus and Grafana: tickets per hour by channel and outcome, answered vs escalated, latency, guardrail activations, confidence distribution |
 
 ## 6. Classifier (Module 4)
 
-- Embeddings (all-MiniLM-L6-v2) with a logistic regression classifier, compared against a TF-IDF (term frequency-inverse document frequency) baseline; the better one is kept (decision D-016).
-- Trained only on development tickets; validation tickets used only for testing, never tuning.
-- **Group cross-validation by question text**: only 215 different questions in 500 tickets, so ordinary splits would put the same question on both sides and inflate the score.
-- Probabilities calibrated and checked with the Evaluation Framework's `calibration_table`.
-- Threshold chosen for **high recall on tickets that should escalate**: a missed escalation costs more than an unnecessary one.
-- Precision and recall per class, confusion matrix, 95% bootstrap confidence intervals; fixed seed; runs recorded with git commit and data hash.
+- all-MiniLM-L6-v2 embeddings with logistic regression (C = 10), chosen over a TF-IDF (term frequency-inverse document frequency) baseline (D-016, D-018).
+- Trained only on the 500 development tickets, with groups kept together so the same message is never on both sides of a test.
+- Confidence checked with the Evaluation Framework's calibration table; the 85% threshold set from development data (D-019).
 
-## 7. Retrieval and generation (Modules 2 and 5)
+## 7. Retrieval and writing (Modules 2 and 5)
 
-- **Search:** meaning-based and keyword (BM25, Best Matching 25) results merged by reciprocal rank fusion, because tickets contain exact codes such as 429 and 401. Kept only if it beats meaning-only search (decision D-017, with chunk size).
-- **Abstain:** below a relevance threshold set from data, search returns nothing and the ticket escalates.
-- **Grounding contract:** numbered sources; every claim cites [n]; one fixed sentence when the sources do not answer; ticket text inside delimiters as data, never instructions; temperature 0.
-- **Structured output:** JSON (JavaScript Object Notation) checked against a schema in code; unparseable output escalates.
-- **Prompts:** versioned in `prompts/` and registered in the Stage 3 prompt library with the requirement each serves.
-- **Evaluation:** search measured separately (expected article in the top 5, and its rank) from replies (grounding, citation accuracy). An AI judge from a different model family (Llama) judges gpt-oss replies; agreement with my own scores is reported.
+- **Search:** 400-character passages; meaning and keyword (BM25, Best Matching 25) search merged by reciprocal rank fusion; relevance floor 0.35 (D-017). A ticket whose type calls for a kind of article the search missed gets the best one of that kind third (type-aware search, for non-fluent English).
+- **Writing:** the writer reads the whole of the top 3 articles and chooses which to answer from; the code copies the main article word for word (every step, note and common cause, without the symptoms list) and the steps of a second article if needed. Help articles are never reworded ("Never change Ines's words"). Prompt PR-01 v1.7; versions and reasons in `prompts/README.md`.
+- **Injection defence:** the ticket is placed between marks and declared to be data; instructions in it are never followed; a guardrail checks for them.
+- **Structured output:** JSON (JavaScript Object Notation) checked in code; anything unreadable goes to a person.
+- **Consistency and cost:** within a run, the same input gets the same answer; a reply cache stores AI answers for development runs only (D-025).
 
-## 8. Guardrails (Module 5, Governance Framework section 4)
+## 8. Guardrails (Module 5, Governance Framework)
 
 | Guardrail | Checks | When it fires |
 |---|---|---|
-| Private data | Names, addresses, keys, account numbers, anything identifying another customer | Block and escalate; never redact and send |
-| Grounding | Every claim cites a retrieved passage | Block and escalate, with the unsupported claim flagged |
-| Instruction integrity | The ticket has not tried to change the system's instructions | Block, escalate and record the input for review |
-| Tone and scope | Stays within support; no promises about refunds, credits or dates | Block and escalate |
-| Confidence floor | The threshold was applied; a missing confidence counts as low | Escalate |
+| private_data | Names, addresses, keys, account numbers, anything identifying a customer | Block; the agent gets no reply text |
+| grounding_words | Every sentence's words and numbers are in its article | Block (or remove the sentence and check again) |
+| grounding_model | A second model from another family (Qwen, PR-02) checks the article fits the situation and each sentence is supported; a sentence copied exactly from its article is always supported | Block, with the unsupported part flagged |
+| instruction_integrity | The ticket has not tried to instruct the system, and the reply holds none of our instructions | Block; the agent gets no reply text |
+| tone_and_scope | No promises about refunds, credits or dates; within support; within the length limit | Block |
+| confidence_floor | The classifier was confident enough and the writer was sure | Block |
 
-All guardrails **fail closed**: if a check errors, the reply is blocked. A red-team set of attack tickets is kept as regression tests, and the false-alarm rate on ordinary tickets is reported.
+All guardrails **fail closed**: if a check errors, the reply is blocked. The red-team tickets (`data/red_team/`) are kept as regression tests.
 
-## 9. Orchestration and deployment (Module 7)
+## 9. Interfaces, orchestration and deployment (Module 7)
 
-- The steps can be drawn as a flowchart, so the system is **one orchestrated workflow with a single language model**, not a crew of agents (which costs 3 to 8 times the model calls).
-- One framework: LangGraph, as the Project Brief recommends; no CrewAI.
-- Bounded: one retry for malformed output, timeouts on every call, a token budget per ticket.
-- Typed contracts: every result checked against a schema before it is written.
-- One trace per ticket, with secrets and personal details removed before logging.
-- FastAPI endpoint with `/healthz` and `/readyz` (FR-17); pinned requirements; keys only in `.env`.
+- One orchestrated workflow with one writing model, not a crew of agents; LangGraph (D-023).
+- FastAPI (`src/api.py`): `POST /tickets` (one ticket in, the decision and reply or handover out), `GET /health`, `GET /healthz` (alive) and `GET /readyz` (models, article index and key in place) (FR-17); `/docs` to try a ticket in the browser.
+- Unattended run: `python -m src.run_evaluation <input> <output>` or `python -m evaluation.harness --input <file> --output <folder>`.
+- Monitoring: Prometheus reads the metrics; the Grafana dashboard (`monitoring/grafana_dashboard.json`) shows the Setup Guide's five panels.
+- CI: GitHub runs every test on every push. Pinned requirements; the key only in `.env`.
 
 ## 10. How the system is judged (Module 1, eval first)
 
-Gates set before running: type precision 85%+; calibration within 5 points; unsupported claims 5% or fewer; citation accuracy 95%+; zero private data; fairness gap under 5 points; consistency 80%+ agreement over 10 runs; zero automatic replies to risky tickets. Also measured: success of each step and the weakest step, latency at the median and 95th percentile, and the share of "check and send" drafts that were right.
+Gates: type precision 85%+; calibration within 5 points; unsupported claims 5% or fewer; citation accuracy 95%+; zero private data; zero automatic replies to must-not tickets; fairness gap under 5 points (also measured inside each question); the same decision for the same input. Also measured: latency at the median and 95th percentile, first contact resolution, escalation rate. Known limitations are listed in `docs/known_limitations.md`.
 
 ## 11. Architecture decisions
 
-Recorded in full in `docs/decision_log.md`: D-016 (trained classifier, not the language model, decides the ticket type). To come during the build: D-017 (chunk size and hybrid search), D-018 (threshold), D-019 (LangGraph orchestration), D-020 (AI judge).
+In full in `docs/decision_log.md`: D-016 (a trained classifier decides the type), D-017 (passages and hybrid search), D-018 (embeddings with logistic regression), D-019 (the 85% threshold), D-020 (grounding checked twice), D-021 (red-team findings), D-023 (LangGraph), D-025 (reply cache), D-026 (validation closed until the final run). Decisions from 13 Nov onward (the walkthrough of the 500 development tickets, the plan rule, the handover summary) are being added from D-027.

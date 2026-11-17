@@ -39,7 +39,7 @@ def test_any_sign_of_use_still_goes_to_a_person(text, ptype):
     "i cannot login since last Friday. password is correct i am sure. please help fast, it is blocking my work."])
 def test_q12_invalid_credentials_with_a_correct_password_goes_to_a_person(text):
     r = safety.check(text, "authentication_failure")
-    assert r.must_go_to_person and any("(Q12)" in x for x in r.reasons)
+    assert r.must_go_to_person and any("invalid credentials with a correct password" in x for x in r.reasons)
 
 
 @pytest.mark.parametrize("text", [
@@ -48,13 +48,13 @@ def test_q12_invalid_credentials_with_a_correct_password_goes_to_a_person(text):
     "restore we start earlier today is still run. database about four hundred gigabytes."])
 def test_q27_a_restore_still_running_goes_to_a_person(text):
     r = safety.check(text, "database_issue")
-    assert r.must_go_to_person and any("(Q27)" in x for x in r.reasons)
+    assert r.must_go_to_person and any("a database restore still running" in x for x in r.reasons)
 
 
 def test_q41_throttled_and_wanting_overage_goes_to_a_person():
     r = safety.check("We were throttled on Monday after a traffic increase and it took down part of our product. "
                      "We would rather pay overage than be stopped. How do we change that?", "quota_or_overage")
-    assert r.must_go_to_person and any("(Q41)" in x for x in r.reasons)
+    assert r.must_go_to_person and any("throttled, would rather pay overage" in x for x in r.reasons)
 
 
 # The neighbouring questions these rules must not catch

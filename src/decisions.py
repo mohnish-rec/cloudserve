@@ -46,5 +46,10 @@ def text_of(ticket) -> str:
     return ticket.body or ticket.text
 
 
+def is_reason(text: str) -> bool:
+    return text.startswith("similar tickets were handled by a person")
+
+
 def reason(p: float) -> str:
-    return f"learned from Mohnish Grover's decisions on the development tickets ({p:.0%} a person)"
+    # 16 Nov 2026: plain words for the agent; the source (his decisions on the development tickets) is in this file.
+    return f"similar tickets were handled by a person ({p:.0%} likely)"

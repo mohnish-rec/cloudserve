@@ -27,6 +27,12 @@ def enabled() -> bool:
     return os.getenv("REPLY_CACHE", "on").strip().lower() not in {"off", "0", "false", "no"}
 
 
+def read_only() -> bool:
+    """15 Nov 2026 (Mohnish Grover): REPLY_CACHE=read reuses stored development answers but stores nothing new, so a
+    validation run can test whether development results carry over without adding validation answers to the cache."""
+    return os.getenv("REPLY_CACHE", "on").strip().lower() == "read"
+
+
 def path() -> Path:
     p = Path(os.getenv("CACHE_PATH", "storage/cache.db"))
     return p if p.is_absolute() else ROOT / p
@@ -57,6 +63,8 @@ def get(k):
 
 
 def put(k, raw, model):
+    if read_only():
+        return
     try:
         con = _connect()
         con.execute("INSERT OR REPLACE INTO cache VALUES (?, ?, ?, ?)",

@@ -129,11 +129,12 @@ def provider_down(t) -> Outcome:
                    requirement_ids=("FR-11",))
 
 
-def run_evaluation(input_path: str, output_path: str, metrics_port: int = None, use_cache: bool = False) -> dict:
+def run_evaluation(input_path: str, output_path: str, metrics_port: int = None, use_cache: bool = False,
+                   read_cache: bool = False) -> dict:
     """use_cache is OFF unless asked for: validation, hidden-set and final runs must be a fresh test that
     neither reads nor writes stored answers (D-025). Only development test runs may turn it on."""
     started = time.perf_counter()
-    os.environ["REPLY_CACHE"] = "on" if use_cache else "off"
+    os.environ["REPLY_CACHE"] = "on" if use_cache else ("read" if read_cache else "off")
     if metrics_port:
         metrics.start_metrics_server(metrics_port)
     raw = json.loads(Path(input_path).read_text(encoding="utf-8-sig"))
@@ -177,7 +178,8 @@ def run_evaluation(input_path: str, output_path: str, metrics_port: int = None, 
             "prompts": f"{ACTIVE_PROMPT[1]}, PR-02 v1.0", "writer": os.getenv("MODEL_NAME", "openai/gpt-oss-20b"),
             "backup": os.getenv("BACKUP_MODEL_NAME", "openai/gpt-oss-120b"), "checker": GUARD_MODEL,
             "classifier": CLASSIFIER, "threshold": CONFIDENCE_THRESHOLD,
-            "reply_cache": "on (development run)" if use_cache else "off (fresh run)",
+            "reply_cache": ("on (development run)" if use_cache else
+                            "read only (stored development answers reused, nothing stored)" if read_cache else "off (fresh run)"),
             "writer_provider": "Groq direct (free tier)",
             "experiment": (f"trim {os.getenv('TRIM_UNSUPPORTED', 'on')}, writer reads {os.getenv('WRITER_ARTICLES', '3')} "
                            f"articles, narrowed safety rules {os.getenv('NARROW_RULES', 'on')}, "
@@ -208,8 +210,10 @@ def main():
     ap.add_argument("--metrics-port", type=int, default=None, help="serve Prometheus metrics while running (e.g. 8001)")
     ap.add_argument("--use-cache", action="store_true",
                     help="development runs only: reuse stored answers. Never for validation or final runs (D-025)")
+    ap.add_argument("--read-cache", action="store_true",
+                    help="reuse stored development answers but store nothing new (15 Nov, Mohnish Grover)")
     a = ap.parse_args()
-    run_evaluation(a.input_path, a.output_path, a.metrics_port, a.use_cache)
+    run_evaluation(a.input_path, a.output_path, a.metrics_port, a.use_cache, a.read_cache)
 
 
 if __name__ == "__main__":

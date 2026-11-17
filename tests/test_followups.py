@@ -23,7 +23,8 @@ def test_a_follow_up_within_7_days_goes_to_a_person_with_the_earlier_reply(tmp_p
     assert first.action == "auto_respond"
     again = handle(ticket("T-2", "2026-11-04T09:00:00Z", body="I tried those steps and it still fails."), tmp=tmp_path)
     assert again.action == "escalate" and "follow-up" in again.reason and "T-1" in again.reason
-    assert again.handover["draft"] == first.sent_text                  # the person sees what was already sent
+    assert again.handover["earlier_reply"] == first.sent_text          # the person sees what was already sent
+    assert again.handover["draft"] == ""                                # 16 Nov: not something to send again
 
 
 def test_a_different_customer_type_or_week_is_not_a_follow_up(tmp_path):

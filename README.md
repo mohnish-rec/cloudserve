@@ -92,6 +92,12 @@ Put the ticket file (in the same format as `data/development_tickets.json`) anyw
 python -m src.run_evaluation <tickets file> <results file>
 ```
 
+The same run in the form the Build Specification shows also works (`--output` can be a folder or a `.json` file):
+
+```
+python -m evaluation.harness --input data/validation_tickets.json --output evaluation/results/
+```
+
 For example, for the hidden test set:
 
 ```
@@ -123,7 +129,7 @@ for example `$env:QUESTION_RULES="off"` in PowerShell or `export QUESTION_RULES=
 | `TYPE_AWARE_SEARCH` | on | Article search also uses the ticket's type |
 | `TRIM_UNSUPPORTED` | on | A sentence the checker cannot support is removed and the whole reply checked again |
 | `PLAN_RULE` | on | A reply using an article that applies only to other plans (its "Applies to" line) goes to a person with the draft (`src/plans.py`) |
-| `REPLY_CACHE` | off in runs | Stored answers are never used for validation or test runs (D-025) |
+| `REPLY_CACHE` | off in runs | Stored answers are never used for validation or test runs (D-025). `--use-cache` turns it on for development runs; `--read-cache` reuses stored development answers but stores nothing new |
 
 To stop all automatic replies at once (kill switch), create an empty file called `storage/kill_switch`:
 every ticket then goes to a person. Delete the file to turn replies back on.
@@ -137,7 +143,7 @@ python -m src.api
 Then open http://127.0.0.1:8000/docs in a browser, choose **POST /tickets**, press **Try it out**, paste a ticket
 (the same fields as in `data/development_tickets.json`) and press **Execute**. The answer shows the decision, the
 reply or the handover for a person, and the reasons. It is the same pipeline as the unattended run: every guardrail
-runs and every decision is written to `storage/decisions.db`. `GET /health` shows whether the kill switch is on.
+runs and every decision is written to `storage/decisions.db`. `GET /health` shows whether the kill switch is on; `GET /healthz` answers while the API is alive, and `GET /readyz` lists anything still missing (the trained models, the article index or the AI key).
 Labels sent with a ticket are ignored. Stop it with Ctrl+C.
 
 ### Monitoring (Prometheus and Grafana)

@@ -1,5 +1,8 @@
 """Setup Guide step 04: build the vector store from the documentation.
 
+Attribution: based on the Setup Guide's code (step 04), adapted with Claude (Anthropic); reviewed and run by
+Mohnish Grover.
+
 Follows the guide's code with five changes, each marked below:
 the pack's field is doc_id (not id), the file is read as UTF-8,
 the store is rebuilt from scratch so a second run gives the same result,

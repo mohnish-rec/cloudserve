@@ -24,7 +24,7 @@ from src.retrieve import search_typed, type_aware
 from src.pipeline import AUTO, DRAFT_READY, ESCALATE, SPECIALIST, finish
 from src.route import route
 from src import decisions, followups, plans
-from src.safety import SafetyResult, check
+from src.safety import NO_DRAFT, SafetyResult, check, decided_for_a_person
 
 
 class TicketState(TypedDict, total=False):
@@ -77,8 +77,20 @@ def build(classifier, retriever, now=None, kill_switch_file=None, call=None, sle
         return {"d": route(t.text, st["c"], st["s"], st["passages"], received_at=t.received_at, now=now,
                            kill_switch_file=kill_switch_file)}
 
+    def draft_for_person(st):
+        """16 Nov 2026 (Mohnish Grover): a ticket sent to a person only by his own decisions (his question rules or the
+        learned decisions) gets a draft for the agent. A fixed safety rule (security, data location, compliance,
+        feature or unclear requests, refunds…) never does. The draft is not sent; the agent checks it."""
+        from src.route import kill_switch_on
+        s = st["s"]
+        others = [r for r in s.reasons if not decisions.is_reason(r)]
+        mine = s.must_go_to_person and (not others or decided_for_a_person(others)) and not (NO_DRAFT & set(s.reasons))
+        return mine and not st["c"].fallback and bool(st["passages"]) and not kill_switch_on(kill_switch_file)
+
     def after_route(st):
         # A safety rule, an unusable ticket or no article: to a person with no model call (NFR-07).
+        if draft_for_person(st):
+            return "write"
         return "handover" if (st["s"].must_go_to_person or st["c"].fallback or not st["passages"]) else "write"
 
     def write(st):

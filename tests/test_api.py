@@ -42,3 +42,17 @@ def test_a_broken_classifier_fails_closed_to_a_person(tmp_path):
     app = create_app(Broken(), Search(), write_log=False, kill_switch_file=tmp_path / "off")
     r = app.state.handle(TICKET)
     assert r["action"] == "escalate" and "unexpected error" in r["reason"]
+
+
+def test_healthz_and_readyz_exist(tmp_path):
+    """FR-17 (17 Nov 2026): /healthz says the process is alive; /readyz lists anything missing."""
+    paths = {r.path for r in app_for(tmp_path).routes}
+    assert {"/healthz", "/readyz"} <= paths
+
+
+def test_readiness_lists_what_is_missing(tmp_path, monkeypatch):
+    from src.api import readiness
+    monkeypatch.delenv("LLM_API_KEY", raising=False)
+    monkeypatch.delenv("WRITER_API_KEY", raising=False)
+    missing = readiness(tmp_path)                    # an empty folder: nothing is in place
+    assert any("classifier model" in m for m in missing) and any("AI key" in m for m in missing)

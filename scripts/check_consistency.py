@@ -1,5 +1,7 @@
 """A5 check (12 Nov 2026): within each run, do all 10 copies of a ticket get the same decision; and across the two
-runs? Plain code, no model. Run after the two consistency runs (see scripts/make_consistency_set.py)."""
+runs? Plain code, no model. Run after the two consistency runs (see scripts/make_consistency_set.py).
+
+Attribution: written with Claude (Anthropic), reviewed and run by Mohnish Grover."""
 import json
 from collections import defaultdict
 from pathlib import Path

@@ -8,10 +8,13 @@ The answer key is never read: only the ticket fields in TicketIn are kept, anyth
 Run:    python -m src.api                      (http://127.0.0.1:8000/docs to try a ticket in the browser)
         API_PORT=8000, METRICS_PORT=8001 (the port prometheus.yml reads; 0 turns the metrics server off)
 Ends:   GET  /health    is the system up, and is the kill switch on?
+        GET  /healthz   alive (FR-17)
+        GET  /readyz    ready to answer tickets: models, article index and AI key all in place (FR-17)
         POST /tickets   one ticket -> the decision, the reply or the handover, and the reasons
 """
 import os
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Optional
 
 from fastapi import FastAPI
@@ -36,6 +39,18 @@ class TicketIn(BaseModel):
     customer_tier: Optional[str] = None
     customer_region: Optional[str] = None
     language_fluency: Optional[str] = None
+
+
+def readiness(root=None) -> list:
+    """What is missing before tickets can be answered: the trained models, the article index, the AI key."""
+    root = Path(root) if root else Path(__file__).resolve().parent.parent
+    need = {"classifier model (python scripts/train_classifier.py)": root / "models" / "classifier.joblib",
+            "learned decisions model (python scripts/train_decision_router.py)": root / "models" / "decision_router.joblib",
+            "article index (python scripts/setup_vector_store.py)": root / os.getenv("CHROMA_PATH", "storage/chroma")}
+    missing = [name for name, path in need.items() if not Path(path).exists()]
+    if not (os.getenv("LLM_API_KEY") or os.getenv("WRITER_API_KEY")):
+        missing.append("AI key (LLM_API_KEY in .env)")
+    return missing
 
 
 FIELDS = tuple(getattr(TicketIn, "model_fields", None) or TicketIn.__fields__)
@@ -78,6 +93,17 @@ def create_app(classifier=None, retriever=None, write_log=True, **options) -> Fa
     def health():
         from src.route import kill_switch_on
         return {"status": "ok", "kill_switch_on": kill_switch_on(options.get("kill_switch_file")), "run_id": run_id}
+
+    @app.get("/healthz")
+    def healthz():
+        """FR-17: the process is alive."""
+        return {"status": "alive"}
+
+    @app.get("/readyz")
+    def readyz():
+        """FR-17: everything a ticket needs is in place. Not ready lists what is missing (nothing is loaded here)."""
+        missing = readiness()
+        return {"status": "ready" if not missing else "not ready", "missing": missing}
 
     @app.post("/tickets")
     def tickets(ticket: TicketIn):

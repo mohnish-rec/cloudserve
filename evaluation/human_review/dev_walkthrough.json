@@ -1277,6 +1277,24 @@
    "date": "15 Nov 2026",
    "rule": "plan rule: when an article the reply uses applies only to other plans ('Applies to' line), the ticket goes to a person with the draft",
    "words": "It should be a general rule because if the standard plan customers cannot get their answers with it then it will be useless (Mohnish Grover)"
+  },
+  {
+   "date": "16 Nov 2026",
+   "rule": "handover: a plain-code summary for every ticket sent to a person (what it is about, the customer's words, why, the documents, what the system was not sure about); no question numbers in what the agent reads; a draft for tickets sent to a person by his own decisions; 'draft' only holds a reply that could be sent",
+   "words": [
+    "Better summary for sure",
+    "in the summary I see \"Q12\" but the questions were for us to figure out the system, the agents don't know these questions, so why is the summary showing \"q12\"?",
+    "Okay so do the drafts for 25 tickets too and make the summaries as suggested in the project files, mention the documents too"
+   ]
+  },
+  {
+   "date": "17 Nov 2026",
+   "rule": "handover: no draft for Q11 (automated jobs after a password change); the articles listed with no reply attached are the closest one, and the second closest only when the knowledge base links the two; no suggested next step for the plan rule (no article states one)",
+   "words": [
+    "Don't make the draft as it will be useless for the agents anyway.",
+    "How about including top 2 where the second one makes sense too",
+    "How can you suggest a next step without knowing the next step? What is the next step for someone on the standard plan? Is it mentioned anywhere?"
+   ]
   }
  ],
  "reply_setting": {

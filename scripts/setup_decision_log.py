@@ -1,5 +1,8 @@
 """Setup Guide step 05: create the decision log database.
 
+Attribution: based on the Setup Guide's code (step 05), adapted with Claude (Anthropic); reviewed and run by
+Mohnish Grover.
+
 The guide's table with seven added columns (marked), so a run can be
 reconciled and every decision traced to the model that made it.
 Run: python scripts/setup_decision_log.py

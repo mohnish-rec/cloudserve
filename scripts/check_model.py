@@ -1,6 +1,8 @@
 """Setup Guide step 03, 'Checking it works': one real call to each model.
 
 Adapted from the guide's snippet for Groq (the guide allows OpenRouter or Groq).
+Attribution: based on the Setup Guide's code (step 03), adapted with Claude (Anthropic); reviewed and run by
+Mohnish Grover.
 Run: python scripts/check_model.py
 """
 import os

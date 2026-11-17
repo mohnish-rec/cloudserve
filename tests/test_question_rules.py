@@ -70,7 +70,7 @@ def test_export_missing_older_records_is_answered(final_rules, text):
     "we change password on our shared account around 14:00 yesterday and now our automated jobs all fail to authenticate."])
 def test_automated_jobs_failing_after_a_password_change_go_to_a_person(final_rules, text):
     result = safety.check(text, "authentication_failure")
-    assert result.must_go_to_person and any("(Q11)" in r for r in result.reasons)
+    assert result.must_go_to_person and any("automated jobs failing after a password change" in r for r in result.reasons)
 
 
 @pytest.mark.parametrize("text", STAY_AUTOMATIC + [

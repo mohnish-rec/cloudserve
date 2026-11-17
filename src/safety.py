@@ -112,24 +112,24 @@ QUESTION_RULES = {
     # asks how the snapshot works, and Ines's article answers that.
     # Q11: no article says to update the password stored in automated jobs; decided "person" (11 Nov). The checker
     # blocked all 4 in v1.6 but let 1 through in v1.7, so the decision is enforced here instead.
-    "no article covers it: automated jobs failing after a password change (Q11)": [
+    "no article covers it: automated jobs failing after a password change": [            # Q11
         r"\bpassword\b\W+(\w+\W+){0,12}(automated|scheduled|scripts?|jobs?|pipelines?|integrations?)\W+(\w+\W+){0,6}(fail\w*|authenticat\w*|broken|stopped)"],
     # 14 Nov 2026, walkthrough of the 500 development tickets (Mohnish Grover):
     # Q12: "invalid credentials" though sure the password is correct. Mohnish Grover, 15 Nov 2026: "The issue is
     # complex and needs human assistance for a quick resolution".
-    "needs a person: invalid credentials with a correct password (Q12)": [
+    "needs a person: invalid credentials with a correct password": [                    # Q12
         r"(invalid credentials|cannot log ?in|can.?t log ?in|cannot sign ?in|not able to log ?in)\W+(\w+\W+){0,25}password\W+(\w+\W+){0,2}(is )?(correct|right)",
         r"password\W+(\w+\W+){0,2}(is )?(correct|right)\W+(\w+\W+){0,25}(invalid credentials|cannot log ?in|can.?t log ?in)"],
     # Q27: a database restore still running long after it started. Mohnish Grover, 15 Nov 2026: "to a person"; the
     # reasoning (the customer cannot tell slow from stalled, only support can check the job) was drafted by Gemini and
     # approved by him (evaluation/human_review/dev_walkthrough.json).
-    "needs a person: a database restore still running (Q27)": [
+    "needs a person: a database restore still running": [                              # Q27
         r"\brestor\w*\W+(\w+\W+){0,6}(still|from long time|for hours|for days)\W+(\w+\W+){0,2}(running|run|going|in progress)",
         r"\brestor\w*\W+(is |are )?(running|run) from long time"],
     # Q41: throttled after a traffic increase and would rather pay overage. Mohnish Grover, 15 Nov 2026: "send it to a
     # person because of the noise" (the reply would include a Common cause, "Overage protection is disabled...", that
     # describes a different situation from the customer's).
-    "needs a person: throttled, would rather pay overage (Q41)": [
+    "needs a person: throttled, would rather pay overage": [                            # Q41
         r"\bthrottl\w*\W+(\w+\W+){0,25}(rather|prefer)\W+(\w+\W+){0,3}(pay )?overage"],
 }
 # Q05 (14 Nov 2026, Mohnish Grover): a key the customer exposed by mistake (pushed or committed to a repository, or
@@ -164,6 +164,22 @@ def check_text(text: str) -> list:
         rules["data location"] = _COMPILED["data location"]     # Daniel's rule in full (11 Nov)
         rules.update(_QUESTIONS)
     return [name for name, pats in rules.items() if any(p.search(text or "") for p in pats)]
+
+
+# 16 Nov 2026 (Mohnish Grover): the reasons an agent reads carry no question numbers ("the agents don't know these
+# questions"); the link to each question stays in the comments above and in evaluation/human_review/dev_walkthrough.json.
+
+
+# 17 Nov 2026 (Mohnish Grover, Q11): "Don't make the draft as it will be useless for the agents anyway." No article
+# covers automated jobs failing after a password change, so a draft from the login article would not help.
+NO_DRAFT = {"word rule: no article covers it: automated jobs failing after a password change"}
+
+
+def decided_for_a_person(reasons) -> bool:
+    """True when every reason is one of Mohnish Grover's own "person" decisions (the question rules above), so no
+    fixed safety rule is involved. Such tickets get a draft for the agent (16 Nov 2026)."""
+    names = {f"word rule: {n}" for n in QUESTION_RULES}
+    return bool(reasons) and all(r in names for r in reasons)
 
 
 def check(text: str, predicted_type: str = None) -> SafetyResult:
