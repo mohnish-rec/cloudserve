@@ -3,7 +3,7 @@
 Attribution: written with Claude (Anthropic), reviewed and run by Mohnish Grover.
 "Sample at least fifty responses, have two people assess them independently, and report your
 agreement rate." 50 replies the system actually sent, drawn at random (seed 42) from the final
-development run (10 Nov 2026: trim, prompt v1.3, answer library, narrowed rules; 500 tickets). Each assessor gets an
+development run (17 Nov 2026: the frozen system, commit 596a3be; 500 tickets, fresh answers). Each assessor gets an
 identical copy and fills it in without seeing the other's.
 
 Run:    python scripts/make_review_sheet.py
@@ -37,7 +37,7 @@ COLUMNS = [
 def main():
     import argparse
     ap = argparse.ArgumentParser()
-    ap.add_argument("--results", default="sandbox_dev500_final.json")
+    ap.add_argument("--results", default="dev500_final_17nov_SANDBOX_PAID.json")
     ap.add_argument("--tickets", default="development_tickets.json")
     ap.add_argument("--all", action="store_true", help="every sent reply instead of a random 50")
     a = ap.parse_args()
@@ -94,7 +94,7 @@ def main():
             (f"Every reply the system sent in {a.results} ({n} replies): a performance check on tickets the system "
              f"never learned from. Nothing in the system is changed because of this review." if a.all else
              "Sample: 50 replies the system sent, chosen at random (seed 42) from the final run of 500 development "
-             "tickets (10 Nov 2026).") + " How each reply was produced (written, trimmed or from the answer library) "
+             "tickets (17 Nov 2026).") + " How each reply was produced (for example whether a sentence was trimmed) "
             "is deliberately not shown, so it cannot sway the review.",
         ]:
             guide.append([line])
