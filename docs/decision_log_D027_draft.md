@@ -148,3 +148,14 @@ and evidence are from the files named. Nothing here is final until Mohnish has c
 - **Why:** Build Specification section 06, steps 13 and 14 ("One ticket from each channel is submitted"; "A ticket
   engineered to trigger a guardrail is submitted"); Evaluation Framework: repeat contacts "catches a system which
   closes tickets without actually solving anything". Mohnish Grover, 17 Nov: "do the 2 small builds yeah".
+
+## D-042 · Decisions confirmed before the final development run (17 Nov 2026)
+- **Q41 stays with a person.** His words: "q41 to person" (as on 15 Nov: "send it to a person because of the noise").
+  Evidence: `docs/known_limitations.md`, 3 (the noise check of 341 replies).
+- **Type-aware search stays on.** His words: "type aware search on". Evidence: found in development run v14 (11 Nov
+  11:50), tested on development run v14_typed (non-fluent tickets: expected article found 81 to 83 of 87; answered
+  89 to 95 of 120).
+- **A refresh mode for the reply cache** (`--refresh-cache`): every answer fresh, the new answers stored. His words:
+  "you can store the cache but dont use the old one from previos 500 run".
+- **Check before the run:** 50 development tickets run fresh (`sandbox_dev_check_50_nocache.json`): 49 of 50 identical
+  to the last 500-ticket run; DEV-0376 (Q02) used one article instead of two (known limitation 2).

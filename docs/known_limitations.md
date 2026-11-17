@@ -54,7 +54,14 @@ testing and not training".
 questions a cause is the answer (Q01: "The role was granted at project scope rather than organisation scope").
 For others a cause is noise: in Q41 the reply would include "Overage protection is disabled, so usage continued beyond
 the allowance", the opposite of the customer's situation. Mohnish Grover, 15 Nov 2026: "send it to a person because of
-the noise" (Q41 stays with a person).
+the noise" (Q41 stays with a person); confirmed 17 Nov 2026: "q41 to person".
+
+**Is there the same noise elsewhere? (17 Nov 2026, scripts/check_causes_noise.py)** The grounding checker was asked,
+for each of the 341 automatic replies in the latest 500-ticket development run, whether any Common cause contradicts
+the customer's situation. It flagged 6 causes in 5 replies, all Q52, and in 5 of the 6 the flagged cause is in fact
+the answer ("The signature was computed over a parsed body rather than the raw bytes"); DEV-0080 is debatable. So no
+other question shows the Q41 problem, and letting the checker remove causes would have removed the answer. The
+causes are Ines's own words, copied as written ("Never change Ines's words").
 
 ## 4. The learned decisions layer cannot spot a brand-new "person" question (14 Nov 2026)
 

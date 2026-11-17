@@ -30,3 +30,15 @@ def test_off_unless_asked_for(monkeypatch):
     """17 Nov 2026, the course team: caching is optional and disabled by default during evaluation."""
     monkeypatch.delenv("REPLY_CACHE", raising=False)
     assert not cache.enabled() and not cache.read_only()
+
+
+def test_refresh_reads_nothing_old_but_stores_the_new_answer(tmp_path, monkeypatch):
+    """17 Nov 2026 (Mohnish Grover): "you can store the cache but dont use the old one from previos 500 run"."""
+    monkeypatch.setenv("CACHE_PATH", str(tmp_path / "c.db"))
+    monkeypatch.setenv("REPLY_CACHE", "on")
+    cache.put("k", "old reply", "model-a")                       # from an earlier run
+    monkeypatch.setenv("REPLY_CACHE", "refresh")
+    assert cache.enabled() and cache.get("k") is None            # the old answer is not used
+    cache.put("k", "new reply", "model-a")                       # the fresh answer is stored
+    monkeypatch.setenv("REPLY_CACHE", "on")
+    assert cache.get("k") == ("new reply", "model-a")

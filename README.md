@@ -135,7 +135,7 @@ for example `$env:QUESTION_RULES="off"` in PowerShell or `export QUESTION_RULES=
 | `TYPE_AWARE_SEARCH` | on | Article search also uses the ticket's type |
 | `TRIM_UNSUPPORTED` | on | A sentence the checker cannot support is removed and the whole reply checked again |
 | `PLAN_RULE` | on | A reply using an article that applies only to other plans (its "Applies to" line) goes to a person with the draft (`src/plans.py`) |
-| `REPLY_CACHE` | off | Stored answers are never used for validation or test runs (D-025). `--use-cache` turns it on for development runs; `--read-cache` reuses stored development answers but stores nothing new |
+| `REPLY_CACHE` | off | Stored answers are never used for validation or test runs (D-025). `--use-cache` turns it on for development runs; `--read-cache` reuses stored development answers but stores nothing new; `--refresh-cache` reads nothing stored (every answer fresh) and stores the new answers for later development runs |
 
 To stop all automatic replies at once (kill switch), create an empty file called `storage/kill_switch`:
 every ticket then goes to a person. Delete the file to turn replies back on.

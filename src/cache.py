@@ -34,6 +34,13 @@ def read_only() -> bool:
     return os.getenv("REPLY_CACHE", "off").strip().lower() == "read"
 
 
+def refresh() -> bool:
+    """17 Nov 2026 (Mohnish Grover): "you can store the cache but dont use the old one from previos 500 run".
+    REPLY_CACHE=refresh reads nothing stored, so every answer is fresh, and stores the new answers (replacing any
+    old answer for the same input) for later development runs."""
+    return os.getenv("REPLY_CACHE", "off").strip().lower() == "refresh"
+
+
 def path() -> Path:
     p = Path(os.getenv("CACHE_PATH", "storage/cache.db"))
     return p if p.is_absolute() else ROOT / p
@@ -54,6 +61,8 @@ def _connect():
 
 def get(k):
     """(raw text, model) or None. Never raises: a broken cache just means a fresh call."""
+    if refresh():
+        return None
     try:
         con = _connect()
         row = con.execute("SELECT raw, model FROM cache WHERE key = ?", (k,)).fetchone()
