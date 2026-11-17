@@ -1,0 +1,401 @@
+{
+  "meta": {
+    "input": "demo_tickets.json",
+    "run_id": "run-20261117T210751-2751da",
+    "date": "2026-11-17T21:10:42+00:00",
+    "git_commit": "8310e58",
+    "prompts": "PR-01 v1.7, PR-02 v1.0",
+    "writer": "openai/gpt-oss-20b",
+    "backup": "openai/gpt-oss-120b",
+    "checker": "qwen/qwen3.8-27b",
+    "classifier": "logistic regression on all-MiniLM-L6-v2 embeddings, C=10 (D-018)",
+    "threshold": 0.85,
+    "reply_cache": "off (fresh run)",
+    "writer_provider": "Groq direct (free tier)",
+    "experiment": "trim on, writer reads 3 articles, narrowed safety rules on, type-aware search on, question rules on, learned decisions on, plan rule on",
+    "input_sha256": "adbf6da5c497b73b",
+    "minutes": 3.1
+  },
+  "results": [
+    {
+      "ticket_id": "DEV-0319",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Sent to a person (Needs a specialist) because model unavailable: all models failed after 12 calls (last: openai/gpt-oss-120b: ConnectionError).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "The ticket: \"Unexpected overage charges — Overage charges appeared on our invoice that we were not expecting. We thought we were well inside our allowance.\"\nWhat it is about: Usage limits or overage. Standard customer, by email, medium priority.\nHelp articles that seemed relevant: \"Usage limits, overage and spend controls\" (knowledge base article DOC-BILL-003, applies to All plans); \"Understanding your invoice and usage breakdown\" (knowledge base article DOC-BILL-001, applies to All plans)\nWhat the system was not sure about: The AI service did not respond, so no reply was written.\nAttached: no draft reply.",
+        "tried": [
+          "classified as quota_or_overage (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-BILL-003, DOC-BILL-001, DOC-BILL-002, DOC-SEC-001, DOC-API-001",
+          "reply not drafted (model unavailable: all models failed after 12 calls (last: openai/gpt-oss-120b: ConnectionError))"
+        ],
+        "article": "DOC-BILL-003",
+        "documents": [
+          {
+            "doc_id": "DOC-BILL-003",
+            "title": "Usage limits, overage and spend controls"
+          },
+          {
+            "doc_id": "DOC-BILL-001",
+            "title": "Understanding your invoice and usage breakdown"
+          },
+          {
+            "doc_id": "DOC-BILL-002",
+            "title": "Changing plans, and how proration is calculated"
+          }
+        ],
+        "draft": "",
+        "earlier_reply": "",
+        "stopped_reply": "",
+        "unsure": "The AI service did not respond, so no reply was written."
+      },
+      "type": "quota_or_overage",
+      "confidence": 0.9984,
+      "articles_found": [
+        "DOC-BILL-003",
+        "DOC-BILL-001",
+        "DOC-BILL-002",
+        "DOC-SEC-001",
+        "DOC-API-001"
+      ],
+      "cited": [],
+      "citations": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0,
+        "writer_cached": 0,
+        "checker_cached": 0
+      },
+      "latency_ms": 34495,
+      "wait_ms": 34156
+    },
+    {
+      "ticket_id": "DEV-0108",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "high",
+      "reason": "Sent to a person (Needs a specialist) because model unavailable: all models failed after 12 calls (last: openai/gpt-oss-120b: ConnectionError).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "The ticket: \"Every deployment fails at the health check stage. I have increased the timeout twice already and it makes no difference.\"\nWhat it is about: A failed deployment or build. Business customer, by chat, high priority.\nHelp articles that seemed relevant: \"Container deployments failing during the health check phase\" (knowledge base article DOC-DEPLOY-001, applies to Container Service); \"First deployment: a walkthrough\" (knowledge base article DOC-ONB-001, applies to All plans)\nWhat the system was not sure about: The AI service did not respond, so no reply was written.\nAttached: no draft reply.",
+        "tried": [
+          "classified as deployment_failure (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-DEPLOY-001, DOC-ONB-001, DOC-INT-001, DOC-ONB-002, DOC-DEPLOY-003",
+          "reply not drafted (model unavailable: all models failed after 12 calls (last: openai/gpt-oss-120b: ConnectionError))"
+        ],
+        "article": "DOC-DEPLOY-001",
+        "documents": [
+          {
+            "doc_id": "DOC-DEPLOY-001",
+            "title": "Container deployments failing during the health check phase"
+          },
+          {
+            "doc_id": "DOC-ONB-001",
+            "title": "First deployment: a walkthrough"
+          },
+          {
+            "doc_id": "DOC-INT-001",
+            "title": "Connecting continuous integration pipelines"
+          }
+        ],
+        "draft": "",
+        "earlier_reply": "",
+        "stopped_reply": "",
+        "unsure": "The AI service did not respond, so no reply was written."
+      },
+      "type": "deployment_failure",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DEPLOY-001",
+        "DOC-ONB-001",
+        "DOC-INT-001",
+        "DOC-ONB-002",
+        "DOC-DEPLOY-003"
+      ],
+      "cited": [],
+      "citations": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0,
+        "writer_cached": 0,
+        "checker_cached": 0
+      },
+      "latency_ms": 36615,
+      "wait_ms": 36341
+    },
+    {
+      "ticket_id": "DEV-0422",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Sent to a person (Needs a specialist) because model unavailable: all models failed after 12 calls (last: openai/gpt-oss-120b: ConnectionError).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "The ticket: \"Question about the export endpoint — Our cursor seems to stop working partway through a long iteration. Is there an expiry we should be handling?\"\nWhat it is about: A question about using the API. Business customer, as a comment on the documentation, medium priority.\nHelp articles that seemed relevant: \"Pagination and handling large result sets\" (knowledge base article DOC-API-002, applies to All plans); \"Understanding API rate limits and quota tiers\" (knowledge base article DOC-API-001, applies to All plans)\nWhat the system was not sure about: The AI service did not respond, so no reply was written.\nAttached: no draft reply.",
+        "tried": [
+          "classified as api_usage_question (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-API-002, DOC-API-001, DOC-DATA-001, DOC-API-003, DOC-SEC-003",
+          "reply not drafted (model unavailable: all models failed after 12 calls (last: openai/gpt-oss-120b: ConnectionError))"
+        ],
+        "article": "DOC-API-002",
+        "documents": [
+          {
+            "doc_id": "DOC-API-002",
+            "title": "Pagination and handling large result sets"
+          },
+          {
+            "doc_id": "DOC-API-001",
+            "title": "Understanding API rate limits and quota tiers"
+          },
+          {
+            "doc_id": "DOC-DATA-001",
+            "title": "Exporting account data and scheduled extracts"
+          }
+        ],
+        "draft": "",
+        "earlier_reply": "",
+        "stopped_reply": "",
+        "unsure": "The AI service did not respond, so no reply was written."
+      },
+      "type": "api_usage_question",
+      "confidence": 0.9996,
+      "articles_found": [
+        "DOC-API-002",
+        "DOC-API-001",
+        "DOC-DATA-001",
+        "DOC-API-003",
+        "DOC-SEC-003"
+      ],
+      "cited": [],
+      "citations": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0,
+        "writer_cached": 0,
+        "checker_cached": 0
+      },
+      "latency_ms": 40627,
+      "wait_ms": 40281
+    },
+    {
+      "ticket_id": "DEV-0330",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "high",
+      "reason": "Sent to a person (Needs a specialist) because model unavailable: all models failed after 12 calls (last: openai/gpt-oss-120b: ConnectionError).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "The ticket: \"No connections available error — Our connection pool appears to be exhausting under moderate load. We have already increased the pool size and it made things worse.\"\nWhat it is about: A database problem. Business customer, on the forum, high priority.\nHelp articles that seemed relevant: \"Database connection pool exhaustion\" (knowledge base article DOC-PERF-003, applies to Managed Database)\nWhat the system was not sure about: The AI service did not respond, so no reply was written.\nAttached: no draft reply.",
+        "tried": [
+          "classified as database_issue (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-PERF-003, DOC-AUTH-003, DOC-DEPLOY-001, DOC-PERF-001, DOC-DEPLOY-004",
+          "reply not drafted (model unavailable: all models failed after 12 calls (last: openai/gpt-oss-120b: ConnectionError))"
+        ],
+        "article": "DOC-PERF-003",
+        "documents": [
+          {
+            "doc_id": "DOC-PERF-003",
+            "title": "Database connection pool exhaustion"
+          },
+          {
+            "doc_id": "DOC-AUTH-003",
+            "title": "Single sign-on configuration with SAML providers"
+          },
+          {
+            "doc_id": "DOC-DEPLOY-001",
+            "title": "Container deployments failing during the health check phase"
+          }
+        ],
+        "draft": "",
+        "earlier_reply": "",
+        "stopped_reply": "",
+        "unsure": "The AI service did not respond, so no reply was written."
+      },
+      "type": "database_issue",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-PERF-003",
+        "DOC-AUTH-003",
+        "DOC-DEPLOY-001",
+        "DOC-PERF-001",
+        "DOC-DEPLOY-004"
+      ],
+      "cited": [],
+      "citations": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0,
+        "writer_cached": 0,
+        "checker_cached": 0
+      },
+      "latency_ms": 37248,
+      "wait_ms": 36947
+    },
+    {
+      "ticket_id": "DEV-0058",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Sent to a person (Needs a specialist) because a safety rule says a person must handle it (word rule: data location; type: data_residency). Priority medium (the classifier's urgency).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "The ticket: \"Question about backup regions — One of our customers has asked for written confirmation of where their data is physically stored. Could you point me to something I can share with them?\"\nWhat it is about: Where data is stored. Business customer, by email, medium priority.\nHelp articles that seemed relevant: \"Data residency and regional storage\" (knowledge base article DOC-DATA-003, applies to Business and Enterprise plans); \"Backups, retention and point-in-time restore\" (knowledge base article DOC-DATA-002, applies to Managed Database)\nWhat the system was not sure about: It asks where data is stored, which a person must always answer.\nAttached: no draft reply.",
+        "tried": [
+          "classified as data_residency (100% sure)",
+          "safety rules: word rule: data location; type: data_residency",
+          "search: DOC-DATA-003, DOC-DATA-002, DOC-ONB-002, DOC-DEPLOY-002, DOC-DATA-001"
+        ],
+        "article": "DOC-DATA-003",
+        "documents": [
+          {
+            "doc_id": "DOC-DATA-003",
+            "title": "Data residency and regional storage"
+          },
+          {
+            "doc_id": "DOC-DATA-002",
+            "title": "Backups, retention and point-in-time restore"
+          },
+          {
+            "doc_id": "DOC-ONB-002",
+            "title": "Migrating an existing application to CloudServe"
+          }
+        ],
+        "draft": "",
+        "earlier_reply": "",
+        "stopped_reply": "",
+        "unsure": "It asks where data is stored, which a person must always answer."
+      },
+      "type": "data_residency",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-DATA-003",
+        "DOC-DATA-002",
+        "DOC-ONB-002",
+        "DOC-DEPLOY-002",
+        "DOC-DATA-001"
+      ],
+      "cited": [],
+      "citations": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0,
+        "writer_cached": 0,
+        "checker_cached": 0
+      },
+      "latency_ms": 195,
+      "wait_ms": 0
+    },
+    {
+      "ticket_id": "DEV-0033",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "high",
+      "reason": "Sent to a person (Needs a specialist) because model unavailable: all models failed after 12 calls (last: openai/gpt-oss-120b: ConnectionError).",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "The ticket: \"We are setting up SAML with our identity provider and users are being bounced back to an error page after authenticating successfully on our side. The assertion looks correct to us.\"\nWhat it is about: Single sign-on (SSO). Standard customer, by chat, high priority.\nHelp articles that seemed relevant: \"Single sign-on configuration with SAML providers\" (knowledge base article DOC-AUTH-003, applies to Business and Enterprise plans)\nWhat the system was not sure about: The AI service did not respond, so no reply was written.\nAttached: no draft reply.",
+        "tried": [
+          "classified as sso_configuration (100% sure)",
+          "safety rules: none fired",
+          "search: DOC-AUTH-003, DOC-SEC-001, DOC-AUTH-002, DOC-AUTH-001, DOC-AUTH-004",
+          "reply not drafted (model unavailable: all models failed after 12 calls (last: openai/gpt-oss-120b: ConnectionError))"
+        ],
+        "article": "DOC-AUTH-003",
+        "documents": [
+          {
+            "doc_id": "DOC-AUTH-003",
+            "title": "Single sign-on configuration with SAML providers"
+          },
+          {
+            "doc_id": "DOC-SEC-001",
+            "title": "Responding to a suspected account compromise"
+          },
+          {
+            "doc_id": "DOC-AUTH-002",
+            "title": "Multi-factor authentication setup and recovery"
+          }
+        ],
+        "draft": "",
+        "earlier_reply": "",
+        "stopped_reply": "",
+        "unsure": "The AI service did not respond, so no reply was written."
+      },
+      "type": "sso_configuration",
+      "confidence": 1.0,
+      "articles_found": [
+        "DOC-AUTH-003",
+        "DOC-SEC-001",
+        "DOC-AUTH-002",
+        "DOC-AUTH-001",
+        "DOC-AUTH-004"
+      ],
+      "cited": [],
+      "citations": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {
+        "writer_in": 0,
+        "writer_out": 0,
+        "checker_in": 0,
+        "checker_out": 0,
+        "writer_cached": 0,
+        "checker_cached": 0
+      },
+      "latency_ms": 15617,
+      "wait_ms": 15224
+    },
+    {
+      "ticket_id": "RT-01",
+      "action": "escalate",
+      "label": "Needs a specialist",
+      "priority": "medium",
+      "reason": "Sent to a person (Needs a specialist) because the model provider is unavailable (failed for 3 tickets in a row): model unavailable, circuit open.",
+      "sent_text": "Thanks for getting in touch. A member of our support team has your ticket and will reply to you directly.",
+      "handover": {
+        "summary": "",
+        "tried": [
+          "not attempted: model provider unavailable"
+        ],
+        "article": "",
+        "draft": "",
+        "unsure": "model provider unavailable"
+      },
+      "type": null,
+      "confidence": null,
+      "articles_found": [],
+      "cited": [],
+      "citations": [],
+      "guardrails": {},
+      "model_calls": 0,
+      "tokens": {},
+      "latency_ms": 0,
+      "wait_ms": 0
+    }
+  ]
+}

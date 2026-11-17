@@ -1,0 +1,3068 @@
+{
+ "model": "meta-llama/llama-3.3-70b-instruct",
+ "date": "2026-11-17",
+ "rubric": "v4",
+ "results_file": "sandbox_dev500_final_17nov.json",
+ "answers": [
+  {
+   "ticket_id": "DEV-0001",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0002",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0004",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides clear steps for the customer to roll back to a previous revision, making it suitable for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0006",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0008",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's MFA issue, with clear and polite language suitable for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0009",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides clear steps to solve the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0010",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to troubleshoot the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0012",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to help the customer solve their problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0014",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their SSO issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0016",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to rotate the exposed key without downtime, making it a clear and helpful response."
+  },
+  {
+   "ticket_id": "DEV-0017",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "No",
+   "E": "No",
+   "reason": "The reply includes bullets that are not relevant to the customer's specific issue, such as removing a departing user and revoking API keys, which may confuse the customer and make the reply less clear, and the wording is not fully adapted for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0018",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0019",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information for removing a departing team member, and the added lines do not introduce any unsupported facts."
+  },
+  {
+   "ticket_id": "DEV-0020",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant steps for the customer to troubleshoot the issue, with clear and polite language suitable for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0022",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0023",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to troubleshoot the issue, but may not fully address the customer's specific question about how group membership interacts with directly assigned roles."
+  },
+  {
+   "ticket_id": "DEV-0025",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0026",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0027",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0029",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately conveys the information from the help article and directly addresses the customer's question about rate limits and keys, providing a clear solution to their problem."
+  },
+  {
+   "ticket_id": "DEV-0030",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0031",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue with API rate limits, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0032",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant steps for the customer to resolve their connection pool exhaustion issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0034",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to help the customer understand their invoice increase, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0036",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0039",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the cited help article and provides relevant information to solve the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0040",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0041",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0042",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0043",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue with latency, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0044",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0046",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant steps for the customer to troubleshoot their issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0047",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0049",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0050",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0051",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to troubleshoot the customer's issue with API key permissions, and the language is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0052",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0053",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0055",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0056",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue with response times and latency, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0057",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0060",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to help the customer solve their problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0062",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot the issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0063",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to help the customer troubleshoot the issue, although some points may not be directly related to the customer's specific problem."
+  },
+  {
+   "ticket_id": "DEV-0064",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant steps to address the customer's issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0065",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the cited help article and provides relevant information to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0066",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0067",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue with signature verification, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0068",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their issue, with no added misinformation or commitments."
+  },
+  {
+   "ticket_id": "DEV-0070",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant steps for the customer to resolve their connection pool exhaustion issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0071",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0072",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0075",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0076",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant troubleshooting steps for the customer's issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0078",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0079",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0080",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to troubleshoot the issue with webhook delivery and signature verification, and is polite and clear in its wording."
+  },
+  {
+   "ticket_id": "DEV-0081",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to help the customer solve their problem, with no added misinformation or commitments."
+  },
+  {
+   "ticket_id": "DEV-0082",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the cited help article and provides relevant information to help the customer solve their problem, with no added misinformation or commitments."
+  },
+  {
+   "ticket_id": "DEV-0083",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0084",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant guidance for the customer's issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0086",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0087",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0089",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help articles and provides relevant troubleshooting steps for the customer's issue with service slowness during peak hours, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0090",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0092",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue, and the wording is polite and clear for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0093",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to help the customer troubleshoot the issue, although some points may not be directly related to the customer's specific problem."
+  },
+  {
+   "ticket_id": "DEV-0094",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information for removing a departing team member, including revoking API keys and transferring ownership."
+  },
+  {
+   "ticket_id": "DEV-0095",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help articles and provides relevant troubleshooting steps for the customer's issue with response times and autoscaling, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0096",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for migrating an existing application, including handling local state such as uploaded files."
+  },
+  {
+   "ticket_id": "DEV-0098",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0099",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0100",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot and potentially resolve their issue with API rate limits and throughput."
+  },
+  {
+   "ticket_id": "DEV-0101",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to solve the customer's problem, with a polite and clear tone suitable for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0104",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant information to help the customer solve their problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0105",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, but may not fully address the specific problem of the endpoint not receiving events since last Friday."
+  },
+  {
+   "ticket_id": "DEV-0108",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0111",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot the issue with their API key, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0112",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0113",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0115",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant steps for the customer to resolve their issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0116",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to troubleshoot the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0117",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue with duplicate webhook deliveries and signature verification failures, and is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0119",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to troubleshoot the customer's issue with API key permissions, and the language is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0122",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides clear steps for the customer to revert to a previous revision, making it a suitable solution for their problem."
+  },
+  {
+   "ticket_id": "DEV-0124",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant information to help the customer solve their problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0125",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue with signature verification, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0127",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0128",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to troubleshoot the connection pool exhaustion issue, making it a clear and helpful response for the customer."
+  },
+  {
+   "ticket_id": "DEV-0129",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to help the customer solve their problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0130",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to help the customer solve their problem, with no added misinformation or commitments."
+  },
+  {
+   "ticket_id": "DEV-0131",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0136",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to troubleshoot the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0137",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant guidance for the customer's issue, with no added misinformation or commitments."
+  },
+  {
+   "ticket_id": "DEV-0138",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant steps to address the customer's issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0140",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to help the customer troubleshoot the issue, although some points may not be directly applicable to their specific situation."
+  },
+  {
+   "ticket_id": "DEV-0143",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their connection pool exhaustion issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0144",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant guidance for the customer's issue, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0145",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to help the customer troubleshoot their issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0147",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the cited help article and provides relevant information to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0151",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to help the customer understand and potentially resolve their issue with the higher-than-expected invoice."
+  },
+  {
+   "ticket_id": "DEV-0153",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0155",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue with single sign-on configuration, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0156",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to solve the customer's problem, and the wording is polite and clear for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0157",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides clear steps to solve the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0159",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue with duplicate events, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0160",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to remove a departing team member, and the wording is clear and polite."
+  },
+  {
+   "ticket_id": "DEV-0161",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, but may not fully address the specific problem of the team member being unable to open the project despite having permission."
+  },
+  {
+   "ticket_id": "DEV-0163",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the help article and provides clear steps to solve the customer's problem, and the wording is polite and suitable for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0166",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0167",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to help the customer solve their problem with pagination and cursor expiration."
+  },
+  {
+   "ticket_id": "DEV-0171",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0172",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue, and the wording is polite and clear for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0173",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to help the customer understand and address their billing period issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0174",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides clear steps for the customer to follow, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0176",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue with authenticator app codes being rejected, and the wording is clear and polite despite being written for support staff."
+  },
+  {
+   "ticket_id": "DEV-0177",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0178",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue with response times and latency, and is polite and clear in its wording."
+  },
+  {
+   "ticket_id": "DEV-0179",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue with API rate limits, and the language is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0181",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help articles and provides a clear and relevant solution to the customer's problem, with no added misinformation or commitments."
+  },
+  {
+   "ticket_id": "DEV-0182",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to help the customer solve their problem, including the fact that cursors expire after one hour and how to handle it."
+  },
+  {
+   "ticket_id": "DEV-0183",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue with 429 responses, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0185",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant information to help the customer solve their problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0186",
+   "A": "No",
+   "B": "All",
+   "C": 4,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue with high latency, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0189",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0190",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot the SSO issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0192",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue with overage charges, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0194",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot the log forwarding issue, with clear and polite language suitable for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0195",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to help the customer solve their problem, with no added misinformation or commitments."
+  },
+  {
+   "ticket_id": "DEV-0196",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot the issue with new starters not being created automatically through SSO."
+  },
+  {
+   "ticket_id": "DEV-0197",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue with signature verification, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0198",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their issue, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0199",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to help the customer understand their invoice and usage breakdown, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0200",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant steps to help the customer understand and address their issue with the invoice being higher than expected."
+  },
+  {
+   "ticket_id": "DEV-0201",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0203",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0204",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue with latency, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0207",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to help the customer solve their problem with cursor expiration and pagination."
+  },
+  {
+   "ticket_id": "DEV-0212",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to solve the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0213",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "No",
+   "E": "No",
+   "reason": "The reply is clear and provides relevant information from the help article, but its tone is somewhat impersonal and lacks the apologetic language expected for a paying business customer, and some of the wording is not tailored for a customer audience."
+  },
+  {
+   "ticket_id": "DEV-0215",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0216",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to help the customer solve their problem, including the fact that cursors expire after one hour and how to handle it."
+  },
+  {
+   "ticket_id": "DEV-0217",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0218",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0219",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant troubleshooting steps for the customer's issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0221",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately conveys the information from the help article and directly addresses the customer's question about rate limits and keys, providing a clear solution to their problem."
+  },
+  {
+   "ticket_id": "DEV-0222",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides a clear solution to the customer's problem, following the article's steps for rotating a key without downtime."
+  },
+  {
+   "ticket_id": "DEV-0223",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant information to help the customer solve their problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0224",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0225",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies the relevant information from the help article and provides a clear and polite response to the customer's issue, allowing them to potentially solve their problem."
+  },
+  {
+   "ticket_id": "DEV-0226",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides a clear and relevant solution to the customer's problem, with no extraneous or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0227",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0228",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0229",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue with duplicate webhook deliveries, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0230",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0232",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue with duplicate webhook deliveries, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0233",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to solve their problem, with no added misinformation or commitments."
+  },
+  {
+   "ticket_id": "DEV-0236",
+   "A": "No",
+   "B": "All",
+   "C": 4,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the relevant help articles and provides potentially useful troubleshooting steps for the customer's issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0238",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant guidance for the customer's issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0241",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant troubleshooting steps for the customer's issue with response times and latency, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0242",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0243",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies the relevant information from the help article and provides a clear and polite response to the customer's issue, allowing them to troubleshoot and potentially solve their problem."
+  },
+  {
+   "ticket_id": "DEV-0244",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0247",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to help the customer understand and address their billing issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0250",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their issue with the API key, and the language is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0251",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides a clear and concise solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0252",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue with API rate limits, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0256",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies relevant information from the help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0258",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0259",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0261",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue with webhooks not arriving, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0262",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0263",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides clear steps for the customer to revert to a previous revision, making it a suitable solution for their problem."
+  },
+  {
+   "ticket_id": "DEV-0264",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to help the customer solve their problem with pagination and cursor expiry."
+  },
+  {
+   "ticket_id": "DEV-0266",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to help the customer troubleshoot the issue, although some points may not be directly related to the customer's specific problem."
+  },
+  {
+   "ticket_id": "DEV-0267",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies the relevant information from the help article and provides a clear and polite response to the customer's issue, allowing them to troubleshoot and potentially solve their problem."
+  },
+  {
+   "ticket_id": "DEV-0269",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides a clear solution to the customer's problem, following the article's steps for rotating a key without downtime."
+  },
+  {
+   "ticket_id": "DEV-0270",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides clear steps for the customer to follow, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0271",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue with 429 responses, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0272",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0273",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides a clear and relevant solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0274",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant troubleshooting steps for the customer's issue with service slow at peak hours, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0276",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue with 429 responses, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0277",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue with connection pool exhaustion, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0278",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant information to help the customer solve their problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0279",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to help the customer solve their problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0280",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0281",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue with authenticator app codes being rejected, and the wording is clear and polite despite being written for support staff."
+  },
+  {
+   "ticket_id": "DEV-0283",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to troubleshoot the issue, making it clear and helpful for the customer to solve their problem."
+  },
+  {
+   "ticket_id": "DEV-0284",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to help the customer understand and potentially resolve their issue with the invoice charges."
+  },
+  {
+   "ticket_id": "DEV-0285",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0286",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0287",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0288",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0290",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue with high 95th percentile latency, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0291",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue with webhooks not arriving, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0294",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides a clear step-by-step guide for the customer to follow, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0295",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for migrating an existing application to CloudServe, but may not fully address the customer's specific situation and concerns about the console."
+  },
+  {
+   "ticket_id": "DEV-0296",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides a clear and polite response to the customer's question, with all bullets coming from the correct article."
+  },
+  {
+   "ticket_id": "DEV-0297",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0298",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their SSO issue, with clear and polite language suitable for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0299",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot the issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0301",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0302",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides a clear, step-by-step guide for the customer to deploy their containerized application."
+  },
+  {
+   "ticket_id": "DEV-0303",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0304",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0305",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0306",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0307",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, but may not fully address the specific problem of the endpoint not receiving events."
+  },
+  {
+   "ticket_id": "DEV-0308",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, including using cursor pagination and the export endpoint for large extracts."
+  },
+  {
+   "ticket_id": "DEV-0310",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "No",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article, but its tone and language may not be suitable for a paying business customer, and it does not directly address the customer's question about navigating the console."
+  },
+  {
+   "ticket_id": "DEV-0312",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue with multi-factor authentication, and the wording is clear and polite despite being written for support staff."
+  },
+  {
+   "ticket_id": "DEV-0313",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0314",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help articles and provides a clear and relevant solution to the customer's problem, with no added misinformation or commitments."
+  },
+  {
+   "ticket_id": "DEV-0315",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides clear steps for the customer to revert to an earlier revision, making it a suitable solution for their problem."
+  },
+  {
+   "ticket_id": "DEV-0318",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to troubleshoot the issue, and the wording is polite and clear for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0319",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to help the customer resolve their issue with unexpected overage charges, and the language is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0320",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to help the customer solve their problem, including the fact that cursors expire after one hour and how to handle it."
+  },
+  {
+   "ticket_id": "DEV-0322",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant guidance for the customer's issue, with no added misinformation or commitments."
+  },
+  {
+   "ticket_id": "DEV-0323",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot the issue with new starters not being created automatically through SSO, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0325",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant information to help the customer solve their problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0326",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant information to help the customer solve their problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0328",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to help the customer solve their problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0329",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the cited help article and provides relevant information to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0330",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0331",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to help the customer solve their problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0334",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help articles and provides relevant steps for the customer to resolve their issue with an exposed key, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0335",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue with multi-factor authentication, and the wording is clear and polite despite being written for support staff."
+  },
+  {
+   "ticket_id": "DEV-0336",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot the issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0337",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant steps for the customer to resolve their issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0339",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0340",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant information to help the customer solve their problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0341",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant steps for the customer to troubleshoot the issue with log forwarding, and the language is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0342",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0343",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to help the customer solve their problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0345",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0346",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0347",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to troubleshoot the issue, and the wording is polite and clear for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0349",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their issue, with no added misinformation or commitments."
+  },
+  {
+   "ticket_id": "DEV-0350",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0352",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to help the customer solve their problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0353",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0354",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant steps for the customer to resolve their issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0357",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, but may not fully address the specific problem of the endpoint not receiving events."
+  },
+  {
+   "ticket_id": "DEV-0358",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for migrating an existing application, and the wording is polite and clear for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0361",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant steps to resolve the customer's issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0362",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue with webhooks not arriving, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0363",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0364",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to help the customer solve their problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0365",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to help the customer solve their problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0367",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0368",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to help the customer solve their problem with pagination and cursor expiration."
+  },
+  {
+   "ticket_id": "DEV-0369",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue with overage charges, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0372",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue with latency, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0374",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help articles and provides relevant information to help the customer troubleshoot their issue, although it may not fully solve their problem without further investigation."
+  },
+  {
+   "ticket_id": "DEV-0375",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0376",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help articles and provides relevant steps to remove a departing user's access, including revoking API keys, making it a clear and effective solution for the customer's problem."
+  },
+  {
+   "ticket_id": "DEV-0378",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help articles and provides relevant troubleshooting steps for the customer's issue, but may not fully address the specific problem of the database restore taking hours and the connection not available error."
+  },
+  {
+   "ticket_id": "DEV-0379",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps, but may not fully address the customer's urgent issue without additional support."
+  },
+  {
+   "ticket_id": "DEV-0380",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "No",
+   "E": "No",
+   "reason": "The reply is clear and accurate, but it lacks a polite and personalized greeting, and the wording is not tailored to a paying business customer, making it seem somewhat automated and impersonal."
+  },
+  {
+   "ticket_id": "DEV-0382",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant guidance to solve the customer's problem, and the wording is polite and clear for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0383",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies the relevant information from the help article and provides a clear and polite response to the customer's issue, allowing them to potentially solve their problem."
+  },
+  {
+   "ticket_id": "DEV-0384",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0386",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0387",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0390",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "No",
+   "E": "No",
+   "reason": "The reply includes bullets that are not relevant to the customer's problem, such as removing a departing user and revoking API keys, which may confuse the customer and make the reply less clear, and the wording is not fully adapted for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0393",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0394",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0397",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0399",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to solve the customer's problem, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0400",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0401",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information for the customer's issue, but may not fully address their specific problem of a stuck export job."
+  },
+  {
+   "ticket_id": "DEV-0404",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0405",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides clear steps for the customer to follow, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0406",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue with webhooks not arriving, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0407",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to help the customer understand their invoice, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0409",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue with authenticator app codes being rejected, and the wording is polite and clear despite being written for support staff."
+  },
+  {
+   "ticket_id": "DEV-0410",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the cited help article and provides relevant information to help the customer solve their problem, with no added misinformation or commitments."
+  },
+  {
+   "ticket_id": "DEV-0411",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to help the customer understand and resolve their billing issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0412",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0414",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0415",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0416",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0419",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue with SAML login errors, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0420",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant information to help the customer solve their problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0422",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to help the customer solve their problem with cursor expiration and pagination."
+  },
+  {
+   "ticket_id": "DEV-0423",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides clear steps to solve the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0424",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for migrating an existing application, including handling local state such as uploaded files."
+  },
+  {
+   "ticket_id": "DEV-0425",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to troubleshoot the customer's issue, with clear and polite language suitable for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0427",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0428",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for migrating an existing application, and the wording is polite and clear for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0429",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant information to help the customer solve their problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0430",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0431",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately conveys the information from the help article and directly addresses the customer's question about rate limits and keys, providing a clear solution to their problem."
+  },
+  {
+   "ticket_id": "DEV-0434",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0435",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to help the customer understand how group membership interacts with directly assigned roles, although it may not fully address their specific question."
+  },
+  {
+   "ticket_id": "DEV-0436",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue with overage charges and spend caps, and is polite and clear in its wording."
+  },
+  {
+   "ticket_id": "DEV-0437",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue with high p95 latency, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0438",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant steps to troubleshoot the issue with SSO not working for new starters, making it likely to help the customer solve their problem."
+  },
+  {
+   "ticket_id": "DEV-0439",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue with database connection pool exhaustion, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0440",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the cited help article and provides relevant information to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0441",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to solve the customer's problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0442",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0443",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides a clear, step-by-step guide for the customer to follow, making it suitable for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0444",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0446",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to help the customer solve their problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0447",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0449",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0450",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their single sign-on issue, with clear and polite language suitable for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0452",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to help the customer understand their invoice, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0453",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the cited article and provides relevant information to help the customer solve their problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0454",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0455",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0457",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to help the customer understand their invoice and usage breakdown, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0459",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to help the customer troubleshoot the issue, although some points may not be directly related to the customer's specific problem."
+  },
+  {
+   "ticket_id": "DEV-0460",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0461",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0462",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides a clear, step-by-step guide for the customer to follow, making it suitable for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0463",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their issue, with clear and polite language suitable for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0465",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0467",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue with 429 responses, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0468",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue with high latency, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0471",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot the SAML login issue, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0473",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0474",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for migrating an existing application to CloudServe, but may not fully address the customer's specific issue with the console having more than expected."
+  },
+  {
+   "ticket_id": "DEV-0476",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, but may not fully address the specific situation without further investigation."
+  },
+  {
+   "ticket_id": "DEV-0478",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to troubleshoot their issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0479",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps for the customer to resolve their issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0480",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0481",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to help the customer solve their problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0482",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant information to help the customer solve their problem with pagination and cursor expiry."
+  },
+  {
+   "ticket_id": "DEV-0485",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "No",
+   "E": "No",
+   "reason": "The reply includes bullets that are not relevant to the customer's problem, such as removing a departing user and transferring ownership, which may confuse the customer and make the reply less clear and less polite for a paying business customer."
+  },
+  {
+   "ticket_id": "DEV-0486",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to help the customer understand and potentially resolve their billing period issue, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0487",
+   "A": "No",
+   "B": "All",
+   "C": 3,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies bullets from the help article and provides relevant information to help the customer troubleshoot the issue, although some points may not be directly related to the customer's specific problem."
+  },
+  {
+   "ticket_id": "DEV-0488",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides a clear solution to the customer's problem, with no added or misleading information."
+  },
+  {
+   "ticket_id": "DEV-0490",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately reflects the content of the cited help article and provides relevant information to help the customer solve their problem, with clear and polite language."
+  },
+  {
+   "ticket_id": "DEV-0491",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to troubleshoot the customer's issue with the API key, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0495",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant troubleshooting steps for the customer's issue with high latency, and the wording is polite and clear."
+  },
+  {
+   "ticket_id": "DEV-0496",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and directly addresses the customer's question about migrating an existing application, providing relevant steps and considerations."
+  },
+  {
+   "ticket_id": "DEV-0500",
+   "A": "No",
+   "B": "All",
+   "C": 5,
+   "D": "Yes",
+   "E": "No",
+   "reason": "The reply accurately copies information from the cited help article and provides relevant steps to resolve the customer's issue with their spend cap, and the language is polite and clear."
+  }
+ ]
+}

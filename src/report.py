@@ -130,7 +130,8 @@ def build(outcomes, tickets, raw_by_id, meta, decisions_logged) -> str:
               f"{sum(labels[i].get('expected_route') == 'escalate' for i in auto)} of {len(auto)} automatic replies",
               f"- **Should-be-automatic tickets answered automatically:** {sum(i in auto for i in should)} of {len(should)} "
               f"({_pct(sum(i in auto for i in should), len(should))})",
-              f"- **Correct first contact resolution** (answered, and the answer key agrees): "
+              f"- **First contact resolution that agrees with the answer key** (answered by the system, and the answer key also "
+              f"says to answer it; 17 Nov 2026: not called \"correct\", because the answer key can be wrong too): "
               f"{_pct(sum(i in should for i in auto), len(ids))}",
               f"- **Retrieval hit rate** (an expected article in the top 5): {hit5} of {len(hits)} ({_pct(hit5, len(hits))})",
               f"- **Citation accuracy** (automatic replies citing an expected article): {cite_ok} of {len(cited)} "
