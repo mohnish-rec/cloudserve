@@ -115,6 +115,18 @@ def test_a_rate_limit_waits_as_long_as_the_provider_asks():
     assert waits and waits[0] >= 7.0
 
 
+def test_waiting_on_rate_limits_is_counted_apart_from_working_time():
+    """17 Nov 2026, the course team: separate the real response time from delays caused by rate limits."""
+    from src.generate import reset_wait, waited_ms
+    reset_wait()
+    waits = []
+    call = fake(TransientError("429", retry_after=7.0), TransientError("429", retry_after=3.0), GOOD)
+    call_with_fallback([], models=["main"], call=call, sleep=waits.append)
+    assert waited_ms() == int(sum(waits) * 1000) and waited_ms() >= 10000
+    reset_wait()
+    assert waited_ms() == 0
+
+
 def test_unusual_spaces_from_the_model_become_normal_spaces():
     from src.generate import assemble
     out = assemble([{"text": "rule out a corrupted\u202fartefact, roll the migration\u2060back and re\u2011invite her",

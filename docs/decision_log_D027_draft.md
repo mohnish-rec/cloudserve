@@ -6,15 +6,24 @@ and evidence are from the files named. Nothing here is final until Mohnish has c
 
 ## Corrections to earlier entries (the log must match what happened)
 
-- **D-024 (no paid provider, even for development test runs) was later changed.** From 14 Nov 2026 the 500
-  development tickets were run on OpenRouter's paid service in a separate copy of the project (the sandbox), for
-  speed; validation's reportable run stays on Groq's free tier in the real project. Disclosed to the course team in
-  Mohnish Grover's message (question 6). His words, 14 Nov 2026: "why are we not running the test in sandbox instead?
-  the paid key is in the sandbox". **[open: Mohnish to confirm the wording]**
+- **D-024 (no paid provider, even for development test runs) was later changed, the same day.** The paid code was
+  removed from the real project on 9 Nov 2026, but a separate copy of the project (the sandbox, never pushed) was set
+  up that afternoon to send replies through OpenRouter's paid service (sandbox commit "Sandbox: OpenRouter writer
+  setting, prompt and model switches", 9 Nov 14:40). The first paid run was all 500 development tickets, 9 Nov 23:22
+  to 10 Nov 01:13 (`sandbox_dev500_run1.json`). From then on most development runs, and validation runs 3 to 9 and
+  11 to 13, ran in the sandbox (`evaluation/results/validation_looks.md`). Reportable runs stay on Groq's free tier
+  in the real project. Disclosed to the course team in Mohnish Grover's message (question 6); their answer, 17 Nov:
+  "Using a paid service during development is acceptable, provided your final submission follows the project
+  requirements and you clearly document its usage." His words, 14 Nov 2026, on running the 500-ticket tests in the
+  sandbox: "why are we not running the test in sandbox instead? the paid key is in the sandbox".
+  Why the sandbox was set up (his words, 17 Nov 2026): "reason to setup the sandbox was to speed up the development
+  because free tier was taking 8-10 hours".
 - **D-025 (cache never on validation runs):** on 15 Nov 2026 one validation look read the development cache without
   storing anything (`--read-cache`), to test whether development results carry over; see D-036.
-- **D-026 (validation closed):** validation was looked at again on 14-15 Nov 2026 (three runs in the sandbox, nothing
-  changed because of them), all listed in `evaluation/results/validation_looks.md`. His words, 14 Nov 2026: "no we
+- **D-026 (validation closed):** validation was run 11 more times after D-026 (10-15 Nov 2026, mostly in the sandbox), all
+  listed in `evaluation/results/validation_looks.md`. No rule or prompt in the system was changed because of them;
+  the two rubric changes that came from validation replies (rubric v2's score descriptions, rubric v3) were removed
+  on 17 Nov 2026 (Mohnish Grover: "remove 3"). His words, 14 Nov 2026: "no we
   don't decide on that we just have a look at the results".
 
 ## D-027 · Every development ticket decided question by question, in Mohnish Grover's words
@@ -88,7 +97,9 @@ and evidence are from the files named. Nothing here is final until Mohnish has c
   "we are not tuning on the validation tickets we are testing if it replicates our development ticket results";
   "Make sure it is designed in a way where the cache is useful it takes it from there else it works without the cache
   for the tickets where its not reliable."
-- **Open:** whether to ship the cache with the submission waits for the course team's answer. **[open]**
+- **Settled 17 Nov 2026 by the course team's answer:** "You may include the implementation in your submission, but
+  please keep it disabled for the hidden evaluation". The cache ships switched off by default (`src/cache.py`,
+  `.env.example`: `REPLY_CACHE=off`); development runs turn it on with `--use-cache`.
 
 ## D-037 · What a person receives: a plain-words summary and, where useful, a draft
 - **Date:** 16-17 Nov 2026
@@ -106,7 +117,34 @@ and evidence are from the files named. Nothing here is final until Mohnish has c
   rule, "How can you suggest a next step without knowing the next step? ... Is it mentioned anywhere?" (no article
   states one).
 
-## Still to decide [open]
-- The related-docs rule: tested (would let through the Q25 case and remove a needed article from 6 tickets); his
-  decision not yet recorded.
-- The expected-to-fail test (Q41 in other words): keep and explain in the README, or remove.
+## D-038 · Not built: the related-docs rule; kept: the expected-to-fail test
+- **Date:** 17 Nov 2026
+- **Decision:** replies are not limited to articles the knowledge base links together (tested: it would have let the
+  Q25 case through and removed a needed article from 6 tickets); the test for Q41 in other words stays marked
+  expected-to-fail and is explained in the README.
+- **Why (his words):** "we dont need doc rule our system works fine"; "1 xfailed test is for what, as I can remember
+  we will keep it".
+
+## D-039 · The course team's answers applied (17 Nov 2026)
+- **Decision:** the reply cache is off by default; the time spent waiting on rate limits is recorded apart from the
+  time spent working on each ticket; the quality score counts only replies the answer key names an article for; the
+  review rubric is for two human reviewers, with an AI check counted as extra only.
+- **Why (the course team, 17 Nov 2026):** "keep it disabled for the hidden evaluation"; "Clearly separate the actual
+  response time per ticket from delays caused by API rate limits."; "Make sure you calculate the fairness metrics
+  correctly"; "an AI model cannot replace the second person."
+- **Evidence:** tests `tests/test_cache.py` and `tests/test_generate.py` (346 passed, 1 xfailed).
+
+## D-040 · Rubric v3 removed and rubric v2 cleaned of what came from validation (17 Nov 2026)
+- **Decision:** rubric v3 removed; v4 is v2 with question C on v1's plain scale (the score descriptions added after
+  VAL-0008 are taken out). Nothing in the system was changed by v2 or v3 (the last reply-prompt change came first).
+- **Why (his words):** "get this out from the 2nd one: It gave 1 out of 5 to a reply that answers the question
+  (VAL-0008) and any changes we made because of it. remove 3 and remove the changes from our system that were made
+  because of it."
+- **Evidence:** `prompts/evaluation/PR-03_review_rubric.md`; `evaluation/results/validation_looks.md`.
+
+## D-041 · Demo tickets for the assessors and the repeat-contact figure (17 Nov 2026)
+- **Decision:** `data/samples/demo_tickets.json` (one development ticket per channel, two for a person, one red-team
+  ticket) with README commands; the metrics report counts repeat contacts and gives the history baseline.
+- **Why:** Build Specification section 06, steps 13 and 14 ("One ticket from each channel is submitted"; "A ticket
+  engineered to trigger a guardrail is submitted"); Evaluation Framework: repeat contacts "catches a system which
+  closes tickets without actually solving anything". Mohnish Grover, 17 Nov: "do the 2 small builds yeah".

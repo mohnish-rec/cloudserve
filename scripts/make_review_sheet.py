@@ -23,7 +23,7 @@ from openpyxl.worksheet.datavalidation import DataValidation
 ROOT = Path(__file__).resolve().parent.parent
 import sys  # noqa: E402
 sys.path.insert(0, str(ROOT / "scripts"))
-from review_rubric import V3, V2_HOW_MADE  # noqa: E402  the shared rubric (PR-03 v3)
+from review_rubric import V4, V2_HOW_MADE  # noqa: E402  the shared rubric (PR-03 v4)
 RES = ROOT / "evaluation" / "results"
 COLUMNS = [
     ("A. Does any sentence say something the cited article does not support?", ["Yes", "No"]),
@@ -88,8 +88,8 @@ def main():
         for line in [
             f"Assessor {k}. Fill in the yellow cells for all {n} replies. Do not look at the other assessor's sheet.",
             "Read the customer's ticket, then the reply, then the article(s) it cites.",
-            "Rubric v3 (12 Nov 2026, PR-03), the same words the AI assessor uses:",
-            *([V2_HOW_MADE] + V3),
+            "Rubric v4 (17 Nov 2026, PR-03):",
+            *([V2_HOW_MADE] + V4),
             "A gives the hallucination rate (target 5% or lower); C is the customer-satisfaction proxy (target 4.0 or better).",
             (f"Every reply the system sent in {a.results} ({n} replies): a performance check on tickets the system "
              f"never learned from. Nothing in the system is changed because of this review." if a.all else

@@ -55,8 +55,8 @@ Likelihood, impact and owner: **[Mohnish to decide]**. The mitigation column lis
 
 ## 3. Fairness audit
 
-Resolution rate = answered automatically. Quality score = share of automatic replies that cite an expected article and
-passed every guardrail (the metrics report's definition). Variation from best = points behind the best segment in the
+Resolution rate = answered automatically. Quality score = of the automatic replies the answer key names an article for, the
+share that cite one of those articles (the metrics report's definition, corrected 17 Nov). Variation from best = points behind the best segment in the
 same group (resolution / quality). The pack's tiers are enterprise, business and standard, so "small business" is shown
 as both business and standard.
 

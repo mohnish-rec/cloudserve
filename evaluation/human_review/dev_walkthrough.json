@@ -1295,6 +1295,14 @@
     "How about including top 2 where the second one makes sense too",
     "How can you suggest a next step without knowing the next step? What is the next step for someone on the standard plan? Is it mentioned anywhere?"
    ]
+  },
+  {
+   "date": "17 Nov 2026",
+   "rule": "related-docs rule not built; the expected-to-fail test (Q41 in other words) kept and explained in the README",
+   "words": [
+    "we dont need doc rule our system works fine",
+    "1 xfailed test is for what, as I can remember we will keep it"
+   ]
   }
  ],
  "reply_setting": {

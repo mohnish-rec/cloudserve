@@ -26,7 +26,7 @@ and metrics report.
 
 | ID | Version | File | Status | Purpose | Requirements |
 |---|---|---|---|---|---|
-| PR-03 | 3 (12 Nov 2026), plus a separate "project" version | `evaluation/PR-03_review_rubric.md` | Active | The marking rules for reviewing replies (human reviewers and an AI reviewer), so both judge by the same words; the text lives in `scripts/review_rubric.py` | Evaluation Framework: hallucination rate, customer-satisfaction proxy, citation accuracy |
+| PR-03 | 4 (17 Nov 2026), plus a separate "project" version | `evaluation/PR-03_review_rubric.md` | Active | The marking rules for reviewing replies (two human reviewers; an AI check may be run as well, but it is an extra check and never counts as a reviewer, 17 Nov 2026, the course team), so all judge by the same words; the text lives in `scripts/review_rubric.py` | Evaluation Framework: hallucination rate, customer-satisfaction proxy, citation accuracy |
 
 ## How each version was tested
 

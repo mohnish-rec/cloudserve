@@ -49,10 +49,30 @@ def _tokens(outcomes, n) -> str:
             f"total {t_tokens:,} ({t_tokens / n if n else 0:,.0f} per ticket)")
 
 
+def repeat_contacts(outcomes, raw_by_id) -> str:
+    """17 Nov 2026: the Evaluation Framework's repeat-contact measure ("the same customer raising the same issue
+    again within a week") for this run. The follow-up rule (FR-14) finds a repeat that comes after an automatic
+    reply; the history block, read only here, gives what happened when people handled these tickets (the baseline)."""
+    n = len(outcomes)
+    follow = [o for o in outcomes if "follow-up:" in (o.reason or "")]
+    to_person = sum(o.action != "auto_respond" for o in follow)
+    hist = [r.get("history") for r in raw_by_id.values() if isinstance(r.get("history"), dict)]
+    base = sum(bool(h.get("repeat_contact")) for h in hist)
+    line = (f"**Repeat contacts:** {len(follow)} of {n} tickets were the same customer asking about the same type "
+            f"within 7 days of an automatic reply in this run; {to_person} of them went to a person with the earlier "
+            f"reply attached (FR-14).")
+    if hist:
+        line += f" Baseline (the history block, when people handled these tickets): {base} of {len(hist)} ({_pct(base, len(hist))})."
+    return line
+
+
 def build(outcomes, tickets, raw_by_id, meta, decisions_logged) -> str:
     n = len(outcomes)
     by = Counter(o.action for o in outcomes)
     lat = [o.latency_ms for o in outcomes]
+    wait = [getattr(o, "wait_ms", 0) for o in outcomes]                 # 17 Nov: rate-limit waits
+    work = [max(0, a - b) for a, b in zip(lat, wait)]                    # response time without those waits
+    pq = lambda xs, q: float(np.percentile(xs, q)) if xs else 0.0  # noqa: E731
     p = lambda q: float(np.percentile(lat, q)) if lat else 0.0  # noqa: E731
     fired = Counter(name for o in outcomes if o.guardrails for name in o.guardrails.fired)
     labels = {tid: r.get("labels") for tid, r in raw_by_id.items() if isinstance(r.get("labels"), dict)}
@@ -75,8 +95,12 @@ def build(outcomes, tickets, raw_by_id, meta, decisions_logged) -> str:
         f"{statistics.mean(lat) / 1000 if lat else 0:.1f} s | {statistics.median(lat) / 1000 if lat else 0:.1f} s |",
         "", "First contact resolution counts only tickets closed with no person involved; "
         "\"Draft ready\" hand-overs count as escalations (FR-07).",
+        "", repeat_contacts(outcomes, raw_by_id),
         "", "## Technical", "",
         f"- **Latency:** median {p(50) / 1000:.1f} s, 95th percentile {p(95) / 1000:.1f} s (target: under 3 s for 95%, NFR-01)",
+        f"- **Response time without rate-limit waits:** median {pq(work, 50) / 1000:.1f} s, 95th percentile "
+        f"{pq(work, 95) / 1000:.1f} s; time spent waiting on rate limits: {sum(wait) / 1000:.0f} s in total, on "
+        f"{sum(1 for w in wait if w)} of {n} tickets (17 Nov: kept apart, as the course team asked)",
         f"- **Model calls:** {sum(o.model_calls for o in outcomes)} in total (retries included), "
         f"{sum(o.model_calls for o in outcomes) / n if n else 0:.2f} per ticket",
         _tokens(outcomes, n),
@@ -122,8 +146,9 @@ def build(outcomes, tickets, raw_by_id, meta, decisions_logged) -> str:
                                  for i in ids if oc[i].classification])
         L += [f"| {lo:.1f}-{hi:.1f} | {k} | {s:.1%} | {o:.1%} | {(s - o) * 100:+.1f} points |" for lo, hi, k, s, o in cal]
         L += ["", "### Results by customer group (NFR-06: under 5 points between groups)", "",
-              "Resolution rate = answered automatically. Quality score = share of automatic replies that cite an "
-              "expected article and passed every guardrail. Groups under 10 tickets are shown but not compared.", "",
+              "Resolution rate = answered automatically. Quality score = of the automatic replies the answer key names an "
+              "article for, the share that cite one of those articles (17 Nov: replies with no article in the answer key "
+              "are left out, as they could never pass). Groups under 10 tickets are shown but not compared.", "",
               "| Group | Value | Tickets | Resolution rate | Quality score | Must-not answered |", "|---|---|---|---|---|---|"]
         tick = {t.ticket_id: t for t in tickets}
         for seg in SEGMENTS:
@@ -132,8 +157,9 @@ def build(outcomes, tickets, raw_by_id, meta, decisions_logged) -> str:
                 groups[getattr(tick[i], seg)].append(i)
             for g, members in sorted(groups.items()):
                 a = [i for i in members if oc[i].action == "auto_respond"]
-                q = [i for i in a if labels[i].get("expected_doc_ids") and oc[i].draft
+                w = [i for i in a if labels[i].get("expected_doc_ids")]
+                q = [i for i in w if oc[i].draft
                      and set(labels[i]["expected_doc_ids"]) & set(oc[i].draft.cited_doc_ids)]
                 L.append(f"| {seg.replace('customer_', '')} | {g} | {len(members)} | {_pct(len(a), len(members))} | "
-                         f"{_pct(len(q), len(a))} | {sum(labels[i].get('must_not_auto_respond') and i in a for i in members)} |")
+                         f"{len(q)} of {len(w)} ({_pct(len(q), len(w))}) | {sum(labels[i].get('must_not_auto_respond') and i in a for i in members)} |")
     return "\n".join(L) + "\n"

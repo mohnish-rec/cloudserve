@@ -8,7 +8,8 @@ The key is a hash of everything the model receives (the prompt version's text, t
 articles) and the model list, so a changed prompt, ticket, article or model never reuses an old answer.
 Only answers that were read successfully are stored. Replies hold no personal details (guardrail 1
 blocks any that do), and the cache lives in storage/, which Git ignores.
-Turned off with REPLY_CACHE=off. Only the real model call uses it; tests with fake models never do.
+Off unless asked for: REPLY_CACHE=on turns it on (17 Nov 2026, the course team: "keep caching as an optional
+feature, disabled by default during evaluation"). Only the real model call uses it; tests with fake models never do.
 The harness (src/run_evaluation.py) turns it OFF for every run unless --use-cache is given, and that
 flag is only for development runs: validation, hidden-set and final runs neither read nor write it,
 so they stay a fresh, independent test, as the assessors' run will be (9 Nov, Mohnish's point).
@@ -24,13 +25,13 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 def enabled() -> bool:
-    return os.getenv("REPLY_CACHE", "on").strip().lower() not in {"off", "0", "false", "no"}
+    return os.getenv("REPLY_CACHE", "off").strip().lower() not in {"off", "0", "false", "no"}
 
 
 def read_only() -> bool:
     """15 Nov 2026 (Mohnish Grover): REPLY_CACHE=read reuses stored development answers but stores nothing new, so a
     validation run can test whether development results carry over without adding validation answers to the cache."""
-    return os.getenv("REPLY_CACHE", "on").strip().lower() == "read"
+    return os.getenv("REPLY_CACHE", "off").strip().lower() == "read"
 
 
 def path() -> Path:

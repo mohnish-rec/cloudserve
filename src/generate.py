@@ -49,6 +49,19 @@ HEADING = 'From our help article "{title}":'
 ALSO = ' (also in: {titles})'
 CAUSES = "Common causes listed in the article:"   # 11 Nov (v1.6): written by code; the causes below it are Ines's words
 MAX_TRIES, BASE_WAIT, MAX_WAIT = 6, 1.0, 60.0   # 8 Nov: 4 quick tries were not enough for a 429 on the free tier
+# 17 Nov 2026 (the course team: "Clearly separate the actual response time per ticket from delays caused by API
+# rate limits"): every wait before a retry is added up here for the ticket being processed.
+_WAITED = [0.0]
+
+
+def reset_wait():
+    """Start a new ticket's waiting time at zero."""
+    _WAITED[0] = 0.0
+
+
+def waited_ms() -> int:
+    """Milliseconds this ticket has spent waiting before retries (rate limits, server errors)."""
+    return int(_WAITED[0] * 1000)
 TOP_ARTICLES = int(os.getenv("WRITER_ARTICLES", "3"))   # PR-01 v1.1: whole articles (Module 5)
 _ARTICLES = {}
 
@@ -293,7 +306,9 @@ def call_with_fallback(messages, models=None, call=call_model, sleep=time.sleep,
                 if attempt < MAX_TRIES - 1:
                     # Wait at least as long as the provider asks, plus backoff with jitter (Module 3).
                     backoff = random.uniform(0, min(MAX_WAIT, BASE_WAIT * 2 ** attempt))
-                    sleep(min(MAX_WAIT, max(getattr(e, "retry_after", 0.0), backoff)))
+                    pause = min(MAX_WAIT, max(getattr(e, "retry_after", 0.0), backoff))
+                    _WAITED[0] += pause
+                    sleep(pause)
     raise TransientError(f"all models failed after {calls} calls (last: {last})")
 
 

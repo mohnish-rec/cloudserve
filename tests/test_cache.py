@@ -24,3 +24,9 @@ def test_read_only_reuses_but_stores_nothing(tmp_path, monkeypatch):
 def test_off_means_off(monkeypatch):
     monkeypatch.setenv("REPLY_CACHE", "off")
     assert not cache.enabled() and not cache.read_only()
+
+
+def test_off_unless_asked_for(monkeypatch):
+    """17 Nov 2026, the course team: caching is optional and disabled by default during evaluation."""
+    monkeypatch.delenv("REPLY_CACHE", raising=False)
+    assert not cache.enabled() and not cache.read_only()

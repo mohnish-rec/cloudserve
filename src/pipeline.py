@@ -17,7 +17,7 @@ import time
 from dataclasses import dataclass, field
 
 from src.classify import Classification
-from src.generate import Draft, articles_for, generate, render, with_notice
+from src.generate import Draft, articles_for, generate, render, waited_ms, with_notice
 from src.guardrails import Report, check_reply
 from src.ingest import is_blocked
 from src.route import AUTO, DRAFT_READY, ESCALATE, SPECIALIST, RouteDecision, route
@@ -46,6 +46,7 @@ class Outcome:
     requirement_ids: tuple = field(default_factory=tuple)
     tokens: dict = field(default_factory=dict)   # {"writer_in", "writer_out", "checker_in", "checker_out"}
     sources: tuple = ()               # 11 Nov: every passage search found: doc_id, rank, scores, the passage itself
+    wait_ms: int = 0                  # 17 Nov: part of latency_ms spent waiting on rate limits before retries
 
 
 def citation_trail(draft, sources) -> list:
@@ -128,7 +129,8 @@ def finish(state, action, label, reason, sent=ACKNOWLEDGEMENT, reqs=()) -> Outco
                    int((time.perf_counter() - state["start"]) * 1000),
                    tuple(dict.fromkeys(d.requirement_ids + tuple(reqs))), tokens,
                    tuple({"doc_id": p.doc_id, "rank": p.rank, "score": round(float(p.similarity), 3),
-                          "keyword": round(float(p.keyword), 3), "passage": p.text[:400]} for p in passages))
+                          "keyword": round(float(p.keyword), 3), "passage": p.text[:400]} for p in passages),
+                   wait_ms=waited_ms())
 
 
 def process(ticket, classifier, retriever, now=None, kill_switch_file=None, call=None, sleep=None) -> Outcome:

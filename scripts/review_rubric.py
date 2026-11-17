@@ -1,13 +1,16 @@
-"""The review rubric shared by the AI assessor and the human review sheets, so both always judge by the same rules.
+"""The review rubric for the two human assessors' sheets (and any extra AI check), so all judge by the same rules.
+17 Nov 2026, the course team: an AI check never counts as one of the two human reviewers.
 
 Attribution: written with Claude (Anthropic), reviewed by Mohnish Grover. Versions and reasons:
 prompts/evaluation/PR-03_review_rubric.md.
 v1 (10 Nov 2026): written for replies in the model's own sentences with [n] citation numbers.
 v2 (12 Nov 2026): for replies that quote the help article word for word (PR-01 v1.4 and later). It only corrects what
 v1 got wrong about how these replies are built; every check that can catch a real problem is kept.
-v3 (12 Nov 2026): v2 was too lenient on what a reply leaves out: it gave 5 out of 5 to all six v1.5 rollback replies
-on validation, none of which had the database-migration step. v3 caps C when the reply omits an article step this
-customer needs. Default from v3.
+v3 (12 Nov 2026): removed 17 Nov 2026 (Mohnish Grover): its only change came from validation replies.
+v4 (17 Nov 2026), the default: v2 without what came from validation. Mohnish Grover, 17 Nov: "get this out from the
+2nd one: It gave 1 out of 5 to a reply that answers the question (VAL-0008) and any changes we made because of it";
+"remove 3". Question C goes back to v1's plain scale (the anchors for each score were added after VAL-0008); every
+other line of v2 rests on development replies (the v1.6 and v1.7 development runs, DEV-0022).
 """
 
 V1 = [
@@ -53,11 +56,12 @@ V2 = [
 ]
 
 
-V3_OMISSION = ("C, also: compare the reply with the article. If the reply leaves out a step or note from the article that "
-               "this customer needs, at most 3; if leaving it out could cause harm (for example rolling back the service "
-               "without first rolling back a database migration, as the article warns), at most 2. A reply that sends "
-               "the whole relevant article is not missing anything.")
-V3 = V2[:3] + [V3_OMISSION] + V2[3:]
+# v4 (17 Nov 2026): v2 with question C on v1's plain scale; the "Do not lower the score..." sentence stays (development
+# evidence: the AI check gave 3 out of 5 to most troubleshooting replies in the v1.6 development run).
+C_V4 = ("C: As this customer, would this reply let you solve your problem? 1 not at all, 3 partly, 5 fully. "
+        "Do not lower the score only because a troubleshooting reply cannot guarantee a fix, or because the article "
+        "also covers other situations, unless those parts would mislead you.")
+V4 = V2[:2] + [C_V4] + V2[3:]
 
 
 # "project" (12 Nov 2026): judged the way the course would judge replies to fresh tickets, from the Evaluation
@@ -78,8 +82,10 @@ PROJECT = [
 ]
 
 
-def instructions(version: str = "v3") -> str:
+def instructions(version: str = "v4") -> str:
     if version == "project":
         return "\n".join(PROJECT)
-    lines = V1 if version == "v1" else [V2_HOW_MADE] + (V2 if version == "v2" else V3)
+    if version == "v3":
+        raise ValueError("rubric v3 was removed on 17 Nov 2026 (it came from validation replies); use v4")
+    lines = V1 if version == "v1" else [V2_HOW_MADE] + (V2 if version == "v2" else V4)
     return "\n".join(lines)

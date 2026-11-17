@@ -17,7 +17,7 @@ from typing import Any, TypedDict
 
 from langgraph.graph import END, StateGraph
 
-from src.generate import articles_for, generate, with_notice
+from src.generate import articles_for, generate, reset_wait, with_notice
 from src.guardrails import check_reply, trim
 from src.ingest import is_blocked
 from src.retrieve import search_typed, type_aware
@@ -179,5 +179,6 @@ def build(classifier, retriever, now=None, kill_switch_file=None, call=None, sle
 
 def run_ticket(ticket, classifier, retriever, **options):
     app = build(classifier, retriever, **options)
+    reset_wait()                    # 17 Nov: waiting time is counted per ticket
     final = app.invoke({"ticket": ticket, "start": time.perf_counter()})
     return final["outcome"]
