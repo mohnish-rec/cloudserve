@@ -3,7 +3,7 @@
 Every time the 80 validation tickets were run, and what happened because of it. Validation is for measurement only;
 the system is built on the 500 development tickets.
 
-Every run of the 80 validation tickets is listed here: 13 so far, and the final run to come (course team, 17 Nov 2026: "Running validation
+Every run of the 80 validation tickets is listed here: 14 so far, and the final run to come (course team, 17 Nov 2026: "Running validation
 multiple times is fine. Make sure you document all runs and avoid using validation results to directly tune your
 system."; Dataset Guide: "Check yourself against the 80 validation tickets as often as you want"). Completed 17 Nov
 2026 from the result files; the runs of 8-12 Nov were missing from the first version of this record.
@@ -23,7 +23,8 @@ system."; Dataset Guide: "Check yourself against the 80 validation tickets as of
 | 11 | 14 Nov 17:38 | sandbox_validation_before_message_only.json | sandbox, paid | walkthrough decisions; learned layer reads subject and message | Nothing |
 | 12 | 14 Nov 18:14 | sandbox_validation_message_only.json | sandbox, paid | walkthrough decisions; learned layer reads the message only | Nothing |
 | 13 | 15 Nov 21:04 | sandbox_validation_read_cache.json | sandbox, paid, reply cache read only (development answers reused, nothing stored) | as run 12 plus the plan rule | Nothing |
-| 14 | (to come) | the final validation run | real project, Groq free tier, no cache | the frozen final system | Nothing will be changed after it |
+| 14 | 17 Nov 23:44 | sandbox_validation_frozen_17nov.json | sandbox, paid, no cache | the frozen final system (as the final development run) | Nothing: a look before the reportable run, to compare the paid and free routes (Mohnish Grover, 17 Nov: "I'll do first on sandbox and later on the free tier too so that we can compare them as well") |
+| 15 | (to come) | the final validation run (reportable) | real project, Groq free tier, no cache | the frozen final system | Nothing will be changed after it |
 
 Checked on 17 Nov 2026: every rule and setting in the system has its own development-ticket evidence (no rule,
 prompt or test names a validation ticket), and the only things validation shaped, rubric v2's score descriptions and
