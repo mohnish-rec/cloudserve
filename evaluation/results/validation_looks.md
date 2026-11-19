@@ -24,7 +24,7 @@ system."; Dataset Guide: "Check yourself against the 80 validation tickets as of
 | 12 | 14 Nov 18:14 | sandbox_validation_message_only.json | sandbox, paid | walkthrough decisions; learned layer reads the message only | Nothing |
 | 13 | 15 Nov 21:04 | sandbox_validation_read_cache.json | sandbox, paid, reply cache read only (development answers reused, nothing stored) | as run 12 plus the plan rule | Nothing |
 | 14 | 17 Nov 23:44 | sandbox_validation_frozen_17nov.json | sandbox, paid, no cache | the frozen final system (as the final development run) | Nothing: a look before the reportable run, to compare the paid and free routes (Mohnish Grover, 17 Nov: "I'll do first on sandbox and later on the free tier too so that we can compare them as well") |
-| 15 | (to come) | the final validation run (reportable) | real project, Groq free tier, no cache | the frozen final system | Nothing will be changed after it |
+| 15 | 19 Nov 18:34 | validation_final_groq_19nov.json (reportable) | real project, Groq free tier, no cache, commit 9861605 | the frozen final system | Nothing. Same as run 14 on 79 of 80 tickets, and all 53 automatic replies word for word the same; VAL-0029 went to a person through a different step (the grounding check stopped the reply, where in run 14 the articles were judged not to answer it), with the same label, Needs a specialist |
 
 Checked on 17 Nov 2026: every rule and setting in the system has its own development-ticket evidence (no rule,
 prompt or test names a validation ticket), and the only things validation shaped, rubric v2's score descriptions and
