@@ -146,11 +146,11 @@ Who does each step and how long it should take: **[Mohnish to decide]**. What th
 
 ## 6. The declaration
 
-To complete last, in Mohnish Grover's own words: **[Mohnish to decide]**
+Completed 20 Nov 2026. Wording drafted by Claude (Anthropic) from the project records; approved by Mohnish Grover.
 
 | Statement | Our position |
 |---|---|
-| This system must never ... | |
-| The mechanism that enforces that is ... | |
-| The most likely way it could still cause harm is ... | |
+| This system must never ... | send a customer a reply that is not copied from Ines's articles and checked, send private data, or answer a ticket that must go to a person (security, compliance, data location, leaked keys). |
+| The mechanism that enforces that is ... | code, not the model: the safety rules run before any model is used; the model only chooses which article parts answer, and the code copies them word for word; five guardrails check every reply and block it if any check fails or cannot run; and a kill switch stops all automatic replies at once. |
+| The most likely way it could still cause harm is ... | a reply copied correctly from an article that looks right but does not fit the customer's situation, for example when a misleading subject line pulls in a different article, or when one of my question groups is asked in words the system has not seen. |
 | We would not deploy this without first ... | running it on a model plan without the free tier's limit, checking the customer groups again on real tickets until they are less than 5 points apart, and agreeing with Daniel which data location questions can be answered from Ines's articles. (Drafted by Claude (Anthropic); approved by Mohnish Grover, 20 Nov 2026.) |
