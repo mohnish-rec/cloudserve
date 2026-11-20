@@ -55,30 +55,52 @@ Likelihood, impact and owner: **[Mohnish to decide]**. The mitigation column lis
 
 ## 3. Fairness audit
 
-Resolution rate = answered automatically. Quality score = of the automatic replies the answer key names an article for, the
-share that cite one of those articles (the metrics report's definition, corrected 17 Nov). Variation from best = points behind the best segment in the
-same group (resolution / quality). The pack's tiers are enterprise, business and standard, so "small business" is shown
-as both business and standard.
+These figures come from the final run of the 500 development tickets on Groq's free tier, 19-20 Nov 2026
+(`evaluation/results/dev500_final_groq_19nov.json`, commit 0364036). "Answered" is the share of tickets the system
+answered by itself. "Right article" is the share of those answers that used the article the labels expect (the
+metrics report's quality score). "Behind the best" is how many points each group is behind the best group of its kind
+(answered / right article). Groups under 10 tickets are not compared. The explanations were drafted by Claude
+(Anthropic) from the run results and approved by Mohnish Grover (20 Nov 2026).
 
-| Segment | Tickets | Resolution rate | Quality score | Variation from best | Explanation |
+| Group | Tickets | Answered | Right article | Behind the best | Why |
 |---|---|---|---|---|---|
-| Enterprise customers | 83 | 68.7% | 82.5% | -0.8 / best | [Mohnish to write; evidence below] |
-| Business customers | 164 | 69.5% | 77.2% | best / -5.3 | |
-| Standard customers | 253 | 67.2% | 73.5% | -2.3 / -9.0 | |
-| Tickets in fluent English | 380 | 69.5% | 75.8% | best / -2.1 | |
-| Tickets in non-fluent English | 120 | 64.2% | 77.9% | -5.3 / best | |
-| Short tickets (28 words or fewer) | 273 | 68.9% | 78.2% | best / best | |
-| Long tickets (over 28 words) | 227 | 67.4% | 73.9% | -1.5 / -4.3 | |
+| Enterprise customers | 83 | 67.5% | 95.9% (47 of 49) | best / best | |
+| Business customers | 164 | 67.1% | 90.4% (85 of 94) | 0.4 / 5.5 | 9 of the 19 answers that used a different article from the labels are in this group |
+| Standard customers | 253 | 64.8% | 93.8% (120 of 128) | 2.6 / 2.2 | The plan rule sends 16 Standard tickets to a person, because the article is only for Business and Enterprise plans |
+| Asia Pacific customers | 119 | 64.7% | 94.9% (56 of 59) | 4.2 / best | |
+| Europe customers | 151 | 68.9% | 91.2% (83 of 91) | best / 3.7 | |
+| Latin America customers | 60 | 61.7% | 93.1% (27 of 29) | 7.2 / 1.8 | More data location questions, which always go to a person (7 of 60); the plan rule (3); 2 lost to the free tier's limit; 2 where the check said the article did not fit |
+| North America customers | 170 | 65.9% | 93.5% (86 of 92) | 3.0 / 1.4 | |
+| Tickets in fluent English | 380 | 67.9% | 93.7% (194 of 207) | best / best | |
+| Tickets in non-fluent English | 120 | 60.0% | 90.6% (58 of 64) | 7.9 / 3.1 | 5 lost to the free tier's limit; more data location questions (9 of 120); the plan rule (5); search finds the right article a little less often (95% against 99%) |
+| Chat | 155 | 63.9% | 94.1% | 5.3 / best | More data location questions (12 of 155); the plan rule (8) |
+| Documentation comments | 78 | 69.2% | 91.7% | best / 2.4 | |
+| Email | 212 | 66.0% | 92.5% | 3.2 / 1.6 | |
+| Forum | 55 | 67.3% | 93.3% | 1.9 / 0.8 | |
+| Short tickets (28 words or fewer) | 273 | 66.3% | 93.4% | best / best | |
+| Long tickets (over 28 words) | 227 | 65.6% | 92.5% | 0.7 / 0.9 | |
 
-Evidence for the explanations (`evaluation/results/fairness_balanced.md`, `docs/known_limitations.md`):
-- Inside each of the 67 questions, every ticket got the same decision whatever the group in 65; with the same mix of
-  questions the gaps are 0.1 (plan), 1.0 (region), 0.7 (fluency) points, so the raw gaps come from which questions each
-  group asked.
-- Standard is lower since 15 Nov because of the plan rule: 16 Standard tickets used articles that apply to Business and
-  Enterprise only and now go to a person with a draft.
-- Non-fluent: a misleading subject outweighs a short message more often (limitation 1), the variation the framework
-  says to expect.
-- Validation (80 tickets) swings much more: 30-40 tickets per group, so one ticket moves a group by 2-4 points.
+**Why some groups are behind**
+
+Region (7.2 points), language fluency (7.9) and channel (5.3) are more than 5 points apart. There are four reasons:
+
+1. **Data location questions always go to a person** (Daniel's rule). Latin America, non-fluent and chat customers ask
+   these questions more often, so they get fewer automatic answers.
+2. **The plan rule.** When the article is only for Business and Enterprise plans, a Standard customer's reply goes to a
+   person with a draft. This is why Standard is behind the other plans, but plans are still less than 5 points apart
+   (2.6). It also adds a little to the region, language and chat gaps.
+3. **The free tier's limit.** 8 times, the free tier refused the safety check on a reply, so the reply was not sent
+   and the ticket went to a person. 5 of those 8 were non-fluent tickets. On the paid test run, which had no limit, the
+   gaps were 4.5 (region) and 5.0 (language).
+4. **Search is a little weaker on non-fluent English** (the right article was found for 95.4% of non-fluent tickets
+   against 99.3% of fluent ones), as the Governance Framework warns.
+
+When the same question is asked, every group gets the same decision almost every time (53 of 67 questions with no
+difference at all), so the gaps come mostly from which questions each group asks. The groups are also small: in Latin
+America, 4 tickets change the result by about 7 points. Nothing in the system was changed because of these results.
+
+Validation (80 tickets, final free-tier run of 19 Nov): 36.7 points apart by plan, 13.2 by region and 17.9 by language.
+With 30-40 tickets per group, one ticket moves a group by 2-4 points.
 
 ---
 
@@ -131,4 +153,4 @@ To complete last, in Mohnish Grover's own words: **[Mohnish to decide]**
 | This system must never ... | |
 | The mechanism that enforces that is ... | |
 | The most likely way it could still cause harm is ... | |
-| We would not deploy this without first ... | |
+| We would not deploy this without first ... | running it on a model plan without the free tier's limit, checking the customer groups again on real tickets until they are less than 5 points apart, and agreeing with Daniel which data location questions can be answered from Ines's articles. (Drafted by Claude (Anthropic); approved by Mohnish Grover, 20 Nov 2026.) |
