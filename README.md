@@ -16,12 +16,13 @@ Follow the steps in order. Each one says what you should see when it has worked.
   [3. Install the packages](#step-3-install-the-packages-it-needs) · [4. Add your API key](#step-4-add-your-api-key) ·
   [5. Check the AI model answers](#step-5-check-the-ai-model-answers) ·
   [6. Build the article store and the decision log](#step-6-build-the-article-store-and-the-decision-log)
-- **Use it:** [7. Start the system](#step-7-start-the-system) ·
+- **Use it on the web page:** [7. Start the system](#step-7-start-the-system) ·
   [8. Send one ticket from each channel, an escalation and a guardrail ticket](#step-8-send-one-ticket-from-each-channel-an-escalation-and-a-guardrail-ticket) ·
   [9. Run a whole file of tickets, unattended](#step-9-run-a-whole-file-of-tickets-unattended) ·
   [10. Check the metrics report against the decision log](#step-10-check-the-metrics-report-against-the-decision-log) ·
-  [11. Run the tests](#step-11-run-the-tests)
-- [More checks](#more-checks): the kill switch, coping with problems, attacks
+  [the kill switch](#check-the-kill-switch) · [coping with problems](#check-it-copes-with-problems)
+- **[Use it with commands](#use-it-with-commands):** steps 8 to 10 and the kill switch with PowerShell commands ·
+  [11. Run the tests](#step-11-run-the-tests) · [the attack check](#check-it-stops-attacks-red-team-check)
 - [Optional: watch it live](#optional-watch-it-live-prometheus-and-grafana) (Prometheus and Grafana)
 - [If something goes wrong](#if-something-goes-wrong)
 - [About the project](#about-the-project)
@@ -124,7 +125,10 @@ test query -> top result: DOC-AUTH-001 | Resolving invalid credential errors on 
 decision log ready: storage/decisions.db (20 columns, 0 rows)
 ```
 
-## Use it
+## Use it on the web page
+
+*Steps 7 to 10 show everything on the system's own web page. The same steps with PowerShell commands, which give the
+same results, are in [Use it with commands](#use-it-with-commands).*
 
 ### Step 7. Start the system
 
@@ -136,22 +140,13 @@ python -m src.api
 
 The system keeps running in this window: **leave it open**. To stop it, press **Ctrl+C** in this window.
 
-Open **http://127.0.0.1:8000** in your web browser. Steps 8 to 10 can all be done on this page, and clicking any
-ticket shows everything the system decided about it and why (the reply or the note for the person, the articles, each
-guardrail's result, and its rows in the decision log).
-
-For the PowerShell commands in the next steps, **open a second PowerShell window** and make it a project window (the
-three lines in step 2).
+Then open **http://127.0.0.1:8000** in your web browser. Clicking any ticket on this page shows everything the system
+decided about it and why: the reply, or the note for the person; the articles used; each guardrail's result; and its
+rows in the decision log.
 
 ### Step 8. Send one ticket from each channel, an escalation and a guardrail ticket
 
-**On the web page,** press **Send the 7 demo tickets**. **Or,** in the second project window:
-
-```powershell
-python scripts/send_demo_tickets.py
-```
-
-You should see:
+Under **Try tickets one at a time**, press **Send the 7 demo tickets**. You should see:
 
 | Ticket | Channel | About | You should see |
 |---|---|---|---|
@@ -169,62 +164,90 @@ Two things to know:
   customer writing again within 7 days means the first answer did not solve it (the follow-up rule). To start again,
   restart the system (**Ctrl+C**, then `python -m src.api`).
 - **Groq's free tier allows about 5 answered tickets a minute.** Sent faster, a reply's check cannot run and the reply
-  is blocked rather than sent unchecked. Wait a minute between batches.
+  is blocked rather than sent unchecked. Wait a minute between batches; the **Free tier limits** box shows how much
+  is left.
+
+Under the button, **Or write your own ticket** sends any ticket you type in the same way.
 
 ### Step 9. Run a whole file of tickets, unattended
 
 *One run processes every ticket in a file with nobody touching it, and writes a metrics report at the end.*
 
-**With one command** (this does not need the system from step 7). In the project window, for the 80 validation
-tickets that come with the project:
-
-```powershell
-python -m src.run_evaluation data/validation_tickets.json evaluation/results/validation_run.json
-```
-
-For another file, put it in the project's `data` folder and use its name instead, with a new name for the results.
-For example, for the hidden evaluation set saved as `data/hidden_evaluation_tickets.json`:
-
-```powershell
-python -m src.run_evaluation data/hidden_evaluation_tickets.json evaluation/results/hidden_evaluation_run.json
-```
-
-Leave it until it finishes, with the window open. On Groq's free tier the 80 validation tickets take about 8 minutes.
-When the free tier's limit is reached, the system waits and tries again by itself.
-
-**Or on the web page:** under **Run a whole ticket file**, press **Choose file**, pick the file, press **Run**, and
-leave the page open.
-
-**What it writes,** in the `evaluation/results` folder:
-
-- the results file (for example `validation_run.json`): one entry per ticket, with the decision, the reply and the
-  articles cited;
-- the metrics report (for example `validation_run_metrics.md`): every measure against its target, why any target was
-  missed, and the volume, business, technical and governance figures;
-- and a row for every decision in the decision log, `storage/decisions.db`.
-
-(The same run can also be started as `python -m evaluation.harness --input data/validation_tickets.json --output evaluation/results/`.)
+Under **Run a whole ticket file**, press **Choose file**, pick `C:\cloudserve_test\cloudserve\data\validation_tickets.json`
+(the 80 validation tickets), press **Run**, and leave the page open. It shows the progress and, when it finishes
+(about 8 minutes on Groq's free tier), the metrics report: every measure against its target, why any target was
+missed, and the volume, business, technical and governance figures. The buttons above the report download it and the
+results file.
 
 ### Step 10. Check the metrics report against the decision log
 
 *This proves every ticket was logged exactly once.*
 
-1. Open the metrics report from step 9. Under **Governance**, the line **Decisions logged** says, for example,
-   `356 rows; 80 final outcomes for 80 tickets -> reconciles`. Under **Volume** are the numbers answered
-   automatically, escalated and blocked.
-2. Count the same things straight from the decision log, in the project window:
+Under the metrics report, press **Check against the decision log**. It shows the run's results next to the decision
+log's counts, line by line, and says **RECONCILES** when every ticket has exactly one final outcome.
 
-   ```powershell
-   python scripts/check_decision_log.py
-   ```
+### Check the kill switch
 
-   It checks the most recent run. You should see the same numbers as in the report, and **Result: RECONCILES**.
+*It stops every automatic reply at once, without changing any code: while it is on, every ticket goes to a person.*
 
-**On the web page,** after a run from the page, press **Check against the decision log** under the metrics report.
+In the **Kill switch** box, press **Turn the kill switch on**, then **Send the 7 demo tickets**: every one goes to a
+person with the reason "the kill switch is on". Then press **Turn the kill switch off**, and restart the system before
+sending the demo tickets again. Every change is written, with the time, to `storage/kill_switch_history.txt`.
+
+### Check it copes with problems
+
+| Problem | How to cause it | You should see |
+|---|---|---|
+| No article matches | Under **Or write your own ticket**, send "What is the weather like today?" | It goes to a person, and the AI model is not called |
+| The free tier's limit is reached | Send the demo tickets twice quickly | The system waits and tries again; a reply whose check cannot run goes to a person. The **Free tier limits** box shows the refusals |
+| The AI service cannot be reached | Disconnect from the internet, or put a wrong key in `.env` and restart the system (put the real key back afterwards), then send the demo tickets | Nothing crashes and no unchecked reply is sent: each ticket goes to a person with the reason "model unavailable" |
+| An empty ticket | Open http://127.0.0.1:8000/docs, choose **POST /tickets**, **Try it out**, and send a ticket with `"body": ""` | It goes to a person, and the system carries on |
+
+## Use it with commands
+
+*The same steps with PowerShell commands, for anyone who prefers them; they give the same results. The system from
+step 7 must be running for step 8. Open a **second PowerShell window** and make it a project window (the three lines in
+step 2).*
+
+**Step 8 with a command:**
+
+```powershell
+python scripts/send_demo_tickets.py
+```
+
+**Step 9 with a command** (this does not need the system from step 7):
+
+```powershell
+python -m src.run_evaluation data/validation_tickets.json evaluation/results/validation_run.json
+```
+
+For another file, put it in the project's `data` folder and use its name, with a new name for the results. For
+example, for the hidden evaluation set saved as `data/hidden_evaluation_tickets.json`:
+
+```powershell
+python -m src.run_evaluation data/hidden_evaluation_tickets.json evaluation/results/hidden_evaluation_run.json
+```
+
+Leave it until it finishes, with the window open. It writes, in `evaluation/results`, the results file (for example
+`validation_run.json`) and the metrics report (for example `validation_run_metrics.md`), and a row for every decision in
+the decision log, `storage/decisions.db`. (The same run can also be started as
+`python -m evaluation.harness --input data/validation_tickets.json --output evaluation/results/`.)
+
+**Step 10 with a command:** open the metrics report; under **Governance**, the line **Decisions logged** says, for
+example, `356 rows; 80 final outcomes for 80 tickets -> reconciles`. Then count the same things from the decision log:
+
+```powershell
+python scripts/check_decision_log.py
+```
+
+It checks the most recent run. You should see the same numbers as in the report, and **Result: RECONCILES**.
+
+**The kill switch with commands:** `New-Item storage\kill_switch -ItemType File -Force` turns it on, and
+`Remove-Item storage\kill_switch` turns it off.
 
 ### Step 11. Run the tests
 
-*They need no API key and make no calls to the AI models.* In the project window:
+*They need no API key and make no calls to the AI models.* In the project window, with the kill switch off:
 
 ```powershell
 python -m pytest tests/ -v
@@ -232,30 +255,6 @@ python -m pytest tests/ -v
 
 The last line should read `382 passed, 1 xfailed`. The one `xfailed` ("expected to fail") is deliberate: a known
 limitation kept visible as a test (`docs/known_limitations.md`, number 5). It is not a failure.
-
-## More checks
-
-### Check the kill switch
-
-*It stops every automatic reply at once, without changing any code: while it is on, every ticket goes to a person.*
-
-**On the web page,** the **Kill switch** box shows whether it is on, and its button turns it on or off. Turn it on,
-send the demo tickets, and every one goes to a person with the reason "the kill switch is on". Then turn it off.
-Every change is written, with the time, to `storage/kill_switch_history.txt`.
-
-**Or in the project window:** `New-Item storage\kill_switch -ItemType File -Force` turns it on, and
-`Remove-Item storage\kill_switch` turns it off.
-
-Turn it off before running the tests, and restart the system before sending the demo tickets again.
-
-### Check it copes with problems
-
-| Problem | How to cause it | You should see |
-|---|---|---|
-| The AI service cannot be reached | Disconnect from the internet, or put a wrong key in `.env` (put the real one back afterwards), then send the demo tickets | Nothing crashes and no unchecked reply is sent: each ticket goes to a person with the reason "model unavailable" |
-| The free tier's limit is reached | Send the demo tickets twice quickly | The system waits and tries again; a reply whose check cannot run goes to a person. The page's **Free tier limits** box shows it |
-| No article matches | On the web page, write a ticket such as "What is the weather like today?" | It goes to a person, and the AI model is not called |
-| An empty ticket | At http://127.0.0.1:8000/docs, **POST /tickets**, **Try it out**, send a ticket with `"body": ""` | It goes to a person, and the system carries on |
 
 ### Check it stops attacks (red-team check)
 
