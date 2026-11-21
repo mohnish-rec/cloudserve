@@ -125,6 +125,7 @@ Each file tests one part, with fake AI models so no key or internet is needed (t
 | Human review | `make_review_sheet.py`, `review_rubric.py`, `make_decision_sheet.py` | Build the two reviewers' sheets and the shared marking rules |
 | Safety testing | `red_team.py` | Attack tickets through the real system; every one must be stopped |
 | Demonstration | `send_demo_tickets.py` | Sends the seven demo tickets to the running system and prints each result in plain words (README step 8) |
+| Checking a run | `check_decision_log.py` | Counts what one run wrote to the decision log, to check it against its metrics report (README step 10) |
 | Trying replies | `try_generate.py` | Write and read a few replies by hand |
 
 ### `prompts/` - the instructions given to the AI

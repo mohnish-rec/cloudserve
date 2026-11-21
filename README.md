@@ -333,17 +333,24 @@ and a row for every decision in the decision log, `storage/decisions.db`.
 
 *This proves every ticket was logged exactly once.*
 
-At the end of the metrics report, the line **Decisions logged** says how many rows the run wrote to
-`storage/decisions.db` and whether every ticket has exactly one final outcome, for example
-`356 rows; 80 final outcomes for 80 tickets -> reconciles`. To count the same thing straight from the log, for the
-most recent run:
+**1. Open the metrics report** from step 9 (for example `evaluation/results/test_run_metrics.md`). Near the end, the
+line **Decisions logged** says how many rows the run wrote to the decision log and whether every ticket has exactly
+one final outcome, for example `356 rows; 80 final outcomes for 80 tickets -> reconciles`. At the top of the report,
+under **Volume**, are the numbers answered automatically, escalated and blocked.
+
+**2. Count the same things straight from the decision log.** In the PowerShell window showing `(.venv)`:
 
 ```
-python -c "import sqlite3; c=sqlite3.connect('storage/decisions.db'); r=c.execute('select run_id from decisions order by created_at desc limit 1').fetchone()[0]; print(r); print(c.execute('select stage, count(*) from decisions where run_id=? group by stage', (r,)).fetchall()); print(c.execute(\"select action_taken, count(*) from decisions where run_id=? and stage='outcome' group by action_taken\", (r,)).fetchall())"
+python scripts/check_decision_log.py
 ```
 
-The outcome counts (`auto_respond`, `escalate`, `block`) match the metrics report: for the final validation run,
-53 answered, 24 escalated and 3 blocked, 80 in all.
+It checks the most recent run. It shows the rows written, the rows for each step, the final outcomes, and whether
+every ticket has exactly one final outcome. You should see the same numbers as in the report, and
+**Result: RECONCILES**. For example, for the final validation run: 356 rows; 53 answered automatically, 24 sent to a
+person and 3 blocked by a guardrail; 80 tickets, each with exactly one final outcome.
+
+To check an earlier run, add its run id from the top of its metrics report, for example
+`python scripts/check_decision_log.py run-20261119T182708-10f116`.
 
 ### Step 11. Run the tests
 
