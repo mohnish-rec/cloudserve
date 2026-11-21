@@ -94,6 +94,15 @@ reason is explained in the report and in `docs/governance.md` (fairness) and `do
 - **A free Groq API key**, from https://console.groq.com/keys
 - About **4 GB of free disk space** and an internet connection. The first run downloads about 1 GB.
 - **Git**, from https://git-scm.com (check with `git --version`).
+
+On Windows 10 or 11 you can install Python and Git from PowerShell instead of the websites (the same official
+installers; then close PowerShell and open a new one, so it finds them):
+
+```powershell
+winget install -e --id Python.Python.3.11
+winget install -e --id Git.Git
+```
+
 - **Optional, only to watch the system live on charts: Prometheus and Grafana**, from https://prometheus.io/download/
   and https://grafana.com/grafana/download. Nothing else needs them; how to start and connect them is in
   [Optional: watch it live](#optional-watch-it-live-prometheus-and-grafana).
@@ -264,23 +273,27 @@ Put the ticket file (in the same format as `data/development_tickets.json`) anyw
 python -m src.run_evaluation <tickets file> <results file>
 ```
 
-The same run can also be started this way (`--output` can be a folder or a `.json` file):
-
-```
-python -m evaluation.harness --input data/validation_tickets.json --output evaluation/results/
-```
-
-For example, for the hidden test set:
+Replace `<tickets file>` with the path of your ticket file and `<results file>` with a name for the results file.
+Type only the names: the `<` and `>` are not part of the command. For example, for the hidden test set, if it is
+saved as `data/test_tickets.json`:
 
 ```
 python -m src.run_evaluation data/test_tickets.json evaluation/results/test_run.json
 ```
 
-It needs no further input. Each ticket is classified, checked against the safety rules, matched to the help
+The same run can also be started this way, which writes its results into the `evaluation/results` folder:
+
+```
+python -m evaluation.harness --input data/test_tickets.json --output evaluation/results/
+```
+
+Once started, it needs nothing from you. Each ticket is classified, checked against the safety rules, matched to the help
 articles, answered or passed to a person, and logged. It writes:
 
-- `<results file>`: one entry per ticket, with the decision, the reply sent and the articles cited;
-- `<results file>_metrics.md` beside it: the measures for the run, with the settings it used;
+- `<results file>`: one entry per ticket, with the decision, the reply sent and the articles cited (for example
+  `evaluation/results/test_run.json`);
+- the metrics report beside it, with `_metrics.md` at the end of the name (for example
+  `evaluation/results/test_run_metrics.md`): the measures for the run, with the settings it used;
 - `storage/decisions.db`: a log row for every decision.
 
 **How long it takes:** on Groq's free tier, the 80 validation tickets took 8.0 minutes (19 Nov 2026) and the 500
@@ -338,8 +351,17 @@ Check it works: open http://localhost:8001/metrics in a browser. You should see 
 **2. Start Prometheus**, which collects those numbers every 15 seconds. Download it from
 https://prometheus.io/download/ and unzip it. In a second terminal, from the folder you unzipped it to:
 
-- Windows: `.\prometheus.exe --config.file=<path to cloudserve>\monitoring\prometheus.yml --web.listen-address=127.0.0.1:9090`
-- macOS / Linux: `./prometheus --config.file=<path to cloudserve>/monitoring/prometheus.yml --web.listen-address=127.0.0.1:9090`
+Windows (if you downloaded the project somewhere other than `C:\cloudserve_test` in step 1, change that part of the path):
+
+```powershell
+.\prometheus.exe --config.file=C:\cloudserve_test\cloudserve\monitoring\prometheus.yml --web.listen-address=127.0.0.1:9090
+```
+
+macOS / Linux:
+
+```bash
+./prometheus --config.file=$HOME/cloudserve_test/cloudserve/monitoring/prometheus.yml --web.listen-address=127.0.0.1:9090
+```
 
 (The listen address keeps it on this computer, so Windows does not ask about the firewall.) Check it works: open
 http://localhost:9090/targets; the `support-system` target should show **UP**.
