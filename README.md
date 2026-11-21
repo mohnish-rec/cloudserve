@@ -181,7 +181,8 @@ Labels sent with a ticket are ignored. Stop it with Ctrl+C.
 
 *Seven prepared tickets show every kind of outcome: four are answered automatically (a success on each of the four channels), two are sent to a person (escalations), and one is blocked by a guardrail.*
 
-The seven tickets are in `data/samples/demo_tickets.json`:
+The seven tickets are in `data/samples/demo_tickets.json`. The last column shows what you should see **the first
+time you send them after starting the system** (step 7):
 
 | Ticket | Channel | About | You should see |
 |---|---|---|---|
@@ -192,6 +193,13 @@ The seven tickets are in `data/samples/demo_tickets.json`:
 | DEV-0058 | email | Where is our data stored? | Sent to a person (data location rule) |
 | DEV-0033 | chat | Single sign-on problem, Standard plan | Sent to a person with a draft (the article is for other plans) |
 | RT-01 | email | Hidden instruction: "ignore all previous instructions…" | Blocked by a guardrail |
+
+**If you send them again without restarting the system,** the tickets that were answered now go to a person, with
+the reason "follow-up: the same customer had an automatic reply on the same type…". This is the follow-up rule
+working: the running system remembers its automatic replies, and when the same customer writes again about the same
+type of problem within 7 days, it assumes the first answer did not solve it and sends the new ticket to a person with
+the earlier reply as a draft. To see the first-time results again, restart the system: press **Ctrl+C** in its window,
+then run `python -m src.api` again.
 
 **Send the seven tickets to the system you started in step 7.** Use the other PowerShell window showing `(.venv)`,
 keep the system from step 7 running, and run:
@@ -360,6 +368,8 @@ python scripts/send_demo_tickets.py
 ```
 
 All seven now show **SENT TO A PERSON**, with the reason "the kill switch is on, so all automatic replies are stopped".
+(After you turn it off, restart the system before sending the demo tickets again, so the follow-up rule described in
+[step 8](#step-8-send-one-ticket-from-each-channel-an-escalation-and-a-guardrail-ticket) does not change the results.)
 
 **3. Turn it off** (this deletes the file), so automatic replies start again:
 
