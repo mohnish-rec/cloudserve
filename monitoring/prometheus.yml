@@ -5,4 +5,6 @@ global:
 scrape_configs:
   - job_name: "support-system"
     static_configs:
-      - targets: ["localhost:8001"]
+      # 127.0.0.1 rather than localhost: the system listens on 127.0.0.1 only (no Windows firewall prompt),
+      # and on some PCs "localhost" is looked up as ::1 first, which nothing answers (21 Nov 2026)
+      - targets: ["127.0.0.1:8001"]
