@@ -265,13 +265,15 @@ in `handover`; a blocked one shows which guardrail fired in `reason` and `guardr
 [Optional: watch it live](#optional-watch-it-live-prometheus-and-grafana). Then stop the system from [step 7](#step-7-start-the-system) (Ctrl+C in its
 terminal), because both use port 8001, and add `--metrics-port 8001` to the command below.
 
-Put the ticket file (in the same format as `data/development_tickets.json`) anywhere you like, then run:
+Copy the ticket file (in the same format as `data/development_tickets.json`) into the project's `data` folder, which
+is `C:\cloudserve_test\cloudserve\data` if you followed step 1. Then, in the PowerShell window showing `(.venv)`, run:
 
 ```
 python -m src.run_evaluation <tickets file> <results file>
 ```
 
-Replace `<tickets file>` with the path of your ticket file and `<results file>` with a name for the results file.
+Replace `<tickets file>` with `data/` followed by your ticket file's name, and `<results file>` with
+`evaluation/results/` followed by a name for the results, ending in `.json`.
 Type only the names: the `<` and `>` are not part of the command. For example, for the hidden test set, if it is
 saved as `data/test_tickets.json`:
 
