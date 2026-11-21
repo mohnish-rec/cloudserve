@@ -266,50 +266,66 @@ in `handover`; a blocked one shows which guardrail fired in `reason` and `guardr
 
 ### Step 9. Run a whole file of tickets, unattended
 
-*One command processes every ticket in a file with nobody touching it, then writes a metrics report.*
+*One command processes every ticket in a file, with nobody touching it, and writes a metrics report at the end.*
 
-**Want to watch the run live?** Set up monitoring first (optional, about 10 minutes): see
-[Optional: watch it live](#optional-watch-it-live-prometheus-and-grafana). Then stop the system from [step 7](#step-7-start-the-system) (Ctrl+C in its
-terminal), because both use port 8001, and add `--metrics-port 8001` to the end of the command below, for example:
+There are two ways to do this step. Use the first unless you set up the optional live charts (Prometheus and Grafana).
 
-```
-python -m src.run_evaluation data/test_tickets.json evaluation/results/test_run.json --metrics-port 8001
-```
+#### Without the live charts
 
-Copy the ticket file (in the same format as `data/development_tickets.json`) into the project's `data` folder, which
-is `C:\cloudserve_test\cloudserve\data` if you followed step 1. Then, in the PowerShell window showing `(.venv)`, run:
+**1. Put the ticket file in the project's `data` folder**, which is `C:\cloudserve_test\cloudserve\data` if you
+followed step 1. The file must be in the same format as `data/development_tickets.json`.
+
+**2. Start the run.** In the PowerShell window showing `(.venv)`, type:
 
 ```
 python -m src.run_evaluation <tickets file> <results file>
 ```
 
-Replace `<tickets file>` with `data/` followed by your ticket file's name, and `<results file>` with
-`evaluation/results/` followed by a name for the results, ending in `.json`.
-Type only the names: the `<` and `>` are not part of the command. For example, for the hidden test set, if it is
-saved as `data/test_tickets.json`:
+- Replace `<tickets file>` with `data/` followed by your ticket file's name.
+- Replace `<results file>` with `evaluation/results/` followed by a name for the results, ending in `.json`.
+- Type only the names: the `<` and `>` are not part of the command.
+
+For example, for the hidden test set saved as `data/test_tickets.json`:
 
 ```
 python -m src.run_evaluation data/test_tickets.json evaluation/results/test_run.json
 ```
 
-The same run can also be started this way, which writes its results into the `evaluation/results` folder:
+**3. Leave it until it finishes.** It needs nothing from you, and the window must stay open. On Groq's free tier the
+80 validation tickets took 8.0 minutes (19 Nov 2026) and the 500 development tickets about 10 hours (609.5 minutes,
+19-20 Nov 2026). When the free tier's limit is reached, the system waits and tries again by itself; a reply that cannot
+be checked is never sent, and that ticket goes to a person instead.
+
+#### With the live charts
+
+Only if you set up [Optional: watch it live](#optional-watch-it-live-prometheus-and-grafana).
+
+**1. Stop the system from step 7.** Press **Ctrl+C** in its window. The run and the system cannot both use the
+live-chart connection (port 8001) at the same time, and the run does not need the system.
+
+**2. Put the ticket file in the project's `data` folder**, as in the first way.
+
+**3. Start the run with `--metrics-port 8001` at the end.** It is the same command as in the first way, with the same
+replacements, plus this ending. For example, for the hidden test set saved as `data/test_tickets.json`:
 
 ```
-python -m evaluation.harness --input data/test_tickets.json --output evaluation/results/
+python -m src.run_evaluation data/test_tickets.json evaluation/results/test_run.json --metrics-port 8001
 ```
 
-Once started, it needs nothing from you. Each ticket is classified, checked against the safety rules, matched to the help
-articles, answered or passed to a person, and logged. It writes:
+**4. Watch the charts while it runs.** In Grafana, set the time range to **Last 15 minutes** and the refresh to
+**10s**. Leave the window open until the run finishes.
 
-- `<results file>`: one entry per ticket, with the decision, the reply sent and the articles cited (for example
-  `evaluation/results/test_run.json`);
-- the metrics report beside it, with `_metrics.md` at the end of the name (for example
-  `evaluation/results/test_run_metrics.md`): the measures for the run, with the settings it used;
-- `storage/decisions.db`: a log row for every decision.
+#### What the run writes (either way)
 
-**How long it takes:** on Groq's free tier, the 80 validation tickets took 8.0 minutes (19 Nov 2026) and the 500
-development tickets 609.5 minutes, about 10 hours (19-20 Nov 2026). When the free tier's limit is reached, the system waits and tries again on its own; a ticket whose
-reply cannot be checked is never sent and goes to a person instead. Leave the terminal open until it finishes.
+In the `evaluation/results` folder, with the example names above:
+
+- `test_run.json`: one entry per ticket, with the decision, the reply sent and the articles cited;
+- `test_run_metrics.md`: the metrics report, with every measure for the run and the settings it used;
+
+and a row for every decision in the decision log, `storage/decisions.db`.
+
+*Another way to start the same run*, with the input and output named:
+`python -m evaluation.harness --input data/test_tickets.json --output evaluation/results/`
 
 ### Step 10. Check the metrics report against the decision log
 
