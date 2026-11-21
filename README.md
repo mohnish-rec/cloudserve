@@ -90,7 +90,9 @@ reason is explained in the report and in `docs/governance.md` (fairness) and `do
 
 *Install these before you start. Everything else is installed by the steps below.*
 
-- **Python 3.11.** [Download 3.11.9](https://www.python.org/downloads/release/python-3119/). On that page, under **Files**, choose **Windows installer (64-bit)** on Windows or **macOS 64-bit universal2 installer** on a Mac, and install with the default options. On Linux, install `python3.11` and `python3.11-venv` with your package manager. Other versions will not work: several pinned packages support Python only up to 3.11.
+These instructions are for **Windows, using PowerShell**, where the system was built and tested.
+
+- **Python 3.11.** [Download 3.11.9](https://www.python.org/downloads/release/python-3119/). On that page, under **Files**, choose **Windows installer (64-bit)**, and install it with the default options. Other versions will not work: several pinned packages support Python only up to 3.11.
 - **A free Groq API key**, from https://console.groq.com/keys
 - About **4 GB of free disk space** and an internet connection. The first run downloads about 1 GB.
 - **Git**, from https://git-scm.com (check with `git --version`).
@@ -113,22 +115,11 @@ winget install -e --id Git.Git
 
 *This downloads a copy of the project to your computer.*
 
-Open a terminal (on Windows, PowerShell) and make a new, empty folder for the project, then download it there.
-
-**Windows (PowerShell):**
+Open PowerShell, make a new, empty folder for the project, and download it there:
 
 ```powershell
 mkdir C:\cloudserve_test
 cd C:\cloudserve_test
-git clone https://github.com/mohnish-rec/cloudserve.git
-cd cloudserve
-```
-
-**macOS / Linux:**
-
-```bash
-mkdir ~/cloudserve_test
-cd ~/cloudserve_test
 git clone https://github.com/mohnish-rec/cloudserve.git
 cd cloudserve
 ```
@@ -139,8 +130,6 @@ Every command below is run in this `cloudserve` folder (the one containing this 
 
 *This makes a private copy of Python just for this project, so nothing else on your computer is affected. Each time you open a new terminal later, run only the activate line again.*
 
-**Windows (PowerShell):**
-
 ```powershell
 py -3.11 -m venv .venv
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
@@ -148,16 +137,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
 python --version
 ```
 
-**macOS / Linux:**
-
-```bash
-python3.11 -m venv .venv
-source .venv/bin/activate
-python --version
-```
-
 You should see `Python 3.11.x`, and your prompt now starts with `(.venv)`.
-**From here on, every command is the same on every system.**
 
 ### Step 3. Install the packages it needs
 
@@ -178,7 +158,7 @@ This takes several minutes. Every package is pinned to the exact version that wa
 cp .env.example .env
 ```
 
-This creates a new file called `.env`. Open **`.env`** (not `.env.example`): on Windows with `notepad .env`, on macOS with `open -e .env`, on Linux with `nano .env`. Replace `your_groq_key_here` with your Groq key (no quotes, no spaces), leave every other line as it is, and save.
+This creates a new file called `.env`. Open **`.env`** (not `.env.example`): with `notepad .env`. Replace `your_groq_key_here` with your Groq key (no quotes, no spaces), leave every other line as it is, and save.
 
 ### Step 5. Check the AI model answers
 
@@ -349,8 +329,6 @@ cd C:\prometheus\prometheus-*
 .\prometheus.exe --version
 ```
 
-On macOS or Linux, download the `darwin` or `linux` file instead and unzip it with `tar -xzf` followed by the file name.
-
 **2. Start Prometheus**, in the same window, and leave it open:
 
 ```powershell
@@ -358,7 +336,6 @@ On macOS or Linux, download the `darwin` or `linux` file instead and unzip it wi
 ```
 
 If you downloaded the project somewhere other than `C:\cloudserve_test` in step 1, change that part of the path.
-(On macOS or Linux: `./prometheus --config.file=$HOME/cloudserve_test/cloudserve/monitoring/prometheus.yml --web.listen-address=127.0.0.1:9090`.)
 Open http://localhost:9090/targets: you will see `support-system`. It shows **DOWN** until the system is started.
 
 **3. Get Grafana.** Tested with Grafana 13.3.1; the dashboard needs Grafana 10 or newer. On Windows 10 or 11, in
@@ -388,7 +365,7 @@ activations over time; and how confident the system was.
 *The tested settings are already the defaults, so you do not need this section to run the system.*
 
 The tested settings are the defaults, so nothing needs to be set. Each can be switched off for a comparison,
-for example `$env:QUESTION_RULES="off"` in PowerShell or `export QUESTION_RULES=off` on macOS/Linux:
+for example `$env:QUESTION_RULES="off"` in PowerShell:
 
 | Setting | Default | What it does |
 |---|---|---|
