@@ -344,7 +344,7 @@ after steps 1 to 6 and before you start the system: Prometheus collects the numb
 you use for the project (the one showing `(.venv)`). In the new window:
 
 ```powershell
-Get-ChildItem "$env:USERPROFILE\Downloads\prometheus-*windows-amd64.zip" | Expand-Archive -DestinationPath C:\prometheus
+Get-ChildItem "$env:USERPROFILE\Downloads\prometheus-*windows-amd64.zip" | Expand-Archive -DestinationPath C:\prometheus -Force
 cd C:\prometheus\prometheus-*
 .\prometheus.exe --version
 ```
