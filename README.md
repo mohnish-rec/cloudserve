@@ -10,7 +10,8 @@ Claude (Anthropic) says so at the top of the file; every file was reviewed and r
 If you are setting this up for the first time, do these steps from top to bottom. Each step says what you should see
 when it has worked.
 
-**Before you start:** [What you need first](#what-you-need-first): Python 3.11, a free Groq key and Git.
+**Before you start:** [What you need first](#what-you-need-first): Python 3.11, a free Groq key and Git. To watch the
+system working live on charts, also install Prometheus and Grafana (optional).
 
 **Set it up (about 20 minutes, most of it downloading):**
 
@@ -25,7 +26,8 @@ when it has worked.
 
 7. [Start the system](#step-7-start-the-system)
 8. [Send one ticket from each channel, an escalation and a guardrail ticket](#step-8-send-one-ticket-from-each-channel-an-escalation-and-a-guardrail-ticket)
-9. [Run a whole file of tickets, unattended](#step-9-run-a-whole-file-of-tickets-unattended)
+9. [Run a whole file of tickets, unattended](#step-9-run-a-whole-file-of-tickets-unattended). To watch it live, first
+   [start Prometheus and Grafana](#optional-watch-it-live-prometheus-and-grafana) (optional)
 10. [Check the metrics report against the decision log](#step-10-check-the-metrics-report-against-the-decision-log)
 11. [Run the tests](#step-11-run-the-tests)
 
@@ -92,6 +94,9 @@ reason is explained in the report and in `docs/governance.md` (fairness) and `do
 - **A free Groq API key**, from https://console.groq.com/keys
 - About **4 GB of free disk space** and an internet connection. The first run downloads about 1 GB.
 - **Git**, from https://git-scm.com (check with `git --version`).
+- **Optional, only to watch the system live on charts: Prometheus and Grafana**, from https://prometheus.io/download/
+  and https://grafana.com/grafana/download. Nothing else needs them; how to start and connect them is in
+  [Optional: watch it live](#optional-watch-it-live-prometheus-and-grafana).
 
 ## Set it up
 
@@ -99,9 +104,22 @@ reason is explained in the report and in `docs/governance.md` (fairness) and `do
 
 *This downloads a copy of the project to your computer.*
 
-In a terminal, go to the folder where you want the project, then:
+Open a terminal (on Windows, PowerShell) and make a new, empty folder for the project, then download it there.
 
+**Windows (PowerShell):**
+
+```powershell
+mkdir C:\cloudserve_test
+cd C:\cloudserve_test
+git clone https://github.com/mohnish-rec/cloudserve.git
+cd cloudserve
 ```
+
+**macOS / Linux:**
+
+```bash
+mkdir ~/cloudserve_test
+cd ~/cloudserve_test
 git clone https://github.com/mohnish-rec/cloudserve.git
 cd cloudserve
 ```
