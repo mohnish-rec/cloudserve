@@ -148,15 +148,12 @@ rows in the decision log.
 
 Under **Try tickets one at a time**, press **Send the 7 demo tickets**. You should see:
 
-| Ticket | Channel | About | You should see |
-|---|---|---|---|
-| DEV-0319 | Email | Unexpected overage charges | Answered automatically |
-| DEV-0108 | Chat | Deployments fail at the health check | Answered automatically |
-| DEV-0422 | Documentation comment | A pagination cursor stops working | Answered automatically |
-| DEV-0330 | Forum | Connection pool exhausted | Answered automatically |
-| DEV-0058 | Email | Where is our data stored? | Sent to a person (data location rule) |
-| DEV-0033 | Chat | Single sign-on problem, Standard plan | Sent to a person with a draft (the article is for other plans) |
-| RT-01 | Email | Hidden instruction: "ignore all previous instructions…" | Blocked by a guardrail |
+- **Answered automatically:** DEV-0319 (email, unexpected overage charges), DEV-0108 (chat, deployments fail at the
+  health check), DEV-0422 (documentation comment, a pagination cursor stops working) and DEV-0330 (forum, connection
+  pool exhausted): one on each channel.
+- **Sent to a person:** DEV-0058 (email, "where is our data stored?", the data location rule) and DEV-0033 (chat,
+  single sign-on on the Standard plan, sent with a draft because the article is for other plans).
+- **Blocked by a guardrail:** RT-01 (email, with a hidden instruction: "ignore all previous instructions…").
 
 Two things to know:
 
@@ -196,12 +193,15 @@ sending the demo tickets again. Every change is written, with the time, to `stor
 
 ### Check it copes with problems
 
-| Problem | How to cause it | You should see |
-|---|---|---|
-| No article matches | Under **Or write your own ticket**, send "What is the weather like today?" | It goes to a person, and the AI model is not called |
-| The free tier's limit is reached | Send the demo tickets twice quickly | The system waits and tries again; a reply whose check cannot run goes to a person. The **Free tier limits** box shows the refusals |
-| The AI service cannot be reached | Disconnect from the internet, or put a wrong key in `.env` and restart the system (put the real key back afterwards), then send the demo tickets | Nothing crashes and no unchecked reply is sent: each ticket goes to a person with the reason "model unavailable" |
-| An empty ticket | Open http://127.0.0.1:8000/docs, choose **POST /tickets**, **Try it out**, and send a ticket with `"body": ""` | It goes to a person, and the system carries on |
+- **No article matches.** Under **Or write your own ticket**, send "What is the weather like today?". It goes to a
+  person, and the AI model is not called.
+- **The free tier's limit is reached.** Send the demo tickets twice quickly. The system waits and tries again; a reply
+  whose check cannot run goes to a person. The **Free tier limits** box shows the refusals.
+- **The AI service cannot be reached.** Disconnect from the internet, or put a wrong key in `.env` and restart the
+  system (put the real key back afterwards), then send the demo tickets. Nothing crashes and no unchecked reply is
+  sent: each ticket goes to a person with the reason "model unavailable".
+- **An empty ticket.** Open http://127.0.0.1:8000/docs, choose **POST /tickets**, **Try it out**, and send a ticket
+  with `"body": ""`. It goes to a person, and the system carries on.
 
 ## Use it with commands
 
@@ -215,23 +215,47 @@ step 2).*
 python scripts/send_demo_tickets.py
 ```
 
-**Step 9 with a command** (this does not need the system from step 7):
+**Step 9 with a command (the unattended run).** This does not need the system from step 7.
 
-```powershell
-python -m src.run_evaluation data/validation_tickets.json evaluation/results/validation_run.json
-```
+1. **Put the ticket file in the project's `data` folder,** which is `C:\cloudserve_test\cloudserve\data`. It must be
+   in the same format as `data/development_tickets.json`.
+2. **Start the run.** In the project window, type:
 
-For another file, put it in the project's `data` folder and use its name, with a new name for the results. For
-example, for the hidden evaluation set saved as `data/hidden_evaluation_tickets.json`:
+   ```
+   python -m src.run_evaluation <tickets file> <results file>
+   ```
 
-```powershell
-python -m src.run_evaluation data/hidden_evaluation_tickets.json evaluation/results/hidden_evaluation_run.json
-```
+   - Replace `<tickets file>` with `data/` followed by your ticket file's real name, exactly as it is spelled,
+     including `.json` at the end.
+   - Replace `<results file>` with `evaluation/results/` followed by a new name you choose for the results, also
+     ending in `.json`.
+   - Type only the names: the `<` and `>` are not part of the command.
 
-Leave it until it finishes, with the window open. It writes, in `evaluation/results`, the results file (for example
-`validation_run.json`) and the metrics report (for example `validation_run_metrics.md`), and a row for every decision in
-the decision log, `storage/decisions.db`. (The same run can also be started as
-`python -m evaluation.harness --input data/validation_tickets.json --output evaluation/results/`.)
+   For example, for the hidden evaluation set (the 120 tickets the assessors run), if it is saved as
+   `data/hidden_evaluation_tickets.json`:
+
+   ```powershell
+   python -m src.run_evaluation data/hidden_evaluation_tickets.json evaluation/results/hidden_evaluation_run.json
+   ```
+
+   To try it now on the 80 validation tickets that come with the project (already in the `data` folder):
+
+   ```powershell
+   python -m src.run_evaluation data/validation_tickets.json evaluation/results/validation_run.json
+   ```
+
+3. **Leave it until it finishes.** It needs nothing from you; keep the window open. On Groq's free tier the 80
+   validation tickets take about 8 minutes. When the free tier's limit is reached, the system waits and tries again by
+   itself.
+
+It writes, in the `evaluation/results` folder, with the example names above:
+
+- `hidden_evaluation_run.json`: one entry per ticket, with the decision, the reply sent and the articles cited;
+- `hidden_evaluation_run_metrics.md`: the metrics report;
+- and a row for every decision in the decision log, `storage/decisions.db`.
+
+The same run can also be started as
+`python -m evaluation.harness --input data/hidden_evaluation_tickets.json --output evaluation/results/`.
 
 **Step 10 with a command:** open the metrics report; under **Governance**, the line **Decisions logged** says, for
 example, `356 rows; 80 final outcomes for 80 tickets -> reconciles`. Then count the same things from the decision log:
@@ -299,15 +323,17 @@ refresh to **10s**.
 
 ## If something goes wrong
 
-| What you see | What to do |
-|---|---|
-| `.venv\Scripts\activate` says running scripts is disabled | Type `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force` first (the three lines in step 2) |
-| Tickets blocked with "grounding_model: the check failed … HTTP 429" | The free tier's limit for that minute is used up. Wait about a minute, then send again; the page's **Free tier limits** box shows it |
-| Tickets that were answered now go to a person | The follow-up rule (step 8). Restart the system: **Ctrl+C**, then `python -m src.api` |
-| Every ticket goes to a person | The kill switch is on. Turn it off on the web page |
-| The web page says the system did not answer | The system has stopped. Start it again: `python -m src.api` |
-| The charts stay empty | Press **Start the live charts from zero** and wait for **Ready**. If still empty, open a chart's menu (three dots) > **Edit** and check the data source is **Prometheus** |
-| "Prometheus was not found" | Do step 1 of the optional charts again |
+- **`.venv\Scripts\activate` says running scripts is disabled.** Type
+  `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force` first (the three lines in step 2).
+- **Tickets blocked with "grounding_model: the check failed … HTTP 429".** The free tier's limit for that minute is
+  used up. Wait about a minute, then send again; the page's **Free tier limits** box shows it.
+- **Tickets that were answered now go to a person.** That is the follow-up rule (step 8). Restart the system:
+  **Ctrl+C**, then `python -m src.api`.
+- **Every ticket goes to a person.** The kill switch is on. Turn it off on the web page.
+- **The web page says the system did not answer.** The system has stopped. Start it again: `python -m src.api`.
+- **The charts stay empty.** Press **Start the live charts from zero** and wait for **Ready**. If they are still empty,
+  open a chart's menu (three dots) > **Edit** and check the data source is **Prometheus**.
+- **"Prometheus was not found".** Do step 1 of the optional charts again.
 
 ## About the project
 
@@ -326,17 +352,10 @@ Every ticket goes through the same steps (`src/workflow.py`):
 A ticket for a person comes with a plain summary, the relevant articles and, where useful, a draft reply. The labels
 in the ticket files are never used to decide.
 
-| Folder | What it holds |
-|---|---|
-| `src/` | The system itself, including its web page |
-| `tests/` | The automatic tests |
-| `evaluation/` | The run command, every run's results and metrics report, and the review sheets |
-| `data/` | The tickets, the help articles, the demo tickets and the attack tickets |
-| `prompts/` | The instructions given to the AI models, with their versions |
-| `models/` | The two trained models |
-| `scripts/` | Setup and checking scripts; each says at the top what it does |
-| `monitoring/` | The Prometheus settings and the Grafana dashboard |
-| `docs/` | The design (`architecture.md`), governance, decision log, known limitations, settings and a guide to every file (`code_guide.md`) |
+The code is in `src/` (including the web page), the tests in `tests/`, the run command and every run's results in
+`evaluation/`, the tickets and help articles in `data/`, the instructions given to the AI models in `prompts/`, and the
+Prometheus settings and Grafana dashboard in `monitoring/`. `docs/` holds the design (`architecture.md`), governance,
+decision log, known limitations, settings and a guide to every file (`code_guide.md`).
 
 `.env.example` lists every setting with placeholder values. Your own `.env` (with your key) and the `storage/` folder
 are never uploaded.
