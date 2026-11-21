@@ -487,6 +487,10 @@ activations over time; and how confident the system was. In Grafana, set the tim
 Only tickets sent to the running system appear on the charts: in [step 8](#step-8-send-one-ticket-from-each-channel-an-escalation-and-a-guardrail-ticket),
 use the command that sends the tickets to the system you started in step 7, not the one that runs them as a separate program.
 
+**Always wait before sending tickets.** The charts show how much the numbers go up, so Prometheus must read the
+starting value of 0 first. After starting Prometheus or the system, wait until http://localhost:9090/targets shows
+**UP**, then 30 seconds more. Tickets sent sooner are processed normally but may not appear on the charts.
+
 **If the charts stay empty:**
 
 - Open http://localhost:9090, type `tickets_processed_total` in the query box and press **Execute**. Numbers above 0
@@ -494,6 +498,24 @@ use the command that sends the tickets to the system you started in step 7, not 
 - If Prometheus has them but Grafana does not show them, open a chart's menu (the three dots at its top right),
   choose **Edit**, and check that the data source above its query says **Prometheus**. If not, import the dashboard
   again (step 5), choosing **Prometheus** in the drop-down, and press **Overwrite** if asked.
+
+**To clear the charts and start fresh:** Prometheus keeps everything it has collected in a folder called `data`, inside
+the folder it is started from. To clear it:
+
+1. Stop Prometheus: press **Ctrl+C** in its window and wait until the normal `PS C:\...>` prompt is back.
+2. In that window, delete its stored numbers and start it again:
+
+   ```powershell
+   cd C:\prometheus\prometheus-*
+   Remove-Item -Recurse -Force data
+   .\prometheus.exe --config.file=C:\cloudserve_test\cloudserve\monitoring\prometheus.yml --web.listen-address=127.0.0.1:9090
+   ```
+
+   This removes only the collected numbers, not Prometheus itself or its settings. It makes a new, empty `data`
+   folder when it starts. (Do not delete the project's own `data` folder, which holds the tickets.)
+3. Restart the system too, so it does not send its earlier totals again: press **Ctrl+C** in its window, then run
+   `python -m src.api`.
+4. Wait until http://localhost:9090/targets shows **UP**, then **30 seconds more**, before sending any tickets.
 
 ### Optional: settings
 
