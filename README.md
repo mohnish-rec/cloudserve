@@ -32,7 +32,8 @@ when it has worked.
 10. [Check the metrics report against the decision log](#step-10-check-the-metrics-report-against-the-decision-log)
 11. [Run the tests](#step-11-run-the-tests)
 
-**Optional, any time after step 6:** [change the settings or use the kill switch](#optional-settings-and-the-kill-switch),
+**Optional, any time after step 6:** [use the kill switch](#optional-the-kill-switch),
+[change the settings](#optional-settings),
 [check it copes with problems](#optional-check-it-copes-with-problems),
 [run the red-team check](#optional-red-team-check).
 
@@ -442,7 +443,7 @@ use the command that sends the tickets to the system you started in step 7, not 
   choose **Edit**, and check that the data source above its query says **Prometheus**. If not, import the dashboard
   again (step 5), choosing **Prometheus** in the drop-down, and press **Overwrite** if asked.
 
-### Optional: settings and the kill switch
+### Optional: settings
 
 *The tested settings are already the defaults, so you do not need this section to run the system.*
 
@@ -460,8 +461,35 @@ for example `$env:QUESTION_RULES="off"` in PowerShell:
 | `PLAN_RULE` | on | A reply using an article that applies only to other plans (its "Applies to" line) goes to a person with the draft (`src/plans.py`) |
 | `REPLY_CACHE` | off | Stored answers are never used for validation or test runs. `--use-cache` turns it on for development runs; `--read-cache` reuses stored development answers but stores nothing new; `--refresh-cache` reads nothing stored (every answer fresh) and stores the new answers for later development runs |
 
-To stop all automatic replies at once (kill switch), create an empty file called `storage/kill_switch`:
-every ticket then goes to a person. Delete the file to turn replies back on.
+### Optional: the kill switch
+
+*The kill switch stops all automatic replies at once: while it is on, every ticket goes to a person. It is checked
+before every ticket, so it works straight away, even in the middle of a run, without restarting anything.*
+
+Use the PowerShell window showing `(.venv)`, in the project folder (`C:\cloudserve_test\cloudserve`).
+
+**1. Turn it on** (this creates an empty file called `storage/kill_switch`):
+
+```powershell
+New-Item storage\kill_switch -ItemType File -Force
+```
+
+**2. Check it is on.** If the system from [step 7](#step-7-start-the-system) is running, open
+http://127.0.0.1:8000/health: it shows `"kill_switch_on": true`. Then send the demo tickets:
+
+```powershell
+python scripts/send_demo_tickets.py
+```
+
+All seven now show **SENT TO A PERSON**, with the reason "the kill switch is on, so all automatic replies are stopped".
+
+**3. Turn it off** (this deletes the file), so automatic replies start again:
+
+```powershell
+Remove-Item storage\kill_switch
+```
+
+http://127.0.0.1:8000/health now shows `"kill_switch_on": false`.
 
 ### Optional: check it copes with problems
 
