@@ -106,7 +106,7 @@ winget install -e --id Git.Git
 ```
 
 - **Optional, only to watch the system live on charts: Prometheus and Grafana.** Nothing else needs them. Set them up
-  after step 6, because Prometheus reads a settings file from the project:
+  after [step 6](#step-6-build-the-article-store-and-the-decision-log), because Prometheus reads a settings file from the project:
   [Optional: watch it live](#optional-watch-it-live-prometheus-and-grafana).
 
 ## Set it up
@@ -216,7 +216,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
 .venv\Scripts\activate
 ```
 
-You should see `(.venv)` at the start of the line. Type the commands from step 8 onwards in this window.
+You should see `(.venv)` at the start of the line. Type the commands from [step 8](#step-8-send-one-ticket-from-each-channel-an-escalation-and-a-guardrail-ticket) onwards in this window.
 
 To try a ticket by hand, open http://127.0.0.1:8000/docs in a browser, choose **POST /tickets**, press **Try it out**, paste a ticket
 (the same fields as in `data/development_tickets.json`) and press **Execute**. The answer shows the decision, the
@@ -262,7 +262,7 @@ in `handover`; a blocked one shows which guardrail fired in `reason` and `guardr
 *One command processes every ticket in a file with nobody touching it, then writes a metrics report.*
 
 **Want to watch the run live?** Set up monitoring first (optional, about 10 minutes): see
-[Optional: watch it live](#optional-watch-it-live-prometheus-and-grafana). Then stop the system from step 7 (Ctrl+C in its
+[Optional: watch it live](#optional-watch-it-live-prometheus-and-grafana). Then stop the system from [step 7](#step-7-start-the-system) (Ctrl+C in its
 terminal), because both use port 8001, and add `--metrics-port 8001` to the command below.
 
 Put the ticket file (in the same format as `data/development_tickets.json`) anywhere you like, then run:
@@ -356,7 +356,7 @@ for as long as you want the charts, and close it to stop Prometheus.
 .\prometheus.exe --config.file=C:\cloudserve_test\cloudserve\monitoring\prometheus.yml --web.listen-address=127.0.0.1:9090
 ```
 
-If you downloaded the project somewhere other than `C:\cloudserve_test` in step 1, change that part of the path.
+If you downloaded the project somewhere other than `C:\cloudserve_test` in [step 1](#step-1-get-the-code), change that part of the path.
 Open http://localhost:9090/targets: you will see `support-system`. It shows **DOWN** until the system is started.
 
 **3. Get Grafana.** Tested with Grafana 13.3.1; the dashboard needs Grafana 10 or newer. On Windows 10 or 11, run this in the
@@ -386,8 +386,8 @@ URL to `http://localhost:9090`, then press **Save & test**.
 **5. Load the dashboard.** **Dashboards > New > Import**, upload `monitoring/grafana_dashboard.json` from the project,
 choose the Prometheus data source when asked, and press **Import**.
 
-**6. Start the system and watch.** Start the system (step 7), or start a full run with `--metrics-port 8001` added to
-the step 9 command. Within about 15 seconds, http://localhost:9090/targets shows **UP**, and the dashboard fills in as
+**6. Start the system and watch.** Start the system ([step 7](#step-7-start-the-system)), or start a full run with
+`--metrics-port 8001` added to the [step 9](#step-9-run-a-whole-file-of-tickets-unattended) command. Within about 15 seconds, http://localhost:9090/targets shows **UP**, and the dashboard fills in as
 tickets are processed. It has five charts: tickets per hour by channel and outcome; the share answered automatically
 against escalated; response time at the median and the slowest 5% (with the 3-second target line); guardrail
 activations over time; and how confident the system was.
@@ -422,8 +422,8 @@ limit is reached, no article matches, or a ticket is broken. This shows how to c
 |---|---|---|
 | The AI service cannot be reached | Disconnect from the internet, or put a wrong key in `.env`, then run the seven demo tickets (step 8). Put your real key back afterwards | Nothing crashes. No reply is sent without being checked: each ticket goes to a person with the reason "model unavailable", and after 3 failures in a row the rest go straight to a person without waiting. The run still ends with a metrics report. Both checks were run on 17 Nov 2026; their results are in `evaluation/results/a11_no_network/` and `evaluation/results/a11_wrong_key/` |
 | The free tier's limit is reached | Happens by itself on Groq's free tier with a large file (step 9) | The system waits as long as Groq asks, then carries on. The metrics report shows the time spent waiting separately |
-| No article matches the ticket | In step 7's page, send a ticket about something the articles do not cover, for example "What is the weather like today?" | It goes to a person; no reply is written and the model is not called |
-| A broken or empty ticket | In step 7's page, send a ticket with an empty body (`"body": ""`); in a ticket file, leave out fields or use unusual characters | It goes to a person with "Needs a specialist", and the run carries on |
+| No article matches the ticket | In [step 7](#step-7-start-the-system)'s page, send a ticket about something the articles do not cover, for example "What is the weather like today?" | It goes to a person; no reply is written and the model is not called |
+| A broken or empty ticket | In [step 7](#step-7-start-the-system)'s page, send a ticket with an empty body (`"body": ""`); in a ticket file, leave out fields or use unusual characters | It goes to a person with "Needs a specialist", and the run carries on |
 
 Each of these is also covered by the tests (step 11), for example "when every model fails the ticket is escalated
 with the reason", "a rate limit waits as long as the provider asks", "an unrelated question returns nothing" and
