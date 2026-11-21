@@ -362,3 +362,26 @@ Drafted by Claude (Anthropic) on 17 Nov 2026 from the project's files and Mohnis
   "you can store the cache but dont use the old one from previos 500 run".
 - **Check before the run:** 50 development tickets run fresh (`sandbox_dev_check_50_nocache.json`): 49 of 50 identical
   to the last 500-ticket run; DEV-0376 (Q02) used one article instead of two (known limitation 2).
+
+## D-043 · A web page to run a ticket file, and scripts for the demonstration and the log check (21 Nov 2026)
+- **Decision:** the running system (`python -m src.api`) has a web page at http://127.0.0.1:8000/: choose a ticket
+  file, press Run, and it goes through the same unattended run (`src/web_runs.py`, using `run_evaluation`), with
+  progress and the metrics report at the end. Two small scripts replace long one-line commands that break in Windows
+  PowerShell: `scripts/send_demo_tickets.py` (README step 8) and `scripts/check_decision_log.py` (README step 10).
+  The README was rewritten as 11 numbered steps for Windows, in the order the assessors test. The metrics report
+  (`src/report.py`) was reorganised: it opens with every target marked Yes / No / Not measured, then explains in plain
+  words, from the run's own numbers, why any target was missed; the measures themselves are calculated as before.
+  A **Start the live charts from zero** button on the same page (`src/live_charts.py`, or `start_live_charts.bat`
+  without the page) sets the chart numbers back to 0, starts Prometheus with its earlier numbers deleted and makes sure
+  Grafana is running, so the charts start from zero each time ("can we add one button to run grafana and prometheus
+  simultaneously and also when everytime we open it clears out the previous data"; "I would like a button on the same
+  page"). The page also has a **Kill switch** button (`POST /kill-switch`): it creates or deletes the same
+  `storage/kill_switch` file as the README's commands, and writes each change with the time to
+  `storage/kill_switch_history.txt` ("Also add the kill switch").
+- **Why (his words):** "Can we create a UI where they directly upload the file and it just processes it as our system
+  is very complex to work with and then connect grafana too?" and "The metric report doesn't look nice after the run
+  finished, make it look organized and easy to read ... explain why we were short of the targets"
+- **What did not change:** no rule, threshold, prompt, guardrail or model. The page only starts the run and shows its
+  progress; the run's only change is an optional progress report after each ticket, which cannot change a decision.
+  The command-line run stays the way the assessors' test is described. Drafted by Claude (Anthropic); approved by
+  Mohnish Grover.

@@ -228,7 +228,8 @@ in `handover`; a blocked one shows which guardrail fired in `reason` and `guardr
 
 *One command processes every ticket in a file, with nobody touching it, and writes a metrics report at the end.*
 
-There are two ways to do this step. Use the first unless you set up the optional live charts (Prometheus and Grafana).
+There are three ways to do this step: with a command, with a command and the live charts, or from a web page. The
+assessors' test uses the first.
 
 #### Without the live charts
 
@@ -290,7 +291,24 @@ python -m src.run_evaluation data/validation_tickets.json evaluation/results/val
 **4. Watch the charts while it runs.** In Grafana, set the time range to **Last 15 minutes** and the refresh to
 **10s**. Leave the window open until the run finishes.
 
-#### What the run writes (either way)
+#### From the web page (the simplest way)
+
+The system from [step 7](#step-7-start-the-system) has a web page that does the same run without typing a command.
+
+1. Keep the system from step 7 running.
+2. Open http://127.0.0.1:8000 in your browser.
+   If you set up the live charts, press **Start the live charts from zero** first and wait until it shows **Ready**.
+3. Press **Choose file**, pick the ticket file (for example `data\validation_tickets.json` in the project folder), and
+   press **Run**.
+4. Leave the page open. It shows how many tickets have been processed, how many were answered, sent to a person or
+   blocked, and the latest tickets. When it finishes, it shows the metrics report.
+
+Every ticket goes through exactly the same steps as the command above, and every decision is written to the decision
+log. If you set up the live charts, Grafana shows the run as it happens. The page writes its
+results into the `evaluation/results` folder, with names starting `web_`, and keeps a copy of the uploaded file in
+`evaluation/results/uploads`. Only one file can run at a time.
+
+#### What the run writes
 
 In the `evaluation/results` folder, with the hidden evaluation set names above (for the validation tickets, the same with
 `validation_run` instead of `hidden_evaluation_run`):
@@ -307,10 +325,11 @@ and a row for every decision in the decision log, `storage/decisions.db`.
 
 *This proves every ticket was logged exactly once.*
 
-**1. Open the metrics report** from step 9 (for example `evaluation/results/hidden_evaluation_run_metrics.md`). Near the end, the
-line **Decisions logged** says how many rows the run wrote to the decision log and whether every ticket has exactly
-one final outcome, for example `356 rows; 80 final outcomes for 80 tickets -> reconciles`. At the top of the report,
-under **Volume**, are the numbers answered automatically, escalated and blocked.
+**1. Open the metrics report** from step 9 (for example `evaluation/results/hidden_evaluation_run_metrics.md`). The report opens with **Results against the targets**
+(each target marked Yes or No) and, under **Why targets were missed**, the reason for any No. Under
+**Safety and the decision log**, the line **Decisions logged** says how many rows the run wrote to the decision log and
+whether every ticket has exactly one final outcome, for example `356 rows; 80 final outcomes for 80 tickets -> reconciles`.
+Under **Volume** are the numbers answered automatically, escalated and blocked.
 
 **2. Count the same things straight from the decision log.** In the PowerShell window showing `(.venv)`:
 
@@ -334,7 +353,7 @@ To check an earlier run, add its run id from the top of its metrics report, for 
 python -m pytest tests/ -v
 ```
 
-Every test should pass; the summary line reads `351 passed, 1 xfailed`.
+Every test should pass; the summary line reads `371 passed, 1 xfailed`.
 
 The one `xfailed` ("expected to fail") is deliberate: a known limitation kept visible as a test
 (`tests/test_decisions.py`). Tickets like "We were throttled… we would rather pay overage than be stopped" go to a
@@ -351,6 +370,11 @@ failure: pytest still finishes successfully. If the system ever gets this case r
 *The course's governance rules require a way to stop automatic replies at once, without changing any code; this is
 it. The kill switch stops all automatic replies at once: while it is on, every ticket goes to a person. It is checked
 before every ticket, so it works straight away, even in the middle of a run, without restarting anything.*
+
+**The simplest way: the web page.** With the system from [step 7](#step-7-start-the-system) running, open
+http://127.0.0.1:8000. The **Kill switch** box shows whether it is on, and its button turns it on or off. Then send the
+demo tickets (step 2 below) to see every one go to a person. Each change is written, with the time, to
+`storage/kill_switch_history.txt`. The commands below do exactly the same, from PowerShell.
 
 Use the PowerShell window showing `(.venv)`, in the project folder (`C:\cloudserve_test\cloudserve`).
 
@@ -477,6 +501,20 @@ URL to `http://localhost:9090`, then press **Save & test**.
 **5. Load the dashboard.** **Dashboards > New > Import**, upload `monitoring/grafana_dashboard.json` from the project,
 choose the Prometheus data source when asked, and press **Import**.
 
+**From now on, start the charts with one button.** Start the system ([step 7](#step-7-start-the-system)), open its web
+page at http://127.0.0.1:8000 and press **Start the live charts from zero**. Each time, it:
+
+- sets the system's own chart numbers back to 0, stops any Prometheus already running and deletes the numbers it
+  collected before, so every chart starts from zero;
+- starts Prometheus again in its own small window, minimised on the taskbar (leave it open; close it to stop Prometheus);
+- starts Grafana if it is not running (if Windows asks for permission, press **Yes**);
+- waits until Prometheus can read the system, then 30 seconds more, and shows **Ready** with a link to the dashboard.
+
+Then choose a ticket file on the same page and press **Run**. It finds Prometheus in `C:\prometheus`, as in step 1, and
+never touches the project's own `data` folder (the tickets) or the decision log. Without the web page, double-clicking
+**`start_live_charts.bat`** in the project folder does the same, before you start the system (if Windows shows "Windows
+protected your PC", press **More info**, then **Run anyway**). The manual steps above and below still work the same way.
+
 **6. Start the system and watch.** Start the system ([step 7](#step-7-start-the-system)), or start a full run with
 `--metrics-port 8001` added to the [step 9](#step-9-run-a-whole-file-of-tickets-unattended) command. Within about 15 seconds, http://localhost:9090/targets shows **UP**, and the dashboard fills in as
 tickets are processed. It has five charts: tickets per hour by channel and outcome; the share answered automatically
@@ -499,8 +537,9 @@ starting value of 0 first. After starting Prometheus or the system, wait until h
   choose **Edit**, and check that the data source above its query says **Prometheus**. If not, import the dashboard
   again (step 5), choosing **Prometheus** in the drop-down, and press **Overwrite** if asked.
 
-**To clear the charts and start fresh:** Prometheus keeps everything it has collected in a folder called `data`, inside
-the folder it is started from. To clear it:
+**To clear the charts and start fresh:** the simplest way is the **Start the live charts from zero** button (above).
+To do it by hand instead: Prometheus keeps everything it has collected in a folder called `data`,
+inside the folder it is started from. To clear it:
 
 1. Stop Prometheus: press **Ctrl+C** in its window and wait until the normal `PS C:\...>` prompt is back.
 2. In that window, delete its stored numbers and start it again:
@@ -568,6 +607,7 @@ the ticket files are never used to decide.
 | `models/` | The two trained models (ticket type, and the decisions learned from Mohnish Grover) |
 | `scripts/` | Setup, checking and analysis scripts; each says at the top what it does |
 | `monitoring/` | The Prometheus settings and the Grafana dashboard |
+| `start_live_charts.bat` | Starts the live charts with no earlier numbers, like the web page's button (Optional: watch it live) |
 | `docs/` | The design, governance, decision log, known limitations and a guide to every file |
 
 `.env.example` lists every setting with placeholder values. Your own `.env` (with your key) and the `storage/` folder

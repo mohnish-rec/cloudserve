@@ -7,7 +7,11 @@ The answer key is never read: only the ticket fields in TicketIn are kept, anyth
 
 Run:    python -m src.api                      (http://127.0.0.1:8000/docs to try a ticket in the browser)
         API_PORT=8000, METRICS_PORT=8001 (the port prometheus.yml reads; 0 turns the metrics server off)
-Ends:   GET  /health    is the system up, and is the kill switch on?
+Ends:   GET  /          a web page: choose a ticket file and press Run (src/web_runs.py)
+        POST /runs      start the unattended run for an uploaded ticket file; GET /runs/<id> shows its progress
+        POST /live-charts  start the live charts from zero (src/live_charts.py); GET /live-charts shows how far it got
+        POST /kill-switch  {"on": true} or {"on": false}: turn the kill switch on or off from the web page (FR-16)
+        GET  /health    is the system up, and is the kill switch on?
         GET  /healthz   alive (FR-17)
         GET  /readyz    ready to answer tickets: models, article index and AI key all in place (FR-17)
         POST /tickets   one ticket -> the decision, the reply or the handover, and the reasons
@@ -17,7 +21,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
-from fastapi import FastAPI
+from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 
 from src import logging_store as log
@@ -25,6 +30,13 @@ from src import metrics
 from src.ingest import normalise
 from src.pipeline import process
 from src.run_evaluation import as_result, failed, log_ticket, record_metrics
+from src.live_charts import LiveCharts
+from src.web_runs import PAGE, FileRuns
+
+
+class KillSwitchIn(BaseModel):
+    """The web page's kill switch button: on (true) or off (false)."""
+    on: bool
 
 
 class TicketIn(BaseModel):
@@ -56,8 +68,11 @@ def readiness(root=None) -> list:
 FIELDS = tuple(getattr(TicketIn, "model_fields", None) or TicketIn.__fields__)
 
 
-def create_app(classifier=None, retriever=None, write_log=True, **options) -> FastAPI:
-    """classifier and retriever load on the first ticket unless given (tests pass fakes). options go to process()."""
+def create_app(classifier=None, retriever=None, write_log=True, file_runs=None, live_charts=None,
+               **options) -> FastAPI:
+    """classifier and retriever load on the first ticket unless given (tests pass fakes). options go to process().
+    file_runs runs uploaded ticket files for the web page (tests pass one with a fake run); live_charts is the page's
+    "Start the live charts from zero" button (tests pass one with a fake script)."""
     app = FastAPI(title="CloudServe support triage",
                   description="One ticket in: answered automatically with cited help articles, or handed to a person "
                               "with a draft and the reasons. Same pipeline, guardrails and decision log as the "
@@ -89,6 +104,71 @@ def create_app(classifier=None, retriever=None, write_log=True, **options) -> Fa
         record_metrics(t, o)
         return {"run_id": run_id, **as_result(o)}
 
+    runs = file_runs or FileRuns()
+    charts = live_charts or LiveCharts()
+
+    @app.get("/", response_class=HTMLResponse)
+    def home():
+        """The web page: choose a ticket file, press Run, watch the progress, read the metrics report."""
+        return PAGE
+
+    @app.post("/runs")
+    async def start_run(file: UploadFile = File(...)):
+        """Start the unattended run for an uploaded ticket file, in the background."""
+        data = await file.read()
+        try:
+            return runs.start(file.filename, data)
+        except ValueError as e:
+            raise HTTPException(status_code=400, detail=str(e)) from None
+        except RuntimeError as e:
+            raise HTTPException(status_code=409, detail=str(e)) from None
+
+    @app.get("/runs/{job_id}")
+    def run_status(job_id: str):
+        """How far a file run has got, and its metrics report when it has finished."""
+        status = runs.status(job_id)
+        if status is None:
+            raise HTTPException(status_code=404, detail="No run with that id.")
+        return status
+
+    @app.post("/live-charts")
+    def start_live_charts():
+        """Set the chart numbers back to 0 and start Prometheus afresh (scripts/start_live_charts.ps1)."""
+        if runs.busy():
+            raise HTTPException(status_code=409, detail="A file is being processed. Start the live charts before "
+                                                        "the next run, not during one.")
+        try:
+            return charts.start()
+        except RuntimeError as e:
+            raise HTTPException(status_code=409, detail=str(e)) from None
+
+    @app.get("/live-charts")
+    def live_charts_status():
+        """What the live-charts start has done so far."""
+        return charts.status()
+
+    @app.post("/kill-switch")
+    def kill_switch(choice: KillSwitchIn):
+        """FR-16 from the web page: creates or deletes the same file as the README's commands (storage/kill_switch).
+        It is checked before every ticket, so it works at once, even in the middle of a run. Each change is also
+        written, with the time, to storage/kill_switch_history.txt."""
+        from src.route import KILL_SWITCH_FILE, kill_switch_on
+        path = Path(options.get("kill_switch_file") or KILL_SWITCH_FILE)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if choice.on:
+            path.touch()
+        elif path.exists():
+            path.unlink()
+        now_on = kill_switch_on(path)
+        stamp = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        with open(path.with_name("kill_switch_history.txt"), "a", encoding="utf-8") as history:
+            history.write(f"{stamp}  turned {'on' if choice.on else 'off'} from the web page; now "
+                          f"{'on' if now_on else 'off'}\n")
+        note = ""
+        if not choice.on and now_on:
+            note = "It is still on because KILL_SWITCH=on is set in the .env file or the environment; change it there."
+        return {"kill_switch_on": now_on, "note": note}
+
     @app.get("/health")
     def health():
         from src.route import kill_switch_on
@@ -110,6 +190,8 @@ def create_app(classifier=None, retriever=None, write_log=True, **options) -> Fa
         return handle(ticket.model_dump() if hasattr(ticket, "model_dump") else ticket.dict())
 
     app.state.handle = handle            # the same function, callable directly (tests)
+    app.state.file_runs = runs
+    app.state.live_charts = charts
     return app
 
 

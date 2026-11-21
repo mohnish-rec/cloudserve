@@ -56,3 +56,25 @@ def test_readiness_lists_what_is_missing(tmp_path, monkeypatch):
     monkeypatch.delenv("WRITER_API_KEY", raising=False)
     missing = readiness(tmp_path)                    # an empty folder: nothing is in place
     assert any("classifier model" in m for m in missing) and any("AI key" in m for m in missing)
+
+
+def test_the_web_page_and_the_file_run_routes_are_there(tmp_path):
+    paths = {r.path for r in app_for(tmp_path).routes}
+    assert {"/", "/runs", "/runs/{job_id}", "/live-charts"} <= paths
+
+
+def test_the_web_page_kill_switch_creates_and_deletes_the_same_file(tmp_path, monkeypatch):
+    """FR-16 from the web page: the button makes the same file as the README's command, and every change is written
+    down with the time."""
+    from src.api import KillSwitchIn
+    monkeypatch.delenv("KILL_SWITCH", raising=False)
+    switch = tmp_path / "storage" / "kill_switch"
+    app = create_app(Classifier(), Search(), write_log=False, call=models(REPLY, FITS), sleep=lambda s: None,
+                     kill_switch_file=switch)
+    flip = next(r.endpoint for r in app.routes if getattr(r, "path", "") == "/kill-switch")
+    assert app.state.handle(dict(TICKET))["action"] == "auto_respond"
+    assert flip(KillSwitchIn(on=True))["kill_switch_on"] is True and switch.exists()
+    assert app.state.handle(dict(TICKET, ticket_id="API-2", customer_id="C-10"))["reason"].count("kill switch")
+    assert flip(KillSwitchIn(on=False))["kill_switch_on"] is False and not switch.exists()
+    history = (tmp_path / "storage" / "kill_switch_history.txt").read_text(encoding="utf-8")
+    assert "turned on from the web page" in history and "turned off from the web page" in history

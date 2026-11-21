@@ -107,3 +107,19 @@ def test_the_cache_is_off_unless_a_development_run_asks_for_it(tmp_path, fake):
     meta = R.run_evaluation(str(tickets_file(tmp_path)), str(tmp_path / "dev.json"), use_cache=True)
     assert meta["reply_cache"].startswith("on")
     os.environ["REPLY_CACHE"] = "off"
+
+
+def test_progress_is_reported_after_every_ticket_without_changing_a_decision(tmp_path, fake):
+    seen = []
+    out = tmp_path / "run.json"
+    R.run_evaluation(str(tickets_file(tmp_path)), str(out), progress=lambda *a: seen.append(a))
+    assert [a[0] for a in seen] == [1, 2, 3, 4] and all(a[1] == 4 for a in seen)
+    data = json.loads(out.read_text(encoding="utf-8"))
+    assert {a[2]: a[3] for a in seen} == {r["ticket_id"]: r["action"] for r in data["results"]}
+
+
+def test_a_broken_progress_report_never_stops_the_run(tmp_path, fake):
+    def broken(*a):
+        raise RuntimeError("the page went away")
+    meta = R.run_evaluation(str(tickets_file(tmp_path)), str(tmp_path / "run.json"), progress=broken)
+    assert json.loads((tmp_path / "run.json").read_text(encoding="utf-8"))["results"] and meta["run_id"]

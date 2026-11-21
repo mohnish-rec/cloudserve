@@ -78,6 +78,8 @@ the API (`python -m src.api`), and the tests (`python -m pytest -q`).
 | `run_evaluation.py` | The one-command unattended run over a whole file (A9), writing the results file and the metrics report (A10) |
 | `report.py` | Calculates the metrics report from a run (FR-12) |
 | `api.py` | The FastAPI web interface: `POST /tickets` (one ticket in, the decision and reply or handover out), `GET /health`, `/healthz` (alive) and `/readyz` (models, article index and key in place, FR-17); the `/docs` page for trying it |
+| `web_runs.py` | The web page at http://127.0.0.1:8000/: choose a ticket file, press Run, and it goes through the same unattended run inside the running system (so Grafana shows it live), with progress and the metrics report at the end. It makes no decisions itself |
+| `live_charts.py` | The web page's **Start the live charts from zero** button: sets the chart numbers back to 0 (`metrics.reset`) and runs `scripts/start_live_charts.ps1`, showing each line it prints |
 
 ### `tests/` - automatic checks (`python -m pytest -q`, A12)
 
@@ -126,6 +128,7 @@ Each file tests one part, with fake AI models so no key or internet is needed (t
 | Safety testing | `red_team.py` | Attack tickets through the real system; every one must be stopped |
 | Demonstration | `send_demo_tickets.py` | Sends the seven demo tickets to the running system and prints each result in plain words (README step 8) |
 | Checking a run | `check_decision_log.py` | Counts what one run wrote to the decision log, to check it against its metrics report (README step 10) |
+| Live charts | `start_live_charts.ps1` | Started by the web page's **Start the live charts from zero** button or by double-clicking `start_live_charts.bat`: stops Prometheus, deletes the numbers it collected before, starts it again, makes sure Grafana runs, opens the dashboard and says when to send tickets (README: Optional: watch it live) |
 | Trying replies | `try_generate.py` | Write and read a few replies by hand |
 
 ### `prompts/` - the instructions given to the AI
@@ -404,7 +407,8 @@ tickets file / one ticket from the API
 | `calibration_table(rows, bands)` | Stated confidence against real accuracy, in five bands (Evaluation Framework) |
 | `_tokens(outcomes, n)` | Tokens used and how many answers came from the cache |
 | `repeat_contacts(outcomes, raw_by_id)` | Follow-ups found in the run, and the history baseline (17 Nov) |
-| `build(...)` | The whole report: volume, business, technical (precision and recall per type, confusion matrix, retrieval hit rate, latency with and without rate-limit waits), governance (decisions logged, guardrail activations, private data), calibration, and results by customer group. The answer key is read only here, after every ticket is done |
+| `why_person(o)`, `group_rates(...)` | The plain-words reason each ticket went to a person (the same groups as report Table 6), and each customer group's share answered with the difference between groups |
+| `build(...)` | The whole report, in this order: results against every target (Yes / No / Not measured), why any target was missed (worked out from the run's own numbers), volume, why tickets went to a person, speed and cost, safety and the decision log, results by customer group, then the marking against the answer key (precision and recall per type, confusion matrix, retrieval hit rate, calibration). The answer key is read only here, after every ticket is done; with no answer key (the hidden set) those rows say "Not measured" |
 
 ### 17. `cache.py`: stored AI answers for development runs (D-025, off by default)
 
@@ -427,7 +431,8 @@ tickets file / one ticket from the API
 |---|---|
 | `TicketIn` | The ticket fields the API accepts; anything else, such as labels, is dropped |
 | `readiness(root)` | What is missing before tickets can be answered: the trained models, the article index, the AI key |
-| `create_app(...)` | The FastAPI application: `POST /tickets`, `GET /health`, `GET /healthz`, `GET /readyz` |
+| `KillSwitchIn` | The web page's kill switch button: on or off |
+| `create_app(...)` | The FastAPI application: `POST /tickets`, `GET /health`, `GET /healthz`, `GET /readyz`, and for the web page `GET /` (the page), `POST /runs` and `GET /runs/<id>` (run a ticket file), `POST /live-charts` and `GET /live-charts` (start the live charts from zero), `POST /kill-switch` (turn the kill switch on or off, written to `storage/kill_switch_history.txt`) |
 | `main()` | `python -m src.api`: the API on port 8000 and the live numbers on port 8001 |
 
 ### 20. `__init__.py`

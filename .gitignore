@@ -5,3 +5,7 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .vscode/
+
+# Files uploaded on the web page and their results (made on each computer, not part of the project)
+evaluation/results/uploads/
+evaluation/results/web_*
