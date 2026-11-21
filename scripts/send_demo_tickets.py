@@ -19,7 +19,7 @@ OUTCOME = {"auto_respond": "ANSWERED AUTOMATICALLY", "escalate": "SENT TO A PERS
 
 def send(ticket: dict) -> dict:
     request = urllib.request.Request(URL, json.dumps(ticket).encode("utf-8"), {"Content-Type": "application/json"})
-    with urllib.request.urlopen(request, timeout=300) as response:
+    with urllib.request.urlopen(request, timeout=120) as response:
         return json.load(response)
 
 
@@ -29,9 +29,14 @@ def main() -> int:
     for number, ticket in enumerate(tickets, 1):
         try:
             result = send(ticket)
-        except urllib.error.URLError:
-            print("The system is not running, so nothing was sent. Start it first (README step 7: "
-                  "python -m src.api), then run this again.")
+        except (TimeoutError, OSError) as error:
+            if isinstance(error, urllib.error.URLError) and not isinstance(error.reason, TimeoutError):
+                print("The system is not running, so nothing was sent. Start it first (README step 7: "
+                      "python -m src.api), then run this again.")
+            else:
+                print(f"The system did not answer {ticket['ticket_id']} within 2 minutes. Look at the window where it is "
+                      "running: if its title starts with 'Select', press Esc there; otherwise stop it with Ctrl+C, "
+                      "start it again (python -m src.api) and run this again.")
             return 1
         outcome = OUTCOME.get(result.get("action"), result.get("action", "?"))
         label = f" ({result['label']})" if result.get("label") else ""

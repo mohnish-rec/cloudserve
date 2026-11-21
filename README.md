@@ -295,6 +295,13 @@ For example, for the hidden test set saved as `data/test_tickets.json`:
 python -m src.run_evaluation data/test_tickets.json evaluation/results/test_run.json
 ```
 
+To try it now on the 80 validation tickets that come with the project (already in the `data` folder, so you can skip
+point 1):
+
+```
+python -m src.run_evaluation data/validation_tickets.json evaluation/results/validation_run.json
+```
+
 **3. Leave it until it finishes.** It needs nothing from you, and the window must stay open. On Groq's free tier the
 80 validation tickets took 8.0 minutes (19 Nov 2026) and the 500 development tickets about 10 hours (609.5 minutes,
 19-20 Nov 2026). When the free tier's limit is reached, the system waits and tries again by itself; a reply that cannot
@@ -316,12 +323,19 @@ replacements, plus this ending. For example, for the hidden test set saved as `d
 python -m src.run_evaluation data/test_tickets.json evaluation/results/test_run.json --metrics-port 8001
 ```
 
+For the 80 validation tickets that come with the project:
+
+```
+python -m src.run_evaluation data/validation_tickets.json evaluation/results/validation_run.json --metrics-port 8001
+```
+
 **4. Watch the charts while it runs.** In Grafana, set the time range to **Last 15 minutes** and the refresh to
 **10s**. Leave the window open until the run finishes.
 
 #### What the run writes (either way)
 
-In the `evaluation/results` folder, with the example names above:
+In the `evaluation/results` folder, with the hidden test set names above (for the validation tickets, the same with
+`validation_run` instead of `test_run`):
 
 - `test_run.json`: one entry per ticket, with the decision, the reply sent and the articles cited;
 - `test_run_metrics.md`: the metrics report, with every measure for the run and the settings it used;
