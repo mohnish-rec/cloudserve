@@ -247,7 +247,9 @@ Run them all unattended (results in `evaluation/results/demo_tickets_results.jso
 python -m evaluation.harness --input data/samples/demo_tickets.json --output evaluation/results/
 ```
 
-Or send each one to the API while it is running (in a second terminal, with the environment active):
+Or send each one to the system you started in step 7 (in the other PowerShell window showing `(.venv)`). **Use this
+way if you set up the live charts**: only tickets sent to the running system appear in Grafana, because the command
+above runs as a separate program. Wait until http://localhost:9090/targets shows **UP** before sending them:
 
 ```
 python -c "import json,urllib.request as u; [print(t['ticket_id'], '->', r['action'], '|', r['label'], '|', r['reason'][:120]) for t in json.load(open('data/samples/demo_tickets.json')) for r in [json.load(u.urlopen(u.Request('http://127.0.0.1:8000/tickets', json.dumps(t).encode(), {'Content-Type': 'application/json'})))]]"
@@ -263,7 +265,11 @@ in `handover`; a blocked one shows which guardrail fired in `reason` and `guardr
 
 **Want to watch the run live?** Set up monitoring first (optional, about 10 minutes): see
 [Optional: watch it live](#optional-watch-it-live-prometheus-and-grafana). Then stop the system from [step 7](#step-7-start-the-system) (Ctrl+C in its
-terminal), because both use port 8001, and add `--metrics-port 8001` to the command below.
+terminal), because both use port 8001, and add `--metrics-port 8001` to the end of the command below, for example:
+
+```
+python -m src.run_evaluation data/test_tickets.json evaluation/results/test_run.json --metrics-port 8001
+```
 
 Copy the ticket file (in the same format as `data/development_tickets.json`) into the project's `data` folder, which
 is `C:\cloudserve_test\cloudserve\data` if you followed step 1. Then, in the PowerShell window showing `(.venv)`, run:
@@ -392,7 +398,19 @@ choose the Prometheus data source when asked, and press **Import**.
 `--metrics-port 8001` added to the [step 9](#step-9-run-a-whole-file-of-tickets-unattended) command. Within about 15 seconds, http://localhost:9090/targets shows **UP**, and the dashboard fills in as
 tickets are processed. It has five charts: tickets per hour by channel and outcome; the share answered automatically
 against escalated; response time at the median and the slowest 5% (with the 3-second target line); guardrail
-activations over time; and how confident the system was.
+activations over time; and how confident the system was. In Grafana, set the time range at the top right to
+**Last 15 minutes** and the refresh to **10s** to see the charts move.
+
+Only tickets sent to the running system appear on the charts: in [step 8](#step-8-send-one-ticket-from-each-channel-an-escalation-and-a-guardrail-ticket),
+use the second command (the one that sends each ticket to the system), not the first.
+
+**If the charts stay empty:**
+
+- Open http://localhost:9090, type `tickets_processed_total` in the query box and press **Execute**. Numbers above 0
+  mean Prometheus has the tickets; all 0 means no ticket has reached the running system yet.
+- If Prometheus has them but Grafana does not show them, open a chart's menu (the three dots at its top right),
+  choose **Edit**, and check that the data source above its query says **Prometheus**. If not, import the dashboard
+  again (step 5), choosing **Prometheus** in the drop-down, and press **Overwrite** if asked.
 
 ### Optional: settings and the kill switch
 
