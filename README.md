@@ -10,8 +10,7 @@ Claude (Anthropic) says so at the top of the file; every file was reviewed and r
 If you are setting this up for the first time, do these steps from top to bottom. Each step says what you should see
 when it has worked.
 
-**Before you start:** [What you need first](#what-you-need-first): Python 3.11, a free Groq key and Git. To watch the
-system working live on charts, also install Prometheus and Grafana (optional).
+**Before you start:** [What you need first](#what-you-need-first): Python 3.11, a free Groq key and Git.
 
 **Set it up (about 20 minutes, most of it downloading):**
 
@@ -22,17 +21,18 @@ system working live on charts, also install Prometheus and Grafana (optional).
 5. [Check the AI model answers](#step-5-check-the-ai-model-answers)
 6. [Build the article store and the decision log](#step-6-build-the-article-store-and-the-decision-log)
 
+**Optional, only if you want to watch the system live on charts (do it here, after step 6):**
+[set up Prometheus and Grafana](#optional-watch-it-live-prometheus-and-grafana).
+
 **Use it (in the same order the assessors use to test the system):**
 
 7. [Start the system](#step-7-start-the-system)
 8. [Send one ticket from each channel, an escalation and a guardrail ticket](#step-8-send-one-ticket-from-each-channel-an-escalation-and-a-guardrail-ticket)
-9. [Run a whole file of tickets, unattended](#step-9-run-a-whole-file-of-tickets-unattended). To watch it live, first
-   [start Prometheus and Grafana](#optional-watch-it-live-prometheus-and-grafana) (optional)
+9. [Run a whole file of tickets, unattended](#step-9-run-a-whole-file-of-tickets-unattended)
 10. [Check the metrics report against the decision log](#step-10-check-the-metrics-report-against-the-decision-log)
 11. [Run the tests](#step-11-run-the-tests)
 
-**Optional:** [watch it live with Prometheus and Grafana](#optional-watch-it-live-prometheus-and-grafana),
-[change the settings or use the kill switch](#optional-settings-and-the-kill-switch),
+**Optional, any time after step 6:** [change the settings or use the kill switch](#optional-settings-and-the-kill-switch),
 [check it copes with problems](#optional-check-it-copes-with-problems),
 [run the red-team check](#optional-red-team-check).
 
@@ -105,8 +105,8 @@ winget install -e --id Python.Python.3.11
 winget install -e --id Git.Git
 ```
 
-- **Optional, only to watch the system live on charts: Prometheus and Grafana**, from https://prometheus.io/download/
-  and https://grafana.com/grafana/download. Nothing else needs them; how to start and connect them is in
+- **Optional, only to watch the system live on charts: Prometheus and Grafana.** Nothing else needs them. Set them up
+  after step 6, because Prometheus reads a settings file from the project:
   [Optional: watch it live](#optional-watch-it-live-prometheus-and-grafana).
 
 ## Set it up
