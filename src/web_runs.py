@@ -130,54 +130,56 @@ PAGE = r"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CloudServe support triage</title>
 <style>
- body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:#f4f6f8;color:#14213d}
- header{background:#0f4c47;color:#fff;padding:16px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
- header a{color:#fff;margin-left:18px;font-size:14px}
- main{max-width:1000px;margin:24px auto;padding:0 16px}
- .card{background:#fff;border-radius:10px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
- h1{font-size:26px;margin:0 0 4px} h2{font-size:18px;margin:0 0 12px} h3{font-size:15px;margin:18px 0 8px}
- p.note{color:#5b6472;margin:4px 0 0}
- button{background:#0f766e;color:#fff;border:0;border-radius:6px;padding:10px 22px;font-size:15px;cursor:pointer}
+ body{margin:0;font-family:Segoe UI,Arial,sans-serif;font-size:14px;line-height:1.45;background:#f4f6f8;color:#14213d}
+ header{background:#0f4c47;color:#fff;padding:12px 28px;font-size:15px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+ header a{color:#fff;margin-left:18px;font-size:13px}
+ main{max-width:980px;margin:20px auto;padding:0 16px}
+ .card{background:#fff;border-radius:10px;padding:16px 22px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+ h1{font-size:21px;margin:0 0 4px} h2{font-size:16px;margin:0 0 8px} h3{font-size:14px;margin:14px 0 6px}
+ p.note{color:#5b6472;margin:4px 0 0;font-size:13px}
+ button{background:#0f766e;color:#fff;border:0;border-radius:6px;padding:8px 18px;font-size:13.5px;cursor:pointer}
  button:disabled{background:#94a3b8;cursor:default}
  button.second{background:#fff;color:#0f766e;border:2px solid #0f766e} button.second:disabled{color:#94a3b8;border-color:#94a3b8;background:#fff}
- button.danger{background:#b91c1c} button.small{padding:5px 12px;font-size:13px}
- a.button{display:inline-block;background:#fff;color:#0f766e;border:2px solid #0f766e;border-radius:6px;padding:8px 18px;font-size:14px;text-decoration:none;margin-right:8px}
- .bar{height:14px;background:#e2e8f0;border-radius:7px;overflow:hidden;margin:12px 0}
+ button.danger{background:#b91c1c} button.small{padding:4px 11px;font-size:12.5px}
+ a.button{display:inline-block;background:#fff;color:#0f766e;border:2px solid #0f766e;border-radius:6px;padding:6px 15px;font-size:13px;text-decoration:none;margin-right:8px}
+ .bar{height:12px;background:#e2e8f0;border-radius:6px;overflow:hidden;margin:10px 0}
  .bar div{height:100%;background:#0f766e;width:0}
  .stats{display:flex;gap:12px;flex-wrap:wrap}
- .stat{flex:1;min-width:150px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 14px}
- .stat b{display:block;font-size:24px}
- table{width:100%;border-collapse:collapse;font-size:14px} td,th{text-align:left;padding:6px 8px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+ .stat{flex:1;min-width:150px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:13px}
+ .stat b{display:block;font-size:19px}
+ table{width:100%;border-collapse:collapse;font-size:13px} td,th{text-align:left;padding:5px 8px;border-bottom:1px solid #e2e8f0;vertical-align:top}
  th{background:#f1f5f9}
  pre{white-space:pre-wrap;font-size:12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;overflow:auto}
- .md h1{font-size:22px;margin:18px 0 8px} .md h2{font-size:18px;margin:22px 0 8px;padding-top:12px;border-top:2px solid #e2e8f0}
- .md h3{font-size:15px;margin:16px 0 6px} .md p,.md li{font-size:14px;line-height:1.5} .md table{margin:8px 0 12px}
+ .md h1{font-size:18px;margin:16px 0 8px} .md h2{font-size:15.5px;margin:20px 0 8px;padding-top:10px;border-top:2px solid #e2e8f0}
+ .md h3{font-size:14px;margin:14px 0 6px} .md p,.md li{font-size:13px;line-height:1.5} .md table{margin:8px 0 12px}
  .md th{background:#0f4c47;color:#fff} .md tr:nth-child(even) td{background:#f8fafc}
  .md td.no,.fail{color:#b91c1c;font-weight:bold} .md td.yes,.pass{color:#15803d;font-weight:bold} .md td.nm,.notrun{color:#64748b;font-style:italic}
  .md code{background:#eef2f7;padding:1px 4px;border-radius:4px}
  .msg{color:#b91c1c;margin-top:10px}
  .switch{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:12px}
- .badge{font-weight:bold;padding:6px 14px;border-radius:20px;font-size:15px}
+ .badge{font-weight:bold;padding:5px 12px;border-radius:20px;font-size:13px}
  .badge.on{background:#fee2e2;color:#b91c1c} .badge.off{background:#dcfce7;color:#15803d}
- .out{font-weight:bold;padding:2px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+ .out{font-weight:bold;padding:2px 9px;border-radius:12px;font-size:12px;white-space:nowrap}
  .out.auto_respond{background:#dcfce7;color:#15803d} .out.escalate{background:#fef3c7;color:#92400e} .out.block{background:#fee2e2;color:#b91c1c}
  #chartlog{display:none;margin-top:12px;max-height:220px} .ready{color:#15803d;font-weight:bold;margin-top:8px} .ready a{color:#15803d}
  form.ticket{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
- form.ticket label{font-size:13px;color:#5b6472;display:flex;flex-direction:column;gap:4px}
+ form.ticket label{font-size:12.5px;color:#5b6472;display:flex;flex-direction:column;gap:4px}
  form.ticket .wide{grid-column:1/-1}
- input,select,textarea{font:inherit;font-size:14px;padding:7px 9px;border:1px solid #cbd5e1;border-radius:6px;background:#fff;color:#14213d}
+ input,select,textarea{font:inherit;font-size:13px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;background:#fff;color:#14213d}
  textarea{min-height:80px;resize:vertical}
  tr.click{cursor:pointer} tr.click:hover td{background:#ecfdf5}
  #overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:10;overflow:auto;padding:24px 12px}
  #panel{background:#fff;max-width:900px;margin:0 auto;border-radius:10px;padding:22px 26px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
  #panel .top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
- #panel dl{display:grid;grid-template-columns:200px 1fr;gap:6px 14px;font-size:14px;margin:8px 0}
+ #panel dl{display:grid;grid-template-columns:190px 1fr;gap:5px 14px;font-size:13px;margin:8px 0}
  #panel dt{color:#5b6472} #panel dd{margin:0}
  details{margin:6px 0} summary{cursor:pointer;color:#0f766e}
  .govnote{background:#f0fdfa;border-left:4px solid #0f766e;padding:8px 12px;font-size:13px;color:#134e4a;margin:10px 0}
- .lim{margin:12px 0 4px} .lim .head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-size:14px}
- .lim .bar{height:16px;margin:6px 0 2px} .lim .bar div{transition:width .6s} .lim small{color:#5b6472}
+ .lim{margin:12px 0 4px} .lim .head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-size:13px}
+ .lim .bar{height:12px;margin:5px 0 2px} .lim .bar div{transition:width .6s} .lim small{color:#5b6472}
  .lim .bar div.mid{background:#d97706} .lim .bar div.high{background:#b91c1c}
+ .cardhead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+ .cardhead h2{margin:0}
  @media (max-width:700px){form.ticket{grid-template-columns:1fr 1fr} #panel dl{grid-template-columns:1fr}}
 </style></head>
 <body>
@@ -201,15 +203,15 @@ about a minute and tells you when it is ready. If Windows asks for permission, p
 <p style="margin-top:12px"><button class="second" id="chartbtn" onclick="startCharts()">Start the live charts from zero</button></p>
 <pre id="chartlog"></pre><div id="chartdone"></div><div class="msg" id="chartmsg"></div></div>
 
-<div class="card"><h2>Free tier limits (Groq)</h2>
+<div class="card"><div class="cardhead"><h2>Free tier limits (Groq)</h2>
+<span><small style="color:#5b6472;margin-right:8px">One tiny call to each model (about 20 to 60 tokens each)</small>
+<button class="second small" id="limbtn" onclick="checkLimits()">Check the limits now</button></span></div>
 <p class="note">How much of each model's limit is used, as Groq reported it on the latest call. It updates by
 itself every few seconds while tickets are processed. Tokens are limited per minute and refill fully within a minute;
 requests are limited per day. When a model's tokens bar is full, Groq refuses calls (HTTP 429, too many requests):
 the system waits and tries again, and a reply whose grounding check cannot run is never sent.</p>
 <div class="stats" id="capacity" style="margin-top:12px"></div><p class="note" id="capnote"></p>
 <div id="limits"><p class="note">No call has been made since the system started. Press the button to check now.</p></div>
-<p style="margin-top:12px"><button class="second" id="limbtn" onclick="checkLimits()">Check the limits now</button>
-<small style="color:#5b6472;margin-left:8px">makes one tiny call to each model (about 20 to 60 tokens each)</small></p>
 <div class="msg" id="limmsg"></div></div>
 
 <div class="card"><h2>Try tickets one at a time</h2>
@@ -219,13 +221,13 @@ automatic reply goes to a person.</p>
 <p style="margin-top:12px"><button id="demobtn" onclick="sendDemo()">Send the 7 demo tickets</button></p>
 <h3>Or write your own ticket</h3>
 <form class="ticket" onsubmit="sendOne(event)">
- <label>Channel<select id="f_channel"><option value="email">email</option><option value="chat">chat</option>
-  <option value="docs_comment">documentation comment</option><option value="forum">forum</option></select></label>
+ <label>Channel<select id="f_channel"><option value="email">Email</option><option value="chat">Chat</option>
+  <option value="docs_comment">Documentation comment</option><option value="forum">Forum</option></select></label>
  <label>Plan<select id="f_tier"><option value="standard">Standard</option><option value="business">Business</option>
   <option value="enterprise">Enterprise</option></select></label>
  <label>Region<select id="f_region"><option value="north_america">North America</option><option value="europe">Europe</option>
   <option value="asia_pacific">Asia Pacific</option><option value="latin_america">Latin America</option></select></label>
- <label>Language<select id="f_fluency"><option value="fluent">fluent English</option><option value="non_fluent">non-fluent English</option></select></label>
+ <label>Language<select id="f_fluency"><option value="fluent">Fluent English</option><option value="non_fluent">Non-fluent English</option></select></label>
  <label class="wide">Subject<input id="f_subject" placeholder="for example: Deployment keeps rolling back"></label>
  <label class="wide">Message<textarea id="f_body" placeholder="Write the customer's message here"></textarea></label>
  <div class="wide"><button id="onebtn" type="submit">Send this ticket</button></div>
@@ -272,7 +274,7 @@ function md(text){            // the metrics report (Markdown) as tidy HTML: hea
   if(l.trim()){h+="<p>"+inline(l)+"</p>";} i++;}
  return h;}
 const WORDS={auto_respond:"Answered automatically",escalate:"Escalated to a person",block:"Blocked by a guardrail"};
-const CHANNEL={email:"email",chat:"chat",docs_comment:"documentation comment",forum:"forum",unknown:"unknown"};
+const CHANNEL={email:"Email",chat:"Chat",docs_comment:"Documentation comment",forum:"Forum",unknown:"Unknown"};
 const GUARD={   // docs/governance.md section 4: what each guardrail checks
  private_data:"Names, addresses, keys, account numbers, anything identifying a customer",
  grounding_words:"Every sentence's words and numbers appear in its article",

@@ -440,3 +440,20 @@ tickets file / one ticket from the API
 ### 20. `__init__.py`
 
 Loads the article search library before scikit-learn, which stops a crash on Windows (found 7 Nov, D-019).
+
+## Settings
+
+The tested settings are the defaults, so none is needed to run the system. Each can be switched off for a comparison,
+for example `$env:QUESTION_RULES="off"` in the project window before starting the system (moved here from the README
+on 21 Nov 2026).
+
+| Setting | Default | What it does |
+|---|---|---|
+| `QUESTION_RULES` | on | Sends four question types to a person that Mohnish Grover decided need one |
+| `LEARNED_DECISIONS` | on | Applies the decisions learned from Mohnish Grover's review of the development tickets |
+| `NARROW_RULES` | on | Safety rules stop requests and disputes, not plain questions |
+| `TYPE_AWARE_SEARCH` | on | The article search also uses the ticket's type |
+| `TRIM_UNSUPPORTED` | on | A sentence the check cannot support is removed, and the reply is checked again |
+| `PLAN_RULE` | on | A reply from an article for other plans goes to a person with the draft |
+| `REPLY_CACHE` | off | Reuses earlier answers; for development runs only, never for validation or test runs |
+| `PR01_FILE` | version 1.7 | Which version of the reply instructions to use |

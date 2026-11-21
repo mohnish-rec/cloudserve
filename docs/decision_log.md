@@ -398,6 +398,11 @@ Drafted by Claude (Anthropic) on 17 Nov 2026 from the project's files and Mohnis
   table, one "project window" box instead of repeating the activation lines, the web page first in steps 8 to 10 with
   the PowerShell commands as the second way, the optional live charts set up after step 7 with the button, and an "If
   something goes wrong" table. The steps keep their numbers and names.
+  Then trimmed to what the project files ask a README to cover ("remove the unnecessary things from the readme"):
+  setup and run instructions for someone who has never seen the project, the start command, one ticket per channel
+  and a guardrail ticket, the unattended run, the report against the decision log, and the single test command. The
+  settings table moved to docs/code_guide.md, and the results table and the by-hand Prometheus steps were removed
+  (the results are in the report; the page's button starts Prometheus).
 - **Why (his words):** "Can we create a UI where they directly upload the file and it just processes it as our system
   is very complex to work with and then connect grafana too?" and "The metric report doesn't look nice after the run
   finished, make it look organized and easy to read ... explain why we were short of the targets"
