@@ -205,8 +205,18 @@ and carry on with [step 7](#step-7-start-the-system).
 python -m src.api
 ```
 
-Leave this terminal open: the system runs until you press Ctrl+C. For the next steps, open a second terminal in the
-same folder and activate the environment again (step 2, the activate line only).
+Run this in the PowerShell window you used for steps 1 to 6 (the one showing `(.venv)`). The system keeps running in
+this window: leave it open, and press Ctrl+C in it when you want to stop the system.
+
+**For the next steps, open another new PowerShell window**, go to the project and switch the environment on:
+
+```powershell
+cd C:\cloudserve_test\cloudserve
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+.venv\Scripts\activate
+```
+
+You should see `(.venv)` at the start of the line. Type the commands from step 8 onwards in this window.
 
 To try a ticket by hand, open http://127.0.0.1:8000/docs in a browser, choose **POST /tickets**, press **Try it out**, paste a ticket
 (the same fields as in `data/development_tickets.json`) and press **Execute**. The answer shows the decision, the
@@ -328,8 +338,10 @@ failure: pytest still finishes successfully. If the system ever gets this case r
 after steps 1 to 6 and before you start the system: Prometheus collects the numbers, and Grafana draws the charts.*
 
 **1. Get Prometheus.** Tested with Prometheus 3.13.5. It needs no installing: you unzip it and run it. On https://prometheus.io/download/, under
-**prometheus**, download the **LTS** version for Windows (the file ending in `windows-amd64.zip`). Then, in
-PowerShell:
+**prometheus**, download the version for Windows (the file ending in `windows-amd64.zip`).
+
+**Open a new PowerShell window for Prometheus.** It keeps running in this window, so keep it separate from the window
+you use for the project (the one showing `(.venv)`). In the new window:
 
 ```powershell
 Get-ChildItem "$env:USERPROFILE\Downloads\prometheus-*windows-amd64.zip" | Expand-Archive -DestinationPath C:\prometheus
@@ -337,7 +349,8 @@ cd C:\prometheus\prometheus-*
 .\prometheus.exe --version
 ```
 
-**2. Start Prometheus**, in the same window, and leave it open:
+**2. Start Prometheus** in that same new window. It keeps running there: leave the window open (minimise it if you like)
+for as long as you want the charts, and close it to stop Prometheus.
 
 ```powershell
 .\prometheus.exe --config.file=C:\cloudserve_test\cloudserve\monitoring\prometheus.yml --web.listen-address=127.0.0.1:9090
