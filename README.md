@@ -283,16 +283,16 @@ followed step 1. The file must be in the same format as `data/development_ticket
 python -m src.run_evaluation <tickets file> <results file>
 ```
 
-- Replace `<tickets file>` with `data/` followed by your ticket file's full name, including `.json` at the end
-  (for example `data/test_tickets.json`).
+- Replace `<tickets file>` with `data/` followed by your ticket file's real name, exactly as it is spelled, including
+  `.json` at the end (for example `data/hidden_evaluation_tickets.json`).
 - Replace `<results file>` with `evaluation/results/` followed by a new name you choose for the results, also ending
-  in `.json` (for example `evaluation/results/test_run.json`).
+  in `.json` (for example `evaluation/results/hidden_evaluation_run.json`).
 - Type only the names: the `<` and `>` are not part of the command.
 
-For example, for the hidden test set saved as `data/test_tickets.json`:
+For example, for the hidden evaluation set (the 120 tickets the assessors run), if it is saved as `data/hidden_evaluation_tickets.json`:
 
 ```
-python -m src.run_evaluation data/test_tickets.json evaluation/results/test_run.json
+python -m src.run_evaluation data/hidden_evaluation_tickets.json evaluation/results/hidden_evaluation_run.json
 ```
 
 To try it now on the 80 validation tickets that come with the project (already in the `data` folder, so you can skip
@@ -317,10 +317,10 @@ live-chart connection (port 8001) at the same time, and the run does not need th
 **2. Put the ticket file in the project's `data` folder**, as in the first way.
 
 **3. Start the run with `--metrics-port 8001` at the end.** It is the same command as in the first way, with the same
-replacements, plus this ending. For example, for the hidden test set saved as `data/test_tickets.json`:
+replacements, plus this ending. For example, for the hidden evaluation set (the 120 tickets the assessors run), if it is saved as `data/hidden_evaluation_tickets.json`:
 
 ```
-python -m src.run_evaluation data/test_tickets.json evaluation/results/test_run.json --metrics-port 8001
+python -m src.run_evaluation data/hidden_evaluation_tickets.json evaluation/results/hidden_evaluation_run.json --metrics-port 8001
 ```
 
 For the 80 validation tickets that come with the project:
@@ -334,22 +334,22 @@ python -m src.run_evaluation data/validation_tickets.json evaluation/results/val
 
 #### What the run writes (either way)
 
-In the `evaluation/results` folder, with the hidden test set names above (for the validation tickets, the same with
-`validation_run` instead of `test_run`):
+In the `evaluation/results` folder, with the hidden evaluation set names above (for the validation tickets, the same with
+`validation_run` instead of `hidden_evaluation_run`):
 
-- `test_run.json`: one entry per ticket, with the decision, the reply sent and the articles cited;
-- `test_run_metrics.md`: the metrics report, with every measure for the run and the settings it used;
+- `hidden_evaluation_run.json`: one entry per ticket, with the decision, the reply sent and the articles cited;
+- `hidden_evaluation_run_metrics.md`: the metrics report, with every measure for the run and the settings it used;
 
 and a row for every decision in the decision log, `storage/decisions.db`.
 
 *Another way to start the same run*, with the input and output named:
-`python -m evaluation.harness --input data/test_tickets.json --output evaluation/results/`
+`python -m evaluation.harness --input data/hidden_evaluation_tickets.json --output evaluation/results/`
 
 ### Step 10. Check the metrics report against the decision log
 
 *This proves every ticket was logged exactly once.*
 
-**1. Open the metrics report** from step 9 (for example `evaluation/results/test_run_metrics.md`). Near the end, the
+**1. Open the metrics report** from step 9 (for example `evaluation/results/hidden_evaluation_run_metrics.md`). Near the end, the
 line **Decisions logged** says how many rows the run wrote to the decision log and whether every ticket has exactly
 one final outcome, for example `356 rows; 80 final outcomes for 80 tickets -> reconciles`. At the top of the report,
 under **Volume**, are the numbers answered automatically, escalated and blocked.
