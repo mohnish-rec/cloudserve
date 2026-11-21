@@ -38,6 +38,23 @@ def test_check_now_calls_each_model_once_and_never_raises():
         if "qwen" in model:
             raise RuntimeError("HTTP 429")
         limits.note(model, HEADERS, 200)
+        limits.note_usage(model, {"total_tokens": 30})
     answers = limits.check_now(fake)
+    assert limits.capacity()["tokens_per_ticket"]["writer"] == 1414    # the tiny check calls are not counted
     assert len(called) == 3 and all(t == 20 for _, t in called)
     assert [a["answer"] for a in answers][:2] == ["works", "works"] and "429" in answers[2]["answer"]
+
+
+def test_how_many_tickets_can_be_answered_with_what_is_left(monkeypatch):
+    for k in ("MODEL_NAME", "BACKUP_MODEL_NAME", "GUARDRAIL_MODEL"):
+        monkeypatch.delenv(k, raising=False)
+    limits.clear()
+    full = dict(HEADERS, **{"x-ratelimit-remaining-tokens": "8000", "x-ratelimit-remaining-requests": "1000"})
+    limits.note("openai/gpt-oss-20b", full, 200, now=1000)
+    limits.note("qwen/qwen3.8-27b", HEADERS, 200, now=1000)          # 2,000 tokens left this minute, 990 requests
+    c = limits.capacity(now=1001)
+    assert c["tokens_per_ticket"] == {"writer": 1414, "grounding check": 492}     # development run figures
+    assert c["now"] == 4 and c["per_minute"] == 5 and c["today"] == 990             # 2,000 // 492; 8,000 // 1,414
+    limits.note_usage("qwen/qwen3.8-27b", {"total_tokens": 1000})
+    c = limits.capacity(now=1001)
+    assert c["tokens_per_ticket"]["grounding check"] == 1000 and c["now"] == 2 and "measured" in c["source"]["grounding check"]

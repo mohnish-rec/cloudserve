@@ -391,6 +391,13 @@ Drafted by Claude (Anthropic) on 17 Nov 2026 from the project's files and Mohnis
   a **Check the limits now** button. Found 21 Nov: demo tickets sent in quick batches used up the grounding check
   model's 8,000 tokens per minute, so its checks were refused and the replies blocked; the bars show this happening
   ("lets add the limit checker button as well and bar which fills up as we reach towards the limit live").
+  It also estimates how many tickets can be answered with what is left (now, per minute, today), from the tokens each
+  call used since the system started, or the development run's 1,414 (writer) and 492 (grounding check) per call until
+  then ("is it possible to show how many tickets can be answered with the available limits?").
+  The README was then tidied ("Now its time to clean the read me and make it very easy to work with"): one contents
+  table, one "project window" box instead of repeating the activation lines, the web page first in steps 8 to 10 with
+  the PowerShell commands as the second way, the optional live charts set up after step 7 with the button, and an "If
+  something goes wrong" table. The steps keep their numbers and names.
 - **Why (his words):** "Can we create a UI where they directly upload the file and it just processes it as our system
   is very complex to work with and then connect grafana too?" and "The metric report doesn't look nice after the run
   finished, make it look organized and easy to read ... explain why we were short of the targets"

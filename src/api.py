@@ -158,14 +158,14 @@ def create_app(classifier=None, retriever=None, write_log=True, file_runs=None, 
     def free_tier_limits():
         """What Groq said about its limits on the latest call to each model (no extra call is made)."""
         from src import limits
-        return {"models": limits.snapshot()}
+        return {"models": limits.snapshot(), "capacity": limits.capacity()}
 
     @app.post("/limits/check")
     def check_limits():
         """One tiny call to each model, then the fresh figures. Uses a few tokens of each limit."""
         from src import limits
         answers = limits.check_now(options.get("limit_call"))
-        return {"answers": answers, "models": limits.snapshot()}
+        return {"answers": answers, "models": limits.snapshot(), "capacity": limits.capacity()}
 
     @app.get("/demo-tickets")
     def demo_tickets():

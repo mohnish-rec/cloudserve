@@ -246,6 +246,11 @@ def call_model(messages, model, max_tokens=2000, role="writer"):
     data = r.json()
     out = Reply(data["choices"][0]["message"].get("content") or "")
     out.usage = data.get("usage") or {}
+    try:
+        from src import limits
+        limits.note_usage(model, out.usage)
+    except Exception:  # noqa: BLE001 - showing the limits must never stop or change a call
+        pass
     return out
 
 

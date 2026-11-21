@@ -1,5 +1,5 @@
-"""Process an uploaded ticket file from a web page, inside the running system (README: "Run a ticket file from the
-web page").
+"""Process an uploaded ticket file from a web page, inside the running system (README step 9,
+Way 1).
 
 Attribution: written with Claude (Anthropic), reviewed and run by Mohnish Grover.
 The page at http://127.0.0.1:8000/ lets someone choose a ticket file and press Run. The file goes through exactly the
@@ -206,6 +206,7 @@ about a minute and tells you when it is ready. If Windows asks for permission, p
 itself every few seconds while tickets are processed. Tokens are limited per minute and refill fully within a minute;
 requests are limited per day. When a model's tokens bar is full, Groq refuses calls (HTTP 429, too many requests):
 the system waits and tries again, and a reply whose grounding check cannot run is never sent.</p>
+<div class="stats" id="capacity" style="margin-top:12px"></div><p class="note" id="capnote"></p>
 <div id="limits"><p class="note">No call has been made since the system started. Press the button to check now.</p></div>
 <p style="margin-top:12px"><button class="second" id="limbtn" onclick="checkLimits()">Check the limits now</button>
 <small style="color:#5b6472;margin-left:8px">makes one tiny call to each model (about 20 to 60 tokens each)</small></p>
@@ -240,8 +241,8 @@ automatic reply goes to a person.</p>
 <div class="msg" id="msg"></div></div>
 <div class="card" id="progress" style="display:none"><h2>Progress</h2>
 <div id="line"></div><div class="bar"><div id="fill"></div></div>
-<div class="stats"><div class="stat"><b id="c_auto">0</b>answered automatically</div>
-<div class="stat"><b id="c_esc">0</b>escalated</div><div class="stat"><b id="c_block">0</b>blocked by guardrails</div></div>
+<div class="stats"><div class="stat"><b id="c_auto">0</b>Answered automatically</div>
+<div class="stat"><b id="c_esc">0</b>Escalated</div><div class="stat"><b id="c_block">0</b>Blocked by guardrails</div></div>
 <h3>Latest tickets (click one for its details)</h3><table><thead><tr><th>Ticket</th><th>Result</th><th>Label</th></tr></thead>
 <tbody id="recent"></tbody></table></div>
 <div class="card" id="done" style="display:none"><h2>Metrics report</h2>
@@ -325,14 +326,22 @@ function limBar(label,used,limit,extra){
   (extra?"; "+extra:"")+'</small><div class="bar"><div class="'+c+'" style="width:'+pc+'%"></div></div>';}
 function showLimits(list){
  if(!list||!list.length)return;
- $("limits").innerHTML=list.map(m=>'<div class="lim"><div class="head"><b>'+esc(m.role)+": "+esc(m.model)+"</b><small>"+
-  (m.refused_last_10_min?'<span class="fail">refused '+m.refused_last_10_min+" times in the last 10 minutes (last "+Math.round(m.last_refused_ago)+" s ago)</span>":
-   '<span class="pass">no refusals in the last 10 minutes</span>')+" · figures from "+Math.round(m.seconds_ago)+" s ago</small></div>"+
+ $("limits").innerHTML=list.map(m=>'<div class="lim"><div class="head"><b>'+esc(m.role.charAt(0).toUpperCase()+m.role.slice(1))+": "+esc(m.model)+"</b><small>"+
+  (m.refused_last_10_min?'<span class="fail">Refused '+m.refused_last_10_min+" times in the last 10 minutes (last "+Math.round(m.last_refused_ago)+" s ago)</span>":
+   '<span class="pass">No refusals in the last 10 minutes</span>')+" · figures from "+Math.round(m.seconds_ago)+" s ago</small></div>"+
   limBar("Tokens this minute",m.tokens_used,m.tokens_limit,m.tokens_used?"full again in "+m.tokens_refill_in+" s":"")+
   limBar("Requests today",m.requests_used,m.requests_limit,"")+"</div>").join("");}
-function pollLimits(){fetch("/limits").then(r=>r.json()).then(j=>showLimits(j.models)).catch(()=>{});}
+function showCapacity(c){if(!c)return; const v=x=>x==null?"–":"Approx. "+x.toLocaleString();
+ $("capacity").innerHTML='<div class="stat"><b>'+v(c.now)+"</b>Answered tickets left this minute<br><small>More tickets can get an automatic reply before this minute's limit is reached</small></div>"+
+  '<div class="stat"><b>'+v(c.per_minute)+"</b>Answered tickets in a full minute<br><small>The most the limit allows each minute, once it has refilled</small></div>"+
+  '<div class="stat"><b>'+v(c.today)+"</b>Answered tickets left today<br><small>From the requests per day still left</small></div>";
+ $("capnote").textContent="All three are approximate. Each answered ticket needs one writer call (about "+c.tokens_per_ticket.writer.toLocaleString()+
+  " tokens, "+c.source.writer+") and one grounding check (about "+c.tokens_per_ticket["grounding check"].toLocaleString()+" tokens, "+
+  c.source["grounding check"]+"). Tickets a rule sends to a person need no model call, and a refused call that is tried again uses more."+
+  (c.now==null?" The numbers appear after the first call: press Check the limits now.":"");}
+function pollLimits(){fetch("/limits").then(r=>r.json()).then(j=>{showLimits(j.models);showCapacity(j.capacity);}).catch(()=>{});}
 async function checkLimits(){const b=$("limbtn"), m=$("limmsg"); b.disabled=true; m.textContent="";
- try{const j=await getJSON("/limits/check",{method:"POST"}); showLimits(j.models);
+ try{const j=await getJSON("/limits/check",{method:"POST"}); showLimits(j.models); showCapacity(j.capacity);
   const bad=j.answers.filter(a=>a.answer!=="works"); if(bad.length)m.textContent=bad.map(a=>a.model+": "+a.answer).join("; ");}
  catch(e){m.textContent=e.message||DOWN;}
  b.disabled=false;}

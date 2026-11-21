@@ -80,7 +80,7 @@ the API (`python -m src.api`), and the tests (`python -m pytest -q`).
 | `api.py` | The FastAPI web interface: `POST /tickets` (one ticket in, the decision and reply or handover out), `GET /health`, `/healthz` (alive) and `/readyz` (models, article index and key in place, FR-17); the `/docs` page for trying it |
 | `web_runs.py` | The web page at http://127.0.0.1:8000/: the kill switch, the live charts button, the seven demo tickets and a form to send one ticket, and a ticket file run (the same unattended run inside the running system, so Grafana shows it live) with progress, the metrics report, downloads and the check against the decision log. Clicking a ticket shows its details: the decision and reason, the reply or handover note, the articles, each guardrail, time and cost, and its decision-log rows. It makes no decisions itself |
 | `live_charts.py` | The web page's **Start the live charts from zero** button: sets the chart numbers back to 0 (`metrics.reset`) and runs `scripts/start_live_charts.ps1`, showing each line it prints |
-| `limits.py` | The Groq free tier's limits as Groq reports them on every call (tokens per minute, requests per day, refusals), for the web page's limit bars; `check_now()` makes one tiny call to each model on request. It never changes a decision |
+| `limits.py` | The Groq free tier's limits as Groq reports them on every call (tokens per minute, requests per day, refusals), for the web page's limit bars; `capacity()` estimates how many tickets can be answered now, per minute and today; `check_now()` makes one tiny call to each model on request. It never changes a decision |
 
 ### `tests/` - automatic checks (`python -m pytest -q`, A12)
 
