@@ -336,50 +336,52 @@ failure: pytest still finishes successfully. If the system ever gets this case r
 
 ### Optional: watch it live (Prometheus and Grafana)
 
-This is optional: the unattended run and the API work without it. It shows what the system is doing while it runs.
+*This shows the system's work on live charts while tickets are processed. Nothing else needs it. Set it up once,
+before you start the system: Prometheus collects the numbers, and Grafana draws the charts.*
 
-**1. Start the system with its metrics switched on.** Either start the API (`python -m src.api`), or add
-`--metrics-port 8001` to an unattended run, for example:
+**1. Get Prometheus.** It needs no installing: you unzip it and run it. On https://prometheus.io/download/, under
+**prometheus**, download the **LTS** version for Windows (the file ending in `windows-amd64.zip`). Then, in
+PowerShell:
 
+```powershell
+Get-ChildItem "$env:USERPROFILE\Downloads\prometheus-*windows-amd64.zip" | Expand-Archive -DestinationPath C:\prometheus
+cd C:\prometheus\prometheus-*
+.\prometheus.exe --version
 ```
-python -m src.run_evaluation data/validation_tickets.json evaluation/results/val_monitored.json --metrics-port 8001
-```
 
-Check it works: open http://localhost:8001/metrics in a browser. You should see lines starting with
-`tickets_processed_total`, `response_seconds` and `guardrail_blocks_total`.
+On macOS or Linux, download the `darwin` or `linux` file instead and unzip it with `tar -xzf` followed by the file name.
 
-**2. Start Prometheus**, which collects those numbers every 15 seconds. Download it from
-https://prometheus.io/download/ and unzip it. In a second terminal, from the folder you unzipped it to:
-
-Windows (if you downloaded the project somewhere other than `C:\cloudserve_test` in step 1, change that part of the path):
+**2. Start Prometheus**, in the same window, and leave it open:
 
 ```powershell
 .\prometheus.exe --config.file=C:\cloudserve_test\cloudserve\monitoring\prometheus.yml --web.listen-address=127.0.0.1:9090
 ```
 
-macOS / Linux:
+If you downloaded the project somewhere other than `C:\cloudserve_test` in step 1, change that part of the path.
+(On macOS or Linux: `./prometheus --config.file=$HOME/cloudserve_test/cloudserve/monitoring/prometheus.yml --web.listen-address=127.0.0.1:9090`.)
+Open http://localhost:9090/targets: you will see `support-system`. It shows **DOWN** until the system is started.
 
-```bash
-./prometheus --config.file=$HOME/cloudserve_test/cloudserve/monitoring/prometheus.yml --web.listen-address=127.0.0.1:9090
+**3. Get Grafana.** Tested with Grafana 13.3.1; the dashboard needs Grafana 10 or newer. On Windows 10 or 11, in
+PowerShell:
+
+```powershell
+winget install -e --id GrafanaLabs.Grafana.OSS
 ```
 
-(The listen address keeps it on this computer, so Windows does not ask about the firewall.) Check it works: open
-http://localhost:9090/targets; the `support-system` target should show **UP**.
+It installs Grafana and starts it in the background. (Otherwise, download it from https://grafana.com/grafana/download.)
+Open http://localhost:3000 and sign in with `admin` / `admin`; it then asks you to choose a new password.
 
-**3. Start Grafana**, which draws the charts. Download it from https://grafana.com/grafana/download and install it
-(on Windows the installer starts it for you; otherwise run `bin/grafana server` from its folder). Open
-http://localhost:3000 and sign in with `admin` / `admin` (it then asks you to choose a new password).
+**4. Connect Grafana to Prometheus.** In Grafana: **Connections > Data sources > Add data source > Prometheus**, set the
+URL to `http://localhost:9090`, then press **Save & test**.
 
-**4. Connect Grafana to Prometheus.** **Connections > Data sources > Add data source > Prometheus**, set the URL to
-`http://localhost:9090`, then **Save & test**.
+**5. Load the dashboard.** **Dashboards > New > Import**, upload `monitoring/grafana_dashboard.json` from the project,
+choose the Prometheus data source when asked, and press **Import**.
 
-**5. Load the dashboard.** **Dashboards > New > Import**, upload `monitoring/grafana_dashboard.json`, choose the
-Prometheus data source when asked, and press **Import**.
-
-The dashboard shows the five charts the course's setup instructions ask for: tickets per hour by channel and outcome; the share
-answered automatically against escalated; response time at the median and 95th percentile (with the 3-second
-target line); guardrail activations by guardrail over time; and the distribution of confidence scores. The charts
-fill in while tickets are being processed.
+**6. Start the system and watch.** Start the system (step 7), or start a full run with `--metrics-port 8001` added to
+the step 9 command. Within about 15 seconds, http://localhost:9090/targets shows **UP**, and the dashboard fills in as
+tickets are processed. It has five charts: tickets per hour by channel and outcome; the share answered automatically
+against escalated; response time at the median and the slowest 5% (with the 3-second target line); guardrail
+activations over time; and how confident the system was.
 
 ### Optional: settings and the kill switch
 
