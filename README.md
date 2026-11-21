@@ -359,15 +359,26 @@ for as long as you want the charts, and close it to stop Prometheus.
 If you downloaded the project somewhere other than `C:\cloudserve_test` in step 1, change that part of the path.
 Open http://localhost:9090/targets: you will see `support-system`. It shows **DOWN** until the system is started.
 
-**3. Get Grafana.** Tested with Grafana 13.3.1; the dashboard needs Grafana 10 or newer. On Windows 10 or 11, in
-PowerShell:
+**3. Get Grafana.** Tested with Grafana 13.3.1; the dashboard needs Grafana 10 or newer. On Windows 10 or 11, run this in the
+PowerShell window you used for steps 1 to 6 (it is free until step 7; not the Prometheus window, which is busy):
 
 ```powershell
 winget install -e --id GrafanaLabs.Grafana.OSS
 ```
 
-It installs Grafana and starts it in the background. (Otherwise, download it from https://grafana.com/grafana/download.)
+If Windows asks for permission to make changes, press **Yes**. It installs Grafana and starts it in the background as a Windows service, so it needs no PowerShell window of its own:
+from now on you use it in your web browser. (Otherwise, download it from https://grafana.com/grafana/download.)
 Open http://localhost:3000 and sign in with `admin` / `admin`; it then asks you to choose a new password.
+
+If Grafana is already installed, `winget` says so ("Found an existing package already installed"); that is fine, carry
+on. To start completely fresh instead, first remove it in the same window (the one from steps 1 to 6), then run the
+install command above again:
+
+```powershell
+winget uninstall -e --id GrafanaLabs.Grafana.OSS
+```
+
+Removing it may also remove an earlier connection and dashboard; steps 4 and 5 below set them up again.
 
 **4. Connect Grafana to Prometheus.** In Grafana: **Connections > Data sources > Add data source > Prometheus**, set the
 URL to `http://localhost:9090`, then press **Save & test**.
