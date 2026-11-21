@@ -134,8 +134,9 @@ def run_evaluation(input_path: str, output_path: str, metrics_port: int = None, 
                    read_cache: bool = False, refresh_cache: bool = False, progress=None) -> dict:
     """use_cache is OFF unless asked for: validation, hidden-set and final runs must be a fresh test that
     neither reads nor writes stored answers (D-025). Only development test runs may turn it on.
-    progress, if given, is told after each ticket (number done, total, ticket id, action, label): the web page
-    (src/web_runs.py) uses it to show how far the run has got. It never changes a decision."""
+    progress, if given, is told after each ticket (number done, total, ticket id, action, label, and the ticket's full
+    result with the run id): the web page (src/web_runs.py) uses it to show how far the run has got and each ticket's
+    details. It never changes a decision."""
     started = time.perf_counter()
     os.environ["REPLY_CACHE"] = ("on" if use_cache else "read" if read_cache else "refresh" if refresh_cache else "off")
     if metrics_port:
@@ -172,7 +173,7 @@ def run_evaluation(input_path: str, output_path: str, metrics_port: int = None, 
         outcomes[i] = o
         if progress:
             try:
-                progress(k, len(tickets), t.ticket_id, o.action, o.label)
+                progress(k, len(tickets), t.ticket_id, o.action, o.label, {"run_id": run_id, **as_result(o)})
             except Exception:  # noqa: BLE001 - showing progress must never stop or change the run
                 pass
         print(f"  [{k}/{len(tickets)}] {t.ticket_id} {o.action:<12} {o.label or '-':<28} {o.latency_ms / 1000:5.1f} s", flush=True)

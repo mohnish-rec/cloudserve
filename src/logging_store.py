@@ -87,3 +87,37 @@ def read(connection, run_id, stage=None) -> list:
     cur = connection.execute(q + " ORDER BY created_at, rowid", args)
     names = [c[0] for c in cur.description]
     return [dict(zip(names, r)) for r in cur.fetchall()]
+
+
+JSON_FIELDS = ("alternatives", "sources_used", "guardrails", "requirement_ids")
+
+
+def ticket_trail(connection, run_id, ticket_id) -> list:
+    """Every decision-log row for one ticket in one run, in order, with the JSON fields read back (the web page's
+    ticket details: every automated decision reconstructable, Project Brief)."""
+    cur = connection.execute("SELECT * FROM decisions WHERE run_id = ? AND ticket_id = ? ORDER BY created_at, rowid",
+                             (run_id, ticket_id))
+    names = [c[0] for c in cur.description]
+    rows = [dict(zip(names, r)) for r in cur.fetchall()]
+    for row in rows:
+        for k in JSON_FIELDS:
+            try:
+                row[k] = json.loads(row[k]) if isinstance(row.get(k), str) else row.get(k)
+            except ValueError:
+                pass
+    return rows
+
+
+def run_check(connection, run_id) -> dict:
+    """What one run wrote to the decision log, as scripts/check_decision_log.py counts it (README step 10)."""
+    one = lambda q: connection.execute(q, (run_id,)).fetchone()[0]  # noqa: E731
+    by_action = dict(connection.execute("SELECT action_taken, COUNT(*) FROM decisions WHERE run_id = ? AND "
+                                        "stage = 'outcome' GROUP BY action_taken", (run_id,)).fetchall())
+    by_stage = dict(connection.execute("SELECT stage, COUNT(*) FROM decisions WHERE run_id = ? GROUP BY stage",
+                                       (run_id,)).fetchall())
+    return {"run_id": run_id, "rows": one("SELECT COUNT(*) FROM decisions WHERE run_id = ?"),
+            "tickets": one("SELECT COUNT(DISTINCT ticket_id) FROM decisions WHERE run_id = ?"),
+            "outcomes": one("SELECT COUNT(*) FROM decisions WHERE run_id = ? AND stage = 'outcome'"),
+            "once": one("SELECT COUNT(*) FROM (SELECT ticket_id FROM decisions WHERE run_id = ? AND stage = 'outcome' "
+                        "GROUP BY ticket_id HAVING COUNT(*) = 1)"),
+            "by_action": by_action, "by_stage": by_stage}

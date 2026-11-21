@@ -378,6 +378,19 @@ Drafted by Claude (Anthropic) on 17 Nov 2026 from the project's files and Mohnis
   page"). The page also has a **Kill switch** button (`POST /kill-switch`): it creates or deletes the same
   `storage/kill_switch` file as the README's commands, and writes each change with the time to
   `storage/kill_switch_history.txt` ("Also add the kill switch").
+  The page then gained a **Send the 7 demo tickets** button and a form to send one ticket (both through `POST /tickets`,
+  the same path as `scripts/send_demo_tickets.py`); ticket details on a click, built from the ticket's result and its
+  decision-log rows, so every automated decision can be reconstructed (Project Brief: "Every automated decision
+  reconstructable"); a **Check against the decision log** button (README step 10); and downloads of the results file
+  and the metrics report. The metrics report now lists every measure, baseline and target of the Evaluation Framework
+  in its three tiers, in its own words, says why each missed target was missed and why some cannot be measured in a
+  run, and follows the Build Specification's groups (Volume, Business, Technical, Governance); its reasons for sending
+  a ticket to a person use the names and explanations of the report's Table 6. No measure is calculated differently.
+  A **Free tier limits (Groq)** box shows each model's tokens per minute and requests per day used, from the headers
+  Groq sends on every call (`src/limits.py`, fed by `call_model`), with refusals (HTTP 429) in the last 10 minutes and
+  a **Check the limits now** button. Found 21 Nov: demo tickets sent in quick batches used up the grounding check
+  model's 8,000 tokens per minute, so its checks were refused and the replies blocked; the bars show this happening
+  ("lets add the limit checker button as well and bar which fills up as we reach towards the limit live").
 - **Why (his words):** "Can we create a UI where they directly upload the file and it just processes it as our system
   is very complex to work with and then connect grafana too?" and "The metric report doesn't look nice after the run
   finished, make it look organized and easy to read ... explain why we were short of the targets"

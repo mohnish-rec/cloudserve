@@ -201,8 +201,13 @@ type of problem within 7 days, it assumes the first answer did not solve it and 
 the earlier reply as a draft. To see the first-time results again, restart the system: press **Ctrl+C** in its window,
 then run `python -m src.api` again.
 
-**Send the seven tickets to the system you started in step 7.** Use the other PowerShell window showing `(.venv)`,
-keep the system from step 7 running, and run:
+**The simplest way: the web page.** Keep the system from step 7 running, open http://127.0.0.1:8000 and press
+**Send the 7 demo tickets**. Each result appears in a table; click a ticket to see everything the system decided
+about it: the reason, the reply the customer received (or the handover note for the person), the articles found and
+cited, each guardrail's result, the time and cost, and every row the decision log holds for it. Under the button,
+**Or write your own ticket** sends any ticket you type, the same way.
+
+**Or from PowerShell.** Use the other PowerShell window showing `(.venv)`, keep the system from step 7 running, and run:
 
 ```
 python scripts/send_demo_tickets.py
@@ -298,10 +303,16 @@ The system from [step 7](#step-7-start-the-system) has a web page that does the 
 1. Keep the system from step 7 running.
 2. Open http://127.0.0.1:8000 in your browser.
    If you set up the live charts, press **Start the live charts from zero** first and wait until it shows **Ready**.
-3. Press **Choose file**, pick the ticket file (for example `data\validation_tickets.json` in the project folder), and
-   press **Run**.
-4. Leave the page open. It shows how many tickets have been processed, how many were answered, sent to a person or
-   blocked, and the latest tickets. When it finishes, it shows the metrics report.
+3. Under **Run a whole ticket file**, press **Choose file**, pick the ticket file (for example
+   `data\validation_tickets.json` in the project folder), and press **Run**.
+4. Leave the page open. It shows how many tickets have been processed, how many were answered, escalated or
+   blocked, and the latest tickets (click one for its details). When it finishes, it shows the metrics report, with
+   buttons to download it and the results file, and to check it against the decision log (step 10).
+
+The page's **Free tier limits (Groq)** box shows, for each model, how much of its tokens per minute and requests per
+day are used, as Groq reports them on every call, and how many calls it refused (HTTP 429, too many requests) in the
+last 10 minutes. It updates by itself; **Check the limits now** makes one tiny call to each model for fresh figures.
+If the grounding check model's tokens bar is full, wait about a minute before sending more tickets.
 
 Every ticket goes through exactly the same steps as the command above, and every decision is written to the decision
 log. If you set up the live charts, Grafana shows the run as it happens. The page writes its
@@ -325,11 +336,18 @@ and a row for every decision in the decision log, `storage/decisions.db`.
 
 *This proves every ticket was logged exactly once.*
 
-**1. Open the metrics report** from step 9 (for example `evaluation/results/hidden_evaluation_run_metrics.md`). The report opens with **Results against the targets**
-(each target marked Yes or No) and, under **Why targets were missed**, the reason for any No. Under
-**Safety and the decision log**, the line **Decisions logged** says how many rows the run wrote to the decision log and
+**1. Open the metrics report** from step 9 (for example `evaluation/results/hidden_evaluation_run_metrics.md`). The report opens with **Results against the targets**:
+every measure and target in the Evaluation Framework, in its three tiers (business outcomes, technical performance and
+governance conditions), each marked Yes, No or Not measured. **Why targets were missed** gives the reason for any No,
+and **Why some measures are not measured** says why a run cannot produce those. Under
+**Governance**, the line **Decisions logged** says how many rows the run wrote to the decision log and
 whether every ticket has exactly one final outcome, for example `356 rows; 80 final outcomes for 80 tickets -> reconciles`.
 Under **Volume** are the numbers answered automatically, escalated and blocked.
+
+**On the web page:** after a file run from the page finishes, press **Check against the decision log** under the
+metrics report. It shows the run's results next to the decision log's counts, line by line, and says **RECONCILES**
+when every ticket has exactly one final outcome. The buttons above it download the results file and the metrics report.
+The steps below do the same from PowerShell.
 
 **2. Count the same things straight from the decision log.** In the PowerShell window showing `(.venv)`:
 
@@ -353,7 +371,7 @@ To check an earlier run, add its run id from the top of its metrics report, for 
 python -m pytest tests/ -v
 ```
 
-Every test should pass; the summary line reads `371 passed, 1 xfailed`.
+Every test should pass; the summary line reads `381 passed, 1 xfailed`.
 
 The one `xfailed` ("expected to fail") is deliberate: a known limitation kept visible as a test
 (`tests/test_decisions.py`). Tickets like "We were throttled… we would rather pay overage than be stopped" go to a

@@ -78,8 +78,9 @@ the API (`python -m src.api`), and the tests (`python -m pytest -q`).
 | `run_evaluation.py` | The one-command unattended run over a whole file (A9), writing the results file and the metrics report (A10) |
 | `report.py` | Calculates the metrics report from a run (FR-12) |
 | `api.py` | The FastAPI web interface: `POST /tickets` (one ticket in, the decision and reply or handover out), `GET /health`, `/healthz` (alive) and `/readyz` (models, article index and key in place, FR-17); the `/docs` page for trying it |
-| `web_runs.py` | The web page at http://127.0.0.1:8000/: choose a ticket file, press Run, and it goes through the same unattended run inside the running system (so Grafana shows it live), with progress and the metrics report at the end. It makes no decisions itself |
+| `web_runs.py` | The web page at http://127.0.0.1:8000/: the kill switch, the live charts button, the seven demo tickets and a form to send one ticket, and a ticket file run (the same unattended run inside the running system, so Grafana shows it live) with progress, the metrics report, downloads and the check against the decision log. Clicking a ticket shows its details: the decision and reason, the reply or handover note, the articles, each guardrail, time and cost, and its decision-log rows. It makes no decisions itself |
 | `live_charts.py` | The web page's **Start the live charts from zero** button: sets the chart numbers back to 0 (`metrics.reset`) and runs `scripts/start_live_charts.ps1`, showing each line it prints |
+| `limits.py` | The Groq free tier's limits as Groq reports them on every call (tokens per minute, requests per day, refusals), for the web page's limit bars; `check_now()` makes one tiny call to each model on request. It never changes a decision |
 
 ### `tests/` - automatic checks (`python -m pytest -q`, A12)
 
@@ -398,6 +399,7 @@ tickets file / one ticket from the API
 | `db_path(url)`, `connect(url)` | Where `storage/decisions.db` is, and opening it |
 | `DecisionRecord` | One log record with the Governance Framework's fields; checked against a fixed shape before it is written |
 | `write(record, connection)`, `read(connection, run_id, stage)` | Write one record; read a run's records back |
+| `ticket_trail(connection, run_id, ticket_id)`, `run_check(connection, run_id)` | Every row for one ticket (the web page's ticket details); a run's counts for README step 10, as `scripts/check_decision_log.py` counts them |
 
 ### 16. `report.py`: the metrics report (FR-12, A10)
 
@@ -407,8 +409,8 @@ tickets file / one ticket from the API
 | `calibration_table(rows, bands)` | Stated confidence against real accuracy, in five bands (Evaluation Framework) |
 | `_tokens(outcomes, n)` | Tokens used and how many answers came from the cache |
 | `repeat_contacts(outcomes, raw_by_id)` | Follow-ups found in the run, and the history baseline (17 Nov) |
-| `why_person(o)`, `group_rates(...)` | The plain-words reason each ticket went to a person (the same groups as report Table 6), and each customer group's share answered with the difference between groups |
-| `build(...)` | The whole report, in this order: results against every target (Yes / No / Not measured), why any target was missed (worked out from the run's own numbers), volume, why tickets went to a person, speed and cost, safety and the decision log, results by customer group, then the marking against the answer key (precision and recall per type, confusion matrix, retrieval hit rate, calibration). The answer key is read only here, after every ticket is done; with no answer key (the hidden set) those rows say "Not measured" |
+| `why_person(o)`, `WHY` | The reason each ticket went to a person and why that reason sends it there, with the names and explanations of report Table 6 |
+| `build(...)` | The whole report: every measure, baseline and target of the Evaluation Framework in its three tiers (Yes / No / Not measured), why each missed target was missed (from the run's own numbers), why some measures cannot be measured in a run, then the Build Specification's groups: Volume, Business (with why tickets went to a person and repeat contacts), Technical (latency, model calls, tokens, retrieval hit rate, precision and recall per class, confusion matrix) and Governance (decisions logged, guardrail activations, private data, results by customer group, calibration, the labels followed exactly). The labels are read only here, after every ticket is done; without them (the hidden set) those measures say "Not measured" |
 
 ### 17. `cache.py`: stored AI answers for development runs (D-025, off by default)
 
@@ -432,7 +434,7 @@ tickets file / one ticket from the API
 | `TicketIn` | The ticket fields the API accepts; anything else, such as labels, is dropped |
 | `readiness(root)` | What is missing before tickets can be answered: the trained models, the article index, the AI key |
 | `KillSwitchIn` | The web page's kill switch button: on or off |
-| `create_app(...)` | The FastAPI application: `POST /tickets`, `GET /health`, `GET /healthz`, `GET /readyz`, and for the web page `GET /` (the page), `POST /runs` and `GET /runs/<id>` (run a ticket file), `POST /live-charts` and `GET /live-charts` (start the live charts from zero), `POST /kill-switch` (turn the kill switch on or off, written to `storage/kill_switch_history.txt`) |
+| `create_app(...)` | The FastAPI application: `POST /tickets`, `GET /health`, `GET /healthz`, `GET /readyz`, and for the web page `GET /` (the page), `POST /runs` and `GET /runs/<id>` (run a ticket file), `POST /live-charts` and `GET /live-charts` (start the live charts from zero), `POST /kill-switch` (turn the kill switch on or off, written to `storage/kill_switch_history.txt`), `GET /demo-tickets` (the seven demo tickets, without labels), `GET /decision-log/<run>/<ticket>` (every decision-log row for one ticket), `GET /runs/<id>/tickets/<ticket>` (one ticket's full result), `GET /runs/<id>/check` (README step 10 on the page) and `GET /runs/<id>/download/results` or `/report` |
 | `main()` | `python -m src.api`: the API on port 8000 and the live numbers on port 8001 |
 
 ### 20. `__init__.py`

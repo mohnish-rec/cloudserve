@@ -123,3 +123,39 @@ def test_a_broken_progress_report_never_stops_the_run(tmp_path, fake):
         raise RuntimeError("the page went away")
     meta = R.run_evaluation(str(tickets_file(tmp_path)), str(tmp_path / "run.json"), progress=broken)
     assert json.loads((tmp_path / "run.json").read_text(encoding="utf-8"))["results"] and meta["run_id"]
+
+
+def test_progress_gives_each_tickets_full_result_with_the_run_id(tmp_path, fake):
+    """21 Nov 2026: the web page's ticket details use the full result the run reports after each ticket."""
+    seen = []
+    meta = R.run_evaluation(str(tickets_file(tmp_path)), str(tmp_path / "run.json"), progress=lambda *a: seen.append(a))
+    results = {a[2]: a[5] for a in seen}
+    assert all(r["run_id"] == meta["run_id"] for r in results.values())
+    assert results["V-1"]["action"] == "auto_respond" and results["V-1"]["sent_text"] and results["V-1"]["guardrails"]
+
+
+def test_the_decision_log_trail_and_check_for_the_web_page(tmp_path, fake):
+    """The page's ticket details (every row for one ticket) and README step 10 on the page (run_check)."""
+    meta = R.run_evaluation(str(tickets_file(tmp_path)), str(tmp_path / "run.json"))
+    con = log.connect(fake)
+    trail = log.ticket_trail(con, meta["run_id"], "V-1")
+    assert [r["stage"] for r in trail][-1] == "outcome" and trail[0]["stage"] == "classification"
+    assert isinstance(trail[-1]["requirement_ids"], list) and isinstance(trail[-1]["guardrails"], dict)
+    check = log.run_check(con, meta["run_id"])
+    assert check["tickets"] == check["outcomes"] == check["once"] == 4
+    assert check["by_action"] == {"auto_respond": 1, "escalate": 3}
+
+
+def test_the_report_names_every_measure_and_target_of_the_evaluation_framework(tmp_path, fake):
+    R.run_evaluation(str(tickets_file(tmp_path)), str(tmp_path / "run.json"))
+    md = (tmp_path / "run_metrics.md").read_text(encoding="utf-8")
+    for measure, target in [("First contact resolution", "60% or better"), ("Mean time to first reply", "Under 5 minutes"),
+                            ("Customer satisfaction", "4.0 or better"), ("Escalation rate", "30% or lower"),
+                            ("Repeat contacts", "Halved"), ("Classification precision", "85% or better"),
+                            ("Hallucination rate", "5% or lower"), ("Citation accuracy", "95% or better"),
+                            ("Latency, 95th percentile", "Under 3 seconds"), ("Availability", "99.5% or better"),
+                            ("Private data in outbound text", "Zero occurrences"),
+                            ("Quality across customer groups", "Under five percentage points"),
+                            ("Decision logging", "Complete coverage"), ("Confidence calibration", "within five points")]:
+        assert measure in md and target in md, measure
+    assert "## Why targets were missed" in md and "## Why some measures are not measured" in md

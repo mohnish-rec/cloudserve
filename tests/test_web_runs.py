@@ -80,3 +80,23 @@ def test_the_page_has_the_file_picker_and_the_run_button():
 
 def test_the_page_has_the_live_charts_button():
     assert "Start the live charts from zero" in PAGE and "/live-charts" in PAGE
+
+
+def test_each_tickets_result_and_the_files_are_kept_for_the_page(tmp_path):
+    def runner(input_path, output_path, progress=None):
+        progress(1, 1, "T-1", "auto_respond", "", {"run_id": "run-x", "ticket_id": "T-1", "action": "auto_respond"})
+        open(output_path, "w", encoding="utf-8").write('{"results": []}')
+        open(output_path.replace(".json", "_metrics.md"), "w", encoding="utf-8").write("# Metrics report")
+    runs = FileRuns(runner=runner, results_dir=tmp_path)
+    job = runs.start("t.json", b'[{"ticket_id": "T-1", "channel": "email", "body": "hi"}]')["job_id"]
+    runs.threads[job].join(5)
+    assert runs.ticket(job, "T-1")["run_id"] == "run-x" and runs.status(job)["run_id"] == "run-x"
+    results, report = runs.files(job)
+    assert results.exists() and report.exists() and runs.ticket(job, "nope") is None
+
+
+def test_the_page_has_the_demo_button_the_form_the_details_the_check_and_the_downloads():
+    for part in ("Send the 7 demo tickets", "Send this ticket", "/demo-tickets", "/decision-log/", "Decision log (audit trail)",
+                 "Check against the decision log", "/check", "download/results", "download/report", "fail closed",
+                 "Free tier limits", "Check the limits now", "/limits"):
+        assert part in PAGE, part

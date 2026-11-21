@@ -11,6 +11,13 @@ Ends:   GET  /          a web page: choose a ticket file and press Run (src/web_
         POST /runs      start the unattended run for an uploaded ticket file; GET /runs/<id> shows its progress
         POST /live-charts  start the live charts from zero (src/live_charts.py); GET /live-charts shows how far it got
         POST /kill-switch  {"on": true} or {"on": false}: turn the kill switch on or off from the web page (FR-16)
+        GET  /limits       how much of the free tier's limits each model has used (src/limits.py); POST /limits/check
+                           makes one tiny call to each model for fresh figures
+        GET  /demo-tickets the seven demo tickets (data/samples/demo_tickets.json), for the page's demo button
+        GET  /decision-log/<run id>/<ticket id>  every decision-log row for one ticket (the page's ticket details)
+        GET  /runs/<id>/tickets/<ticket id>  one ticket's full result from a file run
+        GET  /runs/<id>/check  the run's decision-log counts next to its results (README step 10)
+        GET  /runs/<id>/download/results or /report  the run's results file or metrics report
         GET  /health    is the system up, and is the kill switch on?
         GET  /healthz   alive (FR-17)
         GET  /readyz    ready to answer tickets: models, article index and AI key all in place (FR-17)
@@ -22,7 +29,7 @@ from pathlib import Path
 from typing import Optional
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
-from fastapi.responses import HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse
 from pydantic import BaseModel
 
 from src import logging_store as log
@@ -146,6 +153,76 @@ def create_app(classifier=None, retriever=None, write_log=True, file_runs=None, 
     def live_charts_status():
         """What the live-charts start has done so far."""
         return charts.status()
+
+    @app.get("/limits")
+    def free_tier_limits():
+        """What Groq said about its limits on the latest call to each model (no extra call is made)."""
+        from src import limits
+        return {"models": limits.snapshot()}
+
+    @app.post("/limits/check")
+    def check_limits():
+        """One tiny call to each model, then the fresh figures. Uses a few tokens of each limit."""
+        from src import limits
+        answers = limits.check_now(options.get("limit_call"))
+        return {"answers": answers, "models": limits.snapshot()}
+
+    @app.get("/demo-tickets")
+    def demo_tickets():
+        """The seven demo tickets of README step 8, with only the fields the system reads (TicketIn); the page sends
+        each to POST /tickets."""
+        path = Path(__file__).resolve().parent.parent / "data" / "samples" / "demo_tickets.json"
+        import json
+        fields = TicketIn.model_fields if hasattr(TicketIn, "model_fields") else TicketIn.__fields__
+        return [{k: v for k, v in t.items() if k in fields} for t in json.loads(path.read_text(encoding="utf-8"))]
+
+    @app.get("/decision-log/{log_run_id}/{ticket_id}")
+    def decision_trail(log_run_id: str, ticket_id: str):
+        """Every decision-log row for one ticket: the audit trail behind the page's ticket details."""
+        try:
+            con = log.connect()
+        except FileNotFoundError as e:
+            raise HTTPException(status_code=404, detail=str(e)) from None
+        try:
+            return log.ticket_trail(con, log_run_id, ticket_id)
+        finally:
+            con.close()
+
+    @app.get("/runs/{job_id}/tickets/{ticket_id}")
+    def run_ticket(job_id: str, ticket_id: str):
+        result = runs.ticket(job_id, ticket_id)
+        if result is None:
+            raise HTTPException(status_code=404, detail="No such ticket in that run.")
+        return result
+
+    @app.get("/runs/{job_id}/check")
+    def run_check(job_id: str):
+        """README step 10 on the page: the run's results next to what it wrote to the decision log."""
+        import json
+        status, files = runs.status(job_id), runs.files(job_id)
+        if status is None or files is None or not status.get("run_id"):
+            raise HTTPException(status_code=404, detail="The run has not finished yet.")
+        results = json.loads(Path(files[0]).read_text(encoding="utf-8"))["results"]
+        con = log.connect()
+        try:
+            logged = log.run_check(con, status["run_id"])
+        finally:
+            con.close()
+        counted = {a: sum(r["action"] == a for r in results) for a in ("auto_respond", "escalate", "block")}
+        reconciles = logged["tickets"] == logged["outcomes"] == logged["once"] == len(results)
+        return {"run_id": status["run_id"], "report": {"processed": len(results), **counted},
+                "log": logged, "reconciles": reconciles}
+
+    @app.get("/runs/{job_id}/download/{kind}")
+    def run_download(job_id: str, kind: str):
+        files = runs.files(job_id)
+        if files is None or kind not in ("results", "report"):
+            raise HTTPException(status_code=404, detail="Nothing to download yet.")
+        path = Path(files[0] if kind == "results" else files[1])
+        if not path.exists():
+            raise HTTPException(status_code=404, detail="The file is not there.")
+        return FileResponse(path, filename=path.name,
+                            media_type="application/json" if kind == "results" else "text/markdown")
 
     @app.post("/kill-switch")
     def kill_switch(choice: KillSwitchIn):

@@ -230,6 +230,11 @@ def call_model(messages, model, max_tokens=2000, role="writer"):
                           json=body, timeout=60)
     except (requests.ConnectionError, requests.Timeout) as e:
         raise TransientError(type(e).__name__) from e
+    try:                                         # 21 Nov: the free tier's limits, for the web page's limit bars
+        from src import limits
+        limits.note(model, r.headers, r.status_code)
+    except Exception:  # noqa: BLE001 - showing the limits must never stop or change a call
+        pass
     if r.status_code == 429 or r.status_code >= 500:
         try:
             wait = float(r.headers.get("retry-after", 0) or 0)

@@ -60,7 +60,9 @@ def test_readiness_lists_what_is_missing(tmp_path, monkeypatch):
 
 def test_the_web_page_and_the_file_run_routes_are_there(tmp_path):
     paths = {r.path for r in app_for(tmp_path).routes}
-    assert {"/", "/runs", "/runs/{job_id}", "/live-charts"} <= paths
+    assert {"/", "/runs", "/runs/{job_id}", "/live-charts", "/kill-switch", "/demo-tickets",
+            "/decision-log/{log_run_id}/{ticket_id}", "/runs/{job_id}/tickets/{ticket_id}", "/runs/{job_id}/check",
+            "/runs/{job_id}/download/{kind}", "/limits", "/limits/check"} <= paths
 
 
 def test_the_web_page_kill_switch_creates_and_deletes_the_same_file(tmp_path, monkeypatch):
@@ -78,3 +80,8 @@ def test_the_web_page_kill_switch_creates_and_deletes_the_same_file(tmp_path, mo
     assert flip(KillSwitchIn(on=False))["kill_switch_on"] is False and not switch.exists()
     history = (tmp_path / "storage" / "kill_switch_history.txt").read_text(encoding="utf-8")
     assert "turned on from the web page" in history and "turned off from the web page" in history
+
+
+def test_the_demo_tickets_route_sends_no_labels(tmp_path):
+    demo = next(r.endpoint for r in app_for(tmp_path).routes if getattr(r, "path", "") == "/demo-tickets")()
+    assert len(demo) == 7 and all("labels" not in t for t in demo)
