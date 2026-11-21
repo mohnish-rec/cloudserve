@@ -10,6 +10,8 @@ Claude (Anthropic) says so at the top of the file; every file was reviewed and r
 If you are setting this up for the first time, do these steps from top to bottom. Each step says what you should see
 when it has worked.
 
+**Before you start:** [What you need first](#what-you-need-first): Python 3.11, a free Groq key and Git.
+
 **Set it up (about 20 minutes, most of it downloading):**
 
 1. [Get the code](#step-1-get-the-code)
@@ -19,7 +21,7 @@ when it has worked.
 5. [Check the AI model answers](#step-5-check-the-ai-model-answers)
 6. [Build the article store and the decision log](#step-6-build-the-article-store-and-the-decision-log)
 
-**Use it (in the same order as the Build Specification's test, section 06):**
+**Use it (in the same order the assessors use to test the system):**
 
 7. [Start the system](#step-7-start-the-system)
 8. [Send one ticket from each channel, an escalation and a guardrail ticket](#step-8-send-one-ticket-from-each-channel-an-escalation-and-a-guardrail-ticket)
@@ -54,7 +56,7 @@ and history in the ticket files are never used to decide. The full picture, with
 | Folder or file | What it holds |
 |---|---|
 | `src/` | The system itself: one file per step above, plus `pipeline.py` (runs one ticket), `run_evaluation.py` (runs a file of tickets), `api.py` (one ticket at a time), `report.py` (the metrics report), `logging_store.py` (the decision log), `metrics.py` (monitoring) |
-| `evaluation/` | `harness.py` (the run command in the Build Specification's form), `results/` (the result file and metrics report of every run, with `validation_looks.md` listing every validation run) and `human_review/` (the review sheets). The analysis scripts are in `scripts/` |
+| `evaluation/` | `harness.py` (a second way to start the same unattended run), `results/` (the result file and metrics report of every run, with `validation_looks.md` listing every validation run) and `human_review/` (the review sheets). The analysis scripts are in `scripts/` |
 | `tests/` | The test suite, run by GitHub Actions on every push (`.github/workflows/ci.yml`) |
 | `prompts/` | Every prompt, versioned, with its register in `prompts/README.md` (PR-01 writes the reply, PR-02 the grounding check, PR-03 the review rubric) |
 | `models/` | The two trained models: ticket type (`classifier.joblib`) and the learned decisions (`decision_router.joblib`), with a note of how each was trained |
@@ -200,8 +202,7 @@ Labels sent with a ticket are ignored. Stop it with Ctrl+C.
 
 *Seven prepared tickets show every kind of outcome: answered, sent to a person, and blocked by a safety check.*
 
-`data/samples/demo_tickets.json` holds seven tickets for checking the system by hand (Build Specification section 06: "One ticket from each channel is submitted" and "A ticket engineered to trigger a
-guardrail is submitted"): four real development tickets, one from each channel, two that go to a person, and one red-team
+`data/samples/demo_tickets.json` holds seven tickets for checking the system by hand (the assessors send one ticket from each channel, and one ticket built to set off a guardrail): four real development tickets, one from each channel, two that go to a person, and one red-team
 ticket written to trigger a guardrail.
 
 | Ticket | Channel | What it is | Expected result |
@@ -244,7 +245,7 @@ Put the ticket file (in the same format as `data/development_tickets.json`) anyw
 python -m src.run_evaluation <tickets file> <results file>
 ```
 
-The same run in the form the Build Specification shows also works (`--output` can be a folder or a `.json` file):
+The same run can also be started this way (`--output` can be a folder or a `.json` file):
 
 ```
 python -m evaluation.harness --input data/validation_tickets.json --output evaluation/results/
@@ -303,8 +304,7 @@ failure: pytest still finishes successfully. If the system ever gets this case r
 
 ### Optional: watch it live (Prometheus and Grafana)
 
-This is optional: the unattended run and the API work without it. It shows what the system is doing while it runs
-(Setup Guide step 06).
+This is optional: the unattended run and the API work without it. It shows what the system is doing while it runs.
 
 **1. Start the system with its metrics switched on.** Either start the API (`python -m src.api`), or add
 `--metrics-port 8001` to an unattended run, for example:
@@ -335,7 +335,7 @@ http://localhost:3000 and sign in with `admin` / `admin` (it then asks you to ch
 **5. Load the dashboard.** **Dashboards > New > Import**, upload `monitoring/grafana_dashboard.json`, choose the
 Prometheus data source when asked, and press **Import**.
 
-The dashboard shows the five panels the Setup Guide asks for: tickets per hour by channel and outcome; the share
+The dashboard shows the five charts the course's setup instructions ask for: tickets per hour by channel and outcome; the share
 answered automatically against escalated; response time at the median and 95th percentile (with the 3-second
 target line); guardrail activations by guardrail over time; and the distribution of confidence scores. The charts
 fill in while tickets are being processed.
@@ -349,14 +349,14 @@ for example `$env:QUESTION_RULES="off"` in PowerShell or `export QUESTION_RULES=
 
 | Setting | Default | What it does |
 |---|---|---|
-| `PR01_FILE` | `PR-01_draft_reply_v1.7.md` | The reply prompt. `PR-01_draft_reply.md` is the earlier v1.2 (rollback) |
-| `QUESTION_RULES` | on | Word rules for questions Mohnish Grover sent to a person: jobs failing after a password change (Q11), invalid credentials with a correct password (Q12), a restore still running (Q27), throttled and would rather pay overage (Q41) |
+| `PR01_FILE` | `PR-01_draft_reply_v1.7.md` | The reply prompt. `PR-01_draft_reply.md` is an earlier version (1.2), kept so the system can be switched back to it |
+| `QUESTION_RULES` | on | Word rules for questions Mohnish Grover sent to a person: jobs failing after a password change, invalid credentials with a correct password, a restore still running, and a customer who was throttled and would rather pay overage |
 | `LEARNED_DECISIONS` | on | A model learned from his decisions on the development tickets; it reads the message only and can only send a ticket to a person (`src/decisions.py`) |
 | `NARROW_RULES` | on | Safety rules hold back requests and disputes, not plain questions |
 | `TYPE_AWARE_SEARCH` | on | Article search also uses the ticket's type |
 | `TRIM_UNSUPPORTED` | on | A sentence the checker cannot support is removed and the whole reply checked again |
 | `PLAN_RULE` | on | A reply using an article that applies only to other plans (its "Applies to" line) goes to a person with the draft (`src/plans.py`) |
-| `REPLY_CACHE` | off | Stored answers are never used for validation or test runs (D-025). `--use-cache` turns it on for development runs; `--read-cache` reuses stored development answers but stores nothing new; `--refresh-cache` reads nothing stored (every answer fresh) and stores the new answers for later development runs |
+| `REPLY_CACHE` | off | Stored answers are never used for validation or test runs. `--use-cache` turns it on for development runs; `--read-cache` reuses stored development answers but stores nothing new; `--refresh-cache` reads nothing stored (every answer fresh) and stores the new answers for later development runs |
 
 To stop all automatic replies at once (kill switch), create an empty file called `storage/kill_switch`:
 every ticket then goes to a person. Delete the file to turn replies back on.
