@@ -124,6 +124,7 @@ Each file tests one part, with fake AI models so no key or internet is needed (t
 | Experiments that decided something | `compare_retrieval.py`, `compare_thresholds.py`, `compare_runs.py`, `compare_search_query.py`, `compare_decision_text.py`, `compare_message_check.py`, `learn_decisions.py` | Chunk size and search mode (D-017); the 85% threshold (D-019); subject line or message only; can the system learn the decisions |
 | Human review | `make_review_sheet.py`, `review_rubric.py`, `make_decision_sheet.py` | Build the two reviewers' sheets and the shared marking rules |
 | Safety testing | `red_team.py` | Attack tickets through the real system; every one must be stopped |
+| Demonstration | `send_demo_tickets.py` | Sends the seven demo tickets to the running system and prints each result in plain words (README step 8) |
 | Trying replies | `try_generate.py` | Write and read a few replies by hand |
 
 ### `prompts/` - the instructions given to the AI
