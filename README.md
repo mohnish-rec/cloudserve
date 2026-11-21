@@ -2,6 +2,59 @@
 
 Triage for CloudServe support tickets: classifies each ticket, finds the relevant documentation, drafts a cited answer or escalates to a person, and logs every decision.
 
+Built by Mohnish Grover for the FDE (Forward Deployed Engineer) capstone, November 2026. Code written with help from
+Claude (Anthropic) says so at the top of the file; every file was reviewed and run by Mohnish Grover.
+
+## What it does, in short
+
+Every ticket goes through the same steps, in `src/workflow.py` (a LangGraph workflow):
+
+| Step | What happens | File |
+|---|---|---|
+| 1. Ingest | The four channels (email, chat, documentation comments, forum) are put into one shape; the customer's name is dropped | `src/ingest.py` |
+| 2. Classify | The ticket's type and urgency, with a confidence score (logistic regression on the ticket's meaning, from the all-MiniLM-L6-v2 model, which runs on your computer) | `src/classify.py` |
+| Safety rules | Tickets that must always go to a person: fixed rules, Mohnish Grover's own decisions on 67 question groups, and a repeat contact within 7 days | `src/safety.py`, `src/decisions.py`, `src/followups.py` |
+| 3. Retrieve | The 5 best passages from the 29 help articles, by meaning and by keyword | `src/retrieve.py` |
+| 4. Route | Answer only if the system is at least 85% sure, an article was found and the kill switch is off | `src/route.py` |
+| 5. Generate | The model (openai/gpt-oss-20b on Groq; backup openai/gpt-oss-120b) picks which article parts answer, and the code copies them word for word | `src/generate.py` |
+| 6. Validate | Five guardrails: private data, grounding (checked two ways: by the words, and by a second model, qwen/qwen3.8-27b), instruction integrity, tone and scope, confidence floor. If any fails, or cannot run, the reply is blocked | `src/guardrails.py` |
+| Plan rule | A reply from an article meant only for other plans goes to a person with the draft | `src/plans.py` |
+
+A ticket for a person gets a plain summary, the relevant articles, a draft when there is one, and a label. The labels
+and history in the ticket files are never used to decide. The full picture is in `docs/architecture.md`.
+
+## What is where
+
+| Folder or file | What it holds |
+|---|---|
+| `src/` | The system itself: one file per step above, plus `pipeline.py` (runs one ticket), `run_evaluation.py` (runs a file of tickets), `api.py` (one ticket at a time), `report.py` (the metrics report), `logging_store.py` (the decision log), `metrics.py` (monitoring) |
+| `evaluation/` | `harness.py` (the run command in the Build Specification's form) and `results/`, the dated result file and metrics report of every run |
+| `tests/` | The test suite, run by GitHub Actions on every push (`.github/workflows/ci.yml`) |
+| `prompts/` | Every prompt, versioned, with its register in `prompts/README.md` (PR-01 writes the reply, PR-02 the grounding check, PR-03 the review rubric) |
+| `models/` | The two trained models: ticket type (`classifier.joblib`) and the learned decisions (`decision_router.joblib`), with a note of how each was trained |
+| `data/` | The development and validation tickets, the help articles, the demo tickets and the red-team tickets |
+| `scripts/` | Setup, training and checking scripts; each says at the top what it does and how to run it |
+| `monitoring/` | The Prometheus settings and the Grafana dashboard |
+| `docs/` | `architecture.md` (the design), `governance.md` (risks, fairness audit, incident response, declaration), `decision_log.md` (every decision and why), `known_limitations.md`, `code_guide.md` (every file in plain words) |
+| `.env.example` | Every setting, with placeholder values only. Your real `.env` and the `storage/` folder are never committed |
+
+## Results of the final runs
+
+Groq free tier, reply cache off. Each figure comes from the metrics report beside its result file in `evaluation/results/`.
+
+| Measure (target) | Validation, 80 tickets (19 Nov 2026) | Development, 500 tickets (19-20 Nov 2026) |
+|---|---|---|
+| Answered automatically (60% or better) | 66.2% | 66.0% |
+| Escalation rate (30% or lower) | 33.8% | 34.0% |
+| Must-not tickets answered automatically (0) | 0 of 14 | 0 of 87 |
+| Citation accuracy (95%) | 97.6% | 93.0% |
+| Private data in a reply (0) | 0 | 0 |
+| Slowest 5% of replies, without the free tier's rate-limit waits (under 3 seconds) | 3.4 s | 7.2 s |
+| Decision log reconciles | 80 of 80 | 500 of 500 |
+
+Result files: `validation_final_groq_19nov.json` and `dev500_final_groq_19nov.json`. Where a target is missed, the
+reason is explained in the report and in `docs/governance.md` (fairness) and `docs/known_limitations.md`.
+
 ## What you need first
 
 - **Python 3.11.** [Download 3.11.9](https://www.python.org/downloads/release/python-3119/). On that page, under **Files**, choose **Windows installer (64-bit)** on Windows or **macOS 64-bit universal2 installer** on a Mac, and install with the default options. On Linux, install `python3.11` and `python3.11-venv` with your package manager. Other versions will not work: several pinned packages support Python only up to 3.11.
@@ -71,7 +124,7 @@ The first run downloads the embedding model, which takes a few minutes. You shou
 ```
 stored 141 passages from 29 documents
 test query -> top result: DOC-AUTH-001 | Resolving invalid credential errors on login
-decision log ready: storage/decisions.db (18 columns, 0 rows)
+decision log ready: storage/decisions.db (20 columns, 0 rows)
 ```
 
 ### 6. Run the tests
@@ -80,7 +133,7 @@ decision log ready: storage/decisions.db (18 columns, 0 rows)
 python -m pytest tests/ -v
 ```
 
-Every test should pass; the summary line reads `344 passed, 1 xfailed`.
+Every test should pass; the summary line reads `351 passed, 1 xfailed`.
 
 The one `xfailed` ("expected to fail") is deliberate: a known limitation kept visible as a test
 (`tests/test_decisions.py`). Tickets like "We were throttled… we would rather pay overage than be stopped" go to a
@@ -117,9 +170,23 @@ articles, answered or passed to a person, and logged. It writes:
 - `<results file>_metrics.md` beside it: the measures for the run, with the settings it used;
 - `storage/decisions.db`: a log row for every decision.
 
-**How long it takes:** on Groq's free tier, 80 tickets took about 8 minutes and 500 tickets about 10 hours
-(12 Nov 2026). When the free tier's limit is reached, the system waits and tries again on its own; a ticket whose
+**How long it takes:** on Groq's free tier, the 80 validation tickets took 8.0 minutes (19 Nov 2026) and the 500
+development tickets 609.5 minutes, about 10 hours (19-20 Nov 2026). When the free tier's limit is reached, the system waits and tries again on its own; a ticket whose
 reply cannot be checked is never sent and goes to a person instead. Leave the terminal open until it finishes.
+
+### Check the metrics report against the decision log
+
+At the end of the metrics report, the line **Decisions logged** says how many rows the run wrote to
+`storage/decisions.db` and whether every ticket has exactly one final outcome, for example
+`356 rows; 80 final outcomes for 80 tickets -> reconciles`. To count the same thing straight from the log, for the
+most recent run:
+
+```
+python -c "import sqlite3; c=sqlite3.connect('storage/decisions.db'); r=c.execute('select run_id from decisions order by created_at desc limit 1').fetchone()[0]; print(r); print(c.execute('select stage, count(*) from decisions where run_id=? group by stage', (r,)).fetchall()); print(c.execute(\"select action_taken, count(*) from decisions where run_id=? and stage='outcome' group by action_taken\", (r,)).fetchall())"
+```
+
+The outcome counts (`auto_respond`, `escalate`, `block`) match the metrics report: for the final validation run,
+53 answered, 24 escalated and 3 blocked, 80 in all.
 
 ### Settings
 

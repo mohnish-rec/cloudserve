@@ -1,11 +1,11 @@
 # Governance (draft for Mohnish Grover to complete)
 
 The six sections of the Governance Framework ("What must be true before this could speak to a real customer"), filled
-in with **facts about the system as built**, with evidence. Cells marked **[Mohnish to decide]** are judgements (how
-likely, how bad, who is accountable, the declaration) and are left for Mohnish Grover's own words.
-Drafted 17 Nov 2026 with Claude (Anthropic). Numbers are from the 500 development tickets (latest run:
-`sandbox_dev500_cached`, 15 Nov 2026, paid route in the sandbox); the final validation run (Groq free tier) is added
-when it has run.
+in with **facts about the system as built**, with evidence. The judgements (how likely, how bad, who is accountable, the
+declaration) were decided by Mohnish Grover on 20 Nov 2026.
+Drafted 17 Nov 2026 with Claude (Anthropic), completed 20 Nov 2026. The fairness audit (section 3) uses the final run of
+the 500 development tickets on Groq's free tier (19-20 Nov 2026); some evidence in the other sections comes from earlier
+development runs, named where it is used.
 
 ---
 
@@ -36,20 +36,20 @@ Every step of every ticket is written to `storage/decisions.db` (`src/logging_st
 
 ## 2. Risk register
 
-Likelihood, impact and owner: **[Mohnish to decide]**. The mitigation column lists only controls that exist in the code.
+Likelihood, impact and owner decided by Mohnish Grover, 20 Nov 2026 (suggested by Claude (Anthropic) from the run results). Mohnish Grover, who built the system, owns the risks controlled by the code until handover; CloudServe people own the rest. The mitigation column lists only controls that exist in the code.
 
 | ID | Risk | Likelihood | Impact | Mitigation in our design (with evidence) | Owner |
 |---|---|---|---|---|---|
-| R-01 | The system answers confidently and incorrectly | | | Answers only at 85% classifier confidence or more (D-019); replies are copied word for word from the articles, never written by the AI (PR-01 v1.7); two grounding checks, the second by a model from another family (D-020); the follow-up rule sends a repeat question to a person; every reply says it is automatic and invites a reply. Evidence: 0 forbidden claims in sent replies (`scripts/reference_check.py`); citation accuracy 93.4% (development), 97.7% (validation look) | |
-| R-02 | Private data appears in an outbound response | | | The private_data guardrail blocks any reply with names, addresses, keys or account numbers (never redacts and sends); replies are article text, which holds no customer data; the customer's name is never given to the AI. Evidence: 0 detections in every run | |
-| R-03 | A customer's input is treated as an instruction | | | The ticket sits between marks and is declared data (PR-01); the instruction_integrity guardrail blocks attempts and the agent gets no reply text; red-team tickets kept as tests (`data/red_team/`, `scripts/red_team.py`, D-021) | |
-| R-04 | Some customer groups receive worse answers | | | The system never reads plan, region or fluency to decide (except the plan rule, by the article's own "Applies to" line); type-aware search for non-fluent English; fairness measured every run, and inside each question (section 3). Known limitation: a misleading subject affects non-fluent replies more (`docs/known_limitations.md`, 1) | |
-| R-05 | The documentation the system relies on goes stale | | | Replies copy the current article text at the moment of answering; the article index is rebuilt from `documentation.json` by one command (`scripts/setup_vector_store.py`); every article in the data was reviewed 0 days ago. Not built: an age check on articles | |
-| R-06 | The model provider becomes unavailable | | | Retries with backoff, then a backup model (gpt-oss-120b); after 3 tickets in a row with the provider down, the rest go straight to a person; a reply that cannot be checked is never sent (fail closed). Evidence: DEV-0062 went to a person when the reply was cut off (15 Nov) | |
-| R-07 | Latency degrades under load | | | Tickets for a person need no AI call (median 0.3 s); the dashboard shows the 95th percentile against the 3-second target. Known limitation: 95th percentile above 3 s, especially on the free tier (`docs/known_limitations.md`, 6) | |
-| R-08 | Costs rise unexpectedly with volume | | | About one AI call per ticket (0.97 per ticket, development); tokens counted in every metrics report; the reply cache for development runs (D-025); free tier only for the final runs | |
-| R-09 | A misleading subject line pulls in the wrong article | | | The final grounding check blocks a reply whose article does not fit (DEV-0170, VAL-0023, VAL-0029). Two fixes tested and rejected (`docs/known_limitations.md`, 1) | |
-| R-10 | A new kind of question that needs a person is answered automatically | | | The fixed safety rules and person-only types still apply; the follow-up rule catches a reply that did not help. Known limitation: the learned decisions cannot recognise a question never seen (`docs/known_limitations.md`, 4) | |
+| R-01 | The system answers confidently and incorrectly | Low | High | Answers only at 85% classifier confidence or more (D-019); replies are copied word for word from the articles, never written by the AI (PR-01 v1.7); two grounding checks, the second by a model from another family (D-020); the follow-up rule sends a repeat question to a person; every reply says it is automatic and invites a reply. Evidence: 0 forbidden claims in sent replies (`scripts/reference_check.py`); citation accuracy 93.4% (development), 97.7% (validation look) | Mohnish Grover (until handover) |
+| R-02 | Private data appears in an outbound response | Low | High | The private_data guardrail blocks any reply with names, addresses, keys or account numbers (never redacts and sends); replies are article text, which holds no customer data; the customer's name is never given to the AI. Evidence: 0 detections in every run | Mohnish Grover (until handover) |
+| R-03 | A customer's input is treated as an instruction | Medium | High | The ticket sits between marks and is declared data (PR-01); the instruction_integrity guardrail blocks attempts and the agent gets no reply text; red-team tickets kept as tests (`data/red_team/`, `scripts/red_team.py`, D-021) | Mohnish Grover (until handover) |
+| R-04 | Some customer groups receive worse answers | Medium | Medium | The system never reads plan, region or fluency to decide (except the plan rule, by the article's own "Applies to" line); type-aware search for non-fluent English; fairness measured every run, and inside each question (section 3). Known limitation: a misleading subject affects non-fluent replies more (`docs/known_limitations.md`, 1) | Marcus Adeyemi, Head of Customer Support |
+| R-05 | The documentation the system relies on goes stale | Medium | Medium | Replies copy the current article text at the moment of answering; the article index is rebuilt from `documentation.json` by one command (`scripts/setup_vector_store.py`); every article in the data was reviewed 0 days ago. Not built: an age check on articles | Ines Varga, Technical Writer |
+| R-06 | The model provider becomes unavailable | High on the free tier | Low (tickets go to a person) | Retries with backoff, then a backup model (gpt-oss-120b); after 3 tickets in a row with the provider down, the rest go straight to a person; a reply that cannot be checked is never sent (fail closed). Evidence: DEV-0062 went to a person when the reply was cut off (15 Nov) | Mohnish Grover (until handover) |
+| R-07 | Latency degrades under load | High on the free tier | Medium | Tickets for a person need no AI call (median 0.3 s); the dashboard shows the 95th percentile against the 3-second target. Known limitation: 95th percentile above 3 s, especially on the free tier (`docs/known_limitations.md`, 6) | Mohnish Grover (until handover) |
+| R-08 | Costs rise unexpectedly with volume | Low | Low | About one AI call per ticket (1.02 per ticket on the paid test run of 17 Nov; 2.56 on the free tier, counting the retries its limit caused); tokens counted in every metrics report; the reply cache for development runs (D-025); free tier only for the final runs | Marcus Adeyemi, Head of Customer Support |
+| R-09 | A misleading subject line pulls in the wrong article | Medium | Medium | The final grounding check blocks a reply whose article does not fit (DEV-0170, VAL-0023, VAL-0029). Two fixes tested and rejected (`docs/known_limitations.md`, 1) | Mohnish Grover (until handover) |
+| R-10 | A new kind of question that needs a person is answered automatically | Medium | High | The fixed safety rules and person-only types still apply; the follow-up rule catches a reply that did not help. Known limitation: the learned decisions cannot recognise a question never seen (`docs/known_limitations.md`, 4) | Daniel Okonkwo, Tier Two Support Engineer |
 
 ---
 
@@ -66,7 +66,7 @@ metrics report's quality score). "Behind the best" is how many points each group
 |---|---|---|---|---|---|
 | Enterprise customers | 83 | 67.5% | 95.9% (47 of 49) | best / best | |
 | Business customers | 164 | 67.1% | 90.4% (85 of 94) | 0.4 / 5.5 | 9 of the 19 answers that used a different article from the labels are in this group |
-| Standard customers | 253 | 64.8% | 93.8% (120 of 128) | 2.6 / 2.2 | The plan rule sends 16 Standard tickets to a person, because the article is only for Business and Enterprise plans |
+| Standard customers | 253 | 64.8% | 93.8% (120 of 128) | 2.7 / 2.1 | The plan rule sends 16 Standard tickets to a person, because the article is only for Business and Enterprise plans |
 | Asia Pacific customers | 119 | 64.7% | 94.9% (56 of 59) | 4.2 / best | |
 | Europe customers | 151 | 68.9% | 91.2% (83 of 91) | best / 3.7 | |
 | Latin America customers | 60 | 61.7% | 93.1% (27 of 29) | 7.2 / 1.8 | More data location questions, which always go to a person (7 of 60); the plan rule (3); 2 lost to the free tier's limit; 2 where the check said the article did not fit |
@@ -88,7 +88,7 @@ Region (7.2 points), language fluency (7.9) and channel (5.3) are more than 5 po
    these questions more often, so they get fewer automatic answers.
 2. **The plan rule.** When the article is only for Business and Enterprise plans, a Standard customer's reply goes to a
    person with a draft. This is why Standard is behind the other plans, but plans are still less than 5 points apart
-   (2.6). It also adds a little to the region, language and chat gaps.
+   (2.7). It also adds a little to the region, language and chat gaps.
 3. **The free tier's limit.** 8 times, the free tier refused the safety check on a reply, so the reply was not sent
    and the ticket went to a person. 5 of those 8 were non-fluent tickets. On the paid test run, which had no limit, the
    gaps were 4.5 (region) and 5.0 (language).
@@ -121,23 +121,23 @@ All fail closed: if a check itself errors, the reply is blocked.
 
 ## 5. Incident response
 
-Who does each step and how long it should take: **[Mohnish to decide]**. What the system offers at each step:
+Who does each step and how long it should take: decided by Mohnish Grover, 20 Nov 2026. What the system offers at each step:
 
 | Step | What to do (with what the system provides) | Who does it | How long |
 |---|---|---|---|
-| 1. Detect | Watch the Grafana dashboard: a jump in one guardrail, a fall in the share answered automatically, the 95th percentile over 3 s, or confidence scores shifting lower (drift). A customer's complaint about a reply | | |
-| 2. Contain | Turn on the kill switch (below): every new ticket goes to a person | | |
-| 3. Assess | Find the affected tickets in the decision log (`storage/decisions.db`) by run, stage, guardrail or reason; each row has the prompt version and the articles used | | |
-| 4. Notify | Tell the support lead and, if customers received a wrong reply, contact them | | |
-| 5. Remediate | Fix the cause (a rule, an article, the prompt version via `PR01_FILE`), run the tests and a development run, then turn the kill switch off | | |
-| 6. Review | Add the failing ticket to the tests (as with the red-team tickets) and record the decision in `docs/decision_log.md` | | |
+| 1. Detect | Watch the Grafana dashboard: a jump in one guardrail, a fall in the share answered automatically, the 95th percentile over 3 s, or confidence scores shifting lower (drift). A customer's complaint about a reply | Any support agent (Tier One, for example Sofia Restrepo), from the dashboard or a complaint | As soon as it is seen |
+| 2. Contain | Turn on the kill switch (below): every new ticket goes to a person | Whoever detects it, if authorised to use the kill switch (below) | Within 15 minutes |
+| 3. Assess | Find the affected tickets in the decision log (`storage/decisions.db`) by run, stage, guardrail or reason; each row has the prompt version and the articles used | Mohnish Grover with Daniel Okonkwo | Same day |
+| 4. Notify | Tell the support lead and, if customers received a wrong reply, contact them | Marcus Adeyemi | Within one working day |
+| 5. Remediate | Fix the cause (a rule, an article, the prompt version via `PR01_FILE`), run the tests and a development run, then turn the kill switch off | Mohnish Grover (with Ines Varga if an article is wrong) | Before the kill switch is turned off |
+| 6. Review | Add the failing ticket to the tests (as with the red-team tickets) and record the decision in `docs/decision_log.md` | Mohnish Grover | Within a week |
 
 ### The kill switch
 
 | Question | Answer |
 |---|---|
 | What is the mechanism? | An empty file called `storage/kill_switch` (or the setting `KILL_SWITCH=on`). While it exists, every ticket goes to a person with the reason "the kill switch is on, so all automatic replies are stopped". No deployment or restart is needed |
-| Who is authorised to use it? | [Mohnish to decide] |
+| Who is authorised to use it? | Any support agent (Tier One or Tier Two, for example Sofia Restrepo or Daniel Okonkwo), Marcus Adeyemi (Head of Customer Support), or Mohnish Grover. Any one of them alone, with no approval needed: the switch only sends tickets to a person, so it cannot do harm. (Approved by Mohnish Grover, 20 Nov 2026.) |
 | How long until it takes effect? | From the next ticket: the switch is checked for every ticket at the routing step, in the unattended run and in the API. `GET /health` shows whether it is on |
 | What happens to tickets in flight? | A ticket already past the routing step finishes as decided; every ticket after it goes to a person. No ticket is dropped |
 | How is it tested? | Automatic tests in `tests/test_route.py`; by hand: create the file, send DEMO-1 through the API, see it go to a person, delete the file |

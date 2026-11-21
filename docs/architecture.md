@@ -34,7 +34,7 @@ tickets file (python -m src.run_evaluation, or python -m evaluation.harness) / o
   -> 5 Route         answer only at 85% confidence or more, no rule fired, an article found;
                      reason in plain words; priority; kill switch                             (FR-06, FR-13, FR-16, A5)
   -> 6 Write         the main article copied word for word (prompt PR-01 v1.7), named         (FR-05, A6)
-  -> 7 Check         six guardrails; an unsupported sentence is removed and the reply
+  -> 7 Check         five guardrails (grounding is checked two ways); an unsupported sentence is removed and the reply
                      checked again; any failure blocks (fail closed)                          (FR-09, A7)
   -> 8 Plan rule     an article for other plans is held for a person
   -> answered:  the reply + the automatic-reply notice                                        (FR-08)
@@ -59,7 +59,7 @@ support tool delivers it (through the API, `POST /tickets`).
 | Context | Specific to this ticket | The ticket's text, type, urgency and channel; the customer's name is never used |
 | Memory | Within limits | Within one run: the same input gets the same answer (A5), and the same customer asking again within 7 days goes to a person (follow-up rule) |
 | Feedback | Reviewed by people, not self-learning | The system never changes itself while running. Its only learned decisions were trained once, offline, on Mohnish Grover's own decisions for the 500 development tickets, never on the answer key or on past handling (Daniel: learning from current practice would "scale up a mistake") |
-| Guardrails | Prevent | Fixed safety rules before any AI call; six guardrails after it |
+| Guardrails | Prevent | Fixed safety rules before any AI call; five guardrails (grounding is checked two ways) after it |
 | Orchestration | Coordinate and record | One LangGraph workflow; every step logged with the ticket ID |
 | Recovery | Fail to a person, never to silence | Retries with backoff, a backup model, then a person; after 3 tickets in a row with the AI service down, the rest go straight to a person; the kill switch |
 

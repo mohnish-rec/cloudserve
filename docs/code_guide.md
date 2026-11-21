@@ -26,7 +26,7 @@ written to a log.
 | 4. Search | The help articles that match the ticket are found | `src/retrieve.py` |
 | 5. Route | Answer automatically, or send to a person, and why | `src/route.py` |
 | 6. Write | A reply is built from the article's own words | `src/generate.py` |
-| 7. Check | Six checks run on the reply before it can be sent; any one can stop it | `src/guardrails.py` |
+| 7. Check | Five guardrails (six checks: grounding is checked two ways) run on the reply before it can be sent; any one can stop it | `src/guardrails.py` |
 | 8. Plan rule | A reply from an article meant for other plans is held for a person | `src/plans.py` |
 | 9. Finish | The reply is sent, or the ticket goes to a person with a summary | `src/pipeline.py`, `src/handover_text.py` |
 | 10. Record | Every step goes into the decision log and the live metrics | `src/logging_store.py`, `src/metrics.py` |
@@ -67,7 +67,7 @@ the API (`python -m src.api`), and the tests (`python -m pytest -q`).
 | `retrieve.py` | Step 4. Searches the 29 help articles by meaning and by keywords, and returns the best passages with scores (FR-04, A4) |
 | `route.py` | Step 5. Applies the 85% confidence threshold and the rules; writes the reason in plain words; sets the priority; the kill switch (FR-06, FR-07, FR-13, FR-16, A5) |
 | `generate.py` | Step 6. Builds the reply from the article's own words (prompt PR-01 v1.7), with the article named; calls the AI with retries and a backup model; the run memory (FR-05, A6) |
-| `guardrails.py` | Step 7. Six checks on every reply: private data, every sentence backed by the article (two ways), no instructions from the ticket, tone and scope, confidence (FR-09, A7) |
+| `guardrails.py` | Step 7. Five guardrails, six checks, on every reply: private data, every sentence backed by the article (two ways), no instructions from the ticket, tone and scope, confidence (FR-09, A7) |
 | `plans.py` | Step 8. The plan rule: reads an article's "Applies to" line |
 | `cache.py` | Stores AI answers so the same input is answered once (D-025): on for development runs, off for final runs, read-only mode |
 | `handover_text.py` | The summary a person receives: the ticket, what it is about, the relevant articles, what the system was not sure about, what is attached |
@@ -95,7 +95,7 @@ Each file tests one part, with fake AI models so no key or internet is needed (t
 | `test_generate.py` | Reply writing with a fake AI, including retries and failures |
 | `test_extractive.py`, `test_v15.py`, `test_v16.py`, `test_v17.py` | Each version of the reply prompt: replies copied word for word, every step included, whole article for the main one |
 | `test_render.py` | What the customer sees: steps under the article they came from |
-| `test_guardrails.py` | The six checks, with attack tickets that must be stopped |
+| `test_guardrails.py` | The five guardrails, with attack tickets that must be stopped |
 | `test_exact_copy.py` | A sentence copied exactly from the article cannot be called unsupported |
 | `test_trim.py` | An unsupported sentence is removed and the whole reply checked again |
 | `test_pipeline.py` | One ticket all the way through |
@@ -169,7 +169,7 @@ Each file tests one part, with fake AI models so no key or internet is needed (t
 | File | What it is |
 |---|---|
 | `architecture.md` | How the system is designed and why, by course module (rewritten 17 Nov to match the system as built) |
-| `governance.md` | The Governance Framework's six sections: decision logging, risk register, fairness audit, guardrails, incident response and kill switch, declaration (draft; the judgements are Mohnish Grover's to complete) |
+| `governance.md` | The Governance Framework's six sections: decision logging, risk register, fairness audit, guardrails, incident response and kill switch, declaration (completed and approved by Mohnish Grover, 20 Nov 2026) |
 | `decision_log.md` | Every design decision (D-001 onward), with the reason and the evidence |
 | `known_limitations.md` | What the system does not do well, with evidence and why it was not fixed |
 | `code_guide.md` | This file |
@@ -318,7 +318,7 @@ tickets file / one ticket from the API
 | `generate(ticket_text, intent, passages)` | The whole step: build the prompt with the ticket between marks, call the model, read its answer, copy the article text. Anything unreadable or "not answered" goes to a person, never to the customer |
 | `with_notice(draft, passages)` | The final reply text: the rendered reply plus the automatic-reply notice |
 
-### 9. `guardrails.py`: six checks on every reply before it is sent (FR-09, A7)
+### 9. `guardrails.py`: five guardrails (six checks) on every reply before it is sent (FR-09, A7)
 
 | Name | What it does |
 |---|---|
@@ -371,7 +371,7 @@ tickets file / one ticket from the API
 | Name | What it does |
 |---|---|
 | `TicketState` | What travels from step to step for one ticket |
-| `build(...)` | Builds the workflow. Steps: `classify`, `check_rules` (safety rules, follow-up rule, learned decisions), `search`, `route`, `write`, `validate` (the six checks, then trim and check again), and four endings: `send`, `handover`, `blocked`, `plan`. `draft_for_person` decides when a person gets a draft. Every branch is decided by code, never by the model |
+| `build(...)` | Builds the workflow. Steps: `classify`, `check_rules` (safety rules, follow-up rule, learned decisions), `search`, `route`, `write`, `validate` (the five guardrails, then trim and check again), and four endings: `send`, `handover`, `blocked`, `plan`. `draft_for_person` decides when a person gets a draft. Every branch is decided by code, never by the model |
 | `run_ticket(...)` | Starts the waiting count at zero and runs one ticket through the workflow |
 
 ### 14. `run_evaluation.py`: the whole file, unattended (FR-12, A8 to A11)
