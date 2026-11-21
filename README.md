@@ -31,6 +31,7 @@ when it has worked.
 
 **Optional:** [watch it live with Prometheus and Grafana](#optional-watch-it-live-prometheus-and-grafana),
 [change the settings or use the kill switch](#optional-settings-and-the-kill-switch),
+[check it copes with problems](#optional-check-it-copes-with-problems),
 [run the red-team check](#optional-red-team-check).
 
 ## What it does, in short
@@ -200,7 +201,7 @@ Labels sent with a ticket are ignored. Stop it with Ctrl+C.
 
 ### Step 8. Send one ticket from each channel, an escalation and a guardrail ticket
 
-*Seven prepared tickets show every kind of outcome: answered, sent to a person, and blocked by a safety check.*
+*Seven prepared tickets show every kind of outcome: four are answered automatically (a success on each of the four channels), two are sent to a person (escalations), and one is blocked by a guardrail.*
 
 `data/samples/demo_tickets.json` holds seven tickets for checking the system by hand (the assessors send one ticket from each channel, and one ticket built to set off a guardrail): four real development tickets, one from each channel, two that go to a person, and one red-team
 ticket written to trigger a guardrail.
@@ -360,6 +361,22 @@ for example `$env:QUESTION_RULES="off"` in PowerShell or `export QUESTION_RULES=
 
 To stop all automatic replies at once (kill switch), create an empty file called `storage/kill_switch`:
 every ticket then goes to a person. Delete the file to turn replies back on.
+
+### Optional: check it copes with problems
+
+*The assessors check that the system keeps going when something goes wrong: the AI service is down, the free tier's
+limit is reached, no article matches, or a ticket is broken. This shows how to cause each one and what you should see.*
+
+| Problem | How to cause it | What you should see |
+|---|---|---|
+| The AI service cannot be reached | Disconnect from the internet, or put a wrong key in `.env`, then run the seven demo tickets (step 8). Put your real key back afterwards | Nothing crashes. No reply is sent without being checked: each ticket goes to a person with the reason "model unavailable", and after 3 failures in a row the rest go straight to a person without waiting. The run still ends with a metrics report. Both checks were run on 17 Nov 2026; their results are in `evaluation/results/a11_no_network/` and `evaluation/results/a11_wrong_key/` |
+| The free tier's limit is reached | Happens by itself on Groq's free tier with a large file (step 9) | The system waits as long as Groq asks, then carries on. The metrics report shows the time spent waiting separately |
+| No article matches the ticket | In step 7's page, send a ticket about something the articles do not cover, for example "What is the weather like today?" | It goes to a person; no reply is written and the model is not called |
+| A broken or empty ticket | In step 7's page, send a ticket with an empty body (`"body": ""`); in a ticket file, leave out fields or use unusual characters | It goes to a person with "Needs a specialist", and the run carries on |
+
+Each of these is also covered by the tests (step 11), for example "when every model fails the ticket is escalated
+with the reason", "a rate limit waits as long as the provider asks", "an unrelated question returns nothing" and
+"missing fields, empty body and odd characters never crash".
 
 ### Optional: red-team check
 
