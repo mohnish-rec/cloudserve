@@ -337,9 +337,9 @@ failure: pytest still finishes successfully. If the system ever gets this case r
 ### Optional: watch it live (Prometheus and Grafana)
 
 *This shows the system's work on live charts while tickets are processed. Nothing else needs it. Set it up once,
-before you start the system: Prometheus collects the numbers, and Grafana draws the charts.*
+after steps 1 to 6 and before you start the system: Prometheus collects the numbers, and Grafana draws the charts.*
 
-**1. Get Prometheus.** It needs no installing: you unzip it and run it. On https://prometheus.io/download/, under
+**1. Get Prometheus.** Tested with Prometheus 3.13.5. It needs no installing: you unzip it and run it. On https://prometheus.io/download/, under
 **prometheus**, download the **LTS** version for Windows (the file ending in `windows-amd64.zip`). Then, in
 PowerShell:
 
