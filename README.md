@@ -281,8 +281,10 @@ followed step 1. The file must be in the same format as `data/development_ticket
 python -m src.run_evaluation <tickets file> <results file>
 ```
 
-- Replace `<tickets file>` with `data/` followed by your ticket file's name.
-- Replace `<results file>` with `evaluation/results/` followed by a name for the results, ending in `.json`.
+- Replace `<tickets file>` with `data/` followed by your ticket file's full name, including `.json` at the end
+  (for example `data/test_tickets.json`).
+- Replace `<results file>` with `evaluation/results/` followed by a new name you choose for the results, also ending
+  in `.json` (for example `evaluation/results/test_run.json`).
 - Type only the names: the `<` and `>` are not part of the command.
 
 For example, for the hidden test set saved as `data/test_tickets.json`:
