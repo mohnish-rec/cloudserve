@@ -32,10 +32,11 @@ when it has worked.
 10. [Check the metrics report against the decision log](#step-10-check-the-metrics-report-against-the-decision-log)
 11. [Run the tests](#step-11-run-the-tests)
 
-**Optional, any time after step 6:** [use the kill switch](#optional-the-kill-switch),
-[change the settings](#optional-settings),
-[check it copes with problems](#optional-check-it-copes-with-problems),
-[run the red-team check](#optional-red-team-check).
+**More checks, any time after step 6:** [check the kill switch](#check-the-kill-switch),
+[check it copes with problems](#check-it-copes-with-problems),
+[check it stops attacks](#check-it-stops-attacks-red-team-check).
+
+**Optional:** [change the settings](#optional-settings).
 
 ## What it does, in short
 
@@ -369,6 +370,70 @@ person, but the same request in other words ("We got rate limited… we'd prefer
 recognised and would be answered automatically. It is described in `docs/known_limitations.md` (5). `xfailed` is not a
 failure: pytest still finishes successfully. If the system ever gets this case right, pytest shows `xpassed` instead.
 
+## More checks
+
+*Do these any time after [step 6](#step-6-build-the-article-store-and-the-decision-log), in the PowerShell window showing `(.venv)`.*
+
+### Check the kill switch
+
+*The course's governance rules require a way to stop automatic replies at once, without changing any code; this is
+it. The kill switch stops all automatic replies at once: while it is on, every ticket goes to a person. It is checked
+before every ticket, so it works straight away, even in the middle of a run, without restarting anything.*
+
+Use the PowerShell window showing `(.venv)`, in the project folder (`C:\cloudserve_test\cloudserve`).
+
+**1. Turn it on** (this creates an empty file called `storage/kill_switch`):
+
+```powershell
+New-Item storage\kill_switch -ItemType File -Force
+```
+
+**2. Check it is on.** If the system from [step 7](#step-7-start-the-system) is running, open
+http://127.0.0.1:8000/health: it shows `"kill_switch_on": true`. Then send the demo tickets:
+
+```powershell
+python scripts/send_demo_tickets.py
+```
+
+All seven now show **SENT TO A PERSON**, with the reason "the kill switch is on, so all automatic replies are stopped".
+
+**3. Turn it off** (this deletes the file), so automatic replies start again:
+
+```powershell
+Remove-Item storage\kill_switch
+```
+
+http://127.0.0.1:8000/health now shows `"kill_switch_on": false`.
+
+### Check it copes with problems
+
+*The assessors check that the system keeps going when something goes wrong: the AI service is down, the free tier's
+limit is reached, no article matches, or a ticket is broken. This shows how to cause each one and what you should see.*
+
+| Problem | How to cause it | What you should see |
+|---|---|---|
+| The AI service cannot be reached | Disconnect from the internet, or put a wrong key in `.env`, then run the seven demo tickets (step 8). Put your real key back afterwards | Nothing crashes. No reply is sent without being checked: each ticket goes to a person with the reason "model unavailable", and after 3 failures in a row the rest go straight to a person without waiting. The run still ends with a metrics report. Both checks were run on 17 Nov 2026; their results are in `evaluation/results/a11_no_network/` and `evaluation/results/a11_wrong_key/` |
+| The free tier's limit is reached | Happens by itself on Groq's free tier with a large file (step 9) | The system waits as long as Groq asks, then carries on. The metrics report shows the time spent waiting separately |
+| No article matches the ticket | In [step 7](#step-7-start-the-system)'s page, send a ticket about something the articles do not cover, for example "What is the weather like today?" | It goes to a person; no reply is written and the model is not called |
+| A broken or empty ticket | In [step 7](#step-7-start-the-system)'s page, send a ticket with an empty body (`"body": ""`); in a ticket file, leave out fields or use unusual characters | It goes to a person with "Needs a specialist", and the run carries on |
+
+Each of these is also covered by the tests (step 11), for example "when every model fails the ticket is escalated
+with the reason", "a rate limit waits as long as the provider asks", "an unrelated question returns nothing" and
+"missing fields, empty body and odd characters never crash".
+
+### Check it stops attacks (red-team check)
+
+*Fourteen tickets written to attack or trick the system are sent through the real system: for example, hidden
+instructions to the AI inside a question, a secret key or someone's contact details pasted into a ticket, a demand for
+a refund, or a message in Spanish. Each must be handled safely: most must go to a person, and any that may be answered
+must contain no private data and no promises. It needs the API key and takes a few minutes.*
+
+```
+python scripts/red_team.py
+```
+
+It writes the result for every ticket to `evaluation/results/red_team.md`.
+
 ## Optional extras
 
 ### Optional: watch it live (Prometheus and Grafana)
@@ -460,58 +525,3 @@ for example `$env:QUESTION_RULES="off"` in PowerShell:
 | `TRIM_UNSUPPORTED` | on | A sentence the checker cannot support is removed and the whole reply checked again |
 | `PLAN_RULE` | on | A reply using an article that applies only to other plans (its "Applies to" line) goes to a person with the draft (`src/plans.py`) |
 | `REPLY_CACHE` | off | Stored answers are never used for validation or test runs. `--use-cache` turns it on for development runs; `--read-cache` reuses stored development answers but stores nothing new; `--refresh-cache` reads nothing stored (every answer fresh) and stores the new answers for later development runs |
-
-### Optional: the kill switch
-
-*The kill switch stops all automatic replies at once: while it is on, every ticket goes to a person. It is checked
-before every ticket, so it works straight away, even in the middle of a run, without restarting anything.*
-
-Use the PowerShell window showing `(.venv)`, in the project folder (`C:\cloudserve_test\cloudserve`).
-
-**1. Turn it on** (this creates an empty file called `storage/kill_switch`):
-
-```powershell
-New-Item storage\kill_switch -ItemType File -Force
-```
-
-**2. Check it is on.** If the system from [step 7](#step-7-start-the-system) is running, open
-http://127.0.0.1:8000/health: it shows `"kill_switch_on": true`. Then send the demo tickets:
-
-```powershell
-python scripts/send_demo_tickets.py
-```
-
-All seven now show **SENT TO A PERSON**, with the reason "the kill switch is on, so all automatic replies are stopped".
-
-**3. Turn it off** (this deletes the file), so automatic replies start again:
-
-```powershell
-Remove-Item storage\kill_switch
-```
-
-http://127.0.0.1:8000/health now shows `"kill_switch_on": false`.
-
-### Optional: check it copes with problems
-
-*The assessors check that the system keeps going when something goes wrong: the AI service is down, the free tier's
-limit is reached, no article matches, or a ticket is broken. This shows how to cause each one and what you should see.*
-
-| Problem | How to cause it | What you should see |
-|---|---|---|
-| The AI service cannot be reached | Disconnect from the internet, or put a wrong key in `.env`, then run the seven demo tickets (step 8). Put your real key back afterwards | Nothing crashes. No reply is sent without being checked: each ticket goes to a person with the reason "model unavailable", and after 3 failures in a row the rest go straight to a person without waiting. The run still ends with a metrics report. Both checks were run on 17 Nov 2026; their results are in `evaluation/results/a11_no_network/` and `evaluation/results/a11_wrong_key/` |
-| The free tier's limit is reached | Happens by itself on Groq's free tier with a large file (step 9) | The system waits as long as Groq asks, then carries on. The metrics report shows the time spent waiting separately |
-| No article matches the ticket | In [step 7](#step-7-start-the-system)'s page, send a ticket about something the articles do not cover, for example "What is the weather like today?" | It goes to a person; no reply is written and the model is not called |
-| A broken or empty ticket | In [step 7](#step-7-start-the-system)'s page, send a ticket with an empty body (`"body": ""`); in a ticket file, leave out fields or use unusual characters | It goes to a person with "Needs a specialist", and the run carries on |
-
-Each of these is also covered by the tests (step 11), for example "when every model fails the ticket is escalated
-with the reason", "a rate limit waits as long as the provider asks", "an unrelated question returns nothing" and
-"missing fields, empty body and odd characters never crash".
-
-### Optional: red-team check
-
-```
-python scripts/red_team.py
-```
-
-Runs the attack tickets in `data/red_team/` through the real system and writes `evaluation/results/red_team.md`.
-Every one must be stopped.
