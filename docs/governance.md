@@ -1,4 +1,4 @@
-# Governance (draft for Mohnish Grover to complete)
+# Governance
 
 The six sections of the Governance Framework ("What must be true before this could speak to a real customer"), filled
 in with **facts about the system as built**, with evidence. The judgements (how likely, how bad, who is accountable, the
