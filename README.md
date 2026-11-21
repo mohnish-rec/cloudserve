@@ -21,21 +21,21 @@ Every ticket goes through the same steps, in `src/workflow.py` (a LangGraph work
 | Plan rule | A reply from an article meant only for other plans goes to a person with the draft | `src/plans.py` |
 
 A ticket for a person gets a plain summary, the relevant articles, a draft when there is one, and a label. The labels
-and history in the ticket files are never used to decide. The full picture is in `docs/architecture.md`.
+and history in the ticket files are never used to decide. The full picture, with a diagram, is in `docs/architecture.md`.
 
 ## What is where
 
 | Folder or file | What it holds |
 |---|---|
 | `src/` | The system itself: one file per step above, plus `pipeline.py` (runs one ticket), `run_evaluation.py` (runs a file of tickets), `api.py` (one ticket at a time), `report.py` (the metrics report), `logging_store.py` (the decision log), `metrics.py` (monitoring) |
-| `evaluation/` | `harness.py` (the run command in the Build Specification's form) and `results/`, the dated result file and metrics report of every run |
+| `evaluation/` | `harness.py` (the run command in the Build Specification's form), `results/` (the result file and metrics report of every run, with `validation_looks.md` listing every validation run) and `human_review/` (the review sheets). The analysis scripts are in `scripts/` |
 | `tests/` | The test suite, run by GitHub Actions on every push (`.github/workflows/ci.yml`) |
 | `prompts/` | Every prompt, versioned, with its register in `prompts/README.md` (PR-01 writes the reply, PR-02 the grounding check, PR-03 the review rubric) |
 | `models/` | The two trained models: ticket type (`classifier.joblib`) and the learned decisions (`decision_router.joblib`), with a note of how each was trained |
 | `data/` | The development and validation tickets, the help articles, the demo tickets and the red-team tickets |
-| `scripts/` | Setup, training and checking scripts; each says at the top what it does and how to run it |
+| `scripts/` | Setup, training and analysis scripts, for example `fairness_audit.py` (the fairness audit), `citation_audit.py`, `compare_runs.py` and `red_team.py`; each says at the top what it does and how to run it |
 | `monitoring/` | The Prometheus settings and the Grafana dashboard |
-| `docs/` | `architecture.md` (the design), `governance.md` (risks, fairness audit, incident response, declaration), `decision_log.md` (every decision and why), `known_limitations.md`, `code_guide.md` (every file in plain words) |
+| `docs/` | `architecture.md` (the design) with the diagram `architecture.png`, `governance.md` (risks, fairness audit, incident response, declaration), `decision_log.md` (every decision and why), `known_limitations.md`, `code_guide.md` (every file in plain words) |
 | `.env.example` | Every setting, with placeholder values only. Your real `.env` and the `storage/` folder are never committed |
 
 ## Results of the final runs
@@ -60,10 +60,20 @@ reason is explained in the report and in `docs/governance.md` (fairness) and `do
 - **Python 3.11.** [Download 3.11.9](https://www.python.org/downloads/release/python-3119/). On that page, under **Files**, choose **Windows installer (64-bit)** on Windows or **macOS 64-bit universal2 installer** on a Mac, and install with the default options. On Linux, install `python3.11` and `python3.11-venv` with your package manager. Other versions will not work: several pinned packages support Python only up to 3.11.
 - **A free Groq API key**, from https://console.groq.com/keys
 - About **4 GB of free disk space** and an internet connection. The first run downloads about 1 GB.
+- **Git**, from https://git-scm.com (check with `git --version`).
 
 ## Setup
 
-Open a terminal in this folder (the one containing this README) and run each step in order.
+### 0. Get the code
+
+In a terminal, go to the folder where you want the project, then:
+
+```
+git clone https://github.com/mohnish-rec/cloudserve.git
+cd cloudserve
+```
+
+Every command below is run in this `cloudserve` folder (the one containing this README), in order.
 
 ### 1. Create and activate the environment
 
@@ -253,18 +263,42 @@ in `handover`; a blocked one shows which guardrail fired in `reason` and `guardr
 
 ### Monitoring (Prometheus and Grafana)
 
-The system exposes its metrics at http://localhost:8001/metrics while it runs: start the API as above, or add
-`--metrics-port 8001` to the unattended run. Then:
+This is optional: the unattended run and the API work without it. It shows what the system is doing while it runs
+(Setup Guide step 06).
 
-1. Start Prometheus with `monitoring/prometheus.yml` (it reads localhost:8001 every 15 seconds), from the folder
-   Prometheus was unzipped to: `.\prometheus.exe --config.file=<this project>\monitoring\prometheus.yml --web.listen-address=127.0.0.1:9090`
-   (the listen address keeps it on this computer, so Windows does not ask about the firewall).
-2. In Grafana, add Prometheus as a data source, then **Dashboards > New > Import** and upload
-   `monitoring/grafana_dashboard.json`.
+**1. Start the system with its metrics switched on.** Either start the API (`python -m src.api`), or add
+`--metrics-port 8001` to an unattended run, for example:
+
+```
+python -m src.run_evaluation data/validation_tickets.json evaluation/results/val_monitored.json --metrics-port 8001
+```
+
+Check it works: open http://localhost:8001/metrics in a browser. You should see lines starting with
+`tickets_processed_total`, `response_seconds` and `guardrail_blocks_total`.
+
+**2. Start Prometheus**, which collects those numbers every 15 seconds. Download it from
+https://prometheus.io/download/ and unzip it. In a second terminal, from the folder you unzipped it to:
+
+- Windows: `.\prometheus.exe --config.file=<path to cloudserve>\monitoring\prometheus.yml --web.listen-address=127.0.0.1:9090`
+- macOS / Linux: `./prometheus --config.file=<path to cloudserve>/monitoring/prometheus.yml --web.listen-address=127.0.0.1:9090`
+
+(The listen address keeps it on this computer, so Windows does not ask about the firewall.) Check it works: open
+http://localhost:9090/targets; the `support-system` target should show **UP**.
+
+**3. Start Grafana**, which draws the charts. Download it from https://grafana.com/grafana/download and install it
+(on Windows the installer starts it for you; otherwise run `bin/grafana server` from its folder). Open
+http://localhost:3000 and sign in with `admin` / `admin` (it then asks you to choose a new password).
+
+**4. Connect Grafana to Prometheus.** **Connections > Data sources > Add data source > Prometheus**, set the URL to
+`http://localhost:9090`, then **Save & test**.
+
+**5. Load the dashboard.** **Dashboards > New > Import**, upload `monitoring/grafana_dashboard.json`, choose the
+Prometheus data source when asked, and press **Import**.
 
 The dashboard shows the five panels the Setup Guide asks for: tickets per hour by channel and outcome; the share
 answered automatically against escalated; response time at the median and 95th percentile (with the 3-second
-target line); guardrail activations by guardrail over time; and the distribution of confidence scores.
+target line); guardrail activations by guardrail over time; and the distribution of confidence scores. The charts
+fill in while tickets are being processed.
 
 ### Red-team check
 

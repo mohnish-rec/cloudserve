@@ -2,6 +2,10 @@
 
 How the CloudServe support system is designed, and why. Each choice traces to a requirement in the PRD (product requirements document) version 2 and to the course module it comes from. Written 7 November 2026, before the build; rewritten 17 November 2026 to match the system as built (the earlier text is in Git history). Every file is explained in `docs/code_guide.md`.
 
+![The whole system on one page: the sources it reads, the steps every ticket goes through, the two ways a ticket ends, and what runs around every step](architecture.png)
+
+*The whole system on one page (`docs/architecture.png`, the same picture as Figure 1 in the report).*
+
 ## 1. Why the system exists: the translation ladder (Module 1)
 
 | Layer | CloudServe |
