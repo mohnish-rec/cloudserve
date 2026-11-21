@@ -187,6 +187,14 @@ test query -> top result: DOC-AUTH-001 | Resolving invalid credential errors on 
 decision log ready: storage/decisions.db (20 columns, 0 rows)
 ```
 
+### Optional: watch it live on charts
+
+*Do this now, before step 7, only if you want to see the system working on live charts. Nothing else needs it.*
+
+Set up Prometheus (it collects the numbers) and Grafana (it draws the charts) by following
+[Optional: watch it live (Prometheus and Grafana)](#optional-watch-it-live-prometheus-and-grafana), then come back here
+and carry on with [step 7](#step-7-start-the-system).
+
 ## Use it
 
 ### Step 7. Start the system
